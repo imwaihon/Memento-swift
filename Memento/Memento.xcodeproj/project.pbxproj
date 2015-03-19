@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE35EA1ABA8CEF00417763 /* AppDelegate.swift */; };
+		4FCE35EE1ABA8CEF00417763 /* Memento.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE35EC1ABA8CEF00417763 /* Memento.xcdatamodeld */; };
+		4FCE35F01ABA8CEF00417763 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE35EF1ABA8CEF00417763 /* ViewController.swift */; };
+		4FCE35F31ABA8CF000417763 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FCE35F11ABA8CEF00417763 /* Main.storyboard */; };
+		4FCE35F51ABA8CF000417763 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCE35F41ABA8CF000417763 /* Images.xcassets */; };
+		4FCE35F81ABA8CF000417763 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FCE35F61ABA8CF000417763 /* LaunchScreen.xib */; };
+		4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE36031ABA8CF000417763 /* MementoTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4FCE35FE1ABA8CF000417763 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4FCE35DD1ABA8CEF00417763 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4FCE35E41ABA8CEF00417763;
+			remoteInfo = Memento;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4FCE35E51ABA8CEF00417763 /* Memento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memento.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FCE35E91ABA8CEF00417763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FCE35EA1ABA8CEF00417763 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4FCE35ED1ABA8CEF00417763 /* Memento.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Memento.xcdatamodel; sourceTree = "<group>"; };
+		4FCE35EF1ABA8CEF00417763 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4FCE35F21ABA8CEF00417763 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4FCE35F41ABA8CF000417763 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4FCE35F71ABA8CF000417763 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4FCE35FD1ABA8CF000417763 /* MementoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MementoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FCE36021ABA8CF000417763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FCE36031ABA8CF000417763 /* MementoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementoTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4FCE35E21ABA8CEF00417763 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FCE35FA1ABA8CF000417763 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4FCE35DC1ABA8CEF00417763 = {
+			isa = PBXGroup;
+			children = (
+				4FCE35E71ABA8CEF00417763 /* Memento */,
+				4FCE36001ABA8CF000417763 /* MementoTests */,
+				4FCE35E61ABA8CEF00417763 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4FCE35E61ABA8CEF00417763 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4FCE35E51ABA8CEF00417763 /* Memento.app */,
+				4FCE35FD1ABA8CF000417763 /* MementoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4FCE35E71ABA8CEF00417763 /* Memento */ = {
+			isa = PBXGroup;
+			children = (
+				4FCE35EA1ABA8CEF00417763 /* AppDelegate.swift */,
+				4FCE35EF1ABA8CEF00417763 /* ViewController.swift */,
+				4FCE35F11ABA8CEF00417763 /* Main.storyboard */,
+				4FCE35F41ABA8CF000417763 /* Images.xcassets */,
+				4FCE35F61ABA8CF000417763 /* LaunchScreen.xib */,
+				4FCE35EC1ABA8CEF00417763 /* Memento.xcdatamodeld */,
+				4FCE35E81ABA8CEF00417763 /* Supporting Files */,
+			);
+			path = Memento;
+			sourceTree = "<group>";
+		};
+		4FCE35E81ABA8CEF00417763 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4FCE35E91ABA8CEF00417763 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4FCE36001ABA8CF000417763 /* MementoTests */ = {
+			isa = PBXGroup;
+			children = (
+				4FCE36031ABA8CF000417763 /* MementoTests.swift */,
+				4FCE36011ABA8CF000417763 /* Supporting Files */,
+			);
+			path = MementoTests;
+			sourceTree = "<group>";
+		};
+		4FCE36011ABA8CF000417763 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4FCE36021ABA8CF000417763 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4FCE35E41ABA8CEF00417763 /* Memento */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FCE36071ABA8CF000417763 /* Build configuration list for PBXNativeTarget "Memento" */;
+			buildPhases = (
+				4FCE35E11ABA8CEF00417763 /* Sources */,
+				4FCE35E21ABA8CEF00417763 /* Frameworks */,
+				4FCE35E31ABA8CEF00417763 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Memento;
+			productName = Memento;
+			productReference = 4FCE35E51ABA8CEF00417763 /* Memento.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4FCE35FC1ABA8CF000417763 /* MementoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FCE360A1ABA8CF000417763 /* Build configuration list for PBXNativeTarget "MementoTests" */;
+			buildPhases = (
+				4FCE35F91ABA8CF000417763 /* Sources */,
+				4FCE35FA1ABA8CF000417763 /* Frameworks */,
+				4FCE35FB1ABA8CF000417763 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4FCE35FF1ABA8CF000417763 /* PBXTargetDependency */,
+			);
+			name = MementoTests;
+			productName = MementoTests;
+			productReference = 4FCE35FD1ABA8CF000417763 /* MementoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4FCE35DD1ABA8CEF00417763 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "NUS CS3217";
+				TargetAttributes = {
+					4FCE35E41ABA8CEF00417763 = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = W76H98A34A;
+					};
+					4FCE35FC1ABA8CF000417763 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 4FCE35E41ABA8CEF00417763;
+					};
+				};
+			};
+			buildConfigurationList = 4FCE35E01ABA8CEF00417763 /* Build configuration list for PBXProject "Memento" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4FCE35DC1ABA8CEF00417763;
+			productRefGroup = 4FCE35E61ABA8CEF00417763 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4FCE35E41ABA8CEF00417763 /* Memento */,
+				4FCE35FC1ABA8CF000417763 /* MementoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4FCE35E31ABA8CEF00417763 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FCE35F31ABA8CF000417763 /* Main.storyboard in Resources */,
+				4FCE35F81ABA8CF000417763 /* LaunchScreen.xib in Resources */,
+				4FCE35F51ABA8CF000417763 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FCE35FB1ABA8CF000417763 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4FCE35E11ABA8CEF00417763 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FCE35F01ABA8CEF00417763 /* ViewController.swift in Sources */,
+				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,
+				4FCE35EE1ABA8CEF00417763 /* Memento.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4FCE35F91ABA8CF000417763 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4FCE35FF1ABA8CF000417763 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4FCE35E41ABA8CEF00417763 /* Memento */;
+			targetProxy = 4FCE35FE1ABA8CF000417763 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4FCE35F11ABA8CEF00417763 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4FCE35F21ABA8CEF00417763 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4FCE35F61ABA8CF000417763 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4FCE35F71ABA8CF000417763 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4FCE36051ABA8CF000417763 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		4FCE36061ABA8CF000417763 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4FCE36081ABA8CF000417763 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Memento/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		4FCE36091ABA8CF000417763 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Memento/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		4FCE360B1ABA8CF000417763 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MementoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Memento.app/Memento";
+			};
+			name = Debug;
+		};
+		4FCE360C1ABA8CF000417763 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MementoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Memento.app/Memento";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4FCE35E01ABA8CEF00417763 /* Build configuration list for PBXProject "Memento" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FCE36051ABA8CF000417763 /* Debug */,
+				4FCE36061ABA8CF000417763 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4FCE36071ABA8CF000417763 /* Build configuration list for PBXNativeTarget "Memento" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FCE36081ABA8CF000417763 /* Debug */,
+				4FCE36091ABA8CF000417763 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4FCE360A1ABA8CF000417763 /* Build configuration list for PBXNativeTarget "MementoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FCE360B1ABA8CF000417763 /* Debug */,
+				4FCE360C1ABA8CF000417763 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4FCE35EC1ABA8CEF00417763 /* Memento.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4FCE35ED1ABA8CEF00417763 /* Memento.xcdatamodel */,
+			);
+			currentVersion = 4FCE35ED1ABA8CEF00417763 /* Memento.xcdatamodel */;
+			path = Memento.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4FCE35DD1ABA8CEF00417763 /* Project object */;
+}
