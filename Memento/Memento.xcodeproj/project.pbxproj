@@ -16,6 +16,8 @@
 		4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE36031ABA8CF000417763 /* MementoTests.swift */; };
 		5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */; };
 		5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */; };
+		5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */; };
+		5A78D30E1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,7 @@
 		4FCE36021ABA8CF000417763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FCE36031ABA8CF000417763 /* MementoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementoTests.swift; sourceTree = "<group>"; };
 		5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraph.swift; sourceTree = "<group>"; };
+		5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */,
+				5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */,
 				4FCE35EA1ABA8CEF00417763 /* AppDelegate.swift */,
 				4FCE35EF1ABA8CEF00417763 /* ViewController.swift */,
 				4FCE35F11ABA8CEF00417763 /* Main.storyboard */,
@@ -220,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
 				5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
 				4FCE35F01ABA8CEF00417763 /* ViewController.swift in Sources */,
 				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,
@@ -233,6 +238,7 @@
 			files = (
 				5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
 				4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */,
+				5A78D30E1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
