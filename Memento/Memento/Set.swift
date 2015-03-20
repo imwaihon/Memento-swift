@@ -54,6 +54,7 @@ class Set<T: Comparable> {
     }
     
     init() {
+        _root = nil
         _size = 0
     }
     
@@ -70,9 +71,102 @@ class Set<T: Comparable> {
     
     //The recursive insertion function
     private func insert(elem: T, curNode: SetNode<T>) {
+        //Catch duplicate
         if elem == curNode.value {
             return
         }
+        
+        //Recursive insertion
+        if elem < curNode.value {
+            if curNode.hasLeftChild {
+                insert(elem, curNode: curNode.leftChild!)
+            } else {
+                curNode.leftChild = SetNode<T>(value: elem, parent: curNode)
+            }
+        } else {
+            if curNode.hasRightChild {
+                insert(elem, curNode: curNode.rightChild!)
+            } else {
+                curNode.rightChild = SetNode<T>(value: elem, parent: curNode)
+            }
+        }
+        
+        //Balancing
+        if curNode.balanceFactor == -2 {
+            if curNode.rightChild!.balanceFactor == 1 {
+                rotateRight(curNode.rightChild!)
+            }
+            rotateLeft(curNode)
+            if curNode === _root {
+                _root = curNode.parent
+            }
+        } else if curNode.balanceFactor == 2 {
+            if curNode.leftChild!.balanceFactor == -1 {
+                rotateLeft(curNode.leftChild!)
+            }
+            rotateRight(curNode)
+            if curNode === _root {
+                _root = curNode.parent
+            }
+        }
+    }
+    
+    //Required: node.hasRightChild returns true
+    private func rotateLeft(node: SetNode<T>) {
+        assert(node.hasRightChild)
+        
+        let r = node.rightChild!
+        
+        //Link right child to parent
+        if let p = node.parent {
+            if node === p.leftChild {
+                p.leftChild = r
+            } else {
+                p.rightChild = r
+            }
+        }
+        r.parent = node.parent
+        
+        //Make right child the parent
+        node.parent = r
+        
+        //Make left child of r as right child of node
+        if let rl = r.leftChild {
+            rl.parent = node
+        }
+        node.rightChild = r.leftChild
+        
+        //Set node as r's left child
+        r.leftChild = node
+    }
+    
+    //Required: node.hasLeftChild returns true
+    private func rotateRight(node: SetNode<T>) {
+        assert(node.hasLeftChild)
+        
+        let l = node.leftChild!
+        
+        //Link left child to parent
+        if let p = node.parent {
+            if node === p.leftChild {
+                p.leftChild = l
+            } else {
+                p.rightChild = l
+            }
+        }
+        l.parent = node.parent
+        
+        //Make left child as the parent
+        node.parent = l
+        
+        //Make right child of l as left child of node
+        if let lr = l.rightChild {
+            lr.parent = node
+        }
+        node.leftChild = l.rightChild
+        
+        //Set node as l's right child
+        l.rightChild = node
     }
     
     //Checks if the set contains the specified element
@@ -108,7 +202,7 @@ class SetNode<T> {
     private var _rightChild: SetNode<T>?
     private var _leftHeight: Int
     private var _rightHeight: Int
-    var parent: SetNode<T>?
+    private var _parent: SetNode<T>?
     
     //Properties
     var hasLeftChild: Bool {
@@ -135,6 +229,14 @@ class SetNode<T> {
             _rightHeight = (_rightChild == nil) ? -1: _rightChild!.height
         }
     }
+    var parent: SetNode<T>? {
+        get {
+            return _parent
+        }
+        set {
+            _parent = newValue
+        }
+    }
     var height: Int {
         return max(_leftHeight, _rightHeight) + 1
     }
@@ -144,7 +246,7 @@ class SetNode<T> {
     
     init(value: T, parent: SetNode<T>?){
         self.value = value
-        self.parent = parent
+        self._parent = parent
         _leftChild = nil
         _rightChild = nil
         _leftHeight = -1
