@@ -61,7 +61,7 @@ class Set<T: Comparable> {
     //Inserts a new element into the set.
     //Does nothing if element already exists.
     func insert(elem: T) {
-        if _root == nil {
+        if isEmpty {
             _root = SetNode<T>(value: elem, parent: nil)
         } else {
             insert(elem, curNode: _root!)
@@ -138,6 +138,8 @@ class Set<T: Comparable> {
         
         //Set node as r's left child
         r.leftChild = node
+        
+        assert(abs(node.balanceFactor) < 2)
     }
     
     //Required: node.hasLeftChild returns true
@@ -167,11 +169,13 @@ class Set<T: Comparable> {
         
         //Set node as l's right child
         l.rightChild = node
+        
+        assert(abs(node.balanceFactor) < 2)
     }
     
     //Checks if the set contains the specified element
     func contains(elem: T) -> Bool {
-        if _root == nil {
+        if isEmpty {
             return false
         }
         return contains(elem, curNode: _root!)
@@ -191,7 +195,9 @@ class Set<T: Comparable> {
     }
     
     func erase(elem: T) {
-        //To be implemented
+        if isEmpty {
+            return
+        }
         _size--
     }
 }
