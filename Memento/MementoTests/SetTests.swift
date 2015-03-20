@@ -23,6 +23,7 @@ class SetTests: XCTestCase {
         for num in 1...7 {
             XCTAssertTrue(set.contains(num))
         }
+        XCTAssertEqual(set.size, 7)
     }
     
     func testSmallestElement() {
@@ -61,5 +62,11 @@ class SetTests: XCTestCase {
         set.erase(7)
         XCTAssertFalse(set.contains(7))
         XCTAssertEqual(set.largestElement!, 6)
+        
+        set.erase(2)
+        set.erase(3)
+        set.erase(4)
+        set.erase(6)
+        XCTAssertTrue(set.isEmpty)
     }
 }

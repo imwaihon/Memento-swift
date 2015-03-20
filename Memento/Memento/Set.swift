@@ -207,6 +207,7 @@ class Set<T: Comparable> {
         } else {
             if curNode === _root {
                 _root = nil
+                _size--
                 return
             }
             assert(curNode.parent != nil)
