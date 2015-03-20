@@ -66,12 +66,14 @@ class Set<T: Comparable> {
         if elem < curNode.value {
             if curNode.hasLeftChild {
                 insert(elem, curNode: curNode.leftChild!)
+                curNode.updateHeight()
             } else {
                 curNode.leftChild = SetNode<T>(value: elem, parent: curNode)
             }
         } else {
             if curNode.hasRightChild {
                 insert(elem, curNode: curNode.rightChild!)
+                curNode.updateHeight()
             } else {
                 curNode.rightChild = SetNode<T>(value: elem, parent: curNode)
             }
@@ -180,16 +182,85 @@ class Set<T: Comparable> {
         }
     }
     
+    //Removes the specified element from the set.
+    //Does nothing if the element cannot be found.
     func erase(elem: T) {
         if isEmpty {
             return
         }
         erase(elem, curNode: _root!)
-        _size--
     }
     
     private func erase(elem: T, curNode: SetNode<T>) {
+        if elem < curNode.value {
+            if curNode.hasLeftChild {
+                erase(elem, curNode: curNode.leftChild!)
+            } else {
+                return
+            }
+        } else if elem > curNode.value {
+            if curNode.hasRightChild {
+                erase(elem, curNode: curNode.rightChild!)
+            } else {
+                return
+            }
+        } else {
+            if curNode === _root {
+                _root = nil
+                return
+            }
+            assert(curNode.parent != nil)
+            if !curNode.hasLeftChild && !curNode.hasRightChild {    //If is a leaf node, just delete from parent
+                let p = curNode.parent!
+                if curNode === p.leftChild {
+                    p.leftChild = nil
+                } else {
+                    p.rightChild = nil
+                }
+            } else if curNode.hasLeftChild ^ curNode.hasRightChild {    //If has 1 child
+                let p = curNode.parent!
+                let c = curNode.hasLeftChild ? curNode.leftChild!: curNode.rightChild!
+                if curNode === p.leftChild {
+                    p.leftChild = c
+                } else {
+                    p.rightChild = c
+                }
+                c.parent = p
+            } else {    //If have 2 children
+                let p = curNode.parent!                     //curNode's parent
+                let s = minElement(curNode.rightChild!)     //Essentially curNode's successor
+                let sp = s.parent!                          //Successor's parent
+                s.rightChild?.parent = sp                   //Remove successor from original position
+                sp.leftChild = s.rightChild
+                s.parent = p                                //Replace curNode with successor
+                s.leftChild = curNode.leftChild
+                if curNode === p.leftChild {
+                    p.leftChild = s
+                } else {
+                    p.rightChild = s
+                }
+            }
+            _size--
+        }
         
+        //Balancing
+        if curNode.balanceFactor == -2 {
+            if curNode.rightChild!.balanceFactor == 1 {
+                rotateRight(curNode.rightChild!)
+            }
+            rotateLeft(curNode)
+            if curNode === _root {
+                _root = curNode.parent
+            }
+        } else if curNode.balanceFactor == 2 {
+            if curNode.leftChild!.balanceFactor == -1 {
+                rotateLeft(curNode.leftChild!)
+            }
+            rotateRight(curNode)
+            if curNode === _root {
+                _root = curNode.parent
+            }
+        }
     }
     
     //Returns the node with the next smallest value or nil if no such node exists
@@ -278,5 +349,10 @@ class SetNode<T> {
         _rightChild = nil
         _leftHeight = -1
         _rightHeight = -1
+    }
+    
+    func updateHeight() {
+        _leftHeight = hasLeftChild ? _leftChild!.height: -1
+        _rightHeight = hasRightChild ? _rightChild!.height: -1
     }
 }
