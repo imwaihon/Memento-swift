@@ -33,24 +33,10 @@ class Set<T: Comparable> {
         return size == 0
     }
     var smallestElement: T? {
-        if _root == nil {
-            return nil
-        }
-        var cur = _root!
-        while cur.hasLeftChild {
-            cur = cur.leftChild!
-        }
-        return cur.value
+        return isEmpty ? nil: minElement(_root!).value
     }
     var largestElement: T? {
-        if _root == nil {
-            return nil
-        }
-        var cur = _root!
-        while cur.hasRightChild {
-            cur = cur.rightChild!
-        }
-        return cur.value
+        return isEmpty ? nil: maxElement(_root!).value
     }
     
     init() {
@@ -198,7 +184,42 @@ class Set<T: Comparable> {
         if isEmpty {
             return
         }
+        erase(elem, curNode: _root!)
         _size--
+    }
+    
+    private func erase(elem: T, curNode: SetNode<T>) {
+        
+    }
+    
+    //Returns the node with the next smallest value or nil if no such node exists
+    private func successor(node: SetNode<T>) -> SetNode<T>? {
+        if node.hasRightChild {
+            return minElement(node.rightChild!)
+        }
+        var p = node.parent
+        var cur = node
+        while p != nil && cur === p!.rightChild {
+            cur = p!
+            p = p?.parent
+        }
+        return p
+    }
+    
+    private func minElement(root: SetNode<T>) -> SetNode<T> {
+        var node = root
+        while node.hasLeftChild {
+            node = node.leftChild!
+        }
+        return node
+    }
+    
+    private func maxElement(root: SetNode<T>) -> SetNode<T> {
+        var node = root
+        while node.hasRightChild {
+            node = node.rightChild!
+        }
+        return node
     }
 }
 
