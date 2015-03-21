@@ -199,7 +199,6 @@ class Set<T: Comparable> {
             return
         }
         erase(elem, curNode: _root!)
-        println(_root?.value)
     }
     
     private func erase(elem: T, curNode: SetNode<T>) {
