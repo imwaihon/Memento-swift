@@ -107,6 +107,15 @@ class Set<T: Comparable> {
         
         let r = node.rightChild!
         
+        //Make left child of r as right child of node
+        if let rl = r.leftChild {
+            rl.parent = node
+        }
+        node.rightChild = r.leftChild
+        
+        //Set node as r's left child
+        r.leftChild = node
+        
         //Link right child to parent
         if let p = node.parent {
             if node === p.leftChild {
@@ -119,17 +128,9 @@ class Set<T: Comparable> {
         
         //Make right child the parent
         node.parent = r
-        
-        //Make left child of r as right child of node
-        if let rl = r.leftChild {
-            rl.parent = node
-        }
-        node.rightChild = r.leftChild
-        
-        //Set node as r's left child
-        r.leftChild = node
-        
+
         assert(abs(node.balanceFactor) < 2)
+        assert(abs(r.balanceFactor) < 2)
     }
     
     //Required: node.hasLeftChild returns true
@@ -137,6 +138,15 @@ class Set<T: Comparable> {
         assert(node.hasLeftChild)
         
         let l = node.leftChild!
+        
+        //Make right child of l as left child of node
+        if let lr = l.rightChild {
+            lr.parent = node
+        }
+        node.leftChild = l.rightChild
+        
+        //Set node as l's right child
+        l.rightChild = node
         
         //Link left child to parent
         if let p = node.parent {
@@ -149,18 +159,10 @@ class Set<T: Comparable> {
         l.parent = node.parent
         
         //Make left child as the parent
-        node.parent = l
-        
-        //Make right child of l as left child of node
-        if let lr = l.rightChild {
-            lr.parent = node
-        }
-        node.leftChild = l.rightChild
-        
-        //Set node as l's right child
-        l.rightChild = node
+        node.parent = l 
         
         assert(abs(node.balanceFactor) < 2)
+        assert(abs(l.balanceFactor) < 2)
     }
     
     //Checks if the set contains the specified element
