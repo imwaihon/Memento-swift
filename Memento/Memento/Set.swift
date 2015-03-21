@@ -249,13 +249,19 @@ class Set<T: Comparable> {
                 } else {
                     _root = s
                 }
-                if sp !== curNode {
+                if sp !== curNode { //Removing from successor's original parent
                     sp.leftChild = s.rightChild
                     if let sr = s.rightChild {
                         sr.parent = sp
                     }
                     s.rightChild = curNode.rightChild
                     curNode.rightChild?.parent = s
+                    if sp.balanceFactor == -2 { //Balancing sp after removing s as child
+                        if sp.rightChild!.balanceFactor == 1 {
+                            rotateRight(sp.rightChild!)
+                        }
+                        rotateLeft(sp)
+                    }
                 }
                 node = s
             }
