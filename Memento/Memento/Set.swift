@@ -182,6 +182,12 @@ class Set<T: Comparable> {
         }
     }
     
+    //Removes all elements from this set.
+    func clear() {
+        _root = nil
+        _size = 0
+    }
+    
     //Removes the specified element from the set.
     //Does nothing if the element cannot be found.
     func erase(elem: T) {
