@@ -17,34 +17,54 @@ class SetTests: XCTestCase {
     
     func testInsert() {
         let set = Set<Int>()
-        let values = [7, 10, 13, 17, 15, 5, 4, 14, 16, 2, 6, 3, 1] //These values cause all possible balancing rotations
-        for num in 1...7 {
-            set.insert(num)
-            XCTAssertEqual(set.size, num)
+        let values = [7, 10, 13, 17, 15, 5, 4, 14, 16, 2, 6, 3, 1, 15, 8, 9] //These values cause all possible balancing rotations
+        for value in values {
+            set.insert(value)
         }
-        for num in 1...7 {
-            XCTAssertTrue(set.contains(num))
+        for value in values {
+            XCTAssertTrue(set.contains(value))
         }
+        XCTAssertEqual(set.size, 15)
     }
     
     func testSmallestElement() {
         let set = Set<Int>()
+        let values = [7, 10, 13, 17, 15, 5, 4, 14, 16, 2, 6, 3, 1, 15, 8, 9]
         XCTAssertTrue(set.smallestElement == nil)
         
-        for num in 1...7 {
-            set.insert(num)
+        for value in values {
+            set.insert(value)
         }
         XCTAssertEqual(set.smallestElement!, 1)
     }
     
     func testLargestElement() {
         let set = Set<Int>()
+        let values = [7, 10, 13, 17, 15, 5, 4, 14, 16, 2, 6, 3, 1, 15, 8, 9]
         XCTAssertTrue(set.largestElement == nil)
         
-        for num in 1...7 {
-            set.insert(num)
+        for value in values {
+            set.insert(value)
         }
-        XCTAssertEqual(set.largestElement!, 7)
+        XCTAssertEqual(set.largestElement!, 17)
+    }
+    
+    func testClear() {
+        let set = Set<Int>()
+        let values = [7, 10, 13, 17, 15, 5, 4, 14, 16, 2, 6, 3, 1, 15, 8, 9]
+        for value in values {
+            set.insert(value)
+        }
+        for value in values {
+            XCTAssertTrue(set.contains(value))
+        }
+        XCTAssertEqual(set.size, 15)
+        
+        set.clear()
+        XCTAssertTrue(set.isEmpty)
+        for value in values {
+            XCTAssertFalse(set.contains(value))
+        }
     }
     
     func testErase() {
