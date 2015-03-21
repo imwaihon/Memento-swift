@@ -189,77 +189,95 @@ class Set<T: Comparable> {
             return
         }
         erase(elem, curNode: _root!)
+        println(_root?.value)
     }
     
     private func erase(elem: T, curNode: SetNode<T>) {
+        var node: SetNode<T>
         if elem < curNode.value {
-            if curNode.hasLeftChild {
-                erase(elem, curNode: curNode.leftChild!)
-            } else {
+            if !curNode.hasLeftChild {
                 return
             }
+            erase(elem, curNode: curNode.leftChild!)
+            curNode.updateHeight()
+            node = curNode
         } else if elem > curNode.value {
-            if curNode.hasRightChild {
-                erase(elem, curNode: curNode.rightChild!)
-            } else {
+            if !curNode.hasRightChild {
                 return
             }
+            erase(elem, curNode: curNode.rightChild!)
+            curNode.updateHeight()
+            node = curNode
         } else {
-            if curNode === _root {
-                _root = nil
+            if !curNode.hasLeftChild && !curNode.hasRightChild {
+                if let p = curNode.parent {
+                    if curNode === p.leftChild {
+                        p.leftChild = nil
+                    } else {
+                        p.rightChild = nil
+                    }
+                } else {
+                    _root = nil
+                }
                 _size--
                 return
-            }
-            assert(curNode.parent != nil)
-            if !curNode.hasLeftChild && !curNode.hasRightChild {    //If is a leaf node, just delete from parent
-                let p = curNode.parent!
-                if curNode === p.leftChild {
-                    p.leftChild = nil
-                } else {
-                    p.rightChild = nil
-                }
-            } else if curNode.hasLeftChild ^ curNode.hasRightChild {    //If has 1 child
-                let p = curNode.parent!
+            } else if curNode.hasLeftChild ^ curNode.hasRightChild {
                 let c = curNode.hasLeftChild ? curNode.leftChild!: curNode.rightChild!
-                if curNode === p.leftChild {
-                    p.leftChild = c
+                c.parent = curNode.parent
+                if let p = curNode.parent {
+                    if curNode === p.leftChild {
+                        p.leftChild = c
+                    } else {
+                        p.rightChild = c
+                    }
                 } else {
-                    p.rightChild = c
+                    _root = c
                 }
-                c.parent = p
-            } else {    //If have 2 children
-                let p = curNode.parent!                     //curNode's parent
-                let s = minElement(curNode.rightChild!)     //Essentially curNode's successor
-                let sp = s.parent!                          //Successor's parent
-                s.rightChild?.parent = sp                   //Remove successor from original position
-                sp.leftChild = s.rightChild
-                s.parent = p                                //Replace curNode with successor
+                node = c
+            } else {
+                let s = minElement(curNode.rightChild!)
+                let sp = s.parent!
+                s.parent = curNode.parent
                 s.leftChild = curNode.leftChild
-                if curNode === p.leftChild {
-                    p.leftChild = s
+                curNode.leftChild?.parent = s
+                if let p = curNode.parent {
+                    if curNode === p.leftChild {
+                        p.leftChild = s
+                    } else {
+                        p.rightChild = s
+                    }
                 } else {
-                    p.rightChild = s
+                    _root = s
                 }
+                if sp !== curNode {
+                    sp.leftChild = s.rightChild
+                    if let sr = s.rightChild {
+                        sr.parent = sp
+                    }
+                    s.rightChild = curNode.rightChild
+                    curNode.rightChild?.parent = s
+                }
+                node = s
             }
             _size--
         }
         
         //Balancing
-        if curNode.balanceFactor == -2 {
-            if curNode.rightChild!.balanceFactor == 1 {
-                rotateRight(curNode.rightChild!)
+        if node.balanceFactor == -2 {
+            if node.rightChild!.balanceFactor == 1 {
+                rotateRight(node.rightChild!)
             }
-            rotateLeft(curNode)
+            rotateLeft(node)
             if curNode === _root {
-                _root = curNode.parent
+                _root = node.parent
             }
-        } else if curNode.balanceFactor == 2 {
-            if curNode.leftChild!.balanceFactor == -1 {
-                rotateLeft(curNode.leftChild!)
+        } else if node.balanceFactor == 2 {
+            if node.leftChild!.balanceFactor == -1 {
+                rotateLeft(node.leftChild!)
             }
-            rotateRight(curNode)
-            if curNode === _root {
-                _root = curNode.parent
+            rotateRight(node)
+            if node === _root {
+                _root = node.parent
             }
         }
     }
