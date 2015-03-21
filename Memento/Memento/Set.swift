@@ -49,10 +49,10 @@ class Set<T: Comparable> {
     func insert(elem: T) {
         if isEmpty {
             _root = SetNode<T>(value: elem, parent: nil)
+            _size++
         } else {
             insert(elem, curNode: _root!)
         }
-        _size++
     }
     
     //The recursive insertion function
@@ -69,6 +69,7 @@ class Set<T: Comparable> {
                 curNode.updateHeight()
             } else {
                 curNode.leftChild = SetNode<T>(value: elem, parent: curNode)
+                _size++
             }
         } else {
             if curNode.hasRightChild {
@@ -76,6 +77,7 @@ class Set<T: Comparable> {
                 curNode.updateHeight()
             } else {
                 curNode.rightChild = SetNode<T>(value: elem, parent: curNode)
+                _size++
             }
         }
         
