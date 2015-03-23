@@ -31,6 +31,11 @@ class MementoGraph {
     private var nodes: [MementoNode?]
     private let nodeLabelGenerator: Set<Int>
     
+    //Properties
+    var rootIcon: MementoNodeIcon {
+        return nodes[0]!.icon
+    }
+    
     init(name: String, root: MementoNode) {
         self.name = name
         adjList = [[Int]]()
@@ -74,9 +79,18 @@ class MementoGraph {
         }
     }
     
+    //Gets the node with the given label.
+    //Returns nil if the node does not exist or the label is invalid.
+    func getNode(label: Int) -> MementoNode? {
+        if label < 0 || label >= nodes.count {
+            return nil
+        }
+        return nodes[label]
+    }
+    
     //Gets the neighbours of the given node
     //Returns an empty list if the given node does not exist or is invalid.
-    func getNeighbours(node: MementoNodeIcon) -> [MementoNodeIcon] {
+    func getNeighbourIcons(node: MementoNodeIcon) -> [MementoNodeIcon] {
         let sLabel = node.label
         let set = Set<Int>()
         var res = [MementoNodeIcon]()
