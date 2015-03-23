@@ -3,6 +3,7 @@
 //  Memento
 //
 //  Represents a node in the memory palace.
+//  The node is represented by its own MVC.
 //
 //  Specifications:
 //  Contains necessary information for display.
