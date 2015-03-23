@@ -14,13 +14,11 @@
 import Foundation
 import UIKit
 
-struct Association {
+class Association {
     let frame: CGRect
-    let value: AnyObject
     
-    init(frame: CGRect, value: AnyObject){
+    init(frame: CGRect){
         self.frame = frame
-        self.value = value
     }
     
     //Checks if the area covered by this association conflicts with the given association.
