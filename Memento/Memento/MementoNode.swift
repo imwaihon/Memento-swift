@@ -18,7 +18,23 @@
 //
 
 import Foundation
+import UIKit
 
 class MementoNode {
-
+    var label: Int
+    let imageFile: String
+    let view: UIImageView
+    //associations: [Association]
+    //links: [Link]
+    
+    //Properties
+    var icon: MementoNodeIcon {
+        return MementoNodeIcon(label: label, filename: imageFile)
+    }
+    
+    init(imageFile: String){
+        label = 0
+        self.imageFile = imageFile
+        view = UIImageView(image: UIImage(named: imageFile))
+    }
 }

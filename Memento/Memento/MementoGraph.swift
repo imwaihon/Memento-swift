@@ -30,8 +30,6 @@ class MementoGraph {
     private var adjList: [[Int]]
     private var nodes: [MementoNode?]
     private let nodeLabelGenerator: Set<Int>
-    //private var associations: [Association]
-    //private var links: [Link]
     
     init(name: String, root: MementoNode) {
         self.name = name
@@ -92,7 +90,7 @@ class MementoGraph {
             let dLabel = adjList[sLabel][i]
             if !set.contains(dLabel) {
                 assert(nodes[dLabel] != nil)
-                res.append(MementoNodeIcon(label: dLabel, filename: nodes[dLabel]!.imageFile))
+                res.append(nodes[dLabel]!.icon)
             }
         }
         return res
