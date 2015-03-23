@@ -17,6 +17,7 @@
 		5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */; };
 		5A278FF41AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */; };
 		5A278FF51AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */; };
+		5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */; };
 		5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */; };
 		5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */; };
 		5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */; };
@@ -49,6 +50,7 @@
 		4FCE36031ABA8CF000417763 /* MementoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementoTests.swift; sourceTree = "<group>"; };
 		5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNodeIcon.swift; sourceTree = "<group>"; };
+		5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphTests.swift; sourceTree = "<group>"; };
 		5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraph.swift; sourceTree = "<group>"; };
 		5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNode.swift; sourceTree = "<group>"; };
 		5A837B911ABBE86E00E52F80 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		4FCE36001ABA8CF000417763 /* MementoTests */ = {
 			isa = PBXGroup;
 			children = (
+				5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */,
 				5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */,
 				4FCE36031ABA8CF000417763 /* MementoTests.swift */,
 				4FCE36011ABA8CF000417763 /* Supporting Files */,
@@ -253,6 +256,7 @@
 				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
 				5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
+				5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */,
 				4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */,
 				5A78D30E1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
 			);

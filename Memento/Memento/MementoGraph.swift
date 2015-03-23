@@ -54,8 +54,15 @@ class MementoGraph {
     private func insertNode(node: MementoNode){
         node.label = nodeLabelGenerator.smallestElement!
         nodeLabelGenerator.erase(node.label)
-        nodes[node.label] = node
-        adjList[node.label].removeAll(keepCapacity: false)
+        
+        //node.label is guaranteed to be < nodes.count at all times.
+        if node.label >= nodes.count {
+            nodes.append(node)
+            adjList.append([Int]())
+        } else {
+            nodes[node.label] = node
+            adjList[node.label].removeAll(keepCapacity: false)
+        }
         
         //Replenish the label generator's labels
         if nodeLabelGenerator.size < 3 {
