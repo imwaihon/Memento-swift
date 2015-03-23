@@ -13,15 +13,11 @@ import UIKit
 
 class TextAssociation: Association {
     let value: String
-    let view: UIView
     
     init(frame: CGRect, value: String){
         self.value = value
-        
-        //Initializing the UIView programmatically
-        view = UIView(frame: frame)
-        //Do other thigns to customize the view/make it visible.
-        
         super.init(frame: frame)
+        
+        //Do other things to make view visible.
     }
 }

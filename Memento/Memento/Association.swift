@@ -16,9 +16,11 @@ import UIKit
 
 class Association {
     let frame: CGRect
+    let view: UIView
     
     init(frame: CGRect){
         self.frame = frame
+        view = UIView(frame: frame)
     }
     
     //Checks if the area covered by this association conflicts with the given association.
