@@ -11,10 +11,10 @@ import UIKit
 import XCTest
 
 class MementoGraphTests: XCTestCase {
-    func testInit(){
+    /*func testInit(){
         let graph = MementoGraph(name: "SampleGraph", root: MementoNode(imageFile: "test.png"))
         let rootIcon = graph.rootIcon
         XCTAssertEqual(rootIcon.label, 0)
         XCTAssertEqual(rootIcon.filename, "test.png")
-    }
+    }*/
 }
