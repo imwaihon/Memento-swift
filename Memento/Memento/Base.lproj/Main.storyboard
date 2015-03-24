@@ -81,6 +81,7 @@
                                 </state>
                                 <connections>
                                     <action selector="createNewPressed:" destination="vpL-yG-LtW" eventType="touchUpInside" id="L2j-9Z-0y0"/>
+                                    <segue destination="Ei4-8o-9vm" kind="show" id="byy-ol-F6o"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHJ-A7-n7b">
@@ -98,7 +99,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdN-AK-8AN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1771" y="401"/>
+            <point key="canvasLocation" x="2905" y="737"/>
+        </scene>
+        <!--Palace Overview View Controller-->
+        <scene sceneID="av9-va-kIf">
+            <objects>
+                <viewController id="Ei4-8o-9vm" customClass="PalaceOverviewViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NTK-XH-E6t"/>
+                        <viewControllerLayoutGuide type="bottom" id="PxF-RR-ks6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="joH-r4-FO8">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uxj-Uk-Mgy">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="scrollView" destination="Uxj-Uk-Mgy" id="IJW-VY-f54"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mbK-TX-O1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2415" y="1946"/>
         </scene>
     </scenes>
 </document>
