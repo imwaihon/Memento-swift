@@ -23,8 +23,9 @@ class DraggableImageView: UIImageView {
         self.name = name
         self.parent = parent
         tapGesture = UITapGestureRecognizer(target: self, action: "tapHandler:")
-        tapGesture.numberOfTapsRequired = 1
+        tapGesture.numberOfTapsRequired = 2
         self.addGestureRecognizer(tapGesture)
+        
         
         self.layer.shadowColor = UIColor.blackColor().CGColor
         self.layer.shadowOffset = CGSizeMake(2, 2);
@@ -75,6 +76,7 @@ class DraggableImageView: UIImageView {
     
     func tapHandler(gesture: UIGestureRecognizer){
         NSLog("Go to \(name)")
+        parent.performSegueWithIdentifier("NodeViewSegue", sender: self)
     }
     
     func longPressHandler(gesture: UIGestureRecognizer){

@@ -11,6 +11,7 @@
 		4F000D721AC114A100720E7E /* MoveImageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */; };
 		4F000D731AC114A100720E7E /* LineDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D6F1AC114A100720E7E /* LineDrawer.swift */; };
 		4F000D741AC114A100720E7E /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D701AC114A100720E7E /* DraggableImageView.swift */; };
+		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
 		4FC6DD3D1AC026AC0070F271 /* SelectPalaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6DD3C1AC026AC0070F271 /* SelectPalaceViewController.swift */; };
 		4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6DD3E1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift */; };
 		4FC6DD411AC04C560070F271 /* CreateNewPalaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6DD401AC04C560070F271 /* CreateNewPalaceViewController.swift */; };
@@ -52,6 +53,7 @@
 		4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveImageDelegate.swift; sourceTree = "<group>"; };
 		4F000D6F1AC114A100720E7E /* LineDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDrawer.swift; sourceTree = "<group>"; };
 		4F000D701AC114A100720E7E /* DraggableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableImageView.swift; sourceTree = "<group>"; };
+		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
 		4FC6DD3C1AC026AC0070F271 /* SelectPalaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPalaceViewController.swift; sourceTree = "<group>"; };
 		4FC6DD3E1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPalaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		4FC6DD401AC04C560070F271 /* CreateNewPalaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewPalaceViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		4FCE35E71ABA8CEF00417763 /* Memento */ = {
 			isa = PBXGroup;
 			children = (
+				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
 				4F000D6D1AC114A100720E7E /* PalaceOverviewViewController.swift */,
 				4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */,
 				4F000D6F1AC114A100720E7E /* LineDrawer.swift */,
@@ -277,6 +280,7 @@
 				5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
 				5A837B921ABBE86E00E52F80 /* Set.swift in Sources */,
 				4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */,
+				4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */,
 				4F000D741AC114A100720E7E /* DraggableImageView.swift in Sources */,
 				4FCE35F01ABA8CEF00417763 /* ViewController.swift in Sources */,
 				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,

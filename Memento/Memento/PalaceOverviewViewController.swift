@@ -89,9 +89,12 @@ class PalaceOverviewViewController: UIViewController, UIScrollViewDelegate, Move
             var imageView = DraggableImageView(image: image, name: imageName, parent: self)
             imageView.frame = CGRect(origin: imagesWithLocation[imageName]!, size:CGSize(width: 256.0, height: 192.0))
             imageView.center = imagesWithLocation[imageName]!
+
+
             scrollView.addSubview(imageView)
         }
     }
+    
     
     func getLines() -> [[CGPoint]]{
         var newLines : [[CGPoint]]! = []
