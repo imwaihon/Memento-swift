@@ -22,39 +22,5 @@ import Foundation
 import UIKit
 
 class MementoNode {
-    var label: Int
-    let imageFile: String
-    let view: UIImageView
-    var associations: [Association]
-    //links: [Link]
-    
-    //Properties
-    var icon: MementoNodeIcon {
-        return MementoNodeIcon(label: label, filename: imageFile)
-    }
-    
-    init(imageFile: String){
-        label = 0
-        self.imageFile = imageFile
-        associations = [Association]()
-        view = UIImageView(image: UIImage(named: imageFile))
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTap:"))
-    }
-    
-    //Adds the given association.
-    //Does nothing if this association overlaps with existing associations.
-    func addAssociation(assoc: Association){
-        for association in associations {
-            if assoc.hasConflictWith(association) {
-                return
-            }
-        }
-        associations.append(assoc)
-        view.addSubview(assoc.view)
-    }
-    
-    //Handles tap events in the node's view.
-    func onTap(sender: UITapGestureRecognizer){
-        
-    }
+
 }
