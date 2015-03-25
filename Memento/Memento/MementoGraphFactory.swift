@@ -16,5 +16,14 @@
 import Foundation
 
 class MementoGraphFactory {
-
+    private let nodeFactory: MementoNodeFactory
+    
+    init(){
+        nodeFactory = MementoNodeFactory()
+    }
+    
+    func makeGraph(imageFile: String) -> MementoGraph {
+        let rootNode = nodeFactory.makeNode(imageFile)
+        return MementoGraph()
+    }
 }

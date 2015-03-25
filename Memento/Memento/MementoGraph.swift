@@ -20,5 +20,17 @@
 import Foundation
 
 class MementoGraph {
-
+    private var nodes: [MementoNode]
+    
+    init(rootNode: MementoNode){
+        nodes = [MementoNode]()
+        nodes.append(rootNode)
+        
+        assert(checkRep())
+    }
+    
+    //Checks that representation invariant is not violated
+    private func checkRep() -> Bool {
+        return nodes.count > 0
+    }
 }

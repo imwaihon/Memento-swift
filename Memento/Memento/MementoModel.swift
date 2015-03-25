@@ -11,5 +11,9 @@
 import Foundation
 
 class MementoModel {
-
+    
+    //Adds the new graph to the collection.
+    func addGraph(graph: MementoGraph){
+    
+    }
 }

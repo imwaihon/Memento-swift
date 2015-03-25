@@ -13,14 +13,23 @@ import Foundation
 
 class MementoManager{
     private var selectedPalace: MementoGraph?
+    private var selectedRoom: MementoNode?
+    private let model: MementoModel
+    private let graphFactory: MementoGraphFactory
+    private let nodeFactory: MementoNodeFactory
     
     init(){
         selectedPalace = nil
+        selectedRoom = nil
+        model = MementoModel()
+        graphFactory = MementoGraphFactory()
+        nodeFactory = MementoNodeFactory()
     }
     
     //Adds a new memory palace
     func addMemoryPalace(imageFile: String){
-        
+        let newGraph = graphFactory.makeGraph(imageFile)
+        model.addGraph(newGraph)
     }
     
     //Removes the specified memory palace
@@ -33,5 +42,13 @@ class MementoManager{
     //Returns an integer of at least 0
     func getNumberofMemoryPalace() -> Int{
         return 0
+    }
+    
+    //Adds a new room to the current memory palace.
+    //Does nothing if no memory palace is selected.
+    func addMemoryPalaceRoom(){
+        if selectedPalace == nil {
+            return
+        }
     }
 }
