@@ -26,6 +26,8 @@
 		5A278FF41AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */; };
 		5A278FF51AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */; };
 		5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */; };
+		5A4E789F1AC2A2F700013728 /* MementoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E789E1AC2A2F700013728 /* MementoModel.swift */; };
+		5A4E78A01AC2A2F700013728 /* MementoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E789E1AC2A2F700013728 /* MementoModel.swift */; };
 		5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */; };
 		5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */; };
 		5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */; };
@@ -69,6 +71,7 @@
 		5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNodeIcon.swift; sourceTree = "<group>"; };
 		5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphTests.swift; sourceTree = "<group>"; };
+		5A4E789E1AC2A2F700013728 /* MementoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoModel.swift; sourceTree = "<group>"; };
 		5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraph.swift; sourceTree = "<group>"; };
 		5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNode.swift; sourceTree = "<group>"; };
 		5A837B911ABBE86E00E52F80 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 				4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */,
 				4F000D6F1AC114A100720E7E /* LineDrawer.swift */,
 				5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */,
+				5A4E789E1AC2A2F700013728 /* MementoModel.swift */,
 				4F000D701AC114A100720E7E /* DraggableImageView.swift */,
 				5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */,
 				5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */,
@@ -275,6 +279,7 @@
 				5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
 				5AA1B06A1AC1528B00AC3C65 /* MementoManager.swift in Sources */,
 				5A837B921ABBE86E00E52F80 /* Set.swift in Sources */,
+				5A4E789F1AC2A2F700013728 /* MementoModel.swift in Sources */,
 				4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */,
 				4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */,
 				4F000D741AC114A100720E7E /* DraggableImageView.swift in Sources */,
@@ -293,6 +298,7 @@
 				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
 				5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
+				5A4E78A01AC2A2F700013728 /* MementoModel.swift in Sources */,
 				5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */,
 				4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */,
 				5A78D30E1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
