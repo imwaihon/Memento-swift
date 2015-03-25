@@ -23,4 +23,7 @@ import UIKit
 
 class MementoNode {
 
+    init(imageFile: String){
+        
+    }
 }

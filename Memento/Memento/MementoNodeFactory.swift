@@ -12,4 +12,7 @@ import Foundation
 
 class MementoNodeFactory {
     
+    func makeNode(imageFile: String) -> MementoNode {
+        return MementoNode(imageFile: imageFile)
+    }
 }

@@ -7,6 +7,7 @@
 //  Specifications:
 //  Insert nodes.
 //  Remove nodes.
+//  Convert into memory palace template.
 //
 //  Non-functional requirements:
 //
