@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--Select Palace View Controller-->
@@ -81,7 +81,7 @@
                                 </state>
                                 <connections>
                                     <action selector="createNewPressed:" destination="vpL-yG-LtW" eventType="touchUpInside" id="L2j-9Z-0y0"/>
-                                    <segue destination="Ei4-8o-9vm" kind="show" identifier="PalaceOverviewSegue" id="byy-ol-F6o"/>
+                                    <segue destination="4VP-WZ-IsH" kind="show" identifier="PalaceOverviewSegue" id="Y6l-L7-X7V"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHJ-A7-n7b">
@@ -99,37 +99,74 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdN-AK-8AN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701" y="593"/>
+            <point key="canvasLocation" x="1821" y="225"/>
         </scene>
-        <!--Palace Overview View Controller-->
-        <scene sceneID="av9-va-kIf">
+        <!--Overview View Controller-->
+        <scene sceneID="wLw-nr-hi7">
             <objects>
-                <viewController id="Ei4-8o-9vm" customClass="PalaceOverviewViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4VP-WZ-IsH" customClass="OverviewViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NTK-XH-E6t"/>
-                        <viewControllerLayoutGuide type="bottom" id="PxF-RR-ks6"/>
+                        <viewControllerLayoutGuide type="top" id="HEm-nB-MmZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mfn-za-b0R"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="joH-r4-FO8">
+                    <view key="view" contentMode="scaleToFill" id="usJ-5Y-p2g">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uxj-Uk-Mgy">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="700"/>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zMf-a0-GCB">
-                                <rect key="frame" x="16" y="725" width="35" height="30"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-ML-v3e">
+                                <rect key="frame" x="0.0" y="194" width="1024" height="404"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ckb-2Q-qo5">
+                                    <size key="itemSize" width="522" height="404"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SpaceCell" reuseIdentifier="SpaceCell" id="cnN-TL-3Qj">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="522" height="404"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="OverviewImageCell" reuseIdentifier="OverviewImageCell" id="cSp-aR-enZ" customClass="OverviewImageCollectionViewCell" customModule="Memento" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="522" height="404"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qjJ-xy-D9z">
+                                                    <rect key="frame" x="5" y="10" width="512" height="384"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="image" destination="qjJ-xy-D9z" id="xrj-om-JCE"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FvS-4S-Mlo">
+                                <rect key="frame" x="16" y="730" width="35" height="30"/>
                                 <state key="normal" title="Back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="Ed0-iu-POO"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="pP2-aG-CGP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEd-7t-GxH">
-                                <rect key="frame" x="104" y="725" width="106" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usA-5e-NFD">
+                                <rect key="frame" x="97" y="730" width="106" height="30"/>
                                 <state key="normal" title="Test Node View">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="QAb-Y3-WmI" kind="presentation" id="xme-zL-unE"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -137,13 +174,12 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
-                        <outlet property="scrollView" destination="Uxj-Uk-Mgy" id="IJW-VY-f54"/>
-                        <segue destination="QAb-Y3-WmI" kind="presentation" identifier="NodeViewSegue" id="JAc-M6-x3a"/>
+                        <outlet property="scrollableOverviewCollectionView" destination="cM8-ML-v3e" id="zZc-X6-TQC"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mbK-TX-O1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jq2-H6-THn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701" y="1598"/>
+            <point key="canvasLocation" x="375" y="1510"/>
         </scene>
         <!--Node View Controller-->
         <scene sceneID="Rjw-aY-Ju3">
@@ -211,7 +247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZoN-is-xQV" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2906" y="1598"/>
+            <point key="canvasLocation" x="2466" y="1510"/>
         </scene>
     </scenes>
 </document>
