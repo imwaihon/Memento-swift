@@ -11,11 +11,11 @@
 import Foundation
 
 struct MementoGraphIcon {
-    let graphNumber: Int        //Used as parameter when retrieving/removing graph from model
+    let graphName: String
     let imageFile: String       //Used by view controller to load icon's image file
     
-    init(number: Int, imageFile: String){
-        graphNumber = number
+    init(graphName: String, imageFile: String){
+        graphNumber = graphName
         self.imageFile = imageFile
     }
 }
