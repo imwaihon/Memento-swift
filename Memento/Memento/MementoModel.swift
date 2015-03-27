@@ -66,7 +66,7 @@ class MementoModel {
     func removePalace(palaceName: String){
         if let index = graphMap[palaceName] {
             for i in (index+1)..<graphs.count {
-                graphMap[graphs[i].name]--
+                graphMap[graphs[i].name]?--
             }
             graphMap[graphs[index].name] = nil
             graphs.removeAtIndex(index)
