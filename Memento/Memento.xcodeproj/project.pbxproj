@@ -44,6 +44,8 @@
 		5AEF2A5B1AC4FA4A00B2B6FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */; };
 		5AEF2A5D1AC4FD1300B2B6FB /* MementoGraphIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */; };
 		5AEF2A5E1AC4FD1300B2B6FB /* MementoGraphIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */; };
+		5AEF2A601AC510DB00B2B6FB /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */; };
+		5AEF2A611AC510DB00B2B6FB /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,7 @@
 		5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoManager.swift; sourceTree = "<group>"; };
 		5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphIcon.swift; sourceTree = "<group>"; };
+		5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +132,7 @@
 		4FCE35E71ABA8CEF00417763 /* Memento */ = {
 			isa = PBXGroup;
 			children = (
+				5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */,
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
 				4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */,
 				4F000D6F1AC114A100720E7E /* LineDrawer.swift */,
@@ -293,6 +297,7 @@
 				5A278FF41AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */,
 				5AEF2A5D1AC4FD1300B2B6FB /* MementoGraphIcon.swift in Sources */,
 				4F000D721AC114A100720E7E /* MoveImageDelegate.swift in Sources */,
+				5AEF2A601AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
 				5A4E78A21AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
 				5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
@@ -315,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A278FF51AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */,
+				5AEF2A611AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
 				5A4E78A31AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
