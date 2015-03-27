@@ -11,6 +11,7 @@
 
 import Foundation
 
-class MemoryPalaceRoom{
-
+protocol MemoryPalaceRoom: class {
+    var label: Int { get set }
+    var icon: MemoryPalaceRoomIcon { get }
 }

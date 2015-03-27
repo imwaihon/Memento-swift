@@ -21,8 +21,8 @@
 		4FCE35F81ABA8CF000417763 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FCE35F61ABA8CF000417763 /* LaunchScreen.xib */; };
 		4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE36031ABA8CF000417763 /* MementoTests.swift */; };
 		5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */; };
-		5A278FF41AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */; };
-		5A278FF51AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */; };
+		5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
+		5A278FF51AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
 		5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */; };
 		5A4E789F1AC2A2F700013728 /* MementoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E789E1AC2A2F700013728 /* MementoModel.swift */; };
 		5A4E78A01AC2A2F700013728 /* MementoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E789E1AC2A2F700013728 /* MementoModel.swift */; };
@@ -42,8 +42,8 @@
 		5AA1B06B1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
 		5AEF2A5A1AC4FA4A00B2B6FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */; };
 		5AEF2A5B1AC4FA4A00B2B6FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */; };
-		5AEF2A5D1AC4FD1300B2B6FB /* MementoGraphIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */; };
-		5AEF2A5E1AC4FD1300B2B6FB /* MementoGraphIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */; };
+		5AEF2A5D1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */; };
+		5AEF2A5E1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */; };
 		5AEF2A601AC510DB00B2B6FB /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */; };
 		5AEF2A611AC510DB00B2B6FB /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */; };
 		5AEF2A631AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A621AC513CA00B2B6FB /* RectanglePlaceHolder.swift */; };
@@ -85,7 +85,7 @@
 		4FCE36021ABA8CF000417763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FCE36031ABA8CF000417763 /* MementoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementoTests.swift; sourceTree = "<group>"; };
 		5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
-		5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNodeIcon.swift; sourceTree = "<group>"; };
+		5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomIcon.swift; sourceTree = "<group>"; };
 		5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphTests.swift; sourceTree = "<group>"; };
 		5A4E789E1AC2A2F700013728 /* MementoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoModel.swift; sourceTree = "<group>"; };
 		5A4E78A11AC2A42900013728 /* MementoGraphFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphFactory.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		5A837B911ABBE86E00E52F80 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoManager.swift; sourceTree = "<group>"; };
 		5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphIcon.swift; sourceTree = "<group>"; };
+		5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceIcon.swift; sourceTree = "<group>"; };
 		5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
 		5AEF2A621AC513CA00B2B6FB /* RectanglePlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectanglePlaceHolder.swift; sourceTree = "<group>"; };
 		5AEF2A651AC51E4100B2B6FB /* MemoryPalaceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceManager.swift; sourceTree = "<group>"; };
@@ -158,8 +158,8 @@
 				5A4E789E1AC2A2F700013728 /* MementoModel.swift */,
 				5A78D3091ABABC69003A3DD7 /* MementoGraph.swift */,
 				5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */,
-				5A278FF31AC0334A00B7AE67 /* MementoNodeIcon.swift */,
-				5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */,
+				5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */,
+				5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */,
 				5A78D30C1ABAC7F6003A3DD7 /* MementoNode.swift */,
 				5A837B911ABBE86E00E52F80 /* Set.swift */,
 				4FCE35EA1ABA8CEF00417763 /* AppDelegate.swift */,
@@ -311,8 +311,8 @@
 				5A4E78A51AC2A44800013728 /* MementoNodeFactory.swift in Sources */,
 				4F000D731AC114A100720E7E /* LineDrawer.swift in Sources */,
 				4FC6DD411AC04C560070F271 /* CreateNewPalaceViewController.swift in Sources */,
-				5A278FF41AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */,
-				5AEF2A5D1AC4FD1300B2B6FB /* MementoGraphIcon.swift in Sources */,
+				5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */,
+				5AEF2A5D1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */,
 				4F000D721AC114A100720E7E /* MoveImageDelegate.swift in Sources */,
 				5AEF2A601AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
 				5A4E78A21AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
@@ -339,7 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A278FF51AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */,
+				5A278FF51AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */,
 				5AEF2A611AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
 				5AEF2A641AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				5A4E78A31AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
@@ -347,7 +347,7 @@
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
 				5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
 				5AEF2A6D1AC5260100B2B6FB /* MemoryPalaceRoom.swift in Sources */,
-				5AEF2A5E1AC4FD1300B2B6FB /* MementoGraphIcon.swift in Sources */,
+				5AEF2A5E1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */,
 				5A4E78A01AC2A2F700013728 /* MementoModel.swift in Sources */,
 				5AEF2A6A1AC51F9000B2B6FB /* MemoryPalace.swift in Sources */,
 				5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */,

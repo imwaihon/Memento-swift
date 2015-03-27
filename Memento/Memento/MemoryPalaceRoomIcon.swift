@@ -10,7 +10,7 @@
 
 import Foundation
 
-struct MementoNodeIcon {
+struct MemoryPalaceRoomIcon {
     let label: Int              //Used to retrieve/remove node from graph
     let filename: String        //Used by view controller to load icon's image file
     

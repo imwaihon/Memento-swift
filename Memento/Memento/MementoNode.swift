@@ -21,15 +21,15 @@
 import Foundation
 import UIKit
 
-class MementoNode {
+class MementoNode: MemoryPalaceRoom {
     private let backgroundImageFile: String
     private var placeHolders: [RectanglePlaceHolder]
     
     var label: Int = 0      //The node's identification label in the graph
     
     //Properties
-    var icon: MementoNodeIcon {
-        return MementoNodeIcon(label: label, filename: backgroundImageFile)
+    var icon: MemoryPalaceRoomIcon {
+        return MemoryPalaceRoomIcon(label: label, filename: backgroundImageFile)
     }
 
     init(imageFile: String){

@@ -14,7 +14,7 @@
 
 import Foundation
 
-struct MementoGraphIcon {
+struct MemoryPalaceIcon {
     let graphName: String       //The identifier for the graph
     let imageFile: String       //Used by view controller to load icon's image file
     

@@ -26,20 +26,32 @@ class MementoGraph: MemoryPalace {
     var name: String        //The name of the graph. Also the filename used for saving/loading.
     
     //Properties
-    var icon: MementoGraphIcon {
-        return MementoGraphIcon(number: label, imageFile: nodes[0].icon.filename)
+    var icon: MemoryPalaceIcon {
+        return MemoryPalaceIcon(graphName: name, imageFile: nodes[0].icon.filename)
+    }
+    var nodeIcons: [MemoryPalaceRoomIcon] {
+        var arr = [MemoryPalaceRoomIcon]()
+        for node in nodes {
+            arr.append(node.icon)
+        }
+        return arr
     }
     
     init(name: String, rootNode: MementoNode){
         self.name = name
         nodes = [MementoNode]()
         nodes.append(rootNode)
-        super.init()
         
         assert(checkRep())
     }
     
-    func getRoom(roomNumber: Int) -> MementoNode? {
+    //Adds a room to the memory palace.
+    func addRoom(room: MemoryPalaceRoom) {
+        (room as MementoNode).label = nodes.count
+    }
+    
+    //Gets the room identified by the given number.
+    func getRoom(roomNumber: Int) -> MemoryPalaceRoom? {
         return isValidRoomNumber(roomNumber) ? nodes[roomNumber]: nil
     }
     

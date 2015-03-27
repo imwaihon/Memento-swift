@@ -60,7 +60,7 @@ class MementoManager: MemoryPalaceManager {
     
     //Returns an array of memory palace node icons
     //Returns nil if there is no memory palace of the given name
-    func getPalaceOverview(palaceName: String) -> [MementoNodeIcon]? {
+    func getPalaceOverview(palaceName: String) -> [MemoryPalaceRoomIcon]? {
         if let palace = model.getPalace(palaceName) {
             return palace.nodeIcons
         }
