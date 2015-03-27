@@ -46,6 +46,8 @@
 		5AEF2A5E1AC4FD1300B2B6FB /* MementoGraphIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */; };
 		5AEF2A601AC510DB00B2B6FB /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */; };
 		5AEF2A611AC510DB00B2B6FB /* PlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */; };
+		5AEF2A631AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A621AC513CA00B2B6FB /* RectanglePlaceHolder.swift */; };
+		5AEF2A641AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A621AC513CA00B2B6FB /* RectanglePlaceHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,7 @@
 		5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5AEF2A5C1AC4FD1300B2B6FB /* MementoGraphIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphIcon.swift; sourceTree = "<group>"; };
 		5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
+		5AEF2A621AC513CA00B2B6FB /* RectanglePlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectanglePlaceHolder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */,
+				5AEF2A621AC513CA00B2B6FB /* RectanglePlaceHolder.swift */,
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
 				4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */,
 				4F000D6F1AC114A100720E7E /* LineDrawer.swift */,
@@ -308,6 +312,7 @@
 				4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */,
 				4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */,
 				5AEF2A5A1AC4FA4A00B2B6FB /* Constants.swift in Sources */,
+				5AEF2A631AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				4FCE35F01ABA8CEF00417763 /* ViewController.swift in Sources */,
 				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,
 				5A82F8F31AC44D7100D89166 /* OverviewViewController.swift in Sources */,
@@ -321,6 +326,7 @@
 			files = (
 				5A278FF51AC0334A00B7AE67 /* MementoNodeIcon.swift in Sources */,
 				5AEF2A611AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
+				5AEF2A641AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				5A4E78A31AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
