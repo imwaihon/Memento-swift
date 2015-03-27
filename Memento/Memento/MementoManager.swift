@@ -39,23 +39,31 @@ class MementoManager: MemoryPalaceManager {
     
     //Gets the specified memory palace
     //Returns nil if the specified memory palce does not exist.
-    func getMemoryPalace(palaceNumber: Int) -> MemoryPalace? {
-        return model.getPalace(palaceNumber)
+    func getMemoryPalace(palaceName: String) -> MemoryPalace? {
+        return model.getPalace(palaceName)
     }
     
     //Removes the specified memory palace
-    //Does nothing if no memory palace is represented by the given palaceNumber
-    func removeMemoryPalace(palaceNumber: Int){
-        //Perform integrity checks
-        
-        model.removePalace(palaceNumber)
+    //Does nothing if no memory palace has the given name
+    func removeMemoryPalace(palaceName: String){
+        model.removePalace(palaceName)
     }
     
     //Adds a new room to the current memory palace.
     //Does nothing if no memory palace is selected.
-    func addMemoryPalaceRoom(){
-        if selectedPalace == nil {
-            return
+    func addMemoryPalaceRoom(palaceName: String, roomImage: String){
+        if let palace = model.getPalace(palaceName) {
+            let room = nodeFactory.makeNode(roomImage)
+            palace.addRoom(room)
         }
+    }
+    
+    //Returns an array of memory palace node icons
+    //Returns nil if there is no memory palace of the given name
+    func getPalaceOverview(palaceName: String) -> [MementoNodeIcon]? {
+        if let palace = model.getPalace(palaceName) {
+            return palace.nodeIcons
+        }
+        return nil
     }
 }
