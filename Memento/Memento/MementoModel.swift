@@ -21,6 +21,7 @@ import Foundation
 class MementoModel {
     private var graphs: [MementoGraph]
     private var names: NSMutableSet
+    private var graphMap: [String: Int]
     
     //Properties
     var numPalaces: Int {
@@ -30,44 +31,48 @@ class MementoModel {
     init(){
         graphs = [MementoGraph]()
         names = NSMutableSet()
+        graphMap = [String: Int]()
     }
     
     //Adds the new graph to the collection.
     func addPalace(palace: MementoGraph){
-        graphs.append(palace)
         
         var name = palace.name
-        if names.containsObject(name) { //Check for collision
+        if graphMap[name] != nil { //Check for collision
             for var i=1; ; i++ {
-                if !names.containsObject(name+"(\(i))") {   //Assume NSMutableSet is hash set, this is O(NM)
+                if graphMap[name+"(\(i))"] == nil {   //Assume NSMutableSet is hash set, this is O(NM)
                     palace.name = name+"(\(i))"
                     break
                 }
             }
         }
-        names.addObject(palace.name)
+        graphMap[palace.name] = graphs.count
+        graphs.append(palace)
         
         //Save changes?
     }
     
     //Gets the specified memory palace.
     //Returns nil if palaceNumber<0 or palaceNumber>=numPalaces.
-    func getPalace(palaceNumber: Int) -> MementoGraph? {
-        if !isValidPalaceNumber(palaceNumber) {
-            return nil
+    func getPalace(palaceName: String) -> MementoGraph? {
+        if let index = graphMap[palaceName] {
+            return graphs[index]
         }
-        return graphs[palaceNumber]
+        return nil
     }
     
     //Removes the specified memory palace.
     //Does nothing if palaceNumber<0 or palaceNumber>=numPalaces.
-    func removePalace(palaceNumber: Int){
-        if !isValidPalaceNumber(palaceNumber) {
+    func removePalace(palaceName: String){
+        if let index = graphMap[palaceName] {
+            for i in (index+1)..<graphs.count {
+                graphMap[graphs[i].name]--
+            }
+            graphMap[graphs[index].name] = nil
+            graphs.removeAtIndex(index)
+        } else {
             return
         }
-        let palace = graphs[palaceNumber]
-        graphs.removeAtIndex(palaceNumber)
-        names.removeObject(palace.name)
         
         //Save changes?
     }
