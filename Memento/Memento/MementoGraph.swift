@@ -22,8 +22,10 @@ import Foundation
 
 class MementoGraph {
     private var nodes: [MementoNode]
+    var name: String
     
-    init(rootNode: MementoNode){
+    init(name: String, rootNode: MementoNode){
+        self.name = name
         nodes = [MementoNode]()
         nodes.append(rootNode)
         
