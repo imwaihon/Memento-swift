@@ -17,6 +17,11 @@ class MementoManager{
     private let model: MementoModel
     private let graphFactory: MementoGraphFactory
     private let nodeFactory: MementoNodeFactory
+
+    //Properties
+    var numberOfMemoryPalace: Int {
+        return model.numPalaces
+    }
     
     init(){
         selectedPalace = nil
@@ -36,12 +41,6 @@ class MementoManager{
     //Does nothign if no memory palace is represented by the given palaceNumber
     func removeMemoryPalace(palaceNumber: Int){
         
-    }
-    
-    //Gets the number of memory palaces in existence
-    //Returns an integer of at least 0
-    func getNumberofMemoryPalace() -> Int{
-        return model.numPalaces
     }
     
     //Adds a new room to the current memory palace.
