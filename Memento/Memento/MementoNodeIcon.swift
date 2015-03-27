@@ -11,8 +11,8 @@
 import Foundation
 
 struct MementoNodeIcon {
-    let label: Int
-    let filename: String
+    let label: Int              //Used to retrieve/remove node from graph
+    let filename: String        //Used by view controller to load icon's image file
     
     init(label: Int, filename: String) {
         self.label = label
