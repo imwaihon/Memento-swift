@@ -11,7 +11,7 @@
 
 import Foundation
 
-class MementoManager{
+class MementoManager: MemoryPalaceManager {
     private var selectedPalace: MementoGraph?
     private var selectedRoom: MementoNode?
     private let model: MementoModel
@@ -37,10 +37,18 @@ class MementoManager{
         model.addPalace(newGraph)
     }
     
+    //Gets the specified memory palace
+    //Returns nil if the specified memory palce does not exist.
+    func getMemoryPalace(palaceNumber: Int) -> MemoryPalace? {
+        return model.getPalace(palaceNumber)
+    }
+    
     //Removes the specified memory palace
-    //Does nothign if no memory palace is represented by the given palaceNumber
+    //Does nothing if no memory palace is represented by the given palaceNumber
     func removeMemoryPalace(palaceNumber: Int){
+        //Perform integrity checks
         
+        model.removePalace(palaceNumber)
     }
     
     //Adds a new room to the current memory palace.

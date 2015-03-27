@@ -20,11 +20,10 @@
 
 import Foundation
 
-class MementoGraph {
+class MementoGraph: MemoryPalace {
     private var nodes: [MementoNode]
     
     var name: String        //The name of the graph. Also the filename used for saving/loading.
-    var label: Int = 0      //Graph labelling used by model.
     
     //Properties
     var icon: MementoGraphIcon {
@@ -35,6 +34,7 @@ class MementoGraph {
         self.name = name
         nodes = [MementoNode]()
         nodes.append(rootNode)
+        super.init()
         
         assert(checkRep())
     }
