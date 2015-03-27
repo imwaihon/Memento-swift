@@ -41,7 +41,7 @@ class MementoManager{
     //Gets the number of memory palaces in existence
     //Returns an integer of at least 0
     func getNumberofMemoryPalace() -> Int{
-        return 0
+        return model.numPalaces
     }
     
     //Adds a new room to the current memory palace.
