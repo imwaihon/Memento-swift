@@ -27,9 +27,9 @@ class MementoManager{
     }
     
     //Adds a new memory palace
-    func addMemoryPalace(imageFile: String){
-        let newGraph = graphFactory.makeGraph(imageFile)
-        model.addGraph(newGraph)
+    func addMemoryPalace(named name: String, imageFile: String){
+        let newGraph = graphFactory.makeGraph(named: name, imageFile: imageFile)
+        model.addPalace(newGraph)
     }
     
     //Removes the specified memory palace

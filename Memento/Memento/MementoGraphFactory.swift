@@ -22,8 +22,8 @@ class MementoGraphFactory {
         nodeFactory = MementoNodeFactory()
     }
     
-    func makeGraph(imageFile: String) -> MementoGraph {
+    func makeGraph(named name: String, imageFile: String) -> MementoGraph {
         let rootNode = nodeFactory.makeNode(imageFile)
-        return MementoGraph(rootNode: rootNode)
+        return MementoGraph(name: name, rootNode: rootNode)
     }
 }
