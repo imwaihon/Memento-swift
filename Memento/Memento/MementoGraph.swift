@@ -48,6 +48,7 @@ class MementoGraph: MemoryPalace {
     //Adds a room to the memory palace.
     func addRoom(room: MemoryPalaceRoom) {
         (room as MementoNode).label = nodes.count
+        nodes.append(room as MementoNode)
     }
     
     //Gets the room identified by the given number.
