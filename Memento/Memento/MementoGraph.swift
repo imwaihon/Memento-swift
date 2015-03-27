@@ -22,7 +22,14 @@ import Foundation
 
 class MementoGraph {
     private var nodes: [MementoNode]
-    var name: String
+    
+    var name: String        //The name of the graph. Also the filename used for saving/loading.
+    var label: Int = 0      //Graph labelling used by model.
+    
+    //Properties
+    var icon: MementoGraphIcon {
+        return MementoGraphIcon(number: label, imageFile: nodes[0].icon.filename)
+    }
     
     init(name: String, rootNode: MementoNode){
         self.name = name
@@ -30,6 +37,14 @@ class MementoGraph {
         nodes.append(rootNode)
         
         assert(checkRep())
+    }
+    
+    func getRoom(roomNumber: Int) -> MementoNode? {
+        return isValidRoomNumber(roomNumber) ? nodes[roomNumber]: nil
+    }
+    
+    private func isValidRoomNumber(roomNumber: Int) -> Bool {
+        return roomNumber >= 0 && roomNumber < nodes.count
     }
     
     //Checks that representation invariant is not violated
