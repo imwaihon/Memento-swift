@@ -22,8 +22,18 @@ import Foundation
 import UIKit
 
 class MementoNode {
+    private let backgroundImageFile: String
+    private var placeHolders: [RectanglePlaceHolder]
+    
+    var label: Int = 0      //The node's identification label in the graph
+    
+    //Properties
+    var icon: MementoNodeIcon {
+        return MementoNodeIcon(label: label, filename: backgroundImageFile)
+    }
 
     init(imageFile: String){
-        
+        backgroundImageFile = imageFile
+        placeHolders = [RectanglePlaceHolder]()
     }
 }
