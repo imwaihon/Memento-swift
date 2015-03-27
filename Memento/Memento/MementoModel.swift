@@ -4,6 +4,14 @@
 //
 //  The app model that stores teh runtime representations of the graphs and nodes.
 //
+//  Specifications:
+//  Add graphs
+//  Remove graphs
+//
+//  Non-Functional Specifications:
+//  Able to save the graphs
+//  Deal with graph name collisions
+//
 //  Created by Qua Zi Xian on 25/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
@@ -12,6 +20,7 @@ import Foundation
 
 class MementoModel {
     private var graphs: [MementoGraph]
+    private var names: NSMutableSet
     
     //Properties
     var numPalaces: Int {
@@ -20,11 +29,23 @@ class MementoModel {
     
     init(){
         graphs = [MementoGraph]()
+        names = NSMutableSet()
     }
     
     //Adds the new graph to the collection.
     func addPalace(palace: MementoGraph){
         graphs.append(palace)
+        
+        var name = palace.name
+        if names.containsObject(name) { //Check for collision
+            for var i=1; ; i++ {
+                if !names.containsObject(name+"(\(i))") {   //Assume NSMutableSet is hash set, this is O(NM)
+                    palace.name = name+"(\(i))"
+                    break
+                }
+            }
+        }
+        names.addObject(palace.name)
         
         //Save changes?
     }
@@ -44,7 +65,9 @@ class MementoModel {
         if !isValidPalaceNumber(palaceNumber) {
             return
         }
+        let palace = graphs[palaceNumber]
         graphs.removeAtIndex(palaceNumber)
+        names.removeObject(palace.name)
         
         //Save changes?
     }
