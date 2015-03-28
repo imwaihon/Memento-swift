@@ -37,7 +37,7 @@ class MementoGraph: MemoryPalace {
         return arr
     }
     
-    init(name: String, rootNode: MementoNode){
+    init(name: String, rootNode: MementoNode) {
         self.name = name
         nodes = [MementoNode]()
         nodes.append(rootNode)
@@ -54,6 +54,18 @@ class MementoGraph: MemoryPalace {
     //Gets the room identified by the given number.
     func getRoom(roomNumber: Int) -> MemoryPalaceRoom? {
         return isValidRoomNumber(roomNumber) ? nodes[roomNumber]: nil
+    }
+    
+    //Removes the room identified by the specified number.
+    //Does nothing if room identified by the given number does not exist.
+    func removeRoom(roomNumber: Int) {
+        if !isValidRoomNumber(roomNumber) {
+            return
+        }
+        for i in (roomNumber+1)..<nodes.count {
+            nodes[i].label--
+        }
+        nodes.removeAtIndex(roomNumber)
     }
     
     private func isValidRoomNumber(roomNumber: Int) -> Bool {

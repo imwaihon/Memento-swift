@@ -37,4 +37,14 @@ class MementoGraphTests: XCTestCase {
         XCTAssertFalse(graph.getRoom(1) == nil)
         XCTAssertEqual(graph.getRoom(1)!.icon.filename, "B.png")
     }
+    
+    func testRemoveRoom() {
+        let graph = MementoGraph(name: "sampleGraph", rootNode: MementoNode(imageFile: "A.png"))
+        graph.addRoom(MementoNode(imageFile: "B.png"))
+        
+        graph.removeRoom(0)
+        XCTAssertTrue(graph.getRoom(1) == nil)
+        XCTAssertEqual(graph.getRoom(0)!.icon.label, 0)
+        XCTAssertEqual(graph.getRoom(0)!.icon.filename, "B.png")
+    }
 }
