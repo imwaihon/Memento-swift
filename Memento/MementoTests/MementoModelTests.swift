@@ -27,6 +27,12 @@ class MementoModelTests: XCTestCase {
         model.addPalace(MementoGraph(name: "graph2", rootNode: MementoNode(imageFile: "B.png")))
         XCTAssertEqual(model.numPalaces, 2);
         XCTAssertFalse(model.getPalace("graph2") == nil)
+        
+        let duplicateGraph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile:"B.png"))
+        model.addPalace(duplicateGraph)
+        XCTAssertEqual(model.numPalaces, 3)
+        XCTAssertEqual(duplicateGraph.name, "graph1(1)")
+        XCTAssertFalse(model.getPalace("graph1(1)") == nil)
     }
     
     func testRemovePalace() {
