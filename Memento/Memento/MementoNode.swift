@@ -50,6 +50,8 @@ class MementoNode: MemoryPalaceRoom {
         values = [String?](count: placeHolders.count, repeatedValue: nil)
     }
     
+    //Adds the given placeholder to this memory palace room.
+    //Does nothing if it overlaps with any of the existing placeholedrs.
     func addPlaceHolder(placeHolder: PlaceHolder) {
         var hasOverlap = false
         
@@ -62,5 +64,17 @@ class MementoNode: MemoryPalaceRoom {
             placeHolders.append(placeHolder)
             values.append(nil)
         }
+    }
+    
+    //Associates the specified placeholder with the given value.
+    //Does nothing ifno such placeholder exists.
+    func setAssociationValue(placeHolderNumber: Int, value: String?) {
+        if isValidPlaceHolderNumber(placeHolderNumber) {
+            values[placeHolderNumber] = value
+        }
+    }
+    
+    private func isValidPlaceHolderNumber(num: Int) -> Bool {
+        return num >= 0 && num < numPlaceHolders
     }
 }

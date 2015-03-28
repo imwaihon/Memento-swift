@@ -16,4 +16,7 @@ protocol MemoryPalaceRoom: class {
     var icon: MemoryPalaceRoomIcon { get }
     var numPlaceHolders: Int { get }
     var associations: [Association] { get }
+    
+    func addPlaceHolder(placeHolder: PlaceHolder)
+    func setAssociationValue(placeHolderNumber: Int, value: String?)
 }

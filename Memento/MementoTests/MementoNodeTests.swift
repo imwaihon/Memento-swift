@@ -42,4 +42,32 @@ class MementoNodeTests: XCTestCase {
         XCTAssertEqual(placeHolder3.label, 0)
         XCTAssertEqual(node.associations, [assoc1, assoc2])
     }
+    
+    func testSetAssociationValue() {
+        let node = MementoNode(imageFile: "A.png")
+        let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20))
+        let placeHolder2 = RectanglePlaceHolder(highlightArea: CGRectMake(40, 50, 30, 20))
+        let placeHolder3 = RectanglePlaceHolder(highlightArea: CGRectMake(70, 70, 20, 20))
+        var assoc1 = Association(placeHolder: placeHolder1, value: nil)
+        var assoc2 = Association(placeHolder: placeHolder2, value: nil)
+        var assoc3 = Association(placeHolder: placeHolder3, value: nil)
+        
+        node.addPlaceHolder(placeHolder1)
+        node.addPlaceHolder(placeHolder2)
+        node.addPlaceHolder(placeHolder3)
+        XCTAssertEqual(node.numPlaceHolders, 3)
+        XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
+        
+        node.setAssociationValue(0, value: "3")
+        assoc1 = Association(placeHolder: placeHolder1, value: "3")
+        XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
+        
+        node.setAssociationValue(2, value: "4")
+        assoc3 = Association(placeHolder: placeHolder3, value: "4")
+        XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
+        
+        node.setAssociationValue(0, value: nil)
+        assoc1 = Association(placeHolder: placeHolder1, value: nil)
+        XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
+    }
 }
