@@ -15,4 +15,5 @@ protocol MemoryPalace {
     
     func addRoom(room: MemoryPalaceRoom)
     func getRoom(roomNumber: Int) -> MemoryPalaceRoom?
+    func removeRoom(roomNumber: Int)
 }
