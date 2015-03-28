@@ -32,9 +32,13 @@ class MementoManager: MemoryPalaceManager {
     }
     
     //Adds a new memory palace
-    func addMemoryPalace(named name: String, imageFile: String){
+    //If there exists another memory palace with the same name, a number will be appended to the
+    //new memory palace's name.
+    //Returns the name of the added memory palace as a confirmation.
+    func addMemoryPalace(named name: String, imageFile: String) -> String {
         let newGraph = graphFactory.makeGraph(named: name, imageFile: imageFile)
         model.addPalace(newGraph)
+        return newGraph.name
     }
     
     //Gets the specified memory palace
