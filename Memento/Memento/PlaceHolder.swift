@@ -12,10 +12,14 @@
 import Foundation
 import UIKit
 
-class PlaceHolder {
+class PlaceHolder: Equatable {
     let view: UIView
     
     init(frame: CGRect){
         view = UIView(frame: frame)
     }
+}
+
+func ==(lhs: PlaceHolder, rhs: PlaceHolder) -> Bool {
+    return lhs.view.frame == rhs.view.frame
 }
