@@ -23,13 +23,16 @@ import UIKit
 
 class MementoNode: MemoryPalaceRoom {
     private let backgroundImageFile: String
-    private var placeHolders: [RectanglePlaceHolder]
+    private var placeHolders: [PlaceHolder]
     
     var label: Int = 0      //The node's identification label in the graph
     
     //Properties
     var icon: MemoryPalaceRoomIcon {
         return MemoryPalaceRoomIcon(label: label, filename: backgroundImageFile)
+    }
+    var numPlaceHolders: Int {
+        return placeHolders.count
     }
 
     init(imageFile: String){
