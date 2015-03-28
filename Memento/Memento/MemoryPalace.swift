@@ -12,6 +12,7 @@ import Foundation
 
 protocol MemoryPalace {
     var icon: MemoryPalaceIcon { get }
+    var numRooms: Int { get }
     
     func addRoom(room: MemoryPalaceRoom)
     func getRoom(roomNumber: Int) -> MemoryPalaceRoom?
