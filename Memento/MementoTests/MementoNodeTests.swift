@@ -24,17 +24,22 @@ class MementoNodeTests: XCTestCase {
         let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20))
         let placeHolder2 = RectanglePlaceHolder(highlightArea: CGRectMake(40, 50, 30, 20))
         let placeHolder3 = RectanglePlaceHolder(highlightArea: CGRectMake(69, 69, 20, 20))
+        let assoc1 = Association(placeHolder: placeHolder1, value: nil)
+        let assoc2 = Association(placeHolder: placeHolder2, value: nil)
         
         node.addPlaceHolder(placeHolder1)
         XCTAssertEqual(node.numPlaceHolders, 1)
         XCTAssertEqual(placeHolder1.label, 0)
+        XCTAssertEqual(node.associations, [assoc1])
         
         node.addPlaceHolder(placeHolder2)
         XCTAssertEqual(node.numPlaceHolders, 2)
         XCTAssertEqual(placeHolder2.label, 1)
+        XCTAssertEqual(node.associations, [assoc1, assoc2])
         
         node.addPlaceHolder(placeHolder3)
         XCTAssertEqual(node.numPlaceHolders, 2)
         XCTAssertEqual(placeHolder3.label, 0)
+        XCTAssertEqual(node.associations, [assoc1, assoc2])
     }
 }
