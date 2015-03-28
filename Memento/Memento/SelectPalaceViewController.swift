@@ -67,7 +67,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = palaceTiles.dequeueReusableCellWithReuseIdentifier("SelectPalaceCollectionViewCell", forIndexPath: indexPath) as SelectPalaceCollectionViewCell
-        
+        cell.addShadows()
         // First cell is reserved for the add button
         if indexPath.item == 0 {
             cell.backgroundColor = UIColor.blackColor()

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F000D721AC114A100720E7E /* MoveImageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */; };
-		4F000D731AC114A100720E7E /* LineDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D6F1AC114A100720E7E /* LineDrawer.swift */; };
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
 		4FC6DD3D1AC026AC0070F271 /* SelectPalaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6DD3C1AC026AC0070F271 /* SelectPalaceViewController.swift */; };
 		4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC6DD3E1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift */; };
@@ -72,8 +70,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveImageDelegate.swift; sourceTree = "<group>"; };
-		4F000D6F1AC114A100720E7E /* LineDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDrawer.swift; sourceTree = "<group>"; };
 		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
 		4FC6DD3C1AC026AC0070F271 /* SelectPalaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPalaceViewController.swift; sourceTree = "<group>"; };
 		4FC6DD3E1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPalaceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -156,8 +152,6 @@
 				5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */,
 				5AEF2A621AC513CA00B2B6FB /* RectanglePlaceHolder.swift */,
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
-				4F000D6E1AC114A100720E7E /* MoveImageDelegate.swift */,
-				4F000D6F1AC114A100720E7E /* LineDrawer.swift */,
 				5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */,
 				5AEF2A651AC51E4100B2B6FB /* MemoryPalaceManager.swift */,
 				5AEF2A6B1AC5260100B2B6FB /* MemoryPalaceRoom.swift */,
@@ -322,11 +316,9 @@
 				4FC6DD3D1AC026AC0070F271 /* SelectPalaceViewController.swift in Sources */,
 				5AEF2A691AC51F9000B2B6FB /* MemoryPalace.swift in Sources */,
 				5A4E78A51AC2A44800013728 /* MementoNodeFactory.swift in Sources */,
-				4F000D731AC114A100720E7E /* LineDrawer.swift in Sources */,
 				4FC6DD411AC04C560070F271 /* CreateNewPalaceViewController.swift in Sources */,
 				5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */,
 				5AEF2A5D1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */,
-				4F000D721AC114A100720E7E /* MoveImageDelegate.swift in Sources */,
 				5AEF2A601AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
 				5A4E78A21AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,

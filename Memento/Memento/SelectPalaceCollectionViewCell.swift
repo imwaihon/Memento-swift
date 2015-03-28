@@ -13,6 +13,14 @@ class SelectPalaceCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    func addShadows(){
+        imageView.layer.shadowColor = UIColor.blackColor().CGColor
+        imageView.layer.shadowOffset = CGSizeMake(2, 2);
+        imageView.layer.shadowOpacity = 0.4;
+        imageView.layer.shadowRadius = 1.0;
+        imageView.clipsToBounds = false;
+    }
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
