@@ -15,6 +15,7 @@ class MementoGraphTests: XCTestCase {
     func testinit() {
         let graph = MementoGraph(name: "sampleGraph", rootNode: MementoNode(imageFile: "A.png"))
         XCTAssertEqual(graph.name, "sampleGraph")
+        XCTAssertEqual(graph.numRooms, 1)
     }
     
     func testIcon() {
@@ -32,6 +33,7 @@ class MementoGraphTests: XCTestCase {
     func testAddRoom() {
         let graph = MementoGraph(name: "sampleGraph", rootNode: MementoNode(imageFile: "A.png"))
         graph.addRoom(MementoNode(imageFile: "B.png"))
+        XCTAssertEqual(graph.numRooms, 2)
         XCTAssertFalse(graph.getRoom(1) == nil)
         XCTAssertEqual(graph.getRoom(1)!.icon, MemoryPalaceRoomIcon(label: 1, filename: "B.png"))
     }
@@ -41,7 +43,19 @@ class MementoGraphTests: XCTestCase {
         graph.addRoom(MementoNode(imageFile: "B.png"))
         
         graph.removeRoom(0)
+        XCTAssertEqual(graph.numRooms, 1)
         XCTAssertTrue(graph.getRoom(1) == nil)
+        XCTAssertEqual(graph.getRoom(0)!.icon, MemoryPalaceRoomIcon(label: 0, filename: "B.png"))
+        
+        //Removes non-existent room
+        graph.removeRoom(1)
+        XCTAssertEqual(graph.numRooms, 1)
+        XCTAssertEqual(graph.icon, MemoryPalaceIcon(graphName: "sampleGraph", imageFile: "B.png"))
+        XCTAssertEqual(graph.getRoom(0)!.icon, MemoryPalaceRoomIcon(label: 0, filename: "B.png"))
+        
+        //Attempts to empty the graph
+        graph.removeRoom(0)
+        XCTAssertEqual(graph.numRooms, 1)
         XCTAssertEqual(graph.getRoom(0)!.icon, MemoryPalaceRoomIcon(label: 0, filename: "B.png"))
     }
 }
