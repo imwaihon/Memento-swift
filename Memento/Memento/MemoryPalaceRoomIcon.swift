@@ -10,7 +10,7 @@
 
 import Foundation
 
-struct MemoryPalaceRoomIcon {
+struct MemoryPalaceRoomIcon: Equatable {
     let label: Int              //Used to retrieve/remove node from graph
     let filename: String        //Used by view controller to load icon's image file
     
@@ -18,4 +18,8 @@ struct MemoryPalaceRoomIcon {
         self.label = label
         self.filename = filename
     }
+}
+
+func ==(lhs: MemoryPalaceRoomIcon, rhs: MemoryPalaceRoomIcon) -> Bool {
+    return lhs.label == rhs.label && lhs.filename == rhs.filename
 }
