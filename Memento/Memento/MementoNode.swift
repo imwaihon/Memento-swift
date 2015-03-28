@@ -24,6 +24,7 @@ import UIKit
 class MementoNode: MemoryPalaceRoom {
     private let backgroundImageFile: String
     private var placeHolders: [PlaceHolder]
+    private var values: [String?]
     
     var label: Int = 0      //The node's identification label in the graph
     
@@ -34,9 +35,32 @@ class MementoNode: MemoryPalaceRoom {
     var numPlaceHolders: Int {
         return placeHolders.count
     }
+    var associations: [Association] {
+        var arr = [Association]()
+        let numAssoc = numPlaceHolders
+        for i in 0..<numAssoc {
+            arr.append(Association(placeHolder: placeHolders[i], value: values[i]))
+        }
+        return arr
+    }
 
     init(imageFile: String){
         backgroundImageFile = imageFile
         placeHolders = [RectanglePlaceHolder]()
+        values = [String?](count: placeHolders.count, repeatedValue: nil)
+    }
+    
+    func addPlaceHolder(placeHolder: PlaceHolder) {
+        var hasOverlap = false
+        
+        dispatch_apply(UInt(placeHolders.count), dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {(idx: UInt) -> Void in
+            hasOverlap |= PlaceHolder.hasOverlap(self.placeHolders[Int(idx)], placeHolder2: placeHolder)
+        })
+        
+        if !hasOverlap {
+            placeHolder.label = numPlaceHolders
+            placeHolders.append(placeHolder)
+            values.append(nil)
+        }
     }
 }

@@ -14,4 +14,6 @@ import Foundation
 protocol MemoryPalaceRoom: class {
     var label: Int { get set }
     var icon: MemoryPalaceRoomIcon { get }
+    var numPlaceHolders: Int { get }
+    var associations: [Association] { get }
 }
