@@ -14,9 +14,14 @@ import UIKit
 
 class PlaceHolder: Equatable {
     let view: UIView
+    var label: Int = 0
     
     init(frame: CGRect){
         view = UIView(frame: frame)
+    }
+    
+    class func hasOverlap(placeHolder1: PlaceHolder, placeHolder2: PlaceHolder) -> Bool {
+        return CGRectIntersectsRect(placeHolder1.view.frame, placeHolder2.view.frame)
     }
 }
 
