@@ -14,7 +14,7 @@
 
 import Foundation
 
-struct MemoryPalaceIcon {
+struct MemoryPalaceIcon: Equatable {
     let graphName: String       //The identifier for the graph
     let imageFile: String       //Used by view controller to load icon's image file
     
@@ -22,4 +22,9 @@ struct MemoryPalaceIcon {
         self.graphName = graphName
         self.imageFile = imageFile
     }
+    
+}
+
+func ==(lhs: MemoryPalaceIcon, rhs: MemoryPalaceIcon) -> Bool {
+    return lhs.graphName == rhs.graphName && lhs.imageFile == rhs.imageFile
 }
