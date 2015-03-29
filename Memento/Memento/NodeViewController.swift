@@ -45,26 +45,17 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Camera roll button
     @IBAction func useCameraRoll(sender: AnyObject) {
+        isMainView = true
+        getImageFromPhotoLibrary(sender)
+    }
+    
+    
+    // Adds an overlaying image from camera roll ( possibly in-app sprites next time?)
+    // Possible future portability for cropping images.
+    @IBAction func addOverlayImage(sender: AnyObject){
+        isMainView = false
+        getImageFromPhotoLibrary(sender)
         
-        if UIImagePickerController.isSourceTypeAvailable(
-            UIImagePickerControllerSourceType.SavedPhotosAlbum) {
-                var imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType =
-                    UIImagePickerControllerSourceType.PhotoLibrary
-                imagePicker.mediaTypes = [kUTTypeImage as NSString]
-                imagePicker.allowsEditing = false
-                
-                var popover = UIPopoverController(contentViewController: imagePicker) as UIPopoverController
-                var frame = CGRectMake(315, 260, 386, 386);
-                
-                popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
-                
-                newMedia = false
-                
-                // For main view 
-                isMainView = true
-        }
     }
     
     // Helper functions for main photo pickers
@@ -97,7 +88,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
                 self.view.addSubview(newImage)
             }
-
             
             if (newMedia == true) {
                 // Option to save to camera roll/ Photo album
@@ -129,11 +119,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBAction func dismissView(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
-    // Adds an overlaying image from camera roll ( possibly in-app sprites next time?)
-    // Possible future portability for cropping images.
-    @IBAction func addOverlayImage(sender: AnyObject){
+
+    private func getImageFromPhotoLibrary(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.SavedPhotosAlbum) {
                 var imagePicker = UIImagePickerController()
@@ -149,11 +136,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
                 
                 newMedia = false
-                
-                // For new view
-                isMainView = false
         }
-        
     }
     
 

@@ -1,6 +1,7 @@
 //
 //  DraggableImageView.swift
 //  Helper UIImageView class for draggable UIImageViews
+//  Possible extensions: Rotate, Resize
 //
 //  Memento
 //
@@ -20,7 +21,7 @@ class DraggableImageView : UIImageView
         self.userInteractionEnabled = true
         
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "handlePan:"))
-        
+
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.5
