@@ -49,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SkV-EY-N9x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="237" y="-635"/>
+            <point key="canvasLocation" x="220" y="-883"/>
         </scene>
         <!--Select Palace View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -63,13 +63,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundLight" translatesAutoresizingMaskIntoConstraints="NO" id="YVu-Is-fsk">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mzp-sG-XmF">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="699"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="679"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="4" id="4mv-RS-6xx">
                                     <size key="itemSize" width="320" height="240"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="16" minY="20" maxX="16" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="16" minY="16" maxX="16" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SelectPalaceCollectionViewCell" id="Sbe-1K-7a5" customClass="SelectPalaceCollectionViewCell" customModule="Memento" customModuleProvider="target">
@@ -97,7 +100,11 @@
                             </collectionView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XOV-yE-Wlp">
                                 <rect key="frame" x="0.0" y="699" width="1024" height="69"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1pV-tc-9Vp">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="20"/>
+                                <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,11 +113,13 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="palaceTiles" destination="Mzp-sG-XmF" id="Pli-pT-bYA"/>
-                        <segue destination="vpL-yG-LtW" kind="presentation" identifier="CreateNewPalaceSegue" modalPresentationStyle="pageSheet" id="orp-Uz-sHk"/>
+                        <segue destination="4VP-WZ-IsH" kind="show" identifier="GoToPalaceSegue" id="cfi-6M-yo4"/>
+                        <segue destination="Z2G-JI-7tc" kind="presentation" identifier="CreateNewPalaceSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="hrt-Y1-3T0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="367" y="291"/>
         </scene>
         <!--Create New Palace View Controller-->
         <scene sceneID="wro-cS-jR7">
@@ -121,7 +130,7 @@
                         <viewControllerLayoutGuide type="bottom" id="NRf-kx-QyQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HrT-Pz-SHr">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dH5-c0-ll0">
@@ -131,7 +140,6 @@
                                 </state>
                                 <connections>
                                     <action selector="createNewPressed:" destination="vpL-yG-LtW" eventType="touchUpInside" id="L2j-9Z-0y0"/>
-                                    <segue destination="4VP-WZ-IsH" kind="show" identifier="PalaceOverviewSegue" id="Y6l-L7-X7V"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHJ-A7-n7b">
@@ -146,10 +154,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdN-AK-8AN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1821" y="225"/>
+            <point key="canvasLocation" x="-1619" y="-526"/>
         </scene>
         <!--Overview View Controller-->
         <scene sceneID="wLw-nr-hi7">
@@ -206,7 +216,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="pP2-aG-CGP"/>
+                                    <action selector="backButtonPress:" destination="4VP-WZ-IsH" eventType="touchUpInside" id="hXx-wC-kmd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usA-5e-NFD">
@@ -229,7 +239,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jq2-H6-THn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="375" y="1510"/>
+            <point key="canvasLocation" x="220" y="1374"/>
+        </scene>
+        <!--Blur Create Palace View Controller-->
+        <scene sceneID="4hj-Ff-4nx">
+            <objects>
+                <viewController id="Z2G-JI-7tc" customClass="BlurCreatePalaceViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RJv-bq-NhK"/>
+                        <viewControllerLayoutGuide type="bottom" id="TNs-vm-7RB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tqJ-MO-k9e">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cameraIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Wr1-cH-2ck">
+                                <rect key="frame" x="401" y="339" width="90" height="90"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="webIcon" translatesAutoresizingMaskIntoConstraints="NO" id="87T-Fe-ahd">
+                                <rect key="frame" x="532" y="339" width="90" height="90"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photosIcon" translatesAutoresizingMaskIntoConstraints="NO" id="bFr-FQ-lbq">
+                                <rect key="frame" x="270" y="339" width="90" height="90"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dropboxIcon" translatesAutoresizingMaskIntoConstraints="NO" id="0hY-ZF-AJw">
+                                <rect key="frame" x="663" y="339" width="90" height="90"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IbL-dV-PDl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1989" y="194"/>
         </scene>
         <!--Node View Controller-->
         <scene sceneID="Rjw-aY-Ju3">
@@ -297,15 +341,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZoN-is-xQV" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2466" y="1510"/>
+            <point key="canvasLocation" x="1989" y="1374"/>
         </scene>
     </scenes>
     <resources>
         <image name="background" width="2048" height="1536"/>
+        <image name="backgroundLight" width="2048" height="1536"/>
         <image name="buttonBorder" width="862" height="146"/>
+        <image name="cameraIcon" width="64" height="64"/>
+        <image name="dropboxIcon" width="64" height="64"/>
         <image name="logoSet" width="660" height="659"/>
+        <image name="photosIcon" width="64" height="64"/>
+        <image name="webIcon" width="64" height="64"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="n3L-GS-ZgW"/>
-    </inferredMetricsTieBreakers>
 </document>

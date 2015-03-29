@@ -52,4 +52,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         }
     }
     
+    @IBAction func backButtonPress(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

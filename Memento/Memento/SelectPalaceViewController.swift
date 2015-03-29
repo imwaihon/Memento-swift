@@ -21,8 +21,8 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         super.viewDidLoad()
         
         palaceTiles.backgroundColor = UIColor.clearColor()
-        
-        setUpGestures()
+        self.setNeedsStatusBarAppearanceUpdate()
+        //setUpGestures()
         
     }
     
@@ -70,15 +70,28 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         cell.addShadows()
         // First cell is reserved for the add button
         if indexPath.item == 0 {
-            cell.backgroundColor = UIColor.blackColor()
+            cell.backgroundColor = UIColor.clearColor()
+            cell.imageView.image = UIImage(named: "addPalaceImage")
             
         } else {
             cell.backgroundColor = UIColor.clearColor()
-            cell.imageView.image = UIImage(named: "landscape1")
+            cell.imageView.image = UIImage(named: "landscape\(indexPath.item % 6 + 1)")
             
         }
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.item == 0 {
+            self.performSegueWithIdentifier("CreateNewPalaceSegue", sender: self)
+        } else{
+            self.performSegueWithIdentifier("GoToPalaceSegue", sender: self)
+        }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.BlackOpaque
     }
     
 }
