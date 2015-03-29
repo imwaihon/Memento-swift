@@ -1,3 +1,12 @@
+//
+//  NodeViewController.swift
+//  Memento
+//
+//  Created by Lim Jing Rong on 23/3/15.
+//  Copyright (c) 2015 NUS CS3217. All rights reserved.
+//
+
+
 import UIKit
 import MobileCoreServices
 
@@ -7,6 +16,10 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBOutlet weak var imageView: UIImageView!
     var newMedia: Bool?
+    
+    var isMainView: Bool = true
+    var newImage: DraggableImageView!
+
     
     
     // Camera button
@@ -24,6 +37,9 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 self.presentViewController(imagePicker, animated: true, 
                     completion: nil)
                 newMedia = true
+                
+                // For main view
+                isMainView = true
         }
     }
     
@@ -44,12 +60,14 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 
                 popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
                 
-                // Needs to allow potrait
-                //self.presentViewController(popover, animated: true, completion: nil)
-                
                 newMedia = false
+                
+                // For main view 
+                isMainView = true
         }
     }
+    
+    // Helper functions for main photo pickers
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
@@ -68,8 +86,18 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Up)!
             }
 
+            if isMainView == true {
+                imageView.image = image
+            }
+            else {
+                // Scaling factor for inserted images is default at height 150
+                var scalingFactor = image.size.height/150.0
+                var newWidth = image.size.width / scalingFactor
+                newImage = DraggableImageView(image: image)
+                newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
+                self.view.addSubview(newImage)
+            }
 
-            imageView.image = image
             
             if (newMedia == true) {
                 // Option to save to camera roll/ Photo album
@@ -80,7 +108,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
         }
     }
-
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafePointer<Void>) {
         
         if error != nil {
@@ -99,9 +126,34 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
     @IBAction func dismissView(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    // Adds an overlaying image from camera roll ( possibly in-app sprites next time?)
+    // Possible future portability for cropping images.
+    @IBAction func addOverlayImage(sender: AnyObject){
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+                var imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType =
+                    UIImagePickerControllerSourceType.PhotoLibrary
+                imagePicker.mediaTypes = [kUTTypeImage as NSString]
+                imagePicker.allowsEditing = false
+                
+                var popover = UIPopoverController(contentViewController: imagePicker) as UIPopoverController
+                var frame = CGRectMake(315, 260, 386, 386);
+                
+                popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+                
+                newMedia = false
+                
+                // For new view
+                isMainView = false
+        }
+        
     }
     
 
