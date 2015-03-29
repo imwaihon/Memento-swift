@@ -8,8 +8,12 @@
 
 import Foundation
 import UIKit
+import MobileCoreServices
 
-class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDelegate {
+class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    
+    var newMedia: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,4 +49,53 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.BlackOpaque
     }
+    
+    // Camera button
+    @IBAction func useCamera(sender: AnyObject) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.Camera) {
+                
+                let imagePicker = UIImagePickerController()
+                
+                imagePicker.delegate = self
+                imagePicker.sourceType =
+                    UIImagePickerControllerSourceType.Camera
+                imagePicker.mediaTypes = [kUTTypeImage as NSString]
+                self.presentViewController(imagePicker, animated: true,
+                    completion: nil)
+                newMedia = true
+        }
+    }
+    
+    // Camera roll button
+    @IBAction func useCameraRoll(sender: AnyObject) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+                var imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType =
+                    UIImagePickerControllerSourceType.SavedPhotosAlbum
+                imagePicker.mediaTypes = [kUTTypeImage as NSString]
+                imagePicker.allowsEditing = false
+                
+                var popover = UIPopoverController(contentViewController: imagePicker) as UIPopoverController
+                var frame = CGRectMake(315, 260, 386, 386);
+                
+                popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+                
+                // Needs to allow potrait
+                //self.presentViewController(popover, animated: true, completion: nil)
+                
+                newMedia = false
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        self.dismissViewControllerAnimated(true, completion: {finished in
+            self.performSegueWithIdentifier("ShowNewPalaceSegue", sender: self)
+        })
+    }
+
 }

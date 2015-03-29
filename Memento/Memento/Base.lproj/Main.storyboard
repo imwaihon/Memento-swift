@@ -119,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="367" y="291"/>
+            <point key="canvasLocation" x="220" y="194"/>
         </scene>
         <!--Create New Palace View Controller-->
         <scene sceneID="wro-cS-jR7">
@@ -253,23 +253,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cameraIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Wr1-cH-2ck">
-                                <rect key="frame" x="401" y="339" width="90" height="90"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="webIcon" translatesAutoresizingMaskIntoConstraints="NO" id="87T-Fe-ahd">
-                                <rect key="frame" x="532" y="339" width="90" height="90"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photosIcon" translatesAutoresizingMaskIntoConstraints="NO" id="bFr-FQ-lbq">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pT8-cD-9Nr">
                                 <rect key="frame" x="270" y="339" width="90" height="90"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dropboxIcon" translatesAutoresizingMaskIntoConstraints="NO" id="0hY-ZF-AJw">
-                                <rect key="frame" x="663" y="339" width="90" height="90"/>
-                            </imageView>
+                                <state key="normal" backgroundImage="photosIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="useCameraRoll:" destination="Z2G-JI-7tc" eventType="touchUpInside" id="LeQ-aY-gi7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ris-UI-Pdv">
+                                <rect key="frame" x="401" y="339" width="90" height="90"/>
+                                <state key="normal" backgroundImage="cameraIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="useCamera:" destination="Z2G-JI-7tc" eventType="touchUpInside" id="Ipb-Tg-8oL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSp-ob-xFN">
+                                <rect key="frame" x="532" y="334" width="90" height="90"/>
+                                <state key="normal" backgroundImage="webIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4H-Fg-FfA">
+                                <rect key="frame" x="663" y="334" width="90" height="90"/>
+                                <state key="normal" backgroundImage="dropboxIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <segue destination="4VP-WZ-IsH" kind="show" identifier="ShowNewPalaceSegue" id="DlS-Ad-FtQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IbL-dV-PDl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -354,4 +375,7 @@
         <image name="photosIcon" width="64" height="64"/>
         <image name="webIcon" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="DlS-Ad-FtQ"/>
+    </inferredMetricsTieBreakers>
 </document>
