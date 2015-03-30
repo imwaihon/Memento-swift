@@ -8,9 +8,10 @@
 
 import UIKit
 
-class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIGestureRecognizerDelegate {
+class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIGestureRecognizerDelegate, ModelChangeUpdateDelegate {
     
     @IBOutlet var palaceTiles: UICollectionView!
+    var model = MementoManager()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -24,6 +25,10 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         self.setNeedsStatusBarAppearanceUpdate()
         //setUpGestures()
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     // GESTURES
@@ -62,7 +67,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     
     // Number of tiles
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return model.numberOfMemoryPalace + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -72,11 +77,13 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         if indexPath.item == 0 {
             cell.backgroundColor = UIColor.clearColor()
             cell.imageView.image = UIImage(named: "addPalaceImage")
+            cell.nameLabel.hidden = true
+            cell.opacityBackground.hidden = true
             
         } else {
-            cell.backgroundColor = UIColor.clearColor()
-            cell.imageView.image = UIImage(named: "landscape\(indexPath.item % 6 + 1)")
-            
+            let currentIcon : MemoryPalaceIcon = model.getMemoryPalaceIcons()[indexPath.item-1]
+            cell.imageView.image = getImageNamed(currentIcon.imageFile)
+            cell.nameLabel.text = currentIcon.graphName
         }
         
         return cell
@@ -92,6 +99,37 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.BlackOpaque
+    }
+    
+    func DataModelHasBeenChanged() {
+        self.palaceTiles.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "CreateNewPalaceSegue"){
+            let dvc = segue.destinationViewController as BlurCreatePalaceViewController
+            dvc.parent = self
+            dvc.model = self.model
+        }
+    }
+    
+    func getImageNamed(fileName : String) -> UIImage{
+        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
+        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        {
+            if paths.count > 0
+            {
+                if let dirPath = paths[0] as? String
+                {
+                    let readPath = dirPath.stringByAppendingPathComponent(fileName)
+                    let image    = UIImage(contentsOfFile: readPath)
+                    // Do whatever you want with the image
+                    return image!
+                }
+            }
+        }
+        return UIImage()
     }
     
 }

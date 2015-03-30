@@ -47,6 +47,8 @@
 		5A82F8F51AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82F8F41AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift */; };
 		5A837B921ABBE86E00E52F80 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A837B911ABBE86E00E52F80 /* Set.swift */; };
 		5A837B931ABBE86E00E52F80 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A837B911ABBE86E00E52F80 /* Set.swift */; };
+		5A98038A1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */; };
+		5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */; };
 		5AA1B06A1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
 		5AA1B06B1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
 		5AEF2A5A1AC4FA4A00B2B6FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */; };
@@ -108,6 +110,7 @@
 		5A82F8F21AC44D7100D89166 /* OverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		5A82F8F41AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A837B911ABBE86E00E52F80 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelChangeUpdateDelegate.swift; sourceTree = "<group>"; };
 		5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoManager.swift; sourceTree = "<group>"; };
 		5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceIcon.swift; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 				5A82F8F21AC44D7100D89166 /* OverviewViewController.swift */,
 				5A82F8F41AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift */,
 				5A497A321AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift */,
+				5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */,
 			);
 			path = Memento;
 			sourceTree = "<group>";
@@ -346,6 +350,7 @@
 				4FCE35F01ABA8CEF00417763 /* ViewController.swift in Sources */,
 				5AEF2A6C1AC5260100B2B6FB /* MemoryPalaceRoom.swift in Sources */,
 				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,
+				5A98038A1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */,
 				5A82F8F31AC44D7100D89166 /* OverviewViewController.swift in Sources */,
 				5A5FB0A61AC6628E00EA0EE7 /* Association.swift in Sources */,
 				5AEF2A661AC51E4100B2B6FB /* MemoryPalaceManager.swift in Sources */,
@@ -378,6 +383,7 @@
 				5A4E78A61AC2A44800013728 /* MementoNodeFactory.swift in Sources */,
 				5A497A2F1AC7ECFF00D6C9C5 /* SelectPalaceViewController.swift in Sources */,
 				4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */,
+				5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */,
 				5A78D30E1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
 				5AA1B06B1AC1528B00AC3C65 /* MementoManager.swift in Sources */,
 				5AEF2A671AC51E4100B2B6FB /* MemoryPalaceManager.swift in Sources */,
