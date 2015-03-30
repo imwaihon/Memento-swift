@@ -136,16 +136,17 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
                 if paths.count > 0 {
                     if let dirPath = paths[0] as? String {
                         let readPath = dirPath.stringByAppendingPathComponent("Image.png")
-                        let writePath = dirPath.stringByAppendingPathComponent("Image2.png")
+                        let writePath = dirPath.stringByAppendingPathComponent("\(nameTextField.text)0.png")
                         UIImagePNGRepresentation(image).writeToFile(writePath, atomically: true)
                     }
                 }
             }
-            model.addMemoryPalace(named: nameTextField.text, imageFile: "Image2.png")
+            model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.png")
         }
         parent.DataModelHasBeenChanged()
         self.dismissViewControllerAnimated(true, completion: {finished in
-            self.performSegueWithIdentifier("ShowNewPalaceSegue", sender: self)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            //self.performSegueWithIdentifier("ShowNewPalaceSegue", sender: self)
         })
     }
     

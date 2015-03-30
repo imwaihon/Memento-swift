@@ -12,12 +12,16 @@ import UIKit
 class OverviewViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
     @IBOutlet weak var scrollableOverviewCollectionView: UICollectionView!
-    
+    var palaceName: String!
+    var model: MementoManager!
+    var rooms: [MemoryPalaceRoomIcon]!
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollableOverviewCollectionView.delegate = self
         scrollableOverviewCollectionView.dataSource = self
         scrollableOverviewCollectionView.backgroundColor = UIColor.clearColor()
+        self.setNeedsStatusBarAppearanceUpdate()
+        rooms = model.getPalaceOverview(palaceName)!
         
     }
     override func viewDidAppear(animated: Bool) {
@@ -28,7 +32,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6;
+        return rooms.count + 1;
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -38,7 +42,9 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
             return cell
         } else{
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier("OverviewImageCell", forIndexPath: indexPath) as OverviewImageCollectionViewCell
-            cell.image.image = UIImage(named: "landscape\(indexPath.row)")
+            let currentIcon = rooms[indexPath.row - 1]
+            cell.image.image = self.getImageNamed(currentIcon.filename)
+            //cell.image.image = UIImage(named: "landscape\(indexPath.row)")
             return cell
         }
     }
@@ -54,5 +60,28 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     
     @IBAction func backButtonPress(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.BlackOpaque
+    }
+    
+    func getImageNamed(fileName : String) -> UIImage{
+        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
+        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        {
+            if paths.count > 0
+            {
+                if let dirPath = paths[0] as? String
+                {
+                    let readPath = dirPath.stringByAppendingPathComponent(fileName)
+                    let image    = UIImage(contentsOfFile: readPath)
+                    // Do whatever you want with the image
+                    return image!
+                }
+            }
+        }
+        return UIImage()
     }
 }

@@ -12,6 +12,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     
     @IBOutlet var palaceTiles: UICollectionView!
     var model = MementoManager()
+    var nextPalace = ""
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -94,6 +95,8 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         if indexPath.item == 0 {
             self.performSegueWithIdentifier("CreateNewPalaceSegue", sender: self)
         } else{
+            let cellClicked = collectionView.cellForItemAtIndexPath(indexPath) as SelectPalaceCollectionViewCell
+            self.nextPalace = cellClicked.nameLabel.text!
             self.performSegueWithIdentifier("GoToPalaceSegue", sender: self)
         }
     }
@@ -110,6 +113,10 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         if(segue.identifier == "CreateNewPalaceSegue"){
             let dvc = segue.destinationViewController as BlurCreatePalaceViewController
             dvc.parent = self
+            dvc.model = self.model
+        } else if(segue.identifier == "GoToPalaceSegue"){
+            let dvc = segue.destinationViewController as OverviewViewController
+            dvc.palaceName = self.nextPalace
             dvc.model = self.model
         }
     }
@@ -131,6 +138,10 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
             }
         }
         return UIImage()
+    }
+    
+    @IBAction func backButtonPress(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
