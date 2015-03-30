@@ -11,7 +11,7 @@ import UIKit
 import MobileCoreServices
 import QuartzCore
 
-class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     
     var newMedia: Bool?
@@ -40,6 +40,12 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         nameTextField.layer.borderColor = UIColor.whiteColor().CGColor
         nameTextField.layer.borderWidth = 1.5
         nameTextField.layer.cornerRadius = 5
+        nameTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
     }
     
     override func viewDidAppear(animated: Bool) {

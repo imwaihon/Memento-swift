@@ -23,6 +23,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         
         palaceTiles.backgroundColor = UIColor.clearColor()
         self.setNeedsStatusBarAppearanceUpdate()
+        
         //setUpGestures()
         
     }
