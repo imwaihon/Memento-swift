@@ -21,9 +21,38 @@ class MementoManagerTests: XCTestCase {
         XCTAssertFalse(manager.getMemoryPalace("graph1") == nil)
         XCTAssertEqual(manager.getMemoryPalace("graph1")!.icon, MemoryPalaceIcon(graphName: "graph1", imageFile: "A.png"))
         XCTAssertEqual(manager.addMemoryPalace(named: "graph1", imageFile: "B.png"), "graph1(1)")
-        XCTAssertEqual(manager.numberOfMemoryPalace, 2)
+        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+2)
     }
     
+    //Exact testing to be modified after adding save/load capabilities
+    func testGetMemoryPalaceIcons() {
+        let manager = MementoManager()
+        XCTAssertEqual(manager.getMemoryPalaceIcons(), [])
+        
+        let graph1Icon = MemoryPalaceIcon(graphName: "graph1", imageFile: "A.png")
+        let graph2Icon = MemoryPalaceIcon(graphName: "graph2", imageFile: "B.png")
+        let graph3Icon = MemoryPalaceIcon(graphName: "graph3", imageFile: "C.png")
+        
+        manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
+        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon])
+        
+        manager.addMemoryPalace(named: "graph2", imageFile: "B.png")
+        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon, graph2Icon])
+        
+        manager.addMemoryPalace(named: "graph3", imageFile: "C.png")
+        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon, graph2Icon, graph3Icon])
+        
+        manager.removeMemoryPalace("graph2")
+        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon, graph3Icon])
+        
+        manager.removeMemoryPalace("graph3")
+        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon])
+        
+        manager.removeMemoryPalace("graph1")
+        XCTAssertEqual(manager.getMemoryPalaceIcons(), [])
+    }
+    
+    //Exact memory palace counting tests to be modified after adding save/load capabilities
     func testRemoveMemoryPalace() {
         let manager = MementoManager()
         

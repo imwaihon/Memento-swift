@@ -27,6 +27,13 @@ class MementoModel {
     var numPalaces: Int {
       return graphs.count
     }
+    var palaceIcons: [MemoryPalaceIcon] {
+        var arr = [MemoryPalaceIcon]()
+        for i in 0..<numPalaces {
+            arr.append(graphs[i].icon)
+        }
+        return arr
+    }
     
     init(){
         graphs = [MementoGraph]()

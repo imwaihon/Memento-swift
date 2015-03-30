@@ -31,6 +31,11 @@ class MementoManager: MemoryPalaceManager {
         nodeFactory = MementoNodeFactory()
     }
     
+    //Gets the list of con representation of existing memory palaces.
+    func getMemoryPalaceIcons() -> [MemoryPalaceIcon] {
+        return model.palaceIcons
+    }
+    
     //Adds a new memory palace
     //If there exists another memory palace with the same name, a number will be appended to the
     //new memory palace's name.
