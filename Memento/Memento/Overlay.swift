@@ -11,7 +11,7 @@
 import Foundation
 import UIKit
 
-struct Overlay {
+struct Overlay: Equatable {
     let frame: CGRect
     let imageFile: String
     
@@ -24,4 +24,8 @@ struct Overlay {
     func makeMutable() -> MutableOverlay {
         return MutableOverlay(frame: frame, imageFile: imageFile)
     }
+}
+
+func ==(lhs: Overlay, rhs: Overlay) -> Bool {
+    return lhs.frame == rhs.frame && lhs.imageFile == rhs.imageFile
 }
