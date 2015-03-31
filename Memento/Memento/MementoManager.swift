@@ -12,6 +12,21 @@
 import Foundation
 
 class MementoManager: MemoryPalaceManager {
+    
+    // Singleton pattern
+    class var sharedInstance: MementoManager {
+        struct Static {
+            static var instance: MementoManager?
+            static var token: dispatch_once_t = 0
+        }
+        
+        dispatch_once(&Static.token) {
+            Static.instance = MementoManager()
+        }
+        
+        return Static.instance!
+    }
+    
     private var selectedPalace: MementoGraph?
     private var selectedRoom: MementoNode?
     private let model: MementoModel
