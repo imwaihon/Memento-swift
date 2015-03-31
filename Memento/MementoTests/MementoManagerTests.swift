@@ -88,4 +88,32 @@ class MementoManagerTests: XCTestCase {
         manager.addMemoryPalaceRoom(palaceName, roomImage: "B.png")
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
     }
+    
+    func testRemoveMemoryPalaceRoom() {
+        let manager = MementoManager()
+        let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
+        let room1 = MemoryPalaceRoomIcon(label: 0, filename: "A.png")
+        let room2 = MemoryPalaceRoomIcon(label: 1, filename: "B.png")
+        let newRoom2 = MemoryPalaceRoomIcon(label: 0, filename: "B.png")
+        
+        manager.addMemoryPalaceRoom(palaceName, roomImage: "B.png")
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
+        
+        //Invalid palace name
+        manager.removeMemoryPalaceRoom("graph0", roomLabel: 0)
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
+        
+        //Invalid room labels
+        manager.removeMemoryPalaceRoom(palaceName, roomLabel: -1)
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
+        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 100)
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
+        
+        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 0)
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [newRoom2])
+        
+        //Attempts to make graph empty
+        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 0)
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [newRoom2])
+    }
 }

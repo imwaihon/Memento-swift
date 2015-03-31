@@ -67,6 +67,14 @@ class MementoManager: MemoryPalaceManager {
         }
     }
     
+    //Removes the specified room from the specified memory palace.
+    //Does nothign if either the memory palace or the room is invalid.
+    func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
+        if let palace = model.getPalace(palaceName) {
+            palace.removeRoom(roomLabel)
+        }
+    }
+    
     //Returns an array of memory palace node icons
     //Returns nil if there is no memory palace of the given name
     func getPalaceOverview(palaceName: String) -> [MemoryPalaceRoomIcon]? {
