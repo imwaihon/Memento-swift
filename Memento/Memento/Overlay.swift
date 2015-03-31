@@ -19,4 +19,9 @@ struct Overlay {
         self.frame = frame
         self.imageFile = imageFile
     }
+    
+    //Creates a mutable version of this overlay object.
+    func makeMutable() -> MutableOverlay {
+        return MutableOverlay(frame: frame, imageFile: imageFile)
+    }
 }
