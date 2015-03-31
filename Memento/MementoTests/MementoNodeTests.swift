@@ -15,7 +15,7 @@ import XCTest
 class MementoNodeTests: XCTestCase {
     func testInit(){
         let node = MementoNode(imageFile: "A.png")
-        XCTAssertEqual(node.icon, MemoryPalaceRoomIcon(label: 0, filename: "A.png"))
+        XCTAssertEqual(node.icon, MemoryPalaceRoomIcon(label: 0, filename: "A.png", overlays: []))
         XCTAssertEqual(node.numPlaceHolders, 0)
     }
     

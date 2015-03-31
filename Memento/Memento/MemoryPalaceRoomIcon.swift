@@ -13,10 +13,12 @@ import Foundation
 struct MemoryPalaceRoomIcon: Equatable {
     let label: Int              //Used to retrieve/remove node from graph
     let filename: String        //Used by view controller to load icon's image file
+    let overlays: [Overlay]
     
-    init(label: Int, filename: String) {
+    init(label: Int, filename: String, overlays: [Overlay]) {
         self.label = label
         self.filename = filename
+        self.overlays = overlays
     }
 }
 

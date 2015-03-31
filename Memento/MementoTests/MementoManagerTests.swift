@@ -79,8 +79,8 @@ class MementoManagerTests: XCTestCase {
     func testAddMemoryPalaceRoom() {
         let manager = MementoManager()
         let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
-        let room1 = MemoryPalaceRoomIcon(label: 0, filename: "A.png")
-        let room2 = MemoryPalaceRoomIcon(label: 1, filename: "B.png")
+        let room1 = MemoryPalaceRoomIcon(label: 0, filename: "A.png", overlays: [])
+        let room2 = MemoryPalaceRoomIcon(label: 1, filename: "B.png", overlays: [])
         
         XCTAssertFalse(manager.getPalaceOverview(palaceName) == nil)
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1])
@@ -92,9 +92,9 @@ class MementoManagerTests: XCTestCase {
     func testRemoveMemoryPalaceRoom() {
         let manager = MementoManager()
         let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
-        let room1 = MemoryPalaceRoomIcon(label: 0, filename: "A.png")
-        let room2 = MemoryPalaceRoomIcon(label: 1, filename: "B.png")
-        let newRoom2 = MemoryPalaceRoomIcon(label: 0, filename: "B.png")
+        let room1 = MemoryPalaceRoomIcon(label: 0, filename: "A.png", overlays: [])
+        let room2 = MemoryPalaceRoomIcon(label: 1, filename: "B.png", overlays: [])
+        let newRoom2 = MemoryPalaceRoomIcon(label: 0, filename: "B.png", overlays: [])
         
         manager.addMemoryPalaceRoom(palaceName, roomImage: "B.png")
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
