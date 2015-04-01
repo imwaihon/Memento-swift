@@ -14,7 +14,7 @@ import XCTest
 class MementoModelTests: XCTestCase {
     
     func testAddPalace() {
-        let model = MementoModel.sharedInstance
+        let model = MementoModel()
         let initNumPalace = model.numPalaces
         
         model.addPalace(MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png")))
@@ -33,7 +33,7 @@ class MementoModelTests: XCTestCase {
     }
     
     func testRemovePalace() {
-        let model = MementoModel.sharedInstance
+        let model = MementoModel()
         let initNumPalace = model.numPalaces
         
         model.addPalace(MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png")))
@@ -53,7 +53,7 @@ class MementoModelTests: XCTestCase {
     }
     
     func testAddRoom() {
-        let model = MementoModel.sharedInstance
+        let model = MementoModel()
         let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
         let newRoom = MementoNode(imageFile: "B.png")
         let anotherRoom = MementoNode(imageFile: "C.png")
@@ -70,7 +70,7 @@ class MementoModelTests: XCTestCase {
     }
     
     func testRemoveRoom() {
-        let model = MementoModel.sharedInstance
+        let model = MementoModel()
         let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
         let newRoom = MementoNode(imageFile: "B.png")
         let newRoom2 = MementoNode(imageFile: "C.png")
