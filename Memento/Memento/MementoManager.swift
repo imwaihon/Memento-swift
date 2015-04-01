@@ -41,7 +41,7 @@ class MementoManager: MemoryPalaceManager {
     init(){
         selectedPalace = nil
         selectedRoom = nil
-        model = MementoModel()
+        model = MementoModel.sharedInstance
         graphFactory = MementoGraphFactory()
         nodeFactory = MementoNodeFactory()
     }
