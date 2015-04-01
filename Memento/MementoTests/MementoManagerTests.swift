@@ -3,6 +3,9 @@
 //  Memento
 //
 //  High level black-box unit testing for data managerment component.
+//  Do not change the namges of the unit tests.
+//  Tests are execute by alphabetical order of their names and manager holds a singleton instance of the model.
+//  So changes made to the model through the manager is propagated to othe rtest cases.
 //
 //  Created by Qua Zi Xian on 28/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
@@ -22,6 +25,24 @@ class MementoManagerTests: XCTestCase {
         XCTAssertEqual(manager.getMemoryPalace("graph1")!.icon, MemoryPalaceIcon(graphName: "graph1", imageFile: "A.png"))
         XCTAssertEqual(manager.addMemoryPalace(named: "graph1", imageFile: "B.png"), "graph1(1)")
         XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+2)
+    }
+    
+    //Exact memory palace counting tests to be modified after adding save/load capabilities
+    func testDeleteMemoryPalace() {
+        let manager = MementoManager()
+        
+        let initialNumPalaces = manager.numberOfMemoryPalace
+        
+        XCTAssertFalse(manager.getMemoryPalace("graph1") == nil)
+        XCTAssertFalse(manager.getMemoryPalace("graph1(1)") == nil)
+        
+        manager.removeMemoryPalace("graph1")
+        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalaces-1)
+        XCTAssertTrue(manager.getMemoryPalace("graph1") == nil)
+        
+        manager.removeMemoryPalace("graph1(1)")
+        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalaces-2)
+        XCTAssertTrue(manager.getMemoryPalace("graph1(1)") == nil)
     }
     
     //Exact testing to be modified after adding save/load capabilities
@@ -52,31 +73,9 @@ class MementoManagerTests: XCTestCase {
         XCTAssertEqual(manager.getMemoryPalaceIcons(), [])
     }
     
-    //Exact memory palace counting tests to be modified after adding save/load capabilities
-    func testRemoveMemoryPalace() {
-        let manager = MementoManager()
-        
-        manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
-        manager.addMemoryPalace(named: "graph2", imageFile: "B.png")
-        manager.addMemoryPalace(named: "graph3", imageFile: "B.png")
-        XCTAssertEqual(manager.numberOfMemoryPalace, 3)
-        XCTAssertFalse(manager.getMemoryPalace("graph1") == nil)
-        XCTAssertFalse(manager.getMemoryPalace("graph2") == nil)
-        XCTAssertFalse(manager.getMemoryPalace("graph3") == nil)
-        
-        manager.removeMemoryPalace("graph2")
-        XCTAssertEqual(manager.numberOfMemoryPalace, 2)
-        XCTAssertFalse(manager.getMemoryPalace("graph1") == nil)
-        XCTAssertTrue(manager.getMemoryPalace("graph2") == nil)
-        XCTAssertFalse(manager.getMemoryPalace("graph3") == nil)
-        
-        manager.removeMemoryPalace("graph3")
-        XCTAssertEqual(manager.numberOfMemoryPalace, 1)
-        XCTAssertFalse(manager.getMemoryPalace("graph1") == nil)
-        XCTAssertTrue(manager.getMemoryPalace("graph3") == nil)
-    }
     
-    func testAddMemoryPalaceRoom() {
+    
+    func testInsertMemoryPalaceRoom() {
         let manager = MementoManager()
         let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
         let room1 = MemoryPalaceRoomIcon(label: 0, filename: "A.png", overlays: [])
