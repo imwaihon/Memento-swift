@@ -67,6 +67,15 @@ class MementoManager: MemoryPalaceManager {
         return model.getPalace(palaceName)
     }
     
+    //Returns an array of memory palace node icons
+    //Returns nil if there is no memory palace of the given name
+    func getPalaceOverview(palaceName: String) -> [MemoryPalaceRoomIcon]? {
+        if let palace = model.getPalace(palaceName) {
+            return palace.nodeIcons
+        }
+        return nil
+    }
+    
     //Removes the specified memory palace
     //Does nothing if no memory palace has the given name
     func removeMemoryPalace(palaceName: String){
@@ -76,26 +85,26 @@ class MementoManager: MemoryPalaceManager {
     //Adds a new room to the current memory palace.
     //Does nothing if no memory palace is selected.
     func addMemoryPalaceRoom(palaceName: String, roomImage: String){
-        if let palace = model.getPalace(palaceName) {
-            let room = nodeFactory.makeNode(roomImage)
-            palace.addRoom(room)
-        }
+        model.addPalaceRoom(palaceName, room: nodeFactory.makeNode(roomImage))
+    }
+    
+    //Gets the memory palace room.
+    //Returns nil if the memory palace or the room does not exist.
+    func getMemoryPalaceRoom(palaceName: String, roomLabel: Int) -> MemoryPalaceRoom? {
+        return model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
+    }
+    
+    //Gets the view object representation of the memory palace room.
+    //Returns nil if the memory palace or the room does not exist.
+    func getMemoryPalaceRoomView(palaceName: String, roomLabel: Int) -> MemoryPalaceRoomView? {
+        return (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)? as MementoNode).viewRepresentation
     }
     
     //Removes the specified room from the specified memory palace.
     //Does nothign if either the memory palace or the room is invalid.
     func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
-        if let palace = model.getPalace(palaceName) {
-            palace.removeRoom(roomLabel)
-        }
+        model.removeMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
     }
     
-    //Returns an array of memory palace node icons
-    //Returns nil if there is no memory palace of the given name
-    func getPalaceOverview(palaceName: String) -> [MemoryPalaceRoomIcon]? {
-        if let palace = model.getPalace(palaceName) {
-            return palace.nodeIcons
-        }
-        return nil
-    }
+    
 }
