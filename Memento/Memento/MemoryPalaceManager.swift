@@ -18,4 +18,5 @@ protocol MemoryPalaceManager {
     func getMemoryPalace(palaceName: String) -> MemoryPalace?
     func removeMemoryPalace(palaceName: String)
     func addMemoryPalaceRoom(palaceName: String, roomImage: String)
+    func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int)
 }
