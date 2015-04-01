@@ -51,6 +51,12 @@ class MementoNode: MemoryPalaceRoom {
         }
         return arr
     }
+    var viewRepresentation: MemoryPalaceRoomView {  //The object representation used to render the node in view/edit mode
+        return MemoryPalaceRoomView(backgroundImage: _backgroundImageFile, overlays: overlays, associations: associations)
+    }
+    var plistRepresentation: NSDictionary { //To be implemented
+        return NSDictionary()
+    }
 
     init(imageFile: String){
         _backgroundImageFile = imageFile
@@ -81,6 +87,11 @@ class MementoNode: MemoryPalaceRoom {
         if isValidPlaceHolderNumber(placeHolderNumber) {
             _values[placeHolderNumber] = value
         }
+    }
+    
+    //Adds the given overlay object
+    func addOverlay(overlay: MutableOverlay) {
+        _overlays.append(overlay)
     }
     
     private func isValidPlaceHolderNumber(num: Int) -> Bool {

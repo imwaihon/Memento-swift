@@ -39,6 +39,9 @@ class MementoGraph: MemoryPalace {
     var numRooms: Int {
         return nodes.count
     }
+    var plistRepresentation: NSDictionary { //To be implemented
+        return NSDictionary()
+    }
     
     init(name: String, rootNode: MementoNode) {
         self.name = name
