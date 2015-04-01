@@ -64,6 +64,8 @@
 		5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */; };
 		5AA1B06A1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
 		5AA1B06B1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
+		5AD9C8401ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */; };
+		5AD9C8411ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */; };
 		5AEF2A5A1AC4FA4A00B2B6FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */; };
 		5AEF2A5B1AC4FA4A00B2B6FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */; };
 		5AEF2A5D1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */; };
@@ -134,6 +136,7 @@
 		5A837B911ABBE86E00E52F80 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelChangeUpdateDelegate.swift; sourceTree = "<group>"; };
 		5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoManager.swift; sourceTree = "<group>"; };
+		5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomView.swift; sourceTree = "<group>"; };
 		5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceIcon.swift; sourceTree = "<group>"; };
 		5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 				5A5FB0A51AC6628E00EA0EE7 /* Association.swift */,
 				5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */,
 				5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */,
+				5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */,
 				5A3F386D1ACA76050096AB6C /* Overlay.swift */,
 			);
 			name = RepresentationObjects;
@@ -400,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC6DD3D1AC026AC0070F271 /* SelectPalaceViewController.swift in Sources */,
+				5AD9C8401ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */,
 				5A3F386E1ACA76050096AB6C /* Overlay.swift in Sources */,
 				5AEF2A691AC51F9000B2B6FB /* MemoryPalace.swift in Sources */,
 				5A4E78A51AC2A44800013728 /* MementoNodeFactory.swift in Sources */,
@@ -454,6 +459,7 @@
 				5A5663FB1AC955B200190068 /* OverviewViewController.swift in Sources */,
 				5A497A341AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift in Sources */,
 				5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
+				5AD9C8411ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */,
 				5A5FB0A41AC6601100EA0EE7 /* MementoNodeTests.swift in Sources */,
 				5AEF2A6D1AC5260100B2B6FB /* MemoryPalaceRoom.swift in Sources */,
 				5AEF2A5E1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */,

@@ -99,6 +99,31 @@ class MementoModel {
         //Save changes?
     }
     
+    //Adds the given room to the specified memory palace.
+    //Does nothing if the memory palace does not exist.
+    func addPalaceRoom(palaceName: String, room: MemoryPalaceRoom) {
+        if let palace = getPalace(palaceName) {
+            palace.addRoom(room)
+        }
+    }
+    
+    //Gets the memory palace room with the given room number from the specified memory palace.
+    //Returns nil if either the memory palace or the room is missing.
+    func getMemoryPalaceRoom(palaceName: String, roomLabel: Int) -> MemoryPalaceRoom? {
+        if let palace = getPalace(palaceName) {
+            return palace.getRoom(roomLabel)
+        }
+        return nil
+    }
+    
+    //Removes the room from the specified memory palace.
+    //Does nothing if the memory palace does not exist.
+    func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
+        if let palace = getPalace(palaceName) {
+            palace.removeRoom(roomLabel)
+        }
+    }
+    
     private func isValidPalaceNumber(palaceNumber: Int) -> Bool {
         return palaceNumber >= 0 && palaceNumber < graphs.count
     }
