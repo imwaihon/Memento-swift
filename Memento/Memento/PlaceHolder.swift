@@ -16,6 +16,11 @@ class PlaceHolder: Equatable {
     let view: UIView
     var label: Int = 0
     
+    //Properties
+    var stringEncoding: String {
+        return NSStringFromCGRect(view.frame)
+    }
+    
     init(frame: CGRect){
         view = UIView(frame: frame)
     }

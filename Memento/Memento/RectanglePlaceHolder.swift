@@ -14,6 +14,10 @@ import UIKit
 class RectanglePlaceHolder: PlaceHolder {
     private let highlightArea: CGRect
     
+    override var stringEncoding: String{
+        return NSStringFromCGRect(highlightArea)
+    }
+    
     init(highlightArea: CGRect){
         self.highlightArea = highlightArea
         super.init(frame: highlightArea)

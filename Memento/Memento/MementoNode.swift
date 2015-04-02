@@ -69,7 +69,7 @@ class MementoNode: MemoryPalaceRoom {
         //Gets array of placeholders
         var pHolders = NSMutableArray()
         for placeHolder in _placeHolders {
-            pHolders.addObject(NSStringFromCGRect(placeHolder.view.frame))  //To be changed after implementing free form
+            pHolders.addObject(placeHolder.stringEncoding)
         }
         rep[placeHolderKey] = pHolders
         
