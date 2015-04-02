@@ -24,4 +24,10 @@ class RectanglePlaceHolder: PlaceHolder {
         
         //Do something to the view to make it visible on screen
     }
+    
+    //Decodes the plist representation into a RectanglePlaceHolder.
+    //rep should be the type of string that is returned by stringEncoding property.
+    override class func decodeFromString(rep: String) -> PlaceHolder {
+        return RectanglePlaceHolder(highlightArea: CGRectFromString(rep))
+    }
 }

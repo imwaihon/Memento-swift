@@ -15,6 +15,9 @@ struct MutableOverlay: Equatable {
     var frame: CGRect
     var imageFile: String
     
+    //Currently, the encoding format is <CGRect string>:<image name>
+    //Design issue: Users can create 2 overlays of same size at the exact same locaiton with the same image.
+    //This makes hashing using CGRect string or image file name not feasible.
     var stringEncoding: String {
         var str = NSStringFromCGRect(frame)
         str = str.stringByAppendingString(overlayValueSeparator)
@@ -25,6 +28,13 @@ struct MutableOverlay: Equatable {
     init(frame: CGRect, imageFile: String) {
         self.frame = frame
         self.imageFile = imageFile
+    }
+    
+    //Decode the given string representation into a MutableOverlay object.
+    //rep must be a string returned by stringEncoding property of a MutableOverlay instance.
+    static func decodeFromString(rep: String) -> MutableOverlay {
+        let strArray = rep.componentsSeparatedByString(overlayValueSeparator)
+        return MutableOverlay(frame: CGRectFromString(strArray[0]), imageFile: strArray[1])
     }
     
     //Returns the immutable representation of this object.

@@ -25,6 +25,12 @@ class PlaceHolder: Equatable {
         view = UIView(frame: frame)
     }
     
+    //Decodes the string representation into a PlaceHodler object.
+    //rep should be the type of string returned by stringEncoding property.
+    class func decodeFromString(rep: String) -> PlaceHolder {
+        return PlaceHolder(frame: CGRectFromString(rep))
+    }
+    
     class func hasOverlap(placeHolder1: PlaceHolder, placeHolder2: PlaceHolder) -> Bool {
         return CGRectIntersectsRect(placeHolder1.view.frame, placeHolder2.view.frame)
     }
