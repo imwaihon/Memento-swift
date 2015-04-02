@@ -16,3 +16,16 @@ import UIKit
 
 //Graph Node Icon Display Constants(modify as needed by UI developer)
 let graphNodeIconSize = CGSizeMake(100, 50)
+
+//Overlay encoding
+let overlayValueSeparator = ";"
+
+//Graph plist representation keys
+let nameKey = "name"
+let nodesKey = "nodes"
+
+//Node plist representation keys
+let bgImageKey = "backgroundImage"
+let overlayKey = "overlays"
+let placeHolderKey = "placeHolders"
+let valueKey = "values"

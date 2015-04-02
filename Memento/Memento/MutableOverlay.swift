@@ -15,6 +15,13 @@ struct MutableOverlay: Equatable {
     var frame: CGRect
     var imageFile: String
     
+    var stringEncoding: String {
+        var str = NSStringFromCGRect(frame)
+        str = str.stringByAppendingString(overlayValueSeparator)
+        str = str.stringByAppendingString(imageFile)
+        return str
+    }
+    
     init(frame: CGRect, imageFile: String) {
         self.frame = frame
         self.imageFile = imageFile

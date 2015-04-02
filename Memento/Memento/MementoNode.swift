@@ -54,8 +54,32 @@ class MementoNode: MemoryPalaceRoom {
     var viewRepresentation: MemoryPalaceRoomView {  //The object representation used to render the node in view/edit mode
         return MemoryPalaceRoomView(backgroundImage: _backgroundImageFile, overlays: overlays, associations: associations)
     }
-    var plistRepresentation: NSDictionary { //To be implemented
-        return NSDictionary()
+    
+    var plistRepresentation: NSDictionary { //Currently assumes no deletion of overlays, placeholders and values
+        var rep = NSMutableDictionary()
+        rep[bgImageKey] = NSString(string: _backgroundImageFile)
+        
+        //Gets array of overlays
+        var overlays = NSMutableArray()
+        for overlay in _overlays {
+            overlays.addObject(overlay.stringEncoding)
+        }
+        rep[overlayKey] = overlays
+        
+        //Gets array of placeholders
+        var pHolders = NSMutableArray()
+        for placeHolder in _placeHolders {
+            pHolders.addObject(NSStringFromCGRect(placeHolder.view.frame))  //To be changed after implementing free form
+        }
+        rep[placeHolderKey] = pHolders
+        
+        //Gets array of values
+        var val = NSMutableArray()
+        for value in _values {
+            val.addObject(value == nil ? "": NSString(string: value!))
+        }
+        rep[valueKey] = val
+        return rep
     }
 
     init(imageFile: String){
