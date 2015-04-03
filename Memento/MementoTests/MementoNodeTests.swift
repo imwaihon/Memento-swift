@@ -43,6 +43,51 @@ class MementoNodeTests: XCTestCase {
         XCTAssertEqual(node.associations, [assoc1, assoc2])
     }
     
+    func testRemovePlaceHolder() {
+        let frame1 = CGRectMake(0, 0, 10, 20)
+        let frame2 = CGRectMake(10, 0, 10, 20)
+        let frame3 = CGRectMake(20, 0, 10, 20)
+        let frame4 = CGRectMake(30, 0, 10, 20)
+        let frame5 = CGRectMake(40, 0, 10, 20)
+        let placeHolder1 = RectanglePlaceHolder(highlightArea: frame1)
+        let placeHolder2 = RectanglePlaceHolder(highlightArea: frame2)
+        let placeHolder3 = RectanglePlaceHolder(highlightArea: frame3)
+        let placeHolder4 = RectanglePlaceHolder(highlightArea: frame4)
+        let placeHolder5 = RectanglePlaceHolder(highlightArea: frame5)
+        let node = MementoNode(imageFile: "A.png")
+        
+        node.addPlaceHolder(placeHolder1)
+        node.addPlaceHolder(placeHolder2)
+        node.addPlaceHolder(placeHolder3)
+        
+        //Tests removal from the middle
+        node.removePlaceHolder(placeHolder2.label)
+        XCTAssertTrue(node.getPlaceHolder(placeHolder2.label) == nil)
+        XCTAssertFalse(node.getPlaceHolder(placeHolder1.label) == nil)
+        XCTAssertFalse(node.getPlaceHolder(placeHolder3.label) == nil)
+        XCTAssertEqual(placeHolder3.label, 2)
+        
+        //Tests removal of non-existent placeholder
+        node.removePlaceHolder(placeHolder2.label)
+        XCTAssertFalse(node.getPlaceHolder(placeHolder3.label) == nil)
+        
+        node.addPlaceHolder(placeHolder4)
+        node.addPlaceHolder(placeHolder5)
+        XCTAssertFalse(node.getPlaceHolder(placeHolder4.label) == nil)
+        XCTAssertFalse(node.getPlaceHolder(placeHolder5.label) == nil)
+        
+        //Removal of back elements
+        node.removePlaceHolder(placeHolder4.label)
+        node.removePlaceHolder(placeHolder5.label)
+        XCTAssertTrue(node.getPlaceHolder(placeHolder4.label) == nil)
+        XCTAssertTrue(node.getPlaceHolder(placeHolder5.label) == nil)
+        
+        //Tests placeholder labelling scheme after removal of back elements
+        node.addPlaceHolder(placeHolder2)
+        XCTAssertFalse(node.getPlaceHolder(placeHolder2.label) == nil)
+        XCTAssertEqual(placeHolder2.label, 3)
+    }
+    
     func testSetAssociationValue() {
         let node = MementoNode(imageFile: "A.png")
         let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20))
