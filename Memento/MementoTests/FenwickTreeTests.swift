@@ -38,5 +38,13 @@ class FenwickTreeTests: XCTestCase {
         XCTAssertEqual(ft.query(14), 1)
         XCTAssertEqual(ft.query(15), 4)
         XCTAssertEqual(ft.query(16), 4)
+        
+        //Tests clearing of changes
+        ft.clearFromIndex(0)        //An invalid index
+        XCTAssertEqual(ft.query(16), 4)
+        ft.clearFromIndex(17)       //An index that is larger than current size of Fenwick Tree.
+        XCTAssertEqual(ft.query(16), 4)
+        ft.clearFromIndex(6)
+        XCTAssertEqual(ft.query(16), 2)
     }
 }

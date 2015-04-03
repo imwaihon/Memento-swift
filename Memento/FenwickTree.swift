@@ -16,12 +16,14 @@
 import Foundation
 
 class FenwickTree {
-    private let defaultSize = 9
-    private var arr: [Int]
+    private let _defaultSize = 9
+    private var _arr: [Int]
+    private var _change: [Int]
     
     //Creates a Binary Indexed Tree with the default size.
     init() {
-        arr = [Int](count: defaultSize, repeatedValue: 0)
+        _arr = [Int](count: _defaultSize, repeatedValue: 0)
+        _change = [Int](count: _defaultSize, repeatedValue: 0)
     }
     
     //Creates a Binary Indexed Tree that is able to account for size number of items.
@@ -30,7 +32,8 @@ class FenwickTree {
         while capacity < size {
             capacity <<= 1
         }
-        arr = [Int](count: capacity + 1, repeatedValue: 0)
+        _arr = [Int](count: capacity + 1, repeatedValue: 0)
+        _change = [Int](count: capacity + 1, repeatedValue: 0)
     }
     
     //Gets the cumulative value of elements up to the specified element.
@@ -39,13 +42,13 @@ class FenwickTree {
         if index < 1 {  //Deals with invalid indices
             return 0
         }
-        if index >= arr.count {
-            return query(arr.count-1)
+        if index >= _arr.count {
+            return query(_arr.count-1)
         }
         var sum = 0
         var idx = index
         while idx > 0 {
-            sum += arr[idx]
+            sum += _arr[idx]
             idx -= LSOne(idx)
         }
         return sum
@@ -58,7 +61,7 @@ class FenwickTree {
         if index < 1 {
             return
         }
-        let initialSize = arr.count
+        let initialSize = _arr.count
         if index >= initialSize {   //Array needs to be extended.
             let initialMax = initialSize - 1    //This is always a power of 2 by design of this class.
             
@@ -66,19 +69,35 @@ class FenwickTree {
             while size < index {
                 size <<= 1
             }
-            arr.extend([Int](count: size - initialMax, repeatedValue: 0))
+            _arr.extend([Int](count: size - initialMax, repeatedValue: 0))
+            _change.extend([Int](count: size - initialMax, repeatedValue: 0))
             
-            let newSize = arr.count     //Updates the extended section accordingly.
+            let newSize = _arr.count     //Updates the extended section accordingly.
             for var i = initialMax << 1; i<newSize; i <<= 1 {
-                arr[i] += arr[initialMax]
+                _arr[i] += _arr[initialMax]
             }
         }
-        println("Ok")
         
         var idx = index     //The actual value update.
-        while idx < arr.count {
-            arr[idx] += change
+        _change[index] += change
+        while idx < _arr.count {
+            _arr[idx] += change
             idx += LSOne(idx)
+        }
+    }
+    
+    //Clears changes from the specified index.
+    //Does nothing if index is less than 1.
+    //Performance: O(N log N) if index is 1.
+    func clearFromIndex(index: Int) {
+        if index < 1 || index >= _arr.count {
+            return
+        }
+        let upper = _arr.count
+        for var idx = index; idx < upper; idx++ {
+            if _change[idx] != 0 {
+                update(idx, change: -_change[idx])
+            }
         }
     }
     
