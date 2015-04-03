@@ -23,6 +23,8 @@ import UIKit
 
 class MementoNode: MemoryPalaceRoom {
     private let _backgroundImageFile: String
+    private let _overlayFT: FenwickTree
+    private let _placeHolderFT: FenwickTree
     private var _overlays: [MutableOverlay]
     private var _placeHolders: [PlaceHolder]
     private var _values: [String?]
@@ -85,7 +87,9 @@ class MementoNode: MemoryPalaceRoom {
     init(imageFile: String){
         _backgroundImageFile = imageFile
         _overlays = [MutableOverlay]()
+        _overlayFT = FenwickTree()
         _placeHolders = [RectanglePlaceHolder]()
+        _placeHolderFT = FenwickTree()
         _values = [String?](count: _placeHolders.count, repeatedValue: nil)
     }
     
@@ -116,10 +120,23 @@ class MementoNode: MemoryPalaceRoom {
     //Adds the given overlay object
     //Returns the identifier assigned to the added overlay
     func addOverlay(overlay: MutableOverlay) -> Int {
-        let label = _overlays.count
+        let label = _overlays.isEmpty ? 0: _overlays[_overlays.count - 1].label + 1
         _overlays.append(overlay)
         _overlays[label].label = label
         return label
+    }
+    
+    //Gets the overlay object with the given label.
+    //Returns nil if no such overlay object can be found.
+    func getOverlay(label: Int) -> Overlay? {
+        if label < 0 {
+            return nil
+        }
+        let offset = _overlayFT.query(label + 1)
+        if label - offset >= _overlays.count || _overlays[label - offset].label != label {
+            return nil
+        }
+        return _overlays[label - offset].makeImmuatble()
     }
     
     private func isValidPlaceHolderNumber(num: Int) -> Bool {
