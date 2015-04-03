@@ -249,8 +249,4 @@ class MementoNode: MemoryPalaceRoom {
             _overlays.removeAtIndex(idx)
         }
     }
-    
-    private func isValidPlaceHolderNumber(num: Int) -> Bool {
-        return num >= 0 && num < numPlaceHolders
-    }
 }
