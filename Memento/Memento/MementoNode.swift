@@ -2,8 +2,7 @@
 //  MementoNode.swift
 //  Memento
 //
-//  Represents a node in the memory palace.
-//  The node is represented by its own MVC.
+//  Defines the model of a memory palace room.
 //
 //  Specifications:
 //  Contains necessary information for display.
