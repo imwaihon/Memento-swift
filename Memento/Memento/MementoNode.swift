@@ -9,10 +9,23 @@
 //  Contains necessary information for display.
 //  Changes that will affect the displayed information should update the appropriate view components.
 //  Contains associations and links created by user.
-//  Identify association/link selected by user.
+//  Identify association/overlay selected by user.
+//  Convert into representation that can be saved as a plist.
 //
 //  Non-functional specifications
 //  Easily identified by the graph containing it.
+//  Remove placeholders/overlays without changing the labels of existing overlays/placeholders.
+//  Retrieve the correct placeholder/overlay using the same label even after removing some other overlay/placeholder.
+//
+//  Implementation Explanation for deletion:
+//  Can easily use removeAtIndex on the array, but retrieving the correct object requires O(N) scan as labels no longer
+//  reflect the index.
+//  We want to know the index that stores the object with the given label.
+//  By using cumulative counting, we can know how many items with labels in the range [0, given label] were removed.
+//  Using this, we can identify the index that the object is most likely in.
+//  If the object woth given label does not exist, the object at the index will have a different label.
+//  Cumulative table can be done efficiently in O(log N) time using Binary-Indexed Tree.
+//  Hence, the Binary-Indexed Tree is used in computing the index of the specified object.
 //
 //  Created by Qua Zi Xian on 19/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
