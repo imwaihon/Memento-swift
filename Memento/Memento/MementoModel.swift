@@ -34,6 +34,7 @@ class MementoModel {
         return Static.instance!
     }
     
+    //private let saveLoadManager: SaveLoadManager.sharedInstance   //Compile error for unknown reasons
     private var graphs: [MementoGraph]
     private var names: NSMutableSet
     private var graphMap: [String: Int]
@@ -54,6 +55,7 @@ class MementoModel {
         graphs = [MementoGraph]()
         names = NSMutableSet()
         graphMap = [String: Int]()
+        loadGraphs()
     }
     
     //Adds the new graph to the collection.
@@ -122,6 +124,19 @@ class MementoModel {
         if let palace = getPalace(palaceName) {
             palace.removeRoom(roomLabel)
         }
+    }
+    
+    //Saves the memory palace with the given name.
+    //Does nothing if the memory palace cannot be found.
+    func savePalace(palaceName: String) {
+        //To be implmented once the SaveLoadManager is working.
+        if let palace = getPalace(palaceName) {
+            //saveLoadManager.savePalaceToFile(palace)
+        }
+    }
+    
+    private func loadGraphs() {
+        //To be implemented
     }
     
     private func isValidPalaceNumber(palaceNumber: Int) -> Bool {
