@@ -127,6 +127,99 @@ class MementoNodeTests: XCTestCase {
         XCTAssertEqual((rep.objectForKey(valueKey) as NSArray).count, 2)
         XCTAssertEqual((rep.objectForKey(valueKey) as NSArray).objectAtIndex(0) as String, "")
         XCTAssertEqual((rep.objectForKey(valueKey) as NSArray).objectAtIndex(1) as String, "Hello")
+    }
+    
+    func testAddOverlay() {
+        let frame = CGRectMake(10, 20, 30, 40)
+        var overlay1 = MutableOverlay(frame: frame, imageFile: "A.png")
+        var overlay2 = MutableOverlay(frame: frame, imageFile: "B.png")
+        let node = MementoNode(imageFile: "A.png")
         
+        overlay1.label = node.addOverlay(overlay1)
+        overlay2.label = node.addOverlay(overlay2)
+        XCTAssertFalse(node.getOverlay(overlay1.label) == nil)
+        XCTAssertFalse(node.getOverlay(overlay2.label) == nil)
+        XCTAssertEqual(node.getOverlay(overlay1.label)!, overlay1.makeImmuatble())
+        XCTAssertEqual(node.getOverlay(overlay2.label)!, overlay2.makeImmuatble())
+    }
+    
+    func testRemoveOverlay() {
+        let frame = CGRectMake(10, 20, 30, 40)
+        var overlay1 = MutableOverlay(frame: frame, imageFile: "A.png")
+        var overlay2 = MutableOverlay(frame: frame, imageFile: "B.png")
+        var overlay3 = MutableOverlay(frame: frame, imageFile: "C.png")
+        var overlay4 = MutableOverlay(frame: frame, imageFile: "D.png")
+        var overlay5 = MutableOverlay(frame: frame, imageFile: "E.png")
+        let node =  MementoNode(imageFile: "A.png")
+        
+        //Tests removeing overlay from an empty list.
+        //Make sure it does not crash.
+        node.removeOverlay(3)
+        
+        //Loads the overlays
+        //Oder should be [overlay1, overlay2, overlay3]
+        overlay1.label = node.addOverlay(overlay1)
+        overlay2.label = node.addOverlay(overlay2)
+        overlay3.label = node.addOverlay(overlay3)
+        XCTAssertEqual(node.getOverlay(overlay1.label)!, overlay1.makeImmuatble())
+        XCTAssertEqual(node.getOverlay(overlay2.label)!, overlay2.makeImmuatble())
+        XCTAssertEqual(node.getOverlay(overlay3.label)!, overlay3.makeImmuatble())
+        XCTAssertEqual(node.overlays, [overlay1.makeImmuatble(), overlay2.makeImmuatble(), overlay3.makeImmuatble()])
+        
+        //Tests deletion in the middle
+        //Order should become: [overlay1, overlay3, overlay4] at the end of this block.
+        node.removeOverlay(overlay2.label)
+        XCTAssertTrue(node.getOverlay(overlay2.label) == nil)
+        overlay4.label = node.addOverlay(overlay4)
+        XCTAssertEqual(overlay4.label, overlay3.label + 1)
+        XCTAssertEqual(node.overlays, [overlay1.makeImmuatble(), overlay3.makeImmuatble(), overlay4.makeImmuatble()])
+        
+        //Tests deletion of 1st element
+        //Order should become [overlay3, overlay4]
+        XCTAssertEqual(overlay1.label, 0)
+        node.removeOverlay(overlay1.label)
+        XCTAssertTrue(node.getOverlay(overlay1.label) == nil)
+        XCTAssertEqual(node.overlays, [overlay3.makeImmuatble(), overlay4.makeImmuatble()])
+        XCTAssertFalse(node.getOverlay(overlay3.label) == nil)
+        XCTAssertFalse(node.getOverlay(overlay4.label) == nil)
+        XCTAssertEqual(node.getOverlay(overlay3.label)!, overlay3.makeImmuatble())
+        XCTAssertEqual(node.getOverlay(overlay4.label)!, overlay4.makeImmuatble())
+        
+        //Make number of overlays 3
+        //Overlay list becomes [overlay3, overlay4, overlay5]
+        overlay5.label = node.addOverlay(overlay5)
+        XCTAssertFalse(node.getOverlay(overlay5.label) == nil)
+        XCTAssertEqual(overlay4.label + 1, overlay5.label)
+        
+        //Tests deletion of the last elements
+        node.removeOverlay(overlay5.label)
+        node.removeOverlay(overlay4.label)
+        XCTAssertTrue(node.getOverlay(overlay4.label) == nil)
+        XCTAssertTrue(node.getOverlay(overlay5.label) == nil)
+        overlay1.label = node.addOverlay(overlay1)
+        XCTAssertFalse(node.getOverlay(overlay1.label) == nil)
+        XCTAssertEqual(overlay3.label + 1, overlay1.label)
+        
+        //Currently, list of overlays is [overlay3, overlay1]
+        //Removes non-existent overlays
+        node.removeOverlay(0)
+        node.removeOverlay(1)
+        node.removeOverlay(5)
+        XCTAssertFalse(node.getOverlay(overlay3.label) == nil)
+        XCTAssertFalse(node.getOverlay(overlay1.label) == nil)
+        XCTAssertEqual(node.getOverlay(overlay3.label)!, overlay3.makeImmuatble())
+        XCTAssertEqual(node.getOverlay(overlay1.label)!, overlay1.makeImmuatble())
+        
+        //Tests removing the last remaining overlay.
+        //This happens after removing one of the current 2 overlays.
+        node.removeOverlay(overlay3.label)
+        node.removeOverlay(overlay1.label)
+        XCTAssertTrue(node.getOverlay(overlay3.label) == nil)
+        XCTAssertTrue(node.getOverlay(overlay1.label) == nil)
+        
+        //Test to ensure that Fenwick Tree is cleared properly when overlays array becomes empty.
+        overlay1.label = node.addOverlay(overlay1)
+        XCTAssertFalse(node.getOverlay(0) == nil)
+        XCTAssertEqual(node.getOverlay(0)!, overlay1.makeImmuatble())
     }
 }

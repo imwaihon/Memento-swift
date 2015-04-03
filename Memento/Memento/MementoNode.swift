@@ -23,8 +23,8 @@ import UIKit
 
 class MementoNode: MemoryPalaceRoom {
     private let _backgroundImageFile: String
-    private let _overlayFT: FenwickTree
-    private let _placeHolderFT: FenwickTree
+    private var _overlayFT: FenwickTree
+    private var _placeHolderFT: FenwickTree
     private var _overlays: [MutableOverlay]
     private var _placeHolders: [PlaceHolder]
     private var _values: [String?]
@@ -122,21 +122,47 @@ class MementoNode: MemoryPalaceRoom {
     func addOverlay(overlay: MutableOverlay) -> Int {
         let label = _overlays.isEmpty ? 0: _overlays[_overlays.count - 1].label + 1
         _overlays.append(overlay)
-        _overlays[label].label = label
+        _overlays[_overlays.count - 1].label = label
         return label
     }
     
     //Gets the overlay object with the given label.
     //Returns nil if no such overlay object can be found.
     func getOverlay(label: Int) -> Overlay? {
-        if label < 0 {
+        if label < 0 || _overlays.count == 0 {
             return nil
         }
         let offset = _overlayFT.query(label + 1)
-        if label - offset >= _overlays.count || _overlays[label - offset].label != label {
+        let idx = label - offset
+        if idx < 0 || idx >= _overlays.count || _overlays[idx].label != label {
             return nil
         }
-        return _overlays[label - offset].makeImmuatble()
+        return _overlays[idx].makeImmuatble()
+    }
+    
+    //Removes the overlay identified by the given label.
+    //Does nothing if no such overlay is found.
+    func removeOverlay(label: Int) {
+        if label < 0 || _overlays.isEmpty {     //Error cases
+            return
+        }
+        if _overlays.count == 1 {       //Special case: there is only 1 overlay.
+            if _overlays[0].label == label {    //If the overlay is found.
+                _overlays.removeAtIndex(0)
+                _overlayFT = FenwickTree()
+            }
+            return
+        }
+        let offset = _overlayFT.query(label + 1)
+        let idx = label - offset
+        if idx >= 0 && idx < _overlays.count && _overlays[idx].label == label {  //If the overlay is found
+            _overlayFT.update(label + 1, change: 1)
+            if idx == _overlays.count - 1 { //Special case: Deleting last element.
+                let prevLabel = _overlays[idx - 1].label
+                _overlayFT.clearFromIndex(prevLabel + 1)
+            }
+            _overlays.removeAtIndex(idx)
+        }
     }
     
     private func isValidPlaceHolderNumber(num: Int) -> Bool {
