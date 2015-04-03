@@ -114,6 +114,9 @@ class MementoNodeTests: XCTestCase {
         node.setAssociationValue(0, value: nil)
         assoc1 = Association(placeHolder: placeHolder1, value: nil)
         XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
+        
+        node.removePlaceHolder(0)
+        XCTAssertEqual(node.getAssociation(2)!, assoc3)
     }
     
     func testPlistEncoding() {

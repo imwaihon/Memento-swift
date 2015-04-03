@@ -115,17 +115,77 @@ class MementoNode: MemoryPalaceRoom {
         })
         
         if !hasOverlap {
-            placeHolder.label = numPlaceHolders
+            placeHolder.label = _placeHolders.isEmpty ? 0: _placeHolders[_placeHolders.count - 1].label + 1
             _placeHolders.append(placeHolder)
             _values.append(nil)
         }
     }
     
+    //Gets the placeholder identified by the given label.
+    //Returns nil if no such placeholder is found.
+    func getPlaceHolder(label: Int) -> PlaceHolder? {
+        if label < 0 || _placeHolders.isEmpty {
+            return nil
+        }
+        let offset = _placeHolderFT.query(label + 1)
+        let idx = label - offset
+        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == label {
+            return _placeHolders[idx]
+        }
+        return nil
+    }
+    
+    //Gets the association identified by the placeholder's label.
+    //Returns nil if no such association is found.
+    func getAssociation(placeHolderLabel: Int) -> Association? {
+        if label < 0 || _placeHolders.isEmpty {
+            return nil
+        }
+        let offset = _placeHolderFT.query(placeHolderLabel + 1)
+        let idx = placeHolderLabel - offset
+        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == placeHolderLabel {
+            return Association(placeHolder: _placeHolders[idx], value: _values[idx])
+        }
+        return nil
+    }
+
+    //Removes the placeholder identified by the label, and its corresponding associated value.
+    //Does nothing if the placeholder cannot be found.
+    func removePlaceHolder(label: Int) {
+        if label < 0 || _placeHolders.isEmpty {
+            return
+        }
+        if _placeHolders.count == 1 {   //Special case: Only 1 placeholder exists
+            if _placeHolders[0].label == label {
+                _placeHolders.removeAtIndex(0)
+                _values.removeAtIndex(0)
+                _placeHolderFT = FenwickTree()
+            }
+            return
+        }
+        let offset = _placeHolderFT.query(label + 1)
+        let idx = label - offset
+        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == label {
+            _placeHolderFT.update(label + 1, change: 1)
+            if idx == _placeHolders.count - 1 { //Special case: Removing the last placeholder
+                let prevLabel = _placeHolders[idx - 1].label
+                _placeHolderFT.clearFromIndex(prevLabel + 1)
+            }
+            _placeHolders.removeAtIndex(idx)
+            _values.removeAtIndex(idx)
+        }
+    }
+    
     //Associates the specified placeholder with the given value.
     //Does nothing ifno such placeholder exists.
-    func setAssociationValue(placeHolderNumber: Int, value: String?) {
-        if isValidPlaceHolderNumber(placeHolderNumber) {
-            _values[placeHolderNumber] = value
+    func setAssociationValue(placeHolderLabel: Int, value: String?) {
+        if placeHolderLabel < 0 || _placeHolders.isEmpty {
+            return
+        }
+        let offset = _placeHolderFT.query(placeHolderLabel + 1)
+        let idx = placeHolderLabel - offset
+        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == placeHolderLabel {
+            _values[idx] = value
         }
     }
     
