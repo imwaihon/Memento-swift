@@ -138,8 +138,4 @@ class MementoModel {
     private func loadGraphs() {
         //To be implemented
     }
-    
-    private func isValidPalaceNumber(palaceNumber: Int) -> Bool {
-        return palaceNumber >= 0 && palaceNumber < graphs.count
-    }
 }
