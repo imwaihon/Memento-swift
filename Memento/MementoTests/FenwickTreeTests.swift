@@ -16,9 +16,27 @@ class FenwickTreeTests: XCTestCase {
         let ft = FenwickTree()
         XCTAssertEqual(ft.query(8), 0)
         
+        //Applies a typical change
         ft.update(5, change: 2)
         XCTAssertEqual(ft.query(4), 0)
         XCTAssertEqual(ft.query(5), 2)
         XCTAssertEqual(ft.query(8), 2)
+        
+        //Tests querying for index outside range
+        XCTAssertEqual(ft.query(10), 2)
+        XCTAssertEqual(ft.query(0), 0)
+        XCTAssertEqual(ft.query(-3), 0)
+        
+        //Applies decrement in cumulative value
+        ft.update(7, change: -1)
+        XCTAssertEqual(ft.query(6), 2)
+        XCTAssertEqual(ft.query(7), 1)
+        XCTAssertEqual(ft.query(8), 1)
+        
+        //Causes the unerlying array to expand.
+        ft.update(15, change: 3)
+        XCTAssertEqual(ft.query(14), 1)
+        XCTAssertEqual(ft.query(15), 4)
+        XCTAssertEqual(ft.query(16), 4)
     }
 }
