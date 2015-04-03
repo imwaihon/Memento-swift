@@ -22,6 +22,7 @@ import Foundation
 
 class MementoGraph: MemoryPalace {
     private var _nodes: [MementoNode]
+    private var _nodesFT: FenwickTree
     
     var name: String        //The name of the graph. Also the filename used for saving/loading.
     
@@ -55,6 +56,7 @@ class MementoGraph: MemoryPalace {
     init(name: String, rootNode: MementoNode) {
         self.name = name
         _nodes = [MementoNode]()
+        _nodesFT = FenwickTree()
         _nodes.append(rootNode)
         
         assert(checkRep())
@@ -62,30 +64,40 @@ class MementoGraph: MemoryPalace {
     
     //Adds a room to the memory palace.
     func addRoom(room: MemoryPalaceRoom) {
-        (room as MementoNode).label = _nodes.count
+        (room as MementoNode).label = _nodes.isEmpty ? 0: _nodes[_nodes.count - 1].label + 1
         _nodes.append(room as MementoNode)
     }
     
     //Gets the room identified by the given number.
     func getRoom(roomNumber: Int) -> MemoryPalaceRoom? {
-        return isValidRoomNumber(roomNumber) ? _nodes[roomNumber]: nil
+        if roomNumber < 0 {
+            return nil
+        }
+        let offset = _nodesFT.query(roomNumber + 1)
+        let idx = roomNumber - offset
+        if idx >= 0 && idx < _nodes.count && _nodes[idx].label == roomNumber {
+            return _nodes[idx]
+        }
+        return nil
     }
     
     //Removes the room identified by the specified number.
     //Does nothing if room identified by the given number does not exist.
     func removeRoom(roomNumber: Int) {
-        if _nodes.count == 1 || !isValidRoomNumber(roomNumber) {
+        if _nodes.count == 1 || roomNumber < 0 {
             return
         }
-        for i in (roomNumber+1)..<_nodes.count {
-            _nodes[i].label--
+        let offset = _nodesFT.query(roomNumber + 1)
+        let idx = roomNumber - offset
+        if idx >= 0 && idx < _nodes.count && _nodes[idx].label == roomNumber {
+            _nodesFT.update(roomNumber + 1, change: 1)
+            if idx == _nodes.count - 1 {
+                let prevLabel = _nodes[idx - 1].label
+                _nodesFT.clearFromIndex(prevLabel + 1)
+            }
+            _nodes.removeAtIndex(idx)
         }
-        _nodes.removeAtIndex(roomNumber)
         assert(checkRep())
-    }
-    
-    private func isValidRoomNumber(roomNumber: Int) -> Bool {
-        return roomNumber >= 0 && roomNumber < _nodes.count
     }
     
     //Checks that representation invariant is not violated

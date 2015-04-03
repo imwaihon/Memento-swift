@@ -93,7 +93,6 @@ class MementoManagerTests: XCTestCase {
         let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
         let room1 = MemoryPalaceRoomIcon(label: 0, filename: "A.png", overlays: [])
         let room2 = MemoryPalaceRoomIcon(label: 1, filename: "B.png", overlays: [])
-        let newRoom2 = MemoryPalaceRoomIcon(label: 0, filename: "B.png", overlays: [])
         
         manager.addMemoryPalaceRoom(palaceName, roomImage: "B.png")
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
@@ -109,10 +108,10 @@ class MementoManagerTests: XCTestCase {
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
         
         manager.removeMemoryPalaceRoom(palaceName, roomLabel: 0)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [newRoom2])
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room2])
         
         //Attempts to make graph empty
-        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 0)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [newRoom2])
+        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 1)
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room2])
     }
 }

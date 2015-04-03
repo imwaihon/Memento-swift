@@ -44,19 +44,19 @@ class MementoGraphTests: XCTestCase {
         
         graph.removeRoom(0)
         XCTAssertEqual(graph.numRooms, 1)
-        XCTAssertTrue(graph.getRoom(1) == nil)
-        XCTAssertEqual(graph.getRoom(0)!.icon, MemoryPalaceRoomIcon(label: 0, filename: "B.png", overlays: []))
+        XCTAssertTrue(graph.getRoom(0) == nil)
+        XCTAssertEqual(graph.getRoom(1)!.icon, MemoryPalaceRoomIcon(label: 1, filename: "B.png", overlays: []))
         
         //Removes non-existent room
-        graph.removeRoom(1)
-        XCTAssertEqual(graph.numRooms, 1)
-        XCTAssertEqual(graph.icon, MemoryPalaceIcon(graphName: "sampleGraph", imageFile: "B.png"))
-        XCTAssertEqual(graph.getRoom(0)!.icon, MemoryPalaceRoomIcon(label: 0, filename: "B.png", overlays: []))
-        
-        //Attempts to empty the graph
         graph.removeRoom(0)
         XCTAssertEqual(graph.numRooms, 1)
-        XCTAssertEqual(graph.getRoom(0)!.icon, MemoryPalaceRoomIcon(label: 0, filename: "B.png", overlays: []))
+        XCTAssertEqual(graph.icon, MemoryPalaceIcon(graphName: "sampleGraph", imageFile: "B.png"))
+        XCTAssertEqual(graph.getRoom(1)!.icon, MemoryPalaceRoomIcon(label: 1, filename: "B.png", overlays: []))
+        
+        //Attempts to empty the graph
+        graph.removeRoom(1)
+        XCTAssertEqual(graph.numRooms, 1)
+        XCTAssertEqual(graph.getRoom(1)!.icon, MemoryPalaceRoomIcon(label: 1, filename: "B.png", overlays: []))
     }
     
     func testPlistRepresentation() {

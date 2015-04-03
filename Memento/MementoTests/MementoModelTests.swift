@@ -82,7 +82,7 @@ class MementoModelTests: XCTestCase {
         
         model.removeMemoryPalaceRoom(graph.name, roomLabel: newRoom.label)
         XCTAssertEqual(graph.numRooms, 2)
-        XCTAssertEqual(newRoom2.label, 1)
+        XCTAssertEqual(newRoom2.label, 2)
         XCTAssertFalse(model.getMemoryPalaceRoom(graph.name, roomLabel: newRoom.label) === newRoom)
     }
 }
