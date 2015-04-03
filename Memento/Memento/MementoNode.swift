@@ -114,8 +114,12 @@ class MementoNode: MemoryPalaceRoom {
     }
     
     //Adds the given overlay object
-    func addOverlay(overlay: MutableOverlay) {
+    //Returns the identifier assigned to the added overlay
+    func addOverlay(overlay: MutableOverlay) -> Int {
+        let label = _overlays.count
         _overlays.append(overlay)
+        _overlays[label].label = label
+        return label
     }
     
     private func isValidPlaceHolderNumber(num: Int) -> Bool {

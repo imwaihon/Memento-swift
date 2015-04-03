@@ -12,6 +12,7 @@ import Foundation
 import UIKit
 
 struct MutableOverlay: Equatable {
+    var label: Int
     var frame: CGRect
     var imageFile: String
     
@@ -26,6 +27,7 @@ struct MutableOverlay: Equatable {
     }
     
     init(frame: CGRect, imageFile: String) {
+        self.label = 0
         self.frame = frame
         self.imageFile = imageFile
     }
