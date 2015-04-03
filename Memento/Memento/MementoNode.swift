@@ -152,6 +152,19 @@ class MementoNode: MemoryPalaceRoom {
         }
         return _overlays[idx].makeImmuatble()
     }
+
+    //Changes the frame of the overlay object.
+    //Does nothing if the overlay object cannot be found.
+    func setOverlayFrame(label: Int, newFrame: CGRect) {
+        if _overlays.isEmpty {
+            return
+        }
+        let offset = _overlayFT.query(label + 1)
+        let idx = label - offset
+        if idx >= 0 && idx < _overlays.count && _overlays[idx].label == label {
+            _overlays[idx].frame = newFrame
+        }
+    }
     
     //Removes the overlay identified by the given label.
     //Does nothing if no such overlay is found.

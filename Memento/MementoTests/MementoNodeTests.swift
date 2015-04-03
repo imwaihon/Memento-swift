@@ -222,4 +222,22 @@ class MementoNodeTests: XCTestCase {
         XCTAssertFalse(node.getOverlay(0) == nil)
         XCTAssertEqual(node.getOverlay(0)!, overlay1.makeImmuatble())
     }
+    
+    func testSetOverlayFrame() {
+        let frame1 = CGRectMake(10, 20, 30, 40)
+        let frame2 = CGRectMake(20, 30, 40, 50)
+        var overlay1 = MutableOverlay(frame: frame1, imageFile: "A.png")
+        var overlay2 = MutableOverlay(frame: frame1, imageFile: "B.png")
+        let node = MementoNode(imageFile: "A.png")
+        
+        //Normal case without prior deletion
+        overlay1.label = node.addOverlay(overlay1)
+        overlay2.label = node.addOverlay(overlay2)
+        node.setOverlayFrame(overlay2.label, newFrame: frame2)
+        XCTAssertEqual(node.getOverlay(overlay2.label)!.frame, frame2)
+        
+        node.removeOverlay(overlay1.label)
+        node.setOverlayFrame(overlay2.label, newFrame: frame1)
+        XCTAssertEqual(node.getOverlay(overlay2.label)!.frame, frame1)
+    }
 }
