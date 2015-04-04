@@ -59,6 +59,19 @@ class MementoModel {
         loadGraphs()
     }
     
+    //Gets the palace name that will be used for the new memory palace with the given base name.
+    func generatePalaceName(baseName: String) -> String {
+        var name = baseName
+        if graphMap[name] != nil {
+            for var i = 1; ; i++ {
+                if graphMap[name+"(\(i))"] == nil {
+                    return name+"(\(i))"
+                }
+            }
+        }
+        return name
+    }
+    
     //Adds the new graph to the collection.
     func addPalace(palace: MementoGraph){
         
@@ -74,7 +87,7 @@ class MementoModel {
         graphMap[palace.name] = graphs.count
         graphs.append(palace)
         
-        //Save changes?
+        saveLoadManager.savePalaceToFile(palace)
     }
     
     //Gets the specified memory palace.
