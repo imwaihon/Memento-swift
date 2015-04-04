@@ -149,8 +149,7 @@ class MementoModel {
         }
     }
     
-    private func loadGraphs() -> [MementoGraph] {
-        //To be implemented
-        return saveLoadManager.loadAllPalaces()
+    private func loadGraphs() {
+        graphs = saveLoadManager.loadAllPalaces()
     }
 }
