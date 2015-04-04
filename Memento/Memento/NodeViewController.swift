@@ -19,7 +19,19 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     var isMainView: Bool = true
     var newImage: DraggableImageView!
-
+    var lastRotation = CGFloat()
+    let panRec = UIPanGestureRecognizer()
+    var startPoint = CGPoint()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //setUpGestures()
+        panRec.addTarget(self, action: "handlePan:")
+        self.view.addGestureRecognizer(panRec)
+        self.view.userInteractionEnabled = true
+        
+    }
     
     
     // Camera button
@@ -86,7 +98,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 var newWidth = image.size.width / scalingFactor
                 newImage = DraggableImageView(image: image)
                 newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
-                self.view.addSubview(newImage)
+                imageView.userInteractionEnabled = true
+                imageView.addSubview(newImage)
             }
             
             if (newMedia == true) {
@@ -113,9 +126,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 completion: nil)
         }
     }
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     @IBAction func dismissView(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -139,5 +154,32 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
     
+    // Method to draw rectangles for annotation
+    // In the form of CGRect, UIView with alpha to display to user
+    func handlePan(sender: AnyObject) {
+        // Method to draw a rectangle
+        if (sender.state == UIGestureRecognizerState.Began) {
+            startPoint = sender.locationInView(imageView)
+        }
+        if (sender.state == UIGestureRecognizerState.Ended) {
+            var endPoint = sender.locationInView(imageView)
+            if (startPoint.x > 0.0 && startPoint.y > 0.0) {
+                drawNewRect(startPoint, endPoint: endPoint)
+            }
+        }
+    }
+
+    private func drawNewRect(startPoint: CGPoint, endPoint: CGPoint) {
+        // Make rectangle
+        var toDrawRect = CGRect(x: min(startPoint.x, endPoint.x), y: min(startPoint.y, endPoint.y), width: abs(startPoint.x - endPoint.x), height: abs(startPoint.y - endPoint.y))
+
+        // Add the rectangle into main view
+        var newViewToTest = UIView(frame: toDrawRect)
+        newViewToTest.backgroundColor = .whiteColor()
+        newViewToTest.alpha = 0.15
+        self.imageView.addSubview(newViewToTest)
+        
+        // TODO: Add annotation for the view.
+    }
 
 }
