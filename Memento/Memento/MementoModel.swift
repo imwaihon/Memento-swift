@@ -118,6 +118,7 @@ class MementoModel {
         //Save changes
         dispatch_async(saveQueue, {() -> Void in
             //Make call to delete the palace file
+            self.saveLoadManager.deletePalace(palaceName)
         })
     }
     
