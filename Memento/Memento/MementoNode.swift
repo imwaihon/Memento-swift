@@ -42,6 +42,7 @@ class MementoNode: MemoryPalaceRoom {
     private var _values: [String?]
     
     var label: Int = 0      //The node's identification label in the graph
+    var graphName: String = "sampleGraph"
     
     //Properties
     var icon: MemoryPalaceRoomIcon {

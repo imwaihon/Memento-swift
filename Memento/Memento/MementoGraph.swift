@@ -65,6 +65,7 @@ class MementoGraph: MemoryPalace {
     //Adds a room to the memory palace.
     func addRoom(room: MemoryPalaceRoom) {
         (room as MementoNode).label = _nodes.isEmpty ? 0: _nodes[_nodes.count - 1].label + 1
+        room.graphName = name
         _nodes.append(room as MementoNode)
     }
     
