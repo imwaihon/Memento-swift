@@ -149,6 +149,19 @@ class MementoNode: MemoryPalaceRoom {
         }
         return nil
     }
+    
+    //Sets the new frame for the placeholder identified by the given label.
+    func setPlaceHolderFrame(label: Int, newFrame: CGRect) {
+        if label < 0 || _placeHolders.isEmpty {
+            return
+        }
+        let offset = _placeHolderFT.query(label + 1)
+        let idx = label - offset
+        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == label {
+            _placeHolders[idx] = RectanglePlaceHolder(highlightArea: newFrame)
+            _placeHolders[idx].label = label
+        }
+    }
 
     //Removes the placeholder identified by the label, and its corresponding associated value.
     //Does nothing if the placeholder cannot be found.
