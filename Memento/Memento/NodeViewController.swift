@@ -22,6 +22,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var lastRotation = CGFloat()
     let panRec = UIPanGestureRecognizer()
     var startPoint = CGPoint()
+    var annotationCount: Int = 100
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,11 +175,13 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         var toDrawRect = CGRect(x: min(startPoint.x, endPoint.x), y: min(startPoint.y, endPoint.y), width: abs(startPoint.x - endPoint.x), height: abs(startPoint.y - endPoint.y))
 
         // Add the rectangle into main view
-        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self)
+        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self, tagNumber: annotationCount)
+        annotationCount += 1
         newViewToTest.backgroundColor = .whiteColor()
         newViewToTest.alpha = 0.1
-        //imageView.addSubview(newViewToTest)
-        self.view.addSubview(newViewToTest)
+        imageView.userInteractionEnabled = true
+        imageView.addSubview(newViewToTest)
+        //self.view.addSubview(newViewToTest)
     }
 
 }

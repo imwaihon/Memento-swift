@@ -1,7 +1,7 @@
 //
 //  AnnotatableUIView.swift
 //  Memento
-//  Allows for text labelling
+//  Allows for text labelling on the UIView
 //
 //  Created by Jingrong (: on 4/4/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
@@ -12,10 +12,12 @@ import UIKit
 class AnnotatableUIView: UIView {
     
     var parentViewController = UIViewController()
+    var viewTag = Int()
     
-    init(frame: CGRect, parentController: UIViewController) {
+    init(frame: CGRect, parentController: UIViewController, tagNumber: Int) {
         super.init(frame: frame)
         self.parentViewController = parentController
+        self.viewTag = tagNumber
         
         self.userInteractionEnabled = true
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
@@ -31,7 +33,6 @@ class AnnotatableUIView: UIView {
     func handleTap(nizer: UITapGestureRecognizer!) {
         
         var annotation = String()
-        
         var inputTextField: UITextField?
 
         let loadPrompt = UIAlertController(title: "placeholder title", message: "Some stuff", preferredStyle: UIAlertControllerStyle.Alert)
@@ -39,7 +40,7 @@ class AnnotatableUIView: UIView {
         loadPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
             // Remove previous text
             for eachSubview in self.parentViewController.view.subviews as [UIView] {
-                if eachSubview.tag == 789 {
+                if eachSubview.tag == self.viewTag {
                     eachSubview.removeFromSuperview()
                 }
             }
@@ -47,7 +48,7 @@ class AnnotatableUIView: UIView {
             // New Text
             annotation = inputTextField?.text as String!
             var label = UILabel(frame:CGRectMake(self.center.x, self.center.y, 25, 25))
-            label.tag = 789
+            label.tag = self.viewTag
             label.text = annotation
             label.backgroundColor = UIColor(white: 1, alpha: 0.4)
             label.textColor = .whiteColor()
@@ -62,8 +63,5 @@ class AnnotatableUIView: UIView {
         })
         
         self.parentViewController.presentViewController(loadPrompt, animated: true, completion: nil)
-        
-
-
     }
 }
