@@ -16,9 +16,13 @@ class DraggableImageView : UIImageView
     var dragStartPositionRelativeToCenter : CGPoint?
     
     var lastRotation = CGFloat()
+    var labelIdentifier = Int()
+    var roomLabel = Int()
+    var graphName = String()
     let rotateRec = UIRotationGestureRecognizer()
+    var mementoManager = MementoManager.sharedInstance
     
-    override init(image: UIImage!) {
+    override init(image: UIImage) {
         super.init(image: image)
         
         self.userInteractionEnabled = true
@@ -62,6 +66,11 @@ class DraggableImageView : UIImageView
             layer.shadowOffset = CGSize(width: 0, height: 3)
             layer.shadowOpacity = 0.5
             layer.shadowRadius = 2
+            println(graphName)
+            println(roomLabel)
+            println(self.labelIdentifier)
+            println(self.frame)
+            mementoManager.setOverlayFrame(graphName, roomLabel: roomLabel, overlayLabel: self.labelIdentifier, newFrame: self.frame)
             
             return
         }

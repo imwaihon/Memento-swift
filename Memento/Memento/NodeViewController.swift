@@ -18,6 +18,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var newMedia: Bool?
     
     var mementoManager = MementoManager.sharedInstance
+    var saveLoadManager = SaveLoadManager.sharedInstance
+    
     var isMainView: Bool = true
     var newImage: DraggableImageView!
     var lastRotation = CGFloat()
@@ -27,10 +29,13 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     var roomLabel = Int()
     var graphName = String()
-
+    var overlayList = [Overlay]()
+    
+    var rotationToggler: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imageView.userInteractionEnabled = true
         
         //setUpGestures()
         panRec.addTarget(self, action: "handlePan:")
@@ -43,8 +48,30 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Get image from graphical view
         imageView.image = getImageNamed(roomRep.backgroundImage)
         
+        // Load
+        overlayList = roomRep.overlays
+        loadLayouts()
+        
     }
     
+    // Function to load layouts
+    private func loadLayouts() {
+        var draggableImageViewsToAdd = [DraggableImageView]()
+        var counter = 0
+        for eachOverlay in overlayList {
+            var newFrame = eachOverlay.frame
+            var newImageFile = eachOverlay.imageFile
+            var newImage = saveLoadManager.loadOverlayImage(newImageFile)
+            
+            var newDraggableImageView = DraggableImageView(image: newImage!)
+            newDraggableImageView.graphName = self.graphName
+            newDraggableImageView.roomLabel = self.roomLabel
+            newDraggableImageView.labelIdentifier = counter
+            counter += 1
+            newDraggableImageView.frame = newFrame
+            self.imageView.addSubview(newDraggableImageView)
+        }
+    }
     
     // Camera button
     @IBAction func useCamera(sender: AnyObject) {
@@ -82,8 +109,22 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
-    // Helper functions for main photo pickers
+    @IBAction func rotateImage(sender: AnyObject) {
+        if rotationToggler == true {
+            UIView.animateWithDuration(1.0, animations: {
+                self.imageView.transform = CGAffineTransformMakeRotation((180.0 * CGFloat(M_PI)) / 180.0)
+            })
+            rotationToggler = false
+        } else {
+            UIView.animateWithDuration(1.0, animations: {
+                self.imageView.transform = CGAffineTransformMakeRotation(0)
+            })
+            rotationToggler = true
+        }
+        
+    }
     
+    // Helper functions for main photo pickers
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as NSString
@@ -110,9 +151,15 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 var scalingFactor = image.size.height/150.0
                 var newWidth = image.size.width / scalingFactor
                 newImage = DraggableImageView(image: image)
+                newImage.graphName = self.graphName
+                newImage.roomLabel = self.roomLabel
                 newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
-                imageView.userInteractionEnabled = true
                 imageView.addSubview(newImage)
+                
+                // Get paths for saving
+                saveLoadManager.saveOverlayImage("test", imageToSave: image)
+                var newMutableOverlay = MutableOverlay(frame: newImage.frame, imageFile: "test")
+                newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: newMutableOverlay)
                 
             }
             
@@ -192,9 +239,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         annotationCount += 1
         newViewToTest.backgroundColor = .whiteColor()
         newViewToTest.alpha = 0.1
-        imageView.userInteractionEnabled = true
         imageView.addSubview(newViewToTest)
-        //self.view.addSubview(newViewToTest)
     }
     
     private func getImageNamed(fileName : String) -> UIImage{

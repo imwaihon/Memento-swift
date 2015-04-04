@@ -13,7 +13,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     
     @IBOutlet weak var scrollableOverviewCollectionView: UICollectionView!
     var palaceName: String!
-    var model = MementoManager()
+    var model = MementoManager.sharedInstance
     var rooms: [MemoryPalaceRoomIcon]!
     
     var selectedNode: Int!
@@ -75,7 +75,9 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func backButtonPress(sender: AnyObject) {
+        model.savePalace(palaceName)
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
