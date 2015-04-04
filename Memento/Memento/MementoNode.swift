@@ -67,7 +67,7 @@ class MementoNode: MemoryPalaceRoom {
         return arr
     }
     var viewRepresentation: MemoryPalaceRoomView {  //The object representation used to render the node in view/edit mode
-        return MemoryPalaceRoomView(backgroundImage: _backgroundImageFile, overlays: overlays, associations: associations)
+        return MemoryPalaceRoomView(graphName: graphName, label: label, backgroundImage: _backgroundImageFile, overlays: overlays, associations: associations)
     }
     
     var plistRepresentation: NSDictionary { //Currently assumes no deletion of overlays, placeholders and values
