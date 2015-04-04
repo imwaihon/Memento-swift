@@ -34,7 +34,7 @@ class MementoModel {
         return Static.instance!
     }
     
-    private let saveLoadManager: SaveLoadManager.sharedInstance
+    private var saveLoadManager: SaveLoadManager
     private var graphs: [MementoGraph]
     private var names: NSMutableSet
     private var graphMap: [String: Int]
@@ -52,6 +52,7 @@ class MementoModel {
     }
     
     init(){
+        saveLoadManager = SaveLoadManager.sharedInstance
         graphs = [MementoGraph]()
         names = NSMutableSet()
         graphMap = [String: Int]()

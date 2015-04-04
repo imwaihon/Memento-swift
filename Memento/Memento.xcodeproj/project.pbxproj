@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		41359EBD1AC84F3C00CBCC82 /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */; };
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
+		4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */; };
 		4F9D150D1ACAD42C00BEE609 /* Challenge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F9D150C1ACAD42C00BEE609 /* Challenge.storyboard */; };
 		4F9D150F1ACADB6000BEE609 /* SelectChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */; };
 		4F9D15111ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15101ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift */; };
@@ -471,6 +472,7 @@
 				5AEF2A641AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				5A4E78A31AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
+				4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */,
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
 				5A5663FB1AC955B200190068 /* OverviewViewController.swift in Sources */,
 				5A497A341AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift in Sources */,
