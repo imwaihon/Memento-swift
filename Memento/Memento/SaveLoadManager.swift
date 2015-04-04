@@ -37,6 +37,8 @@ class SaveLoadManager {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
         let path = documentsDirectory.stringByAppendingPathComponent("data")
+        let sharedPath = documentsDirectory.stringByAppendingPathComponent("sharedResources")
+        let overlayPath = documentsDirectory.stringByAppendingPathComponent("sharedResources").stringByAppendingPathComponent("overlays")
         
         let fileManager = NSFileManager.defaultManager()
         var error: NSError?
@@ -44,6 +46,22 @@ class SaveLoadManager {
         if (!fileManager.fileExistsAtPath(path)) {
             // Folder does not exist, create folder
             if !fileManager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil, error: &error) {
+                println("Failed to create dir: \(error!.localizedDescription)")
+                return
+            }
+        }
+        
+        if (!fileManager.fileExistsAtPath(sharedPath)) {
+            // Folder does not exist, create folder
+            if !fileManager.createDirectoryAtPath(sharedPath, withIntermediateDirectories: true, attributes: nil, error: &error) {
+                println("Failed to create dir: \(error!.localizedDescription)")
+                return
+            }
+        }
+        
+        if (!fileManager.fileExistsAtPath(overlayPath)) {
+            // Folder does not exist, create folder
+            if !fileManager.createDirectoryAtPath(overlayPath, withIntermediateDirectories: true, attributes: nil, error: &error) {
                 println("Failed to create dir: \(error!.localizedDescription)")
                 return
             }
