@@ -30,6 +30,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var roomLabel = Int()
     var graphName = String()
     var overlayList = [Overlay]()
+    var associationList = [Association]()
     
     var rotationToggler: Bool = true
     
@@ -50,12 +51,14 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         // Load
         overlayList = roomRep.overlays
+        associationList = roomRep.associations
         loadLayouts()
         
     }
     
     // Function to load layouts
     private func loadLayouts() {
+        // Load draggable image views/layers
         var draggableImageViewsToAdd = [DraggableImageView]()
         var counter = 0
         for eachOverlay in overlayList {
@@ -71,6 +74,18 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             newDraggableImageView.frame = newFrame
             self.imageView.addSubview(newDraggableImageView)
         }
+        
+        // Load association list
+        for eachAssociation in associationList {
+            var newFrame = eachAssociation.placeHolder.view.frame
+            var newLabel = eachAssociation.placeHolder.label
+            
+            var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel)
+            newAnnotatableView.backgroundColor = .whiteColor()
+            newAnnotatableView.alpha = 0.1
+            imageView.addSubview(newAnnotatableView)
+        }
+        
     }
     
     // Camera button
@@ -235,12 +250,15 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         var toDrawRect = CGRect(x: min(startPoint.x, endPoint.x), y: min(startPoint.y, endPoint.y), width: abs(startPoint.x - endPoint.x), height: abs(startPoint.y - endPoint.y))
 
         // Add the rectangle into main view
-        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self, tagNumber: annotationCount)
-        annotationCount += 1
+        var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: toDrawRect)
+        mementoManager.addPlaceHolder(graphName, roomLabel: roomLabel, placeHolder: newRectPlaceHolder)
+        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self, tagNumber: newRectPlaceHolder.label)
         newViewToTest.backgroundColor = .whiteColor()
         newViewToTest.alpha = 0.1
         imageView.addSubview(newViewToTest)
+        
     }
+    
     
     private func getImageNamed(fileName : String) -> UIImage{
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
