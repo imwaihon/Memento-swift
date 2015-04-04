@@ -82,12 +82,12 @@ class SaveLoadManager {
         let path = documentsDirectory.stringByAppendingPathComponent("data")
         
         let fileManager = NSFileManager.defaultManager()
-        let palacesFilenames = fileManager.contentsOfDirectoryAtPath(path: path, error: nil)
+        let palacesFilenames = fileManager.contentsOfDirectoryAtPath(path, error: nil)! as NSArray
         
         var result = [MementoGraph]()
         
         for filename in palacesFilenames {
-            result.append(loadPalace(filename))
+            result.append(loadPalace(filename as String))
         }
         
         return result
