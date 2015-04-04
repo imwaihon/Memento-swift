@@ -237,7 +237,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="QAb-Y3-WmI" kind="presentation" id="xme-zL-unE"/>
+                                            <segue destination="QAb-Y3-WmI" kind="presentation" identifier="" id="xme-zL-unE"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FvS-4S-Mlo">
@@ -300,6 +300,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="scrollableOverviewCollectionView" destination="cM8-ML-v3e" id="zZc-X6-TQC"/>
+                        <segue destination="QAb-Y3-WmI" kind="show" identifier="goToNode" id="2W0-zM-hGH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jq2-H6-THn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -471,5 +472,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cfi-6M-yo4"/>
+        <segue reference="2W0-zM-hGH"/>
     </inferredMetricsTieBreakers>
 </document>

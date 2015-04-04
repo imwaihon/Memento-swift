@@ -15,6 +15,8 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     var palaceName: String!
     var model = MementoManager()
     var rooms: [MemoryPalaceRoomIcon]!
+    
+    var selectedNode: Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollableOverviewCollectionView.delegate = self
@@ -48,6 +50,20 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
             return cell
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.selectedNode = indexPath.item - 1
+        self.performSegueWithIdentifier("goToNode", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "goToNode"){
+            let dvc = segue.destinationViewController as NodeViewController
+            dvc.roomLabel = selectedNode
+            dvc.graphName = palaceName
+        }
+    }
+
     
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
