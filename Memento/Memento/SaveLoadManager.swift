@@ -24,6 +24,12 @@ class SaveLoadManager {
         return Static.instance!
     }
     
+    private let graphFactory: MementoGraphFactory
+    
+    init() {
+        graphFactory = MementoGraphFactory()
+    }
+    
     // Saves the representation of the memory palace (memento graph)
     func savePalaceToFile(palace: MementoGraph) {
         let palaceName = palace.name
@@ -31,13 +37,11 @@ class SaveLoadManager {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
         let path = documentsDirectory.stringByAppendingPathComponent("data").stringByAppendingPathComponent("\(palaceName)")
-        let attributePath = path.stringByAppendingPathComponent("attribute")
-        let graphPath = path.stringByAppendingPathComponent("graph")
+        let graphPath = path.stringByAppendingPathComponent("graph.plist")
         
         let fileManager = NSFileManager.defaultManager()
         
-        var attributeData: NSMutableDictionary?
-        var graphData: NSMutableArray?
+        var graphData: NSDictionary?
         var error: NSError?
         
         if (!fileManager.fileExistsAtPath(path)) {
@@ -47,24 +51,23 @@ class SaveLoadManager {
                 return
             }
             
-            attributeData = NSMutableDictionary()
-            graphData = NSMutableArray()
+            // Create the attribute and graph files
+            graphData = NSDictionary()
             
         } else {
-            attributeData = NSMutableDictionary(contentsOfFile: attributePath)
-            graphData = NSMutableArray(contentsOfFile: graphPath)
+            // Just load the plist files
+            graphData = NSDictionary(contentsOfFile: graphPath)
             
         }
         
-        if attributeData != nil && graphData != nil {
+        if graphData != nil {
             
-            // Obtain attribute and graph data here
+            // Obtain graph data here
+            graphData = palace.plistRepresentation
             
-            attributeData!.writeToFile(attributePath, atomically: true)
             graphData!.writeToFile(graphPath, atomically: true)
             
         }
-        
     }
     
     // Saves shared resources such as images for layers/photos
@@ -72,7 +75,34 @@ class SaveLoadManager {
         
     }
     
-    func loadPalace() {
+    
+    func loadAllPalaces() -> [MementoGraph] {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let documentsDirectory = paths.objectAtIndex(0) as String
+        let path = documentsDirectory.stringByAppendingPathComponent("data")
         
+        let fileManager = NSFileManager.defaultManager()
+        let palacesFilenames = fileManager.contentsOfDirectoryAtPath(path: path, error: nil)
+        
+        var result = [MementoGraph]()
+        
+        for filename in palacesFilenames {
+            result.append(loadPalace(filename))
+        }
+        
+        return result
+    }
+    
+    func loadPalace(palaceName: String) -> MementoGraph {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let documentsDirectory = paths.objectAtIndex(0) as String
+        let path = documentsDirectory.stringByAppendingPathComponent("data").stringByAppendingPathComponent("\(palaceName)")
+        let graphPath = path.stringByAppendingPathComponent("graph.plist")
+        
+        var graphData = NSDictionary(contentsOfFile: graphPath)!
+        
+        var createdGraph = graphFactory.decodeAndMakeGraph(graphData)
+        
+        return createdGraph
     }
 }

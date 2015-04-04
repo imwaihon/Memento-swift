@@ -26,4 +26,22 @@ class MementoGraphFactory {
         let rootNode = nodeFactory.makeNode(imageFile)
         return MementoGraph(name: name, rootNode: rootNode)
     }
+    
+    func decodeAndMakeGraph(data: NSDictionary) -> MementoGraph {
+        var name = data[nameKey] as String
+        var nodes = data[nodesKey] as NSArray
+        var createdNodes = [MementoNode]()
+        
+        for node in nodes {
+            createdNodes.append(nodeFactory.makeNode(node as NSDictionary))
+        }
+        
+        var createdGraph = MementoGraph(name: name, rootNode: createdNodes[0])
+    
+        for index in 1..<createdNodes.count {
+            createdGraph.addRoom(createdNodes[index])
+        }
+        
+        return createdGraph
+    }
 }

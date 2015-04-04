@@ -15,4 +15,29 @@ class MementoNodeFactory {
     func makeNode(imageFile: String) -> MementoNode {
         return MementoNode(imageFile: imageFile)
     }
+    
+    func makeNode(nodeData: NSDictionary) -> MementoNode {
+        var node = MementoNode(imageFile: nodeData[bgImageKey]! as String)
+
+        var overlayArray = nodeData[overlayKey]! as NSArray
+        var placeholderArray = nodeData[placeHolderKey]! as NSArray
+        var valueArray = nodeData[valueKey]! as NSArray
+        
+        
+        for overlayString in overlayArray {
+            node.addOverlay(MutableOverlay.decodeFromString(overlayString as String))
+        }
+        
+        for placeholderString in placeholderArray {
+            node.addPlaceHolder(PlaceHolder.decodeFromString(placeholderString as String))
+            
+        }
+        
+        
+        for index in 0..<valueArray.count {
+            node.setAssociationValue(index, value: valueArray.objectAtIndex(index) as? String)
+        }
+        
+        return node
+    }
 }
