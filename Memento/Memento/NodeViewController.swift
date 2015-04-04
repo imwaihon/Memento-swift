@@ -17,12 +17,17 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var imageView: UIImageView!
     var newMedia: Bool?
     
+    var mementoManager = MementoManager.sharedInstance
     var isMainView: Bool = true
     var newImage: DraggableImageView!
     var lastRotation = CGFloat()
     let panRec = UIPanGestureRecognizer()
     var startPoint = CGPoint()
     var annotationCount: Int = 100
+    
+    var roomLabel = Int()
+    var graphName = String()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +36,12 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         panRec.addTarget(self, action: "handlePan:")
         self.view.addGestureRecognizer(panRec)
         self.view.userInteractionEnabled = true
+        
+        // Get view representation of room
+        var roomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
+        
+        // Get image from graphical view
+        imageView.image = getImageNamed(roomRep.backgroundImage)
         
     }
     
@@ -94,6 +105,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 imageView.image = image
             }
             else {
+                // Adding draggable images
                 // Scaling factor for inserted images is default at height 150
                 var scalingFactor = image.size.height/150.0
                 var newWidth = image.size.width / scalingFactor
@@ -101,6 +113,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
                 imageView.userInteractionEnabled = true
                 imageView.addSubview(newImage)
+                
             }
             
             if (newMedia == true) {
@@ -182,6 +195,25 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         imageView.userInteractionEnabled = true
         imageView.addSubview(newViewToTest)
         //self.view.addSubview(newViewToTest)
+    }
+    
+    private func getImageNamed(fileName : String) -> UIImage{
+        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
+        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        {
+            if paths.count > 0
+            {
+                if let dirPath = paths[0] as? String
+                {
+                    let readPath = dirPath.stringByAppendingPathComponent(fileName)
+                    let image    = UIImage(contentsOfFile: readPath)
+                    // Do whatever you want with the image
+                    return image!
+                }
+            }
+        }
+        return UIImage()
     }
 
 }
