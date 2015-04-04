@@ -35,6 +35,8 @@
 		5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
 		5A278FF51AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
 		5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */; };
+		5A28A8BA1AD0436F00518AB1 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A28A8B91AD0436F00518AB1 /* Map.swift */; };
+		5A28A8BB1AD0436F00518AB1 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A28A8B91AD0436F00518AB1 /* Map.swift */; };
 		5A3F386E1ACA76050096AB6C /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F386D1ACA76050096AB6C /* Overlay.swift */; };
 		5A3F386F1ACA76050096AB6C /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F386D1ACA76050096AB6C /* Overlay.swift */; };
 		5A3F38711ACA76A90096AB6C /* MutableOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F38701ACA76A90096AB6C /* MutableOverlay.swift */; };
@@ -131,6 +133,7 @@
 		5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomIcon.swift; sourceTree = "<group>"; };
 		5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphTests.swift; sourceTree = "<group>"; };
+		5A28A8B91AD0436F00518AB1 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		5A3F386D1ACA76050096AB6C /* Overlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		5A3F38701ACA76A90096AB6C /* MutableOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableOverlay.swift; sourceTree = "<group>"; };
 		5A497A321AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurCreatePalaceViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +280,7 @@
 			children = (
 				5A01A3441ACE438900351423 /* FenwickTree.swift */,
 				5A837B911ABBE86E00E52F80 /* Set.swift */,
+				5A28A8B91AD0436F00518AB1 /* Map.swift */,
 			);
 			name = "Data Structures and Algorithms";
 			sourceTree = "<group>";
@@ -436,6 +440,7 @@
 				5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */,
 				4F9D15151ACADBB400BEE609 /* GameChallengeViewController.swift in Sources */,
 				5AEF2A5D1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */,
+				5A28A8BA1AD0436F00518AB1 /* Map.swift in Sources */,
 				5AEF2A601AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
 				5A4E78A21AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				4F9D15191ACAEF6A00BEE609 /* SaveLoadManager.swift in Sources */,
@@ -482,6 +487,7 @@
 				5A4E78A31AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
 				4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */,
+				5A28A8BB1AD0436F00518AB1 /* Map.swift in Sources */,
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
 				5A5663FB1AC955B200190068 /* OverviewViewController.swift in Sources */,
 				5A497A341AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift in Sources */,
