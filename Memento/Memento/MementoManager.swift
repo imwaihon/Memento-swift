@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MementoManager: MemoryPalaceManager {
     
@@ -116,6 +117,18 @@ class MementoManager: MemoryPalaceManager {
     func addOverlay(palaceName: String, roomLabel: Int, overlay: MutableOverlay) -> Int {
         return (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).addOverlay(overlay)
     }
+
+    //Sets the overlay's frame.
+    //Does nothing if the overlay object is not found.
+    func setOverlayFrame(palaceName: String, roomLabel: Int, overlayLabel: Int, newFrame: CGRect) {
+        (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).setOverlayFrame(overlayLabel, newFrame: newFrame)
+    }
+    
+    //Removes the overlay from the memory palace room.
+    //Does nothing if the memory palace room or the overlay cannot be found.
+    func removeOverlay(palaceName: String, roomLabel: Int, overlayLabel: Int) {
+        (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).removeOverlay(overlayLabel)
+    }
     
     //Adds the given palceholder to the specified memory palace room.
     //Does nothing if the memory palace room is not found or if the placeholder overlaps with existing placeholders.
@@ -123,10 +136,22 @@ class MementoManager: MemoryPalaceManager {
         model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.addPlaceHolder(placeHolder)
     }
     
+    //Sets the palceholder's frame.
+    //Does nothing if the placehodler is not found.
+    func setPlaceHolderFrame(palaceName: String, roomLabel: Int, placeHolderLabel: Int, newFrame: CGRect) {
+        (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).setPlaceHolderFrame(placeHolderLabel, newFrame: newFrame)
+    }
+    
     //Sets the value of the specified placeholder in the given memory palace room.
     //Does nothing if the placeholder is not found.
     func setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String?) {
         model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.setAssociationValue(placeHolderLabel, value: value)
+    }
+    
+    //Removes the specified placeholder.
+    //Does nothing if the placeholder is not found.
+    func removePlaceHolder(palaceName: String, roomLabel: Int, placeHolderLabel: Int) {
+        model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.removePlaceHolder(placeHolderLabel)
     }
     
     //Saves the memory palace with the given name.
