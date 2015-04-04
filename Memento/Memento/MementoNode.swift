@@ -46,7 +46,7 @@ class MementoNode: MemoryPalaceRoom {
     
     //Properties
     var icon: MemoryPalaceRoomIcon {
-        return MemoryPalaceRoomIcon(label: label, filename: _backgroundImageFile, overlays: overlays)
+        return MemoryPalaceRoomIcon(graphName: graphName, label: label, filename: _backgroundImageFile, overlays: overlays)
     }
     var overlays: [Overlay] {
         var arr = [Overlay]()

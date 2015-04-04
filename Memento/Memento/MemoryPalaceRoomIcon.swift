@@ -11,11 +11,13 @@
 import Foundation
 
 struct MemoryPalaceRoomIcon: Equatable {
+    let graphName: String
     let label: Int              //Used to retrieve/remove node from graph
     let filename: String        //Used by view controller to load icon's image file
     let overlays: [Overlay]
     
-    init(label: Int, filename: String, overlays: [Overlay]) {
+    init(graphName: String, label: Int, filename: String, overlays: [Overlay]) {
+        self.graphName = graphName
         self.label = label
         self.filename = filename
         self.overlays = overlays
@@ -23,5 +25,5 @@ struct MemoryPalaceRoomIcon: Equatable {
 }
 
 func ==(lhs: MemoryPalaceRoomIcon, rhs: MemoryPalaceRoomIcon) -> Bool {
-    return lhs.label == rhs.label && lhs.filename == rhs.filename
+    return lhs.graphName == rhs.graphName && lhs.label == rhs.label && lhs.filename == rhs.filename
 }
