@@ -10,6 +10,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MemoryPalaceRoom: class {
     var graphName: String { get set }
@@ -19,5 +20,7 @@ protocol MemoryPalaceRoom: class {
     var associations: [Association] { get }
     
     func addPlaceHolder(placeHolder: PlaceHolder)
+    func setPlaceHolderFrame(label: Int, newFrame: CGRect)
     func setAssociationValue(placeHolderNumber: Int, value: String?)
+    func removePlaceHolder(label: Int)
 }
