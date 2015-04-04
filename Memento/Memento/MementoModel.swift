@@ -36,8 +36,8 @@ class MementoModel {
     
     private var saveLoadManager: SaveLoadManager
     private var graphs: [MementoGraph]
-    private var names: NSMutableSet
     private var graphMap: [String: Int]
+    private var saveQueue: dispatch_queue_t
     
     //Properties
     var numPalaces: Int {
@@ -54,8 +54,8 @@ class MementoModel {
     init(){
         saveLoadManager = SaveLoadManager.sharedInstance
         graphs = [MementoGraph]()
-        names = NSMutableSet()
         graphMap = [String: Int]()
+        saveQueue = dispatch_queue_create("com.cs3217.Memento", DISPATCH_QUEUE_SERIAL)
         loadGraphs()
     }
     
@@ -151,5 +151,9 @@ class MementoModel {
     
     private func loadGraphs() {
         graphs = saveLoadManager.loadAllPalaces()
+        let numGraphs = graphs.count
+        for i in 0..<numGraphs {
+            graphMap[graphs[i].name] = i
+        }
     }
 }
