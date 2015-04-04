@@ -174,12 +174,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         var toDrawRect = CGRect(x: min(startPoint.x, endPoint.x), y: min(startPoint.y, endPoint.y), width: abs(startPoint.x - endPoint.x), height: abs(startPoint.y - endPoint.y))
 
         // Add the rectangle into main view
-        var newViewToTest = UIView(frame: toDrawRect)
+        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self)
         newViewToTest.backgroundColor = .whiteColor()
-        newViewToTest.alpha = 0.15
-        self.imageView.addSubview(newViewToTest)
-        
-        // TODO: Add annotation for the view.
+        newViewToTest.alpha = 0.1
+        //imageView.addSubview(newViewToTest)
+        self.view.addSubview(newViewToTest)
     }
 
 }

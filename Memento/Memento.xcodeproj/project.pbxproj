@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		41359EBD1AC84F3C00CBCC82 /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */; };
+		41941ABE1ACFA71000035302 /* AnnotatableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */; };
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
 		4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */; };
 		4F9D150D1ACAD42C00BEE609 /* Challenge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F9D150C1ACAD42C00BEE609 /* Challenge.storyboard */; };
@@ -98,6 +99,7 @@
 
 /* Begin PBXFileReference section */
 		41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableImageView.swift; sourceTree = "<group>"; };
+		41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotatableUIView.swift; sourceTree = "<group>"; };
 		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
 		4F9D150C1ACAD42C00BEE609 /* Challenge.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Challenge.storyboard; sourceTree = "<group>"; };
 		4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectChallengeViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				5A01A3431ACE433800351423 /* Data Structures and Algorithms */,
 				4F9D150B1ACAD3CF00BEE609 /* ChallengeMode */,
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
+				41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */,
 				41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */,
 				4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */,
 				5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */,
@@ -419,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41941ABE1ACFA71000035302 /* AnnotatableUIView.swift in Sources */,
 				4FC6DD3D1AC026AC0070F271 /* SelectPalaceViewController.swift in Sources */,
 				5AD9C8401ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */,
 				5A3F386E1ACA76050096AB6C /* Overlay.swift in Sources */,
