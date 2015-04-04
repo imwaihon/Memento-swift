@@ -92,6 +92,21 @@ class SaveLoadManager {
     func saveSharedResource() {
         
     }
+
+
+    // Deletes Palace directory
+    func deletePalace(palaceName: String) {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let documentsDirectory = paths.objectAtIndex(0) as String
+        let path = documentsDirectory.stringByAppendingPathComponent("data").stringByAppendingPathComponent("\(palaceName)")
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        if (fileManager.fileExistsAtPath(path)) {
+            fileManager.removeItemAtPath(path, error: nil)
+        }
+        
+    }
     
     
     func loadAllPalaces() -> [MementoGraph] {
