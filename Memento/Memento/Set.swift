@@ -297,6 +297,27 @@ class Set<T: Comparable> {
         }
     }
     
+    //Gets the array of elements stored in this set.
+    func inOrderTraversal() -> [T] {
+        if isEmpty {
+            return [T]()
+        }
+        var arr = [T]()
+        arr.reserveCapacity(size)
+        inOrderTraversal(_root!, arr: &arr)
+        return arr
+    }
+    
+    private func inOrderTraversal(curNode: SetNode<T>, inout arr: [T]) {
+        if curNode.hasLeftChild {
+            inOrderTraversal(curNode.leftChild!, arr: &arr)
+        }
+        arr.append(curNode.value)
+        if curNode.hasRightChild {
+            inOrderTraversal(curNode.rightChild!, arr: &arr)
+        }
+    }
+    
     //Returns the node with the next smallest value or nil if no such node exists
     private func successor(node: SetNode<T>) -> SetNode<T>? {
         if node.hasRightChild {

@@ -140,4 +140,16 @@ class SetTests: XCTestCase {
         set.erase(6)
         XCTAssertTrue(set.isEmpty)
     }
+    
+    func testInOrderTraversal() {
+        let set = Set<Int>()
+        let unsortedArr = [5, 2, 6, 8, 13, 77, 1, 16]
+        let sortedArr = [1, 2, 5, 6, 8, 13, 16, 77]
+        
+        for val in unsortedArr {
+            set.insert(val)
+        }
+        
+        XCTAssertEqual(set.inOrderTraversal(), sortedArr)
+    }
 }
