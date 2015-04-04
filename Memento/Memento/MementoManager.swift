@@ -142,6 +142,12 @@ class MementoManager: MemoryPalaceManager {
         (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).setPlaceHolderFrame(placeHolderLabel, newFrame: newFrame)
     }
     
+    //Returns true if the swap is successful.
+    //Returns false if swap is unsuccessful due to absence of 1 or both of the placeholders.
+    func swapPlaceHolders(pHolder1Label: Int, pHolder2Label: Int) -> Bool {
+        return false    //Stub implementation
+    }
+    
     //Sets the value of the specified placeholder in the given memory palace room.
     //Does nothing if the placeholder is not found.
     func setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String?) {
