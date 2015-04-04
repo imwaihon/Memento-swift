@@ -37,7 +37,7 @@ class MementoModel {
     private var saveLoadManager: SaveLoadManager
     private var graphs: [MementoGraph]
     private var graphMap: [String: Int]
-    private var saveQueue: dispatch_queue_t
+    let saveQueue: dispatch_queue_t
     
     //Properties
     var numPalaces: Int {

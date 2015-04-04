@@ -14,7 +14,7 @@ import XCTest
 class MementoModelTests: XCTestCase {
     
     func testAddPalace() {
-        let model = MementoModel()
+        let model = MementoModel.sharedInstance
         let initNumPalace = model.numPalaces
         
         model.addPalace(MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png")))
@@ -30,10 +30,16 @@ class MementoModelTests: XCTestCase {
         XCTAssertEqual(model.numPalaces, initNumPalace+3)
         XCTAssertEqual(duplicateGraph.name, "graph1(1)")
         XCTAssertFalse(model.getPalace("graph1(1)") == nil)
+        
+        dispatch_sync(model.saveQueue, {() -> Void in
+            SaveLoadManager.sharedInstance.deletePalace("graph1")
+            SaveLoadManager.sharedInstance.deletePalace("graph1(1)")
+            SaveLoadManager.sharedInstance.deletePalace("graph2")
+        })
     }
     
     func testRemovePalace() {
-        let model = MementoModel()
+        let model = MementoModel.sharedInstance
         let initNumPalace = model.numPalaces
         
         model.addPalace(MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png")))
@@ -50,10 +56,14 @@ class MementoModelTests: XCTestCase {
         model.removePalace("graph2")
         XCTAssertEqual(model.numPalaces, initNumPalace)
         XCTAssertTrue(model.getPalace("graph2") == nil)
+        
+        dispatch_sync(model.saveQueue, {() -> Void in
+            //Do nothing. Wait for file operations to complete.
+        })
     }
     
     func testAddRoom() {
-        let model = MementoModel()
+        let model = MementoModel.sharedInstance
         let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
         let newRoom = MementoNode(imageFile: "B.png")
         let anotherRoom = MementoNode(imageFile: "C.png")
@@ -67,10 +77,14 @@ class MementoModelTests: XCTestCase {
         //Tries adding to non-existent graph
         model.addPalaceRoom("unknownGraph", room: anotherRoom)
         XCTAssertTrue(model.getMemoryPalaceRoom("unknownGraph", roomLabel: anotherRoom.label) == nil)
+        
+        dispatch_sync(model.saveQueue, {() -> Void in
+            SaveLoadManager.sharedInstance.deletePalace("graph1")
+        })
     }
     
     func testRemoveRoom() {
-        let model = MementoModel()
+        let model = MementoModel.sharedInstance
         let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
         let newRoom = MementoNode(imageFile: "B.png")
         let newRoom2 = MementoNode(imageFile: "C.png")
@@ -84,5 +98,29 @@ class MementoModelTests: XCTestCase {
         XCTAssertEqual(graph.numRooms, 2)
         XCTAssertEqual(newRoom2.label, 2)
         XCTAssertFalse(model.getMemoryPalaceRoom(graph.name, roomLabel: newRoom.label) === newRoom)
+        
+        dispatch_sync(model.saveQueue, {() -> Void in
+            SaveLoadManager.sharedInstance.deletePalace(graph.name)
+        })
     }
+    
+    /*func testDummytest() {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let documentsDirectory = paths.objectAtIndex(0) as String
+        let path = documentsDirectory.stringByAppendingPathComponent("data")
+        
+        let fileManager = NSFileManager.defaultManager()
+        let palacesFilenames = fileManager.subpathsOfDirectoryAtPath(path, error: nil)! as [String]
+        
+        for filename in palacesFilenames {
+            println(filename)
+        }
+        
+        fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph2"), error: nil)
+        fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1(1)"), error: nil)
+        fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1"), error: nil)
+        /*fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1(2)"), error: nil)
+        fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1(3)"), error: nil)
+        fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1(4)"), error: nil)*/
+    }*/
 }
