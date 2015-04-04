@@ -12,6 +12,7 @@
 import Foundation
 
 protocol MemoryPalaceRoom: class {
+    var graphName: String { get set }
     var label: Int { get set }
     var icon: MemoryPalaceRoomIcon { get }
     var numPlaceHolders: Int { get }

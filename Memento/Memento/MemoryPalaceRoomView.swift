@@ -12,11 +12,15 @@
 import Foundation
 
 struct MemoryPalaceRoomView {
+    let graphName: String
+    let label: Int
     let backgroundImage: String
     let overlays: [Overlay]
     let associations: [Association]
     
-    init(backgroundImage: String, overlays: [Overlay], associations: [Association]) {
+    init(graphName: String, label: Int, backgroundImage: String, overlays: [Overlay], associations: [Association]) {
+        self.graphName = graphName
+        self.label = label
         self.backgroundImage = backgroundImage
         self.overlays = overlays
         self.associations = associations

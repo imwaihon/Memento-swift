@@ -87,7 +87,10 @@ class MementoModel {
         graphMap[palace.name] = graphs.count
         graphs.append(palace)
         
-        saveLoadManager.savePalaceToFile(palace)
+        //Save the new palace
+        dispatch_async(saveQueue, {() -> Void in
+            self.savePalace(palace)
+        })
     }
     
     //Gets the specified memory palace.
@@ -112,7 +115,10 @@ class MementoModel {
             return
         }
         
-        //Save changes?
+        //Save changes
+        dispatch_async(saveQueue, {() -> Void in
+            //Make call to delete the palace file
+        })
     }
     
     //Adds the given room to the specified memory palace.
@@ -120,6 +126,11 @@ class MementoModel {
     func addPalaceRoom(palaceName: String, room: MemoryPalaceRoom) {
         if let palace = getPalace(palaceName) {
             palace.addRoom(room)
+            
+            //Save changes
+            dispatch_async(saveQueue, {() -> Void in
+                self.savePalace(palace)
+            })
         }
     }
     
@@ -137,7 +148,16 @@ class MementoModel {
     func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
         if let palace = getPalace(palaceName) {
             palace.removeRoom(roomLabel)
+            
+            //Save changes
+            dispatch_async(saveQueue, {() -> Void in
+                self.savePalace(palace)
+            })
         }
+    }
+    
+    private func savePalace(palace: MementoGraph) {
+        saveLoadManager.savePalaceToFile(palace)
     }
     
     //Saves the memory palace with the given name.
