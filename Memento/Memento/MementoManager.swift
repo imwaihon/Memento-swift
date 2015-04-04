@@ -106,6 +106,11 @@ class MementoManager: MemoryPalaceManager {
         model.removeMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
     }
     
+    //Gets the name that will be used for the memory
+    func generatePalaceName(baseName: String) -> String {
+        return model.generatePalaceName(baseName)
+    }
+    
     //Saves the memory palace with the given name.
     //Does nothing if the memory palace cannot be found.
     func savePalace(palaceName: String) {
