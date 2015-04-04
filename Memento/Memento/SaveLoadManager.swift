@@ -83,6 +83,7 @@ class SaveLoadManager {
             graphData = palace.plistRepresentation
             
             graphData!.writeToFile(graphPath, atomically: true)
+            NSLog(graphPath)
             
         }
     }

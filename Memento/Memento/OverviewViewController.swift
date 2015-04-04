@@ -13,7 +13,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     
     @IBOutlet weak var scrollableOverviewCollectionView: UICollectionView!
     var palaceName: String!
-    var model: MementoManager!
+    var model = MementoManager()
     var rooms: [MemoryPalaceRoomIcon]!
     override func viewDidLoad() {
         super.viewDidLoad()
