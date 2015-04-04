@@ -111,6 +111,24 @@ class MementoManager: MemoryPalaceManager {
         return model.generatePalaceName(baseName)
     }
     
+    //Adds the given overlay object to the speicified memory palace room.
+    // Does nothing if the memory palace room is not found.
+    func addOverlay(palaceName: String, roomLabel: Int, overlay: MutableOverlay) -> Int {
+        return (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).addOverlay(overlay)
+    }
+    
+    //Adds the given palceholder to the specified memory palace room.
+    //Does nothing if the memory palace room is not found or if the placeholder overlaps with existing placeholders.
+    func addPlaceHolder(palaceName: String, roomLabel: Int, placeHolder: PlaceHolder) {
+        model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.addPlaceHolder(placeHolder)
+    }
+    
+    //Sets the value of the specified placeholder in the given memory palace room.
+    //Does nothing if the placeholder is not found.
+    func setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String?) {
+        model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.setAssociationValue(placeHolderLabel, value: value)
+    }
+    
     //Saves the memory palace with the given name.
     //Does nothing if the memory palace cannot be found.
     func savePalace(palaceName: String) {
