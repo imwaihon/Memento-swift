@@ -83,12 +83,28 @@ class SaveLoadManager {
             graphData = palace.plistRepresentation
             
             graphData!.writeToFile(graphPath, atomically: true)
+            NSLog(graphPath)
             
         }
     }
     
     // Saves shared resources such as images for layers/photos
     func saveSharedResource() {
+        
+    }
+
+
+    // Deletes Palace directory
+    func deletePalace(palaceName: String) {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let documentsDirectory = paths.objectAtIndex(0) as String
+        let path = documentsDirectory.stringByAppendingPathComponent("data").stringByAppendingPathComponent("\(palaceName)")
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        if (fileManager.fileExistsAtPath(path)) {
+            fileManager.removeItemAtPath(path, error: nil)
+        }
         
     }
     

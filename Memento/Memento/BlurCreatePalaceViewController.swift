@@ -15,7 +15,7 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
     
     
     var newMedia: Bool?
-    var model: MementoManager!
+    var model = MementoManager()
     var parent: ModelChangeUpdateDelegate!
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -135,7 +135,6 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
             if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) {
                 if paths.count > 0 {
                     if let dirPath = paths[0] as? String {
-                        let readPath = dirPath.stringByAppendingPathComponent("Image.png")
                         let writePath = dirPath.stringByAppendingPathComponent("\(nameTextField.text)0.png")
                         UIImagePNGRepresentation(image).writeToFile(writePath, atomically: true)
                     }
@@ -146,7 +145,6 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         parent.DataModelHasBeenChanged()
         self.dismissViewControllerAnimated(true, completion: {finished in
             self.dismissViewControllerAnimated(true, completion: nil)
-            //self.performSegueWithIdentifier("ShowNewPalaceSegue", sender: self)
         })
     }
     

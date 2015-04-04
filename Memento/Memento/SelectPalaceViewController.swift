@@ -13,6 +13,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     @IBOutlet var palaceTiles: UICollectionView!
     var model = MementoManager()
     var nextPalace = ""
+    var selectedPalace = ""
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -25,56 +26,43 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         palaceTiles.backgroundColor = UIColor.clearColor()
         self.setNeedsStatusBarAppearanceUpdate()
         
-        //setUpGestures()
+        self.setUpGestures()
         
+    }
+    
+    func setUpGestures(){
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: "longPressHandler:")
+        longPressGesture.minimumPressDuration = CFTimeInterval(0.5)
+        self.view.addGestureRecognizer(longPressGesture)
+    }
+    
+    func longPressHandler(gesture: UIGestureRecognizer){
+        var pointOfTheTouch = gesture.locationInView(self.view)
+        var indexPath = palaceTiles.indexPathForItemAtPoint(pointOfTheTouch)
+        
+        if(indexPath != nil && indexPath!.item != 0){
+            let selectedCell = palaceTiles.cellForItemAtIndexPath(indexPath!) as SelectPalaceCollectionViewCell?
+            if(selectedCell != nil){
+                selectedPalace = selectedCell!.nameLabel.text!
+                palaceTiles.reloadData()
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        palaceTiles.reloadData()
     }
-    
-    // GESTURES
-    
-    // Set up gestures
-    func setUpGestures() {
-        // Tap Gesture
-        let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
-        tapGesture.numberOfTapsRequired = 1
-        
-        palaceTiles.addGestureRecognizer(tapGesture)
-    }
-    
-    func handleTap(sender: UITapGestureRecognizer) {
-        if sender.state == UIGestureRecognizerState.Ended {
-            var point = sender.locationInView(palaceTiles)
-            
-            var indexPath = palaceTiles.indexPathForItemAtPoint(point)
-            
-            // If first cell is selected
-            if indexPath?.item == 0 {
-                self.performSegueWithIdentifier("CreateNewPalaceSegue", sender: self)
-            }
-            
-        }
-    }
-    
-
     
     
     // COLLECTION VIEW
-
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    // Number of tiles
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return model.numberOfMemoryPalace + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = palaceTiles.dequeueReusableCellWithReuseIdentifier("SelectPalaceCollectionViewCell", forIndexPath: indexPath) as SelectPalaceCollectionViewCell
-        cell.addShadows()
+        var cell = palaceTiles.dequeueReusableCellWithReuseIdentifier("SelectPalaceCollectionViewCell", forIndexPath: indexPath) as SelectPalaceCollectionViewCell
+        //cell.addShadows()
         // First cell is reserved for the add button
         if indexPath.item == 0 {
             cell.backgroundColor = UIColor.clearColor()
@@ -86,6 +74,13 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
             let currentIcon : MemoryPalaceIcon = model.getMemoryPalaceIcons()[indexPath.item-1]
             cell.imageView.image = getImageNamed(currentIcon.imageFile)
             cell.nameLabel.text = currentIcon.graphName
+            cell.nameLabel.hidden = false
+            cell.opacityBackground.hidden = false
+            if(cell.nameLabel.text == selectedPalace){
+                cell.alpha = 0.5
+            } else{
+                cell.alpha = 1
+            }
         }
         
         return cell
@@ -111,13 +106,13 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "CreateNewPalaceSegue"){
+            self.selectedPalace = ""
             let dvc = segue.destinationViewController as BlurCreatePalaceViewController
             dvc.parent = self
-            dvc.model = self.model
         } else if(segue.identifier == "GoToPalaceSegue"){
+            self.selectedPalace = ""
             let dvc = segue.destinationViewController as OverviewViewController
             dvc.palaceName = self.nextPalace
-            dvc.model = self.model
         }
     }
     
