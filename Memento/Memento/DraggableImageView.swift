@@ -15,17 +15,29 @@ class DraggableImageView : UIImageView
 {
     var dragStartPositionRelativeToCenter : CGPoint?
     
+    var lastRotation = CGFloat()
+    let rotateRec = UIRotationGestureRecognizer()
+    
     override init(image: UIImage!) {
         super.init(image: image)
         
         self.userInteractionEnabled = true
+        self.multipleTouchEnabled = true
         
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "handlePan:"))
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
+        
+        
+        // Function rotate images
+        //rotateRec.addTarget(self, action: "rotatedView:")
+        //self.addGestureRecognizer(rotateRec)
+        
 
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.5
         layer.shadowRadius = 2
+        
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -61,4 +73,25 @@ class DraggableImageView : UIImageView
                 y: locationInView.y - self.dragStartPositionRelativeToCenter!.y)
         }
     }
+    
+    func handleTap(nizer: UITapGestureRecognizer!) {
+        nizer.numberOfTapsRequired = 2
+        self.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2));
+    }
+    
+    
+    func rotatedView(sender:UIRotationGestureRecognizer){
+        var lastRotation = CGFloat()
+        if(sender.state == UIGestureRecognizerState.Ended){
+            lastRotation = 0.0;
+        }
+        var rotation = 0.0 - (lastRotation - sender.rotation)
+        var point = rotateRec.locationInView(self)
+        var currentTrans = sender.view!.transform
+        var newTrans = CGAffineTransformRotate(currentTrans, rotation)
+        sender.view!.transform = newTrans
+        lastRotation = sender.rotation
+    }
+
+    
 }
