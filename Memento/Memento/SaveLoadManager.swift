@@ -30,6 +30,23 @@ class SaveLoadManager {
         graphFactory = MementoGraphFactory()
     }
     
+    func checkFolder() {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let documentsDirectory = paths.objectAtIndex(0) as String
+        let path = documentsDirectory.stringByAppendingPathComponent("data")
+        
+        let fileManager = NSFileManager.defaultManager()
+        var error: NSError?
+        
+        if (!fileManager.fileExistsAtPath(path)) {
+            // Folder does not exist, create folder
+            if !fileManager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil, error: &error) {
+                println("Failed to create dir: \(error!.localizedDescription)")
+                return
+            }
+        }
+    }
+    
     // Saves the representation of the memory palace (memento graph)
     func savePalaceToFile(palace: MementoGraph) {
         let palaceName = palace.name
@@ -77,6 +94,8 @@ class SaveLoadManager {
     
     
     func loadAllPalaces() -> [MementoGraph] {
+        checkFolder()
+        
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
         let path = documentsDirectory.stringByAppendingPathComponent("data")
