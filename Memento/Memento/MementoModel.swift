@@ -109,7 +109,7 @@ class MementoModel {
             for i in (index+1)..<graphs.count {
                 graphMap[graphs[i].name]?--
             }
-            graphMap[graphs[index].name] = nil
+            graphMap[palaceName] = nil
             graphs.removeAtIndex(index)
         } else {
             return

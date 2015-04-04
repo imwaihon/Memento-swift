@@ -57,6 +57,7 @@ class MementoGraph: MemoryPalace {
         self.name = name
         _nodes = [MementoNode]()
         _nodesFT = FenwickTree()
+        rootNode.graphName = name
         _nodes.append(rootNode)
         
         assert(checkRep())
