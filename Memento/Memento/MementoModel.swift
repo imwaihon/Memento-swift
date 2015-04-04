@@ -34,7 +34,7 @@ class MementoModel {
         return Static.instance!
     }
     
-    //private let saveLoadManager: SaveLoadManager.sharedInstance   //Compile error for unknown reasons
+    private let saveLoadManager: SaveLoadManager.sharedInstance
     private var graphs: [MementoGraph]
     private var names: NSMutableSet
     private var graphMap: [String: Int]
@@ -131,11 +131,12 @@ class MementoModel {
     func savePalace(palaceName: String) {
         //To be implmented once the SaveLoadManager is working.
         if let palace = getPalace(palaceName) {
-            //saveLoadManager.savePalaceToFile(palace)
+            saveLoadManager.savePalaceToFile(palace)
         }
     }
     
-    private func loadGraphs() {
+    private func loadGraphs() -> [MementoGraph] {
         //To be implemented
+        return saveLoadManager.loadAllPalaces()
     }
 }
