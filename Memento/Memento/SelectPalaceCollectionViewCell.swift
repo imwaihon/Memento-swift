@@ -14,6 +14,8 @@ class SelectPalaceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var opacityBackground: UIView!
+    @IBOutlet weak var deleteButton: UIButton!
+    var parent : ModelChangeUpdateDelegate!
     
     func addShadows(){
         imageView.layer.shadowColor = UIColor.blackColor().CGColor
@@ -31,9 +33,10 @@ class SelectPalaceCollectionViewCell: UICollectionViewCell {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        
-        
     }
     
+    @IBAction func deleteButtonPressed(sender: AnyObject) {
+        var palaceName = nameLabel.text!
+        parent.deletePalace(palaceName)
+    }
 }

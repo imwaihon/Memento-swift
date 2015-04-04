@@ -95,10 +95,22 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGZ-Ll-Mqd">
+                                                    <rect key="frame" x="10" y="179" width="300" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="Delete" backgroundImage="deleteButton">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteButtonPressed:" destination="Sbe-1K-7a5" eventType="touchUpInside" id="PgG-md-PdH"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="deleteButton" destination="VGZ-Ll-Mqd" id="vG8-I7-HXG"/>
                                             <outlet property="imageView" destination="6Fx-Cn-Dgn" id="hb9-zX-TFs"/>
                                             <outlet property="nameLabel" destination="iys-iK-24F" id="QnI-lE-jgU"/>
                                             <outlet property="opacityBackground" destination="CX3-HA-Vza" id="hJp-eu-x9M"/>
@@ -450,6 +462,7 @@
         <image name="backgroundGrey" width="1024" height="768"/>
         <image name="buttonBorder" width="862" height="146"/>
         <image name="cameraIcon" width="64" height="64"/>
+        <image name="deleteButton" width="300" height="50"/>
         <image name="dropboxIcon" width="64" height="64"/>
         <image name="leftArrow" width="50" height="50"/>
         <image name="logoSet" width="660" height="659"/>

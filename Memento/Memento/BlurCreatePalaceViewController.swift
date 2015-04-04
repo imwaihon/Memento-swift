@@ -142,7 +142,7 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
             }
             model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.png")
         }
-        parent.DataModelHasBeenChanged()
+        parent.dataModelHasBeenChanged()
         self.dismissViewControllerAnimated(true, completion: {finished in
             self.dismissViewControllerAnimated(true, completion: nil)
         })

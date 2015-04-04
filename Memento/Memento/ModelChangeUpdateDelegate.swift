@@ -9,5 +9,6 @@
 import Foundation
 
 protocol ModelChangeUpdateDelegate{
-    func DataModelHasBeenChanged()
+    func dataModelHasBeenChanged()
+    func deletePalace(named : String)
 }

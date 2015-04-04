@@ -12,6 +12,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     
     @IBOutlet var palaceTiles: UICollectionView!
     var model = MementoManager()
+    var palaces : [MemoryPalaceIcon]!
     var nextPalace = ""
     var selectedPalace = ""
     
@@ -28,16 +29,18 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         
         self.setUpGestures()
         
+        self.palaces = model.getMemoryPalaceIcons()
+        
     }
     
     func setUpGestures(){
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: "longPressHandler:")
-        longPressGesture.minimumPressDuration = CFTimeInterval(0.5)
+        longPressGesture.minimumPressDuration = 0.5
         self.view.addGestureRecognizer(longPressGesture)
     }
     
     func longPressHandler(gesture: UIGestureRecognizer){
-        var pointOfTheTouch = gesture.locationInView(self.view)
+        var pointOfTheTouch = gesture.locationInView(self.palaceTiles)
         var indexPath = palaceTiles.indexPathForItemAtPoint(pointOfTheTouch)
         
         if(indexPath != nil && indexPath!.item != 0){
@@ -57,11 +60,12 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     
     // COLLECTION VIEW
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.numberOfMemoryPalace + 1
+        return palaces.count + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = palaceTiles.dequeueReusableCellWithReuseIdentifier("SelectPalaceCollectionViewCell", forIndexPath: indexPath) as SelectPalaceCollectionViewCell
+        cell.parent = self
         //cell.addShadows()
         // First cell is reserved for the add button
         if indexPath.item == 0 {
@@ -69,17 +73,18 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
             cell.imageView.image = UIImage(named: "addPalaceImage")
             cell.nameLabel.hidden = true
             cell.opacityBackground.hidden = true
+            cell.deleteButton.hidden = true
             
         } else {
-            let currentIcon : MemoryPalaceIcon = model.getMemoryPalaceIcons()[indexPath.item-1]
+            let currentIcon : MemoryPalaceIcon = palaces[indexPath.item-1]
             cell.imageView.image = getImageNamed(currentIcon.imageFile)
             cell.nameLabel.text = currentIcon.graphName
             cell.nameLabel.hidden = false
             cell.opacityBackground.hidden = false
             if(cell.nameLabel.text == selectedPalace){
-                cell.alpha = 0.5
+                cell.deleteButton.hidden = false
             } else{
-                cell.alpha = 1
+                cell.deleteButton.hidden = true
             }
         }
         
@@ -100,8 +105,14 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         return UIStatusBarStyle.BlackOpaque
     }
     
-    func DataModelHasBeenChanged() {
+    func dataModelHasBeenChanged() {
+        self.palaces = model.getMemoryPalaceIcons()
         self.palaceTiles.reloadData()
+    }
+    
+    func deletePalace(named : String){
+        model.removeMemoryPalace(named)
+        self.dataModelHasBeenChanged()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
