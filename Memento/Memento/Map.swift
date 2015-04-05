@@ -177,24 +177,37 @@ class Map<K: Comparable, V> {
     }
     
     //Checks if the set contains the specified element
-    func containsValueForKey(key: K) -> Bool {
-        if isEmpty {
-            return false
-        }
-        return contains(key, curNode: _root!)
+    func containsKey(key: K) -> Bool {
+        return isEmpty ? false: containsKey(key, curNode: _root!)
     }
     
     //The recursive binary search function
-    private func contains(key: K, curNode: MapNode<K, V>) -> Bool {
+    private func containsKey(key: K, curNode: MapNode<K, V>) -> Bool {
         if key == curNode.key {
             return true
         }
         
         if key < curNode.key {
-            return curNode.hasLeftChild ? contains(key, curNode: curNode.leftChild!): false
+            return curNode.hasLeftChild ? containsKey(key, curNode: curNode.leftChild!): false
         } else {
-            return curNode.hasRightChild ? contains(key, curNode: curNode.rightChild!): false
+            return curNode.hasRightChild ? containsKey(key, curNode: curNode.rightChild!): false
         }
+    }
+    
+    //Gets the value mapped to the given key.
+    //Returns nil if the key is not found.
+    func valueForKey(key: K) -> V? {
+        return isEmpty ? nil: valueForKey(key, curNode: _root!)
+    }
+    
+    private func valueForKey(key: K, curNode: MapNode<K, V>) -> V? {
+        if key == curNode.key {
+            return curNode.value
+        }
+        if key < curNode.key {
+            return curNode.hasLeftChild ? valueForKey(key, curNode: curNode.leftChild!): nil
+        }
+        return curNode.hasRightChild ? valueForKey(key, curNode: curNode.rightChild!): nil
     }
     
     //Removes all elements from this set.
@@ -205,27 +218,27 @@ class Map<K: Comparable, V> {
     
     //Removes the specified element from the set.
     //Does nothing if the element cannot be found.
-    func erase(elem: T) {
+    func eraseValueForKey(key: K) {
         if isEmpty {
             return
         }
-        erase(elem, curNode: _root!)
+        erase(key, curNode: _root!)
     }
     
-    private func erase(elem: T, curNode: SetNode<T>) {
-        var node: SetNode<T>
-        if elem < curNode.value {
+    private func erase(key: K, curNode: MapNode<K, V>) {
+        var node: MapNode<K, V>
+        if key < curNode.key {
             if !curNode.hasLeftChild {
                 return
             }
-            erase(elem, curNode: curNode.leftChild!)
+            erase(key, curNode: curNode.leftChild!)
             curNode.updateHeight()
             node = curNode
-        } else if elem > curNode.value {
+        } else if key > curNode.key {
             if !curNode.hasRightChild {
                 return
             }
-            erase(elem, curNode: curNode.rightChild!)
+            erase(key, curNode: curNode.rightChild!)
             curNode.updateHeight()
             node = curNode
         } else {
