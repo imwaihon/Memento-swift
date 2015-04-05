@@ -33,6 +33,18 @@ class Map<K: Comparable, V> {
     var valueForLargestKey: V? {
         return isEmpty ? nil: maxElement(_root!).value
     }
+    subscript(key: K) -> V? {
+        get {
+            return valueForKey(key)
+        }
+        set(newValue) {
+            if newValue == nil {
+                eraseValueForKey(key)
+            } else {
+                insertValueForKey(key, value: newValue!)
+            }
+        }
+    }
     
     init() {
         _root = nil
