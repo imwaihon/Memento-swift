@@ -35,7 +35,7 @@ class MementoNodeFactory {
         
         
         for index in 0..<valueArray.count {
-            node.setAssociationValue(index, value: valueArray.objectAtIndex(index) as? String)
+            node.setAssociationValue(index, value: valueArray.objectAtIndex(index) as String)
         }
         
         return node

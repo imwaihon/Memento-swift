@@ -150,7 +150,7 @@ class MementoManager: MemoryPalaceManager {
     
     //Sets the value of the specified placeholder in the given memory palace room.
     //Does nothing if the placeholder is not found.
-    func setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String?) {
+    func setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String) {
         model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.setAssociationValue(placeHolderLabel, value: value)
     }
     
