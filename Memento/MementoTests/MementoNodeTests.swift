@@ -24,8 +24,9 @@ class MementoNodeTests: XCTestCase {
         let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20))
         let placeHolder2 = RectanglePlaceHolder(highlightArea: CGRectMake(40, 50, 30, 20))
         let placeHolder3 = RectanglePlaceHolder(highlightArea: CGRectMake(69, 69, 20, 20))
-        let assoc1 = Association(placeHolder: placeHolder1, value: nil)
-        let assoc2 = Association(placeHolder: placeHolder2, value: nil)
+        let assoc1 = Association(placeHolder: placeHolder1, value: "")
+        let assoc2 = Association(placeHolder: placeHolder2, value: "")
+        let assoc3 = Association(placeHolder: placeHolder3, value: "")
         
         node.addPlaceHolder(placeHolder1)
         XCTAssertEqual(node.numPlaceHolders, 1)
@@ -38,9 +39,9 @@ class MementoNodeTests: XCTestCase {
         XCTAssertEqual(node.associations, [assoc1, assoc2])
         
         node.addPlaceHolder(placeHolder3)
-        XCTAssertEqual(node.numPlaceHolders, 2)
-        XCTAssertEqual(placeHolder3.label, 0)
-        XCTAssertEqual(node.associations, [assoc1, assoc2])
+        XCTAssertEqual(node.numPlaceHolders, 3)
+        XCTAssertEqual(placeHolder3.label, 2)
+        XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
     }
     
     func testRemovePlaceHolder() {
@@ -93,9 +94,9 @@ class MementoNodeTests: XCTestCase {
         let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20))
         let placeHolder2 = RectanglePlaceHolder(highlightArea: CGRectMake(40, 50, 30, 20))
         let placeHolder3 = RectanglePlaceHolder(highlightArea: CGRectMake(70, 70, 20, 20))
-        var assoc1 = Association(placeHolder: placeHolder1, value: nil)
-        var assoc2 = Association(placeHolder: placeHolder2, value: nil)
-        var assoc3 = Association(placeHolder: placeHolder3, value: nil)
+        var assoc1 = Association(placeHolder: placeHolder1, value: "")
+        var assoc2 = Association(placeHolder: placeHolder2, value: "")
+        var assoc3 = Association(placeHolder: placeHolder3, value: "")
         
         node.addPlaceHolder(placeHolder1)
         node.addPlaceHolder(placeHolder2)
@@ -111,8 +112,8 @@ class MementoNodeTests: XCTestCase {
         assoc3 = Association(placeHolder: placeHolder3, value: "4")
         XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
         
-        node.setAssociationValue(0, value: nil)
-        assoc1 = Association(placeHolder: placeHolder1, value: nil)
+        node.setAssociationValue(0, value: "")
+        assoc1 = Association(placeHolder: placeHolder1, value: "")
         XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
         
         node.removePlaceHolder(0)

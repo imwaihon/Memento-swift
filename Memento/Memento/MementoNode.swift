@@ -35,11 +35,14 @@ import UIKit
 
 class MementoNode: MemoryPalaceRoom {
     private let _backgroundImageFile: String
-    private var _overlayFT: FenwickTree
-    private var _placeHolderFT: FenwickTree
-    private var _overlays: [MutableOverlay]
-    private var _placeHolders: [PlaceHolder]
-    private var _values: [String?]
+    //private var _overlayFT: FenwickTree
+    //private var _placeHolderFT: FenwickTree
+    //private var _overlays: [MutableOverlay]
+    //private var _placeHolders: [PlaceHolder]
+    //private var _values: [String?]
+    private let _overlays: Map<Int, MutableOverlay>
+    private let _placeHolders: Map<Int, PlaceHolder>
+    private let _values: Map<Int, String>
     
     var label: Int = 0      //The node's identification label in the graph
     var graphName: String = "sampleGraph"
@@ -49,20 +52,35 @@ class MementoNode: MemoryPalaceRoom {
         return MemoryPalaceRoomIcon(graphName: graphName, label: label, filename: _backgroundImageFile, overlays: overlays)
     }
     var overlays: [Overlay] {
-        var arr = [Overlay]()
+        /*var arr = [Overlay]()
         for i in 0..<_overlays.count {
             arr.append(_overlays[i].makeImmuatble())
+        }*/
+        var tempArr = _overlays.inOrderTraversal()
+        var arr = [Overlay]()
+        arr.reserveCapacity(numOverlays)
+        for elem in tempArr {
+            arr.append(elem.1.makeImmuatble())
         }
         return arr
     }
+    var numOverlays: Int {
+        return _overlays.size
+    }
     var numPlaceHolders: Int {
-        return _placeHolders.count
+        return _placeHolders.size
     }
     var associations: [Association] {
         var arr = [Association]()
-        let numAssoc = numPlaceHolders
+        /*let numAssoc = numPlaceHolders
         for i in 0..<numAssoc {
             arr.append(Association(placeHolder: _placeHolders[i], value: _values[i]))
+        }*/
+        var tempArr1 = _placeHolders.inOrderTraversal()
+        var tempArr2 = _values.inOrderTraversal()
+        arr.reserveCapacity(numPlaceHolders)
+        for i in 0..<numPlaceHolders {
+            arr.append(Association(placeHolder: tempArr1[i].1, value: tempArr2[i].1))
         }
         return arr
     }
@@ -75,35 +93,58 @@ class MementoNode: MemoryPalaceRoom {
         rep[bgImageKey] = NSString(string: _backgroundImageFile)
         
         //Gets array of overlays
-        var overlays = NSMutableArray()
+        /*var overlays = NSMutableArray()
         for overlay in _overlays {
             overlays.addObject(overlay.stringEncoding)
         }
-        rep[overlayKey] = overlays
+        rep[overlayKey] = overlays*/
+        let overlayArr = overlays
+        var overlayStrArr = [String]()
+        overlayStrArr.reserveCapacity(overlayArr.count)
+        for overlay in overlayArr {
+            overlayStrArr.append(overlay.stringEncoding)
+        }
+        rep[overlayKey] = NSArray(array: overlayStrArr)
         
         //Gets array of placeholders
-        var pHolders = NSMutableArray()
+        /*var pHolders = NSMutableArray()
         for placeHolder in _placeHolders {
             pHolders.addObject(placeHolder.stringEncoding)
         }
-        rep[placeHolderKey] = pHolders
+        rep[placeHolderKey] = pHolders*/
+        let assoc = associations
+        var pHolderStrArr = [String]()
+        var val = [String]()
+        pHolderStrArr.reserveCapacity(assoc.count)
+        val.reserveCapacity(assoc.count)
+        
+        for elem in assoc {
+            pHolderStrArr.append(elem.placeHolder.stringEncoding)
+            val.append(elem.value)
+        }
+        
+        rep[placeHolderKey] = NSArray(array: pHolderStrArr)
+        rep[valueKey] = NSArray(array: val)
         
         //Gets array of values
-        var val = NSMutableArray()
-        for value in _values {
+        /*var val = NSMutableArray()
+        for value in values {
             val.addObject(value == nil ? "": NSString(string: value!))
         }
-        rep[valueKey] = val
+        rep[valueKey] = val*/
         return rep
     }
 
     init(imageFile: String){
         _backgroundImageFile = imageFile
-        _overlays = [MutableOverlay]()
-        _overlayFT = FenwickTree()
-        _placeHolders = [RectanglePlaceHolder]()
-        _placeHolderFT = FenwickTree()
-        _values = [String?](count: _placeHolders.count, repeatedValue: nil)
+        //_overlays = [MutableOverlay]()
+        //_overlayFT = FenwickTree()
+        //_placeHolders = [RectanglePlaceHolder]()
+        //_placeHolderFT = FenwickTree()
+        //_values = [String?](count: _placeHolders.count, repeatedValue: nil)
+        _overlays = Map<Int, MutableOverlay>()
+        _placeHolders = Map<Int, PlaceHolder>()
+        _values = Map<Int, String>()
     }
     
     //Adds the given placeholder to this memory palace room.
@@ -111,7 +152,7 @@ class MementoNode: MemoryPalaceRoom {
     func addPlaceHolder(placeHolder: PlaceHolder) {
         var hasOverlap = false
         
-        dispatch_apply(UInt(_placeHolders.count), dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {(idx: UInt) -> Void in
+        /*dispatch_apply(UInt(_placeHolders.count), dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {(idx: UInt) -> Void in
             hasOverlap |= PlaceHolder.hasOverlap(self._placeHolders[Int(idx)], placeHolder2: placeHolder)
         })
         
@@ -119,13 +160,17 @@ class MementoNode: MemoryPalaceRoom {
             placeHolder.label = _placeHolders.isEmpty ? 0: _placeHolders[_placeHolders.count - 1].label + 1
             _placeHolders.append(placeHolder)
             _values.append(nil)
-        }
+        }*/
+        let label = _placeHolders.isEmpty ? 0: _placeHolders.largestKey! + 1
+        placeHolder.label = label
+        _placeHolders[label] = placeHolder
+        _values[label] = String()
     }
     
     //Gets the placeholder identified by the given label.
     //Returns nil if no such placeholder is found.
-    func getPlaceHolder(label: Int) -> PlaceHolder? {
-        if label < 0 || _placeHolders.isEmpty {
+    func getPlaceHolder(placeHolderLabel: Int) -> PlaceHolder? {
+        /*if label < 0 || _placeHolders.isEmpty {
             return nil
         }
         let offset = _placeHolderFT.query(label + 1)
@@ -133,13 +178,14 @@ class MementoNode: MemoryPalaceRoom {
         if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == label {
             return _placeHolders[idx]
         }
-        return nil
+        return nil*/
+        return _placeHolders[placeHolderLabel]
     }
     
     //Gets the association identified by the placeholder's label.
     //Returns nil if no such association is found.
     func getAssociation(placeHolderLabel: Int) -> Association? {
-        if label < 0 || _placeHolders.isEmpty {
+        /*if label < 0 || _placeHolders.isEmpty {
             return nil
         }
         let offset = _placeHolderFT.query(placeHolderLabel + 1)
@@ -147,12 +193,13 @@ class MementoNode: MemoryPalaceRoom {
         if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == placeHolderLabel {
             return Association(placeHolder: _placeHolders[idx], value: _values[idx])
         }
-        return nil
+        return nil*/
+        return _placeHolders[placeHolderLabel] != nil && _values[placeHolderLabel] != nil ? Association(placeHolder: _placeHolders[placeHolderLabel]!, value: _values[placeHolderLabel]!): nil
     }
     
     //Sets the new frame for the placeholder identified by the given label.
     func setPlaceHolderFrame(label: Int, newFrame: CGRect) {
-        if label < 0 || _placeHolders.isEmpty {
+        /*if label < 0 || _placeHolders.isEmpty {
             return
         }
         let offset = _placeHolderFT.query(label + 1)
@@ -160,13 +207,18 @@ class MementoNode: MemoryPalaceRoom {
         if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == label {
             _placeHolders[idx] = RectanglePlaceHolder(highlightArea: newFrame)
             _placeHolders[idx].label = label
+        }*/
+        if let pHolder = _placeHolders[label] {
+            let newPlaceholder = RectanglePlaceHolder(highlightArea: newFrame)
+            newPlaceholder.label = pHolder.label
+            _placeHolders[label] = newPlaceholder
         }
     }
 
     //Removes the placeholder identified by the label, and its corresponding associated value.
     //Does nothing if the placeholder cannot be found.
-    func removePlaceHolder(label: Int) {
-        if label < 0 || _placeHolders.isEmpty {
+    func removePlaceHolder(placeHolderLabel: Int) {
+        /*if label < 0 || _placeHolders.isEmpty {
             return
         }
         if _placeHolders.count == 1 {   //Special case: Only 1 placeholder exists
@@ -187,35 +239,44 @@ class MementoNode: MemoryPalaceRoom {
             }
             _placeHolders.removeAtIndex(idx)
             _values.removeAtIndex(idx)
-        }
+        }*/
+        _placeHolders.eraseValueForKey(placeHolderLabel)
+        _values.eraseValueForKey(placeHolderLabel)
     }
     
     //Associates the specified placeholder with the given value.
     //Does nothing ifno such placeholder exists.
-    func setAssociationValue(placeHolderLabel: Int, value: String?) {
-        if placeHolderLabel < 0 || _placeHolders.isEmpty {
+    func setAssociationValue(placeHolderLabel: Int, value: String) {
+        /*if placeHolderLabel < 0 || _placeHolders.isEmpty {
             return
         }
         let offset = _placeHolderFT.query(placeHolderLabel + 1)
         let idx = placeHolderLabel - offset
         if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == placeHolderLabel {
             _values[idx] = value
+        }*/
+        if _placeHolders[placeHolderLabel] != nil {
+            _values[placeHolderLabel] = value
         }
     }
     
     //Adds the given overlay object
     //Returns the identifier assigned to the added overlay
     func addOverlay(overlay: MutableOverlay) -> Int {
-        let label = _overlays.isEmpty ? 0: _overlays[_overlays.count - 1].label + 1
+        /*let label = _overlays.isEmpty ? 0: _overlays[_overlays.count - 1].label + 1
         _overlays.append(overlay)
         _overlays[_overlays.count - 1].label = label
+        return label*/
+        let label = _overlays.isEmpty ? 0: _overlays.largestKey! + 1
+        _overlays[label] = overlay
+        _overlays[label]?.label = label
         return label
     }
     
     //Gets the overlay object with the given label.
     //Returns nil if no such overlay object can be found.
-    func getOverlay(label: Int) -> Overlay? {
-        if label < 0 || _overlays.count == 0 {
+    func getOverlay(overlayLabel: Int) -> Overlay? {
+        /*if label < 0 || _overlays.count == 0 {
             return nil
         }
         let offset = _overlayFT.query(label + 1)
@@ -223,26 +284,30 @@ class MementoNode: MemoryPalaceRoom {
         if idx < 0 || idx >= _overlays.count || _overlays[idx].label != label {
             return nil
         }
-        return _overlays[idx].makeImmuatble()
+        return _overlays[idx].makeImmuatble()*/
+        return _overlays[overlayLabel]?.makeImmuatble()
     }
 
     //Changes the frame of the overlay object.
     //Does nothing if the overlay object cannot be found.
-    func setOverlayFrame(label: Int, newFrame: CGRect) {
-        if _overlays.isEmpty {
+    func setOverlayFrame(overlayLabel: Int, newFrame: CGRect) {
+        /*if _overlays.isEmpty {
             return
         }
         let offset = _overlayFT.query(label + 1)
         let idx = label - offset
         if idx >= 0 && idx < _overlays.count && _overlays[idx].label == label {
             _overlays[idx].frame = newFrame
+        }*/
+        if _overlays[overlayLabel] != nil {
+            _overlays[overlayLabel]?.frame = newFrame
         }
     }
     
     //Removes the overlay identified by the given label.
     //Does nothing if no such overlay is found.
-    func removeOverlay(label: Int) {
-        if label < 0 || _overlays.isEmpty {     //Error cases
+    func removeOverlay(overlayLabel: Int) {
+        /*if label < 0 || _overlays.isEmpty {     //Error cases
             return
         }
         if _overlays.count == 1 {       //Special case: there is only 1 overlay.
@@ -261,6 +326,7 @@ class MementoNode: MemoryPalaceRoom {
                 _overlayFT.clearFromIndex(prevLabel + 1)
             }
             _overlays.removeAtIndex(idx)
-        }
+        }*/
+        _overlays.eraseValueForKey(overlayLabel)
     }
 }
