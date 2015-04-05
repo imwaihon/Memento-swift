@@ -10,9 +10,9 @@ import Foundation
 
 struct Association: Equatable {
     let placeHolder: PlaceHolder
-    let value: String?
+    let value: String
     
-    init(placeHolder: PlaceHolder, value: String?) {
+    init(placeHolder: PlaceHolder, value: String) {
         self.placeHolder = placeHolder
         self.value = value
     }
