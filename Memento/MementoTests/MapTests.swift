@@ -207,4 +207,30 @@ class MapTests: XCTestCase {
             XCTAssertEqual(resArr[i].1, expectedArr[i].1)
         }
     }
+    
+    //tests subscript methods
+    func testSubscript() {
+        let map = Map<Int, Character>()
+        let keys = [2, 1, 4, 7, 5, 18]
+        let values = Array<Character>("badger")
+        
+        XCTAssertEqual(map.size, 0)
+        for i in 0..<keys.count {
+            map[keys[i]] = values[i]
+        }
+        
+        for i in 0..<keys.count {
+            XCTAssertEqual(map.valueForKey(keys[i])!, values[i])
+            XCTAssertEqual(map[keys[i]]!, values[i])
+        }
+        
+        XCTAssertTrue(map[3] == nil)
+        
+        map[keys[0]] = nil
+        XCTAssertFalse(map.containsKey(keys[0]))
+        XCTAssertTrue(map[keys[0]] == nil)
+        
+        map[keys[1]] = Character("e")
+        XCTAssertEqual(map[keys[1]]!, Character("e"))
+    }
 }
