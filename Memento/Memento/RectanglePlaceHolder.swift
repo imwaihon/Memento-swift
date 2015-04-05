@@ -12,7 +12,7 @@ import Foundation
 import UIKit
 
 class RectanglePlaceHolder: PlaceHolder {
-    private let highlightArea: CGRect
+    let highlightArea: CGRect
     
     override var stringEncoding: String{
         return NSStringFromCGRect(highlightArea)
