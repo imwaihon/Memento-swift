@@ -15,6 +15,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
     var palaces : [MemoryPalaceIcon]!
     var nextPalace = ""
     var selectedPalace = ""
+    var imagesCache = [String:UIImage]()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -77,7 +78,10 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
             
         } else {
             let currentIcon : MemoryPalaceIcon = palaces[indexPath.item-1]
-            cell.imageView.image = getImageNamed(currentIcon.imageFile)
+            if(imagesCache[currentIcon.imageFile] == nil || imagesCache[currentIcon.imageFile] == UIImage()){
+                imagesCache[currentIcon.imageFile] = getImageNamed(currentIcon.imageFile)
+            }
+            cell.imageView.image = imagesCache[currentIcon.imageFile]
             cell.nameLabel.text = currentIcon.graphName
             cell.nameLabel.hidden = false
             cell.opacityBackground.hidden = false
@@ -127,7 +131,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         }
     }
     
-    func getImageNamed(fileName : String) -> UIImage{
+    func getImageNamed(fileName : String) -> UIImage!{
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
         if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
