@@ -51,7 +51,7 @@ class MementoGraphTests: XCTestCase {
         graph.removeRoom(0)
         XCTAssertEqual(graph.numRooms, 1)
         XCTAssertEqual(graph.icon, MemoryPalaceIcon(graphName: "sampleGraph", imageFile: "B.png"))
-        XCTAssertEqual(graph.getRoom(1)!.icon, MemoryPalaceRoomIcon(graphName: "", label: 1, filename: "B.png", overlays: []))
+        XCTAssertEqual(graph.getRoom(1)!.icon, MemoryPalaceRoomIcon(graphName: "sampleGraph", label: 1, filename: "B.png", overlays: []))
         
         //Attempts to empty the graph
         graph.removeRoom(1)

@@ -25,6 +25,8 @@
 //  If the object woth given label does not exist, the object at the index will have a different label.
 //  Cumulative table can be done efficiently in O(log N) time using Binary-Indexed Tree.
 //  Hence, the Binary-Indexed Tree is used in computing the index of the specified object.
+//  Fenwick Tree solution is scraped as it leads to occupying even more memory and does not improve deletion time complexity.
+//  Current implementation is using balanced Binary Search Tree to map label to object.
 //
 //  Created by Qua Zi Xian on 19/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
@@ -35,11 +37,9 @@ import UIKit
 
 class MementoNode: MemoryPalaceRoom {
     private let _backgroundImageFile: String
-    private var _overlayFT: FenwickTree
-    private var _placeHolderFT: FenwickTree
-    private var _overlays: [MutableOverlay]
-    private var _placeHolders: [PlaceHolder]
-    private var _values: [String?]
+    private let _overlays: Map<Int, MutableOverlay>
+    private let _placeHolders: Map<Int, PlaceHolder>
+    private let _values: Map<Int, String>
     
     var label: Int = 0      //The node's identification label in the graph
     var graphName: String = "sampleGraph"
@@ -49,20 +49,27 @@ class MementoNode: MemoryPalaceRoom {
         return MemoryPalaceRoomIcon(graphName: graphName, label: label, filename: _backgroundImageFile, overlays: overlays)
     }
     var overlays: [Overlay] {
+        var tempArr = _overlays.inOrderTraversal()
         var arr = [Overlay]()
-        for i in 0..<_overlays.count {
-            arr.append(_overlays[i].makeImmuatble())
+        arr.reserveCapacity(numOverlays)
+        for elem in tempArr {
+            arr.append(elem.1.makeImmuatble())
         }
         return arr
     }
+    var numOverlays: Int {
+        return _overlays.size
+    }
     var numPlaceHolders: Int {
-        return _placeHolders.count
+        return _placeHolders.size
     }
     var associations: [Association] {
         var arr = [Association]()
-        let numAssoc = numPlaceHolders
-        for i in 0..<numAssoc {
-            arr.append(Association(placeHolder: _placeHolders[i], value: _values[i]))
+        var tempArr1 = _placeHolders.inOrderTraversal()
+        var tempArr2 = _values.inOrderTraversal()
+        arr.reserveCapacity(numPlaceHolders)
+        for i in 0..<numPlaceHolders {
+            arr.append(Association(placeHolder: tempArr1[i].1, value: tempArr2[i].1))
         }
         return arr
     }
@@ -75,179 +82,142 @@ class MementoNode: MemoryPalaceRoom {
         rep[bgImageKey] = NSString(string: _backgroundImageFile)
         
         //Gets array of overlays
-        var overlays = NSMutableArray()
-        for overlay in _overlays {
-            overlays.addObject(overlay.stringEncoding)
+        let overlayArr = overlays
+        var overlayStrArr = [String]()
+        overlayStrArr.reserveCapacity(overlayArr.count)
+        for overlay in overlayArr {
+            overlayStrArr.append(overlay.stringEncoding)
         }
-        rep[overlayKey] = overlays
+        rep[overlayKey] = NSArray(array: overlayStrArr)
         
-        //Gets array of placeholders
-        var pHolders = NSMutableArray()
-        for placeHolder in _placeHolders {
-            pHolders.addObject(placeHolder.stringEncoding)
-        }
-        rep[placeHolderKey] = pHolders
+        //Gets arrays of placeholders and values
+        let assoc = associations
+        var pHolderStrArr = [String]()
+        var val = [String]()
+        pHolderStrArr.reserveCapacity(assoc.count)
+        val.reserveCapacity(assoc.count)
         
-        //Gets array of values
-        var val = NSMutableArray()
-        for value in _values {
-            val.addObject(value == nil ? "": NSString(string: value!))
+        for elem in assoc {
+            pHolderStrArr.append(elem.placeHolder.stringEncoding)
+            val.append(elem.value)
         }
-        rep[valueKey] = val
+        
+        rep[placeHolderKey] = NSArray(array: pHolderStrArr)
+        rep[valueKey] = NSArray(array: val)
+        
         return rep
     }
 
     init(imageFile: String){
         _backgroundImageFile = imageFile
-        _overlays = [MutableOverlay]()
-        _overlayFT = FenwickTree()
-        _placeHolders = [RectanglePlaceHolder]()
-        _placeHolderFT = FenwickTree()
-        _values = [String?](count: _placeHolders.count, repeatedValue: nil)
+        _overlays = Map<Int, MutableOverlay>()
+        _placeHolders = Map<Int, PlaceHolder>()
+        _values = Map<Int, String>()
     }
     
     //Adds the given placeholder to this memory palace room.
-    //Does nothing if it overlaps with any of the existing placeholedrs.
-    func addPlaceHolder(placeHolder: PlaceHolder) {
+    //Returns false if the placeholder cannot be added because it overlaps with an existing placeholder.
+    func addPlaceHolder(placeHolder: PlaceHolder) -> Bool {
+        
+        //Checks for overlap
+        let pHolders = _placeHolders.inOrderTraversal()
         var hasOverlap = false
-        
-        dispatch_apply(UInt(_placeHolders.count), dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {(idx: UInt) -> Void in
-            hasOverlap |= PlaceHolder.hasOverlap(self._placeHolders[Int(idx)], placeHolder2: placeHolder)
+        dispatch_apply(UInt(pHolders.count), dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {(idx: UInt) -> Void in
+            hasOverlap |= PlaceHolder.hasOverlap(placeHolder, placeHolder2: pHolders[Int(idx)].1)
         })
-        
-        if !hasOverlap {
-            placeHolder.label = _placeHolders.isEmpty ? 0: _placeHolders[_placeHolders.count - 1].label + 1
-            _placeHolders.append(placeHolder)
-            _values.append(nil)
+        if hasOverlap {
+            return false
         }
+        
+        //Else add the placeholder.
+        let label = _placeHolders.isEmpty ? 0: _placeHolders.largestKey! + 1
+        placeHolder.label = label
+        _placeHolders[label] = placeHolder
+        _values[label] = String()
+        return true
     }
     
     //Gets the placeholder identified by the given label.
     //Returns nil if no such placeholder is found.
-    func getPlaceHolder(label: Int) -> PlaceHolder? {
-        if label < 0 || _placeHolders.isEmpty {
-            return nil
-        }
-        let offset = _placeHolderFT.query(label + 1)
-        let idx = label - offset
-        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == label {
-            return _placeHolders[idx]
-        }
-        return nil
+    func getPlaceHolder(placeHolderLabel: Int) -> PlaceHolder? {
+        return _placeHolders[placeHolderLabel]
     }
     
     //Gets the association identified by the placeholder's label.
     //Returns nil if no such association is found.
     func getAssociation(placeHolderLabel: Int) -> Association? {
-        if label < 0 || _placeHolders.isEmpty {
-            return nil
+        return _placeHolders[placeHolderLabel] != nil && _values[placeHolderLabel] != nil ? Association(placeHolder: _placeHolders[placeHolderLabel]!, value: _values[placeHolderLabel]!): nil
+    }
+    
+    //Sets the new frame for the placeholder identified by the given label.
+    func setPlaceHolderFrame(label: Int, newFrame: CGRect) {
+        if let pHolder = _placeHolders[label] {
+            let newPlaceholder = RectanglePlaceHolder(highlightArea: newFrame)
+            newPlaceholder.label = pHolder.label
+            _placeHolders[label] = newPlaceholder
         }
-        let offset = _placeHolderFT.query(placeHolderLabel + 1)
-        let idx = placeHolderLabel - offset
-        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == placeHolderLabel {
-            return Association(placeHolder: _placeHolders[idx], value: _values[idx])
+    }
+    
+    //Swaps the 2 placeholders.
+    //Returns false if no swapping takes place due to absence of 1 of the specified placeholders.
+    func swapPlaceHolders(pHolder1Label: Int, pHolder2Label: Int) -> Bool {
+        if let pHolder1 = _placeHolders[pHolder1Label] {
+            if let pHolder2 = _placeHolders[pHolder2Label] {
+                let value1 = _values[pHolder1Label]
+                let value2 = _values[pHolder2Label]
+                pHolder1.label = pHolder2Label
+                pHolder2.label = pHolder1Label
+                _placeHolders[pHolder1Label] = pHolder2
+                _placeHolders[pHolder2Label] = pHolder1
+                _values[pHolder1Label] = value2
+                _values[pHolder2Label] = value1
+                return true
+            }
         }
-        return nil
+        return false
     }
 
     //Removes the placeholder identified by the label, and its corresponding associated value.
     //Does nothing if the placeholder cannot be found.
-    func removePlaceHolder(label: Int) {
-        if label < 0 || _placeHolders.isEmpty {
-            return
-        }
-        if _placeHolders.count == 1 {   //Special case: Only 1 placeholder exists
-            if _placeHolders[0].label == label {
-                _placeHolders.removeAtIndex(0)
-                _values.removeAtIndex(0)
-                _placeHolderFT = FenwickTree()
-            }
-            return
-        }
-        let offset = _placeHolderFT.query(label + 1)
-        let idx = label - offset
-        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == label {
-            _placeHolderFT.update(label + 1, change: 1)
-            if idx == _placeHolders.count - 1 { //Special case: Removing the last placeholder
-                let prevLabel = _placeHolders[idx - 1].label
-                _placeHolderFT.clearFromIndex(prevLabel + 1)
-            }
-            _placeHolders.removeAtIndex(idx)
-            _values.removeAtIndex(idx)
-        }
+    func removePlaceHolder(placeHolderLabel: Int) {
+        _placeHolders.eraseValueForKey(placeHolderLabel)
+        _values.eraseValueForKey(placeHolderLabel)
     }
     
     //Associates the specified placeholder with the given value.
     //Does nothing ifno such placeholder exists.
-    func setAssociationValue(placeHolderLabel: Int, value: String?) {
-        if placeHolderLabel < 0 || _placeHolders.isEmpty {
-            return
-        }
-        let offset = _placeHolderFT.query(placeHolderLabel + 1)
-        let idx = placeHolderLabel - offset
-        if idx >= 0 && idx < _placeHolders.count && _placeHolders[idx].label == placeHolderLabel {
-            _values[idx] = value
+    func setAssociationValue(placeHolderLabel: Int, value: String) {
+        if _placeHolders[placeHolderLabel] != nil {
+            _values[placeHolderLabel] = value
         }
     }
     
     //Adds the given overlay object
     //Returns the identifier assigned to the added overlay
     func addOverlay(overlay: MutableOverlay) -> Int {
-        let label = _overlays.isEmpty ? 0: _overlays[_overlays.count - 1].label + 1
-        _overlays.append(overlay)
-        _overlays[_overlays.count - 1].label = label
+        let label = _overlays.isEmpty ? 0: _overlays.largestKey! + 1
+        _overlays[label] = overlay
+        _overlays[label]?.label = label
         return label
     }
     
     //Gets the overlay object with the given label.
     //Returns nil if no such overlay object can be found.
-    func getOverlay(label: Int) -> Overlay? {
-        if label < 0 || _overlays.count == 0 {
-            return nil
-        }
-        let offset = _overlayFT.query(label + 1)
-        let idx = label - offset
-        if idx < 0 || idx >= _overlays.count || _overlays[idx].label != label {
-            return nil
-        }
-        return _overlays[idx].makeImmuatble()
+    func getOverlay(overlayLabel: Int) -> Overlay? {
+        return _overlays[overlayLabel]?.makeImmuatble()
     }
 
     //Changes the frame of the overlay object.
     //Does nothing if the overlay object cannot be found.
-    func setOverlayFrame(label: Int, newFrame: CGRect) {
-        if _overlays.isEmpty {
-            return
-        }
-        let offset = _overlayFT.query(label + 1)
-        let idx = label - offset
-        if idx >= 0 && idx < _overlays.count && _overlays[idx].label == label {
-            _overlays[idx].frame = newFrame
+    func setOverlayFrame(overlayLabel: Int, newFrame: CGRect) {
+        if _overlays[overlayLabel] != nil {
+            _overlays[overlayLabel]?.frame = newFrame
         }
     }
     
     //Removes the overlay identified by the given label.
     //Does nothing if no such overlay is found.
-    func removeOverlay(label: Int) {
-        if label < 0 || _overlays.isEmpty {     //Error cases
-            return
-        }
-        if _overlays.count == 1 {       //Special case: there is only 1 overlay.
-            if _overlays[0].label == label {    //If the overlay is found.
-                _overlays.removeAtIndex(0)
-                _overlayFT = FenwickTree()
-            }
-            return
-        }
-        let offset = _overlayFT.query(label + 1)
-        let idx = label - offset
-        if idx >= 0 && idx < _overlays.count && _overlays[idx].label == label {  //If the overlay is found
-            _overlayFT.update(label + 1, change: 1)
-            if idx == _overlays.count - 1 { //Special case: Deleting last element.
-                let prevLabel = _overlays[idx - 1].label
-                _overlayFT.clearFromIndex(prevLabel + 1)
-            }
-            _overlays.removeAtIndex(idx)
-        }
+    func removeOverlay(overlayLabel: Int) {
+        _overlays.eraseValueForKey(overlayLabel)
     }
 }

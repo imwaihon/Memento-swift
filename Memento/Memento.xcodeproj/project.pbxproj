@@ -35,6 +35,8 @@
 		5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
 		5A278FF51AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
 		5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */; };
+		5A28A8BA1AD0436F00518AB1 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A28A8B91AD0436F00518AB1 /* Map.swift */; };
+		5A28A8BB1AD0436F00518AB1 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A28A8B91AD0436F00518AB1 /* Map.swift */; };
 		5A3F386E1ACA76050096AB6C /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F386D1ACA76050096AB6C /* Overlay.swift */; };
 		5A3F386F1ACA76050096AB6C /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F386D1ACA76050096AB6C /* Overlay.swift */; };
 		5A3F38711ACA76A90096AB6C /* MutableOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F38701ACA76A90096AB6C /* MutableOverlay.swift */; };
@@ -75,6 +77,7 @@
 		5AA1B06B1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
 		5AD9C8401ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */; };
 		5AD9C8411ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */; };
+		5AEE2F861AD0C59900E0DD81 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEE2F851AD0C59900E0DD81 /* MapTests.swift */; };
 		5AEF2A5A1AC4FA4A00B2B6FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */; };
 		5AEF2A5B1AC4FA4A00B2B6FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */; };
 		5AEF2A5D1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */; };
@@ -131,6 +134,7 @@
 		5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomIcon.swift; sourceTree = "<group>"; };
 		5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphTests.swift; sourceTree = "<group>"; };
+		5A28A8B91AD0436F00518AB1 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		5A3F386D1ACA76050096AB6C /* Overlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		5A3F38701ACA76A90096AB6C /* MutableOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableOverlay.swift; sourceTree = "<group>"; };
 		5A497A321AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurCreatePalaceViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 		5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelChangeUpdateDelegate.swift; sourceTree = "<group>"; };
 		5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoManager.swift; sourceTree = "<group>"; };
 		5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomView.swift; sourceTree = "<group>"; };
+		5AEE2F851AD0C59900E0DD81 /* MapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5AEF2A5C1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceIcon.swift; sourceTree = "<group>"; };
 		5AEF2A5F1AC510DB00B2B6FB /* PlaceHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceHolder.swift; sourceTree = "<group>"; };
@@ -252,6 +257,7 @@
 		4FCE36001ABA8CF000417763 /* MementoTests */ = {
 			isa = PBXGroup;
 			children = (
+				5AEE2F851AD0C59900E0DD81 /* MapTests.swift */,
 				5A5FB0A11AC63D6E00EA0EE7 /* MementoModelTests.swift */,
 				5A5FB0A81AC67FB400EA0EE7 /* MementoManagerTests.swift */,
 				5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */,
@@ -277,6 +283,7 @@
 			children = (
 				5A01A3441ACE438900351423 /* FenwickTree.swift */,
 				5A837B911ABBE86E00E52F80 /* Set.swift */,
+				5A28A8B91AD0436F00518AB1 /* Map.swift */,
 			);
 			name = "Data Structures and Algorithms";
 			sourceTree = "<group>";
@@ -436,6 +443,7 @@
 				5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */,
 				4F9D15151ACADBB400BEE609 /* GameChallengeViewController.swift in Sources */,
 				5AEF2A5D1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */,
+				5A28A8BA1AD0436F00518AB1 /* Map.swift in Sources */,
 				5AEF2A601AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
 				5A4E78A21AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				4F9D15191ACAEF6A00BEE609 /* SaveLoadManager.swift in Sources */,
@@ -482,6 +490,7 @@
 				5A4E78A31AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
 				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
 				4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */,
+				5A28A8BB1AD0436F00518AB1 /* Map.swift in Sources */,
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
 				5A5663FB1AC955B200190068 /* OverviewViewController.swift in Sources */,
 				5A497A341AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift in Sources */,
@@ -500,6 +509,7 @@
 				5A4E78A61AC2A44800013728 /* MementoNodeFactory.swift in Sources */,
 				5A497A2F1AC7ECFF00D6C9C5 /* SelectPalaceViewController.swift in Sources */,
 				4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */,
+				5AEE2F861AD0C59900E0DD81 /* MapTests.swift in Sources */,
 				5A3F386F1ACA76050096AB6C /* Overlay.swift in Sources */,
 				5A01A3461ACE438900351423 /* FenwickTree.swift in Sources */,
 				5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */,

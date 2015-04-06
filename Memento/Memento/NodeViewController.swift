@@ -7,6 +7,8 @@
 //
 
 
+//  TODO: Record ordering of nodes using model.
+
 import UIKit
 import MobileCoreServices
 
@@ -15,27 +17,34 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // ImageView = whole screen
     
     @IBOutlet weak var imageView: UIImageView!
-    var newMedia: Bool?
+    private var newMedia: Bool?
     
     var mementoManager = MementoManager.sharedInstance
-    var isMainView: Bool = true
-    var newImage: DraggableImageView!
-    var lastRotation = CGFloat()
-    let panRec = UIPanGestureRecognizer()
-    var startPoint = CGPoint()
-    var annotationCount: Int = 100
+    var saveLoadManager = SaveLoadManager.sharedInstance
+    
+    private var isMainView: Bool = true
+    private var newImage: DraggableImageView!
+    private var lastRotation = CGFloat()
+    private let panRec = UIPanGestureRecognizer()
+    private var startPoint = CGPoint()
+    private var annotationCount: Int = 0
     
     var roomLabel = Int()
     var graphName = String()
-
+    private var overlayList = [Overlay]()
+    private var associationList = [Association]()
+    
+    private var rotationToggler: Bool = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.imageView.userInteractionEnabled = true
+        self.view.userInteractionEnabled = true
         
         //setUpGestures()
         panRec.addTarget(self, action: "handlePan:")
         self.view.addGestureRecognizer(panRec)
-        self.view.userInteractionEnabled = true
         
         // Get view representation of room
         var roomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
@@ -43,8 +52,44 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Get image from graphical view
         imageView.image = getImageNamed(roomRep.backgroundImage)
         
+        // Load
+        overlayList = roomRep.overlays
+        associationList = roomRep.associations
+        loadLayouts()
+        
     }
     
+    // Function to load layouts
+    private func loadLayouts() {
+        // Load draggable image views/layers
+        var draggableImageViewsToAdd = [DraggableImageView]()
+        var counter = 0
+        for eachOverlay in overlayList {
+            var newFrame = eachOverlay.frame
+            var newImageFile = eachOverlay.imageFile
+            var newImage = saveLoadManager.loadOverlayImage(newImageFile)
+            
+            var newDraggableImageView = DraggableImageView(image: newImage!)
+            newDraggableImageView.graphName = self.graphName
+            newDraggableImageView.roomLabel = self.roomLabel
+            newDraggableImageView.labelIdentifier = counter
+            counter += 1
+            newDraggableImageView.frame = newFrame
+            self.imageView.addSubview(newDraggableImageView)
+        }
+        
+        // Load association list
+        for eachAssociation in associationList {
+            var newFrame = eachAssociation.placeHolder.view.frame
+            var newLabel = eachAssociation.placeHolder.label
+            
+            var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, background: imageView)
+            newAnnotatableView.backgroundColor = .whiteColor()
+            newAnnotatableView.alpha = 0.1
+            imageView.addSubview(newAnnotatableView)
+        }
+        
+    }
     
     // Camera button
     @IBAction func useCamera(sender: AnyObject) {
@@ -82,8 +127,22 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
-    // Helper functions for main photo pickers
+    @IBAction func rotateImage(sender: AnyObject) {
+        if rotationToggler == true {
+            UIView.animateWithDuration(1.0, animations: {
+                self.imageView.transform = CGAffineTransformMakeRotation((180.0 * CGFloat(M_PI)) / 180.0)
+            })
+            rotationToggler = false
+        } else {
+            UIView.animateWithDuration(1.0, animations: {
+                self.imageView.transform = CGAffineTransformMakeRotation(0)
+            })
+            rotationToggler = true
+        }
+        
+    }
     
+    // Helper functions for main photo pickers
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as NSString
@@ -110,9 +169,15 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 var scalingFactor = image.size.height/150.0
                 var newWidth = image.size.width / scalingFactor
                 newImage = DraggableImageView(image: image)
+                newImage.graphName = self.graphName
+                newImage.roomLabel = self.roomLabel
                 newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
-                imageView.userInteractionEnabled = true
                 imageView.addSubview(newImage)
+                
+                // Get paths for saving
+                saveLoadManager.saveOverlayImage("test", imageToSave: image)
+                var newMutableOverlay = MutableOverlay(frame: newImage.frame, imageFile: "test")
+                newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: newMutableOverlay)
                 
             }
             
@@ -188,14 +253,14 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         var toDrawRect = CGRect(x: min(startPoint.x, endPoint.x), y: min(startPoint.y, endPoint.y), width: abs(startPoint.x - endPoint.x), height: abs(startPoint.y - endPoint.y))
 
         // Add the rectangle into main view
-        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self, tagNumber: annotationCount)
-        annotationCount += 1
+        var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: toDrawRect)
+        mementoManager.addPlaceHolder(graphName, roomLabel: roomLabel, placeHolder: newRectPlaceHolder)
+        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView)
         newViewToTest.backgroundColor = .whiteColor()
         newViewToTest.alpha = 0.1
-        imageView.userInteractionEnabled = true
         imageView.addSubview(newViewToTest)
-        //self.view.addSubview(newViewToTest)
     }
+    
     
     private func getImageNamed(fileName : String) -> UIImage{
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory

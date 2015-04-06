@@ -37,7 +37,7 @@ class MementoModel {
     private var saveLoadManager: SaveLoadManager
     private var graphs: [MementoGraph]
     private var graphMap: [String: Int]
-    private var saveQueue: dispatch_queue_t
+    let saveQueue: dispatch_queue_t
     
     //Properties
     var numPalaces: Int {
@@ -109,7 +109,7 @@ class MementoModel {
             for i in (index+1)..<graphs.count {
                 graphMap[graphs[i].name]?--
             }
-            graphMap[graphs[index].name] = nil
+            graphMap[palaceName] = nil
             graphs.removeAtIndex(index)
         } else {
             return
@@ -118,6 +118,7 @@ class MementoModel {
         //Save changes
         dispatch_async(saveQueue, {() -> Void in
             //Make call to delete the palace file
+            self.saveLoadManager.deletePalace(palaceName)
         })
     }
     

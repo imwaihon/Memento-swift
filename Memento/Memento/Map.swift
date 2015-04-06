@@ -1,28 +1,17 @@
 //
-//  Set.swift
+//  Map.swift
 //  Memento
 //
-//  Represents the balanced Binary Search Tree data structure.
+//  Defines an ordered collection of mapping of keys to values using balanced Binary Search Tree.
 //
-//  Functional Specifications
-//  Insert element
-//  Remove element
-//  Find an element
-//  Get smallest element
-//  Get largest element
-//
-//  Non-functional Specifications
-//  O(log n) time complexity for functional operations.
-//  No duplicate elements.
-//
-//  Created by Qua Zi Xian on 20/3/15.
+//  Created by Qua Zi Xian on 5/4/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
 import Foundation
 
-class Set<T: Comparable> {
-    private var _root: SetNode<T>?
+class Map<K: Comparable, V> {
+    private var _root: MapNode<K, V>?
     private var _size: Int
     
     //Properties
@@ -32,11 +21,29 @@ class Set<T: Comparable> {
     var isEmpty: Bool {
         return size == 0
     }
-    var smallestElement: T? {
+    var smallestKey: K? {
+        return isEmpty ? nil: minElement(_root!).key
+    }
+    var valueForSmallestKey: V? {
         return isEmpty ? nil: minElement(_root!).value
     }
-    var largestElement: T? {
+    var largestKey: K? {
+        return isEmpty ? nil: maxElement(_root!).key
+    }
+    var valueForLargestKey: V? {
         return isEmpty ? nil: maxElement(_root!).value
+    }
+    subscript(key: K) -> V? {
+        get {
+            return valueForKey(key)
+        }
+        set(newValue) {
+            if newValue == nil {
+                eraseValueForKey(key)
+            } else {
+                insertValueForKey(key, value: newValue!)
+            }
+        }
     }
     
     init() {
@@ -46,37 +53,53 @@ class Set<T: Comparable> {
     
     //Inserts a new element into the set.
     //Does nothing if element already exists.
-    func insert(elem: T) {
+    func insertValueForKey(key: K, value: V) {
         if isEmpty {
-            _root = SetNode<T>(value: elem, parent: nil)
+            _root = MapNode<K, V>(key: key, value: value, parent: nil)
             _size++
         } else {
-            insert(elem, curNode: _root!)
+            insert(MapNode<K, V>(key: key, value: value, parent: nil), curNode: _root!)
         }
     }
     
     //The recursive insertion function
-    private func insert(elem: T, curNode: SetNode<T>) {
+    private func insert(newNode: MapNode<K, V>, curNode: MapNode<K, V>) {
         //Catch duplicate
-        if elem == curNode.value {
+        if newNode.key == curNode.key {
+            newNode.parent = curNode.parent
+            newNode.leftChild = curNode.leftChild
+            newNode.rightChild = curNode.rightChild
+            curNode.leftChild?.parent = newNode
+            curNode.rightChild?.parent = newNode
+            if curNode === _root {
+                _root = newNode
+            } else if let p = curNode.parent {
+                if curNode === p.leftChild {
+                    p.leftChild = newNode
+                } else {
+                    p.rightChild = newNode
+                }
+            }
             return
         }
         
         //Recursive insertion
-        if elem < curNode.value {
+        if newNode.key < curNode.key {
             if curNode.hasLeftChild {
-                insert(elem, curNode: curNode.leftChild!)
+                insert(newNode, curNode: curNode.leftChild!)
                 curNode.updateHeight()
             } else {
-                curNode.leftChild = SetNode<T>(value: elem, parent: curNode)
+                curNode.leftChild = newNode
+                newNode.parent = curNode
                 _size++
             }
         } else {
             if curNode.hasRightChild {
-                insert(elem, curNode: curNode.rightChild!)
+                insert(newNode, curNode: curNode.rightChild!)
                 curNode.updateHeight()
             } else {
-                curNode.rightChild = SetNode<T>(value: elem, parent: curNode)
+                curNode.rightChild = newNode
+                newNode.parent = curNode
                 _size++
             }
         }
@@ -102,7 +125,7 @@ class Set<T: Comparable> {
     }
     
     //Required: node.hasRightChild returns true
-    private func rotateLeft(node: SetNode<T>) {
+    private func rotateLeft(node: MapNode<K, V>) {
         assert(node.hasRightChild)
         
         let r = node.rightChild!
@@ -128,13 +151,13 @@ class Set<T: Comparable> {
         
         //Make right child the parent
         node.parent = r
-
+        
         assert(abs(node.balanceFactor) < 2)
         assert(abs(r.balanceFactor) < 2)
     }
     
     //Required: node.hasLeftChild returns true
-    private func rotateRight(node: SetNode<T>) {
+    private func rotateRight(node: MapNode<K, V>) {
         assert(node.hasLeftChild)
         
         let l = node.leftChild!
@@ -159,31 +182,44 @@ class Set<T: Comparable> {
         l.parent = node.parent
         
         //Make left child as the parent
-        node.parent = l 
+        node.parent = l
         
         assert(abs(node.balanceFactor) < 2)
         assert(abs(l.balanceFactor) < 2)
     }
     
     //Checks if the set contains the specified element
-    func contains(elem: T) -> Bool {
-        if isEmpty {
-            return false
-        }
-        return contains(elem, curNode: _root!)
+    func containsKey(key: K) -> Bool {
+        return isEmpty ? false: containsKey(key, curNode: _root!)
     }
     
     //The recursive binary search function
-    private func contains(elem: T, curNode: SetNode<T>) -> Bool {
-        if elem == curNode.value {
+    private func containsKey(key: K, curNode: MapNode<K, V>) -> Bool {
+        if key == curNode.key {
             return true
         }
         
-        if elem < curNode.value {
-            return curNode.hasLeftChild ? contains(elem, curNode: curNode.leftChild!): false
+        if key < curNode.key {
+            return curNode.hasLeftChild ? containsKey(key, curNode: curNode.leftChild!): false
         } else {
-            return curNode.hasRightChild ? contains(elem, curNode: curNode.rightChild!): false
+            return curNode.hasRightChild ? containsKey(key, curNode: curNode.rightChild!): false
         }
+    }
+    
+    //Gets the value mapped to the given key.
+    //Returns nil if the key is not found.
+    func valueForKey(key: K) -> V? {
+        return isEmpty ? nil: valueForKey(key, curNode: _root!)
+    }
+    
+    private func valueForKey(key: K, curNode: MapNode<K, V>) -> V? {
+        if key == curNode.key {
+            return curNode.value
+        }
+        if key < curNode.key {
+            return curNode.hasLeftChild ? valueForKey(key, curNode: curNode.leftChild!): nil
+        }
+        return curNode.hasRightChild ? valueForKey(key, curNode: curNode.rightChild!): nil
     }
     
     //Removes all elements from this set.
@@ -194,27 +230,27 @@ class Set<T: Comparable> {
     
     //Removes the specified element from the set.
     //Does nothing if the element cannot be found.
-    func erase(elem: T) {
+    func eraseValueForKey(key: K) {
         if isEmpty {
             return
         }
-        erase(elem, curNode: _root!)
+        erase(key, curNode: _root!)
     }
     
-    private func erase(elem: T, curNode: SetNode<T>) {
-        var node: SetNode<T>
-        if elem < curNode.value {
+    private func erase(key: K, curNode: MapNode<K, V>) {
+        var node: MapNode<K, V>
+        if key < curNode.key {
             if !curNode.hasLeftChild {
                 return
             }
-            erase(elem, curNode: curNode.leftChild!)
+            erase(key, curNode: curNode.leftChild!)
             curNode.updateHeight()
             node = curNode
-        } else if elem > curNode.value {
+        } else if key > curNode.key {
             if !curNode.hasRightChild {
                 return
             }
-            erase(elem, curNode: curNode.rightChild!)
+            erase(key, curNode: curNode.rightChild!)
             curNode.updateHeight()
             node = curNode
         } else {
@@ -298,28 +334,28 @@ class Set<T: Comparable> {
     }
     
     //Gets the array of elements stored in this set.
-    func inOrderTraversal() -> [T] {
+    func inOrderTraversal() -> [(K, V)] {
         if isEmpty {
-            return [T]()
+            return [(K, V)]()
         }
-        var arr = [T]()
+        var arr = [(K, V)]()
         arr.reserveCapacity(size)
         inOrderTraversal(_root!, arr: &arr)
         return arr
     }
     
-    private func inOrderTraversal(curNode: SetNode<T>, inout arr: [T]) {
+    private func inOrderTraversal(curNode: MapNode<K, V>, inout arr: [(K, V)]) {
         if curNode.hasLeftChild {
             inOrderTraversal(curNode.leftChild!, arr: &arr)
         }
-        arr.append(curNode.value)
+        arr.append((curNode.key, curNode.value))
         if curNode.hasRightChild {
             inOrderTraversal(curNode.rightChild!, arr: &arr)
         }
     }
     
     //Returns the node with the next smallest value or nil if no such node exists
-    private func successor(node: SetNode<T>) -> SetNode<T>? {
+    private func successor(node: MapNode<K, V>) -> MapNode<K, V>? {
         if node.hasRightChild {
             return minElement(node.rightChild!)
         }
@@ -332,7 +368,7 @@ class Set<T: Comparable> {
         return p
     }
     
-    private func minElement(root: SetNode<T>) -> SetNode<T> {
+    private func minElement(root: MapNode<K, V>) -> MapNode<K, V> {
         var node = root
         while node.hasLeftChild {
             node = node.leftChild!
@@ -340,7 +376,7 @@ class Set<T: Comparable> {
         return node
     }
     
-    private func maxElement(root: SetNode<T>) -> SetNode<T> {
+    private func maxElement(root: MapNode<K, V>) -> MapNode<K, V> {
         var node = root
         while node.hasRightChild {
             node = node.rightChild!
@@ -349,13 +385,14 @@ class Set<T: Comparable> {
     }
 }
 
-class SetNode<T> {
-    let value: T
-    private var _leftChild: SetNode<T>?
-    private var _rightChild: SetNode<T>?
+class MapNode<K: Comparable, V> {
+    let key: K
+    let value: V
+    private var _leftChild: MapNode<K, V>?
+    private var _rightChild: MapNode<K, V>?
     private var _leftHeight: Int
     private var _rightHeight: Int
-    private var _parent: SetNode<T>?
+    private var _parent: MapNode<K, V>?
     
     //Properties
     var hasLeftChild: Bool {
@@ -364,7 +401,7 @@ class SetNode<T> {
     var hasRightChild: Bool {
         return _rightChild != nil
     }
-    var leftChild: SetNode<T>? {
+    var leftChild: MapNode<K, V>? {
         get {
             return _leftChild
         }
@@ -373,7 +410,7 @@ class SetNode<T> {
             _leftHeight = (_leftChild == nil) ? -1: _leftChild!.height
         }
     }
-    var rightChild: SetNode<T>? {
+    var rightChild: MapNode<K, V>? {
         get {
             return _rightChild
         }
@@ -382,7 +419,7 @@ class SetNode<T> {
             _rightHeight = (_rightChild == nil) ? -1: _rightChild!.height
         }
     }
-    var parent: SetNode<T>? {
+    var parent: MapNode<K, V>? {
         get {
             return _parent
         }
@@ -397,7 +434,8 @@ class SetNode<T> {
         return _leftHeight - _rightHeight
     }
     
-    init(value: T, parent: SetNode<T>?){
+    init(key: K, value: V, parent: MapNode<K, V>?){
+        self.key = key
         self.value = value
         self._parent = parent
         _leftChild = nil

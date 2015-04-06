@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class SaveLoadManager {
     
@@ -28,12 +29,16 @@ class SaveLoadManager {
     
     init() {
         graphFactory = MementoGraphFactory()
+        checkFolder()
     }
     
+    // Check folder if exist, if not, create one
     func checkFolder() {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
         let path = documentsDirectory.stringByAppendingPathComponent("data")
+        let sharedPath = documentsDirectory.stringByAppendingPathComponent("sharedResources")
+        let overlayPath = documentsDirectory.stringByAppendingPathComponent("sharedResources").stringByAppendingPathComponent("overlays")
         
         let fileManager = NSFileManager.defaultManager()
         var error: NSError?
@@ -41,6 +46,22 @@ class SaveLoadManager {
         if (!fileManager.fileExistsAtPath(path)) {
             // Folder does not exist, create folder
             if !fileManager.createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil, error: &error) {
+                println("Failed to create dir: \(error!.localizedDescription)")
+                return
+            }
+        }
+        
+        if (!fileManager.fileExistsAtPath(sharedPath)) {
+            // Folder does not exist, create folder
+            if !fileManager.createDirectoryAtPath(sharedPath, withIntermediateDirectories: true, attributes: nil, error: &error) {
+                println("Failed to create dir: \(error!.localizedDescription)")
+                return
+            }
+        }
+        
+        if (!fileManager.fileExistsAtPath(overlayPath)) {
+            // Folder does not exist, create folder
+            if !fileManager.createDirectoryAtPath(overlayPath, withIntermediateDirectories: true, attributes: nil, error: &error) {
                 println("Failed to create dir: \(error!.localizedDescription)")
                 return
             }
@@ -88,10 +109,6 @@ class SaveLoadManager {
         }
     }
     
-    // Saves shared resources such as images for layers/photos
-    func saveSharedResource() {
-        
-    }
 
 
     // Deletes Palace directory
@@ -110,8 +127,6 @@ class SaveLoadManager {
     
     
     func loadAllPalaces() -> [MementoGraph] {
-        checkFolder()
-        
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
         let path = documentsDirectory.stringByAppendingPathComponent("data")
@@ -139,5 +154,37 @@ class SaveLoadManager {
         var createdGraph = graphFactory.decodeAndMakeGraph(graphData)
         
         return createdGraph
+    }
+    
+    
+    // Save overlay image in shared resources
+    func saveOverlayImage(imageName: String, imageToSave: UIImage) {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let documentsDirectory = paths.objectAtIndex(0) as String
+        let path = documentsDirectory.stringByAppendingPathComponent("sharedResources").stringByAppendingPathComponent("overlays")
+        let overlayPath = path.stringByAppendingPathComponent("\(imageName).png")
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        var binaryImageData = UIImagePNGRepresentation(imageToSave);
+        
+        binaryImageData.writeToFile(overlayPath, atomically: true)
+        
+    }
+    
+    func loadOverlayImage(imageName: String) -> UIImage? {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
+        let documentsDirectory = paths.objectAtIndex(0) as String
+        let path = documentsDirectory.stringByAppendingPathComponent("sharedResources").stringByAppendingPathComponent("overlays")
+        let overlayPath = path.stringByAppendingPathComponent("\(imageName).png")
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        if (fileManager.fileExistsAtPath(overlayPath)) {
+            var image = UIImage(contentsOfFile: overlayPath)
+            return image
+        } else {
+            return nil
+        }
     }
 }

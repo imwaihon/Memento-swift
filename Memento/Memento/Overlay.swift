@@ -15,6 +15,17 @@ struct Overlay: Equatable {
     let frame: CGRect
     let imageFile: String
     
+    //Properties
+    //Currently, the encoding format is <CGRect string>:<image name>
+    //Design issue: Users can create 2 overlays of same size at the exact same locaiton with the same image.
+    //This makes hashing using CGRect string or image file name not feasible.
+    var stringEncoding: String {
+        var str = NSStringFromCGRect(frame)
+        str = str.stringByAppendingString(overlayValueSeparator)
+        str = str.stringByAppendingString(imageFile)
+        return str
+    }
+    
     init(frame: CGRect, imageFile: String) {
         self.frame = frame
         self.imageFile = imageFile
