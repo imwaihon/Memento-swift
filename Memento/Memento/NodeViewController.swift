@@ -86,7 +86,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, background: imageView, graphName: graphName, roomLabel:roomLabel)
             newAnnotatableView.backgroundColor = .whiteColor()
             newAnnotatableView.alpha = 0.25
-            newAnnotatableView.label.text = eachAssociation.value
+            newAnnotatableView.annotation = eachAssociation.value
             imageView.addSubview(newAnnotatableView)
         }
         
