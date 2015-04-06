@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -303,7 +303,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter the name of your new memory palace..." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="66T-04-AfI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter the name of your new memory palace..." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="66T-04-AfI" userLabel="Enter the name of your new memory palace...in">
                                 <rect key="frame" x="270" y="430" width="483" height="50"/>
                                 <color key="tintColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" white="0.84814814810000005" alpha="1" colorSpace="calibratedWhite"/>
@@ -354,7 +354,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="dismissView:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="rrb-10-Yrf"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="backButton" id="1Xt-xa-qh2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oob-gV-7jL">
@@ -368,30 +368,19 @@
                                             <action selector="rotateImage:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="shX-3V-jKO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvH-aE-EF5">
-                                        <rect key="frame" x="909" y="0.0" width="107" height="64"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
-                                        <state key="normal" title="Camera Roll">
-                                            <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="useCameraRoll:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="XAj-KT-wpo"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-py-EFm">
-                                        <rect key="frame" x="801" y="0.0" width="87" height="65"/>
+                                        <rect key="frame" x="747" y="0.0" width="99" height="65"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
-                                        <state key="normal" title="Take photo">
+                                        <state key="normal" title="Editing Mode">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="useCamera:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="21d-9F-a2n"/>
+                                            <action selector="toggleEditMode:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="1c6-Jq-vRa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-gd-6UF">
-                                        <rect key="frame" x="428" y="0.0" width="223" height="65"/>
+                                        <rect key="frame" x="427" y="0.0" width="223" height="65"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
                                         <state key="normal" title="Insert small image annotations">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -399,6 +388,17 @@
                                         </state>
                                         <connections>
                                             <action selector="addOverlayImage:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="UfG-XP-koN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="baG-to-RYt">
+                                        <rect key="frame" x="907" y="0.0" width="89" height="65"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextNodePressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="Xad-Fh-Vhn"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -410,7 +410,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
+                        <outlet property="editModeButton" destination="xmX-py-EFm" id="3nA-Wh-mmv"/>
                         <outlet property="imageView" destination="LzC-0M-630" id="vwI-s6-IjB"/>
+                        <segue destination="i5H-qo-ahd" kind="presentation" identifier="clearTransition" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" animates="NO" id="luw-jc-K8M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZoN-is-xQV" sceneMemberID="firstResponder"/>
@@ -648,6 +650,96 @@
             </objects>
             <point key="canvasLocation" x="-1972" y="2162"/>
         </scene>
+        <!--Blur Create Node Popover Controller-->
+        <scene sceneID="uQz-vv-j0Y">
+            <objects>
+                <viewController id="f5g-fC-prm" customClass="BlurCreateNodePopoverController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NYH-u3-b9i"/>
+                        <viewControllerLayoutGuide type="bottom" id="FA3-Wu-exW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6vZ-do-pS6">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZR-72-3Wn">
+                                <rect key="frame" x="270" y="251" width="90" height="90"/>
+                                <state key="normal" backgroundImage="photosIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="useCameraRoll:" destination="f5g-fC-prm" eventType="touchUpInside" id="MYY-Kh-YVE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9f4-Vi-YeI">
+                                <rect key="frame" x="401" y="251" width="90" height="90"/>
+                                <state key="normal" backgroundImage="cameraIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="useCamera:" destination="f5g-fC-prm" eventType="touchUpInside" id="XzO-FQ-fdg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuN-qC-HmF">
+                                <rect key="frame" x="532" y="246" width="90" height="90"/>
+                                <state key="normal" backgroundImage="webIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JbX-e0-M8u">
+                                <rect key="frame" x="663" y="246" width="90" height="90"/>
+                                <state key="normal" backgroundImage="dropboxIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter the name of your new image ." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LuN-kV-9d7">
+                                <rect key="frame" x="270" y="430" width="483" height="50"/>
+                                <color key="tintColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <action selector="startedEnteringName:" destination="f5g-fC-prm" eventType="editingDidBegin" id="vcw-pq-jeY"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="nameTextField" destination="LuN-kV-9d7" id="1j4-19-Lme"/>
+                        <segue destination="QAb-Y3-WmI" kind="show" identifier="goToNextNode" id="JWR-Ul-xwC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CeZ-gc-HsU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1989" y="194"/>
+        </scene>
+        <!--Dummy Clear View Controller-->
+        <scene sceneID="IFb-Iq-GuY">
+            <objects>
+                <viewController id="i5H-qo-ahd" customClass="DummyClearViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L1Z-X2-Dv8"/>
+                        <viewControllerLayoutGuide type="bottom" id="Egi-je-dgn"/>
+                    </layoutGuides>
+                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="lCS-1o-kza">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.23999999999999999" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <segue destination="f5g-fC-prm" kind="presentation" identifier="goToSelectPicture" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Kpe-aI-78M"/>
+                        <segue destination="QAb-Y3-WmI" kind="show" identifier="goToExistingNextNode" id="oIa-u6-W6u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x79-J7-89U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="255" y="2574"/>
+        </scene>
     </scenes>
     <resources>
         <image name="background" width="2048" height="1536"/>
@@ -662,6 +754,8 @@
         <image name="webIcon" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cfi-6M-yo4"/>
+        <segue reference="1Xt-xa-qh2"/>
+        <segue reference="oIa-u6-W6u"/>
+        <segue reference="DlS-Ad-FtQ"/>
     </inferredMetricsTieBreakers>
 </document>

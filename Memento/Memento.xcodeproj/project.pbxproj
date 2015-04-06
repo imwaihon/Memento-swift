@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4127D7A11AD30103007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */; };
+		4127D7A21AD30112007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */; };
+		4127D7A41AD30E05007D6EE5 /* DummyClearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127D7A31AD30E05007D6EE5 /* DummyClearViewController.swift */; };
+		4127D7A51AD30E09007D6EE5 /* DummyClearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127D7A31AD30E05007D6EE5 /* DummyClearViewController.swift */; };
 		41359EBD1AC84F3C00CBCC82 /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */; };
 		41941ABE1ACFA71000035302 /* AnnotatableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */; };
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
@@ -106,6 +110,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurCreateNodePopoverController.swift; sourceTree = "<group>"; };
+		4127D7A31AD30E05007D6EE5 /* DummyClearViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyClearViewController.swift; sourceTree = "<group>"; };
 		41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableImageView.swift; sourceTree = "<group>"; };
 		41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotatableUIView.swift; sourceTree = "<group>"; };
 		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +231,8 @@
 				5A01A3431ACE433800351423 /* Data Structures and Algorithms */,
 				4F9D150B1ACAD3CF00BEE609 /* ChallengeMode */,
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
+				4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */,
+				4127D7A31AD30E05007D6EE5 /* DummyClearViewController.swift */,
 				41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */,
 				41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */,
 				4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */,
@@ -454,6 +462,7 @@
 				5A3F38711ACA76A90096AB6C /* MutableOverlay.swift in Sources */,
 				5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
 				4F06E88E1AD2B2AD00436083 /* GameEngine.swift in Sources */,
+				4127D7A41AD30E05007D6EE5 /* DummyClearViewController.swift in Sources */,
 				5A497A331AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift in Sources */,
 				5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
 				5AA1B06A1AC1528B00AC3C65 /* MementoManager.swift in Sources */,
@@ -471,6 +480,7 @@
 				5A01A3451ACE438900351423 /* FenwickTree.swift in Sources */,
 				5AEF2A6C1AC5260100B2B6FB /* MemoryPalaceRoom.swift in Sources */,
 				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,
+				4127D7A11AD30103007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */,
 				5A98038A1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */,
 				5A82F8F31AC44D7100D89166 /* OverviewViewController.swift in Sources */,
 				5A5FB0A61AC6628E00EA0EE7 /* Association.swift in Sources */,
@@ -516,6 +526,7 @@
 				5AEE2F861AD0C59900E0DD81 /* MapTests.swift in Sources */,
 				5A3F386F1ACA76050096AB6C /* Overlay.swift in Sources */,
 				5A01A3461ACE438900351423 /* FenwickTree.swift in Sources */,
+				4127D7A21AD30112007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */,
 				5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */,
 				5A5735181ACFC1D200A18107 /* NodeViewController.swift in Sources */,
 				5A78D30E1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
@@ -524,6 +535,7 @@
 				5A3F38721ACA76A90096AB6C /* MutableOverlay.swift in Sources */,
 				5A5FB0A21AC63D6E00EA0EE7 /* MementoModelTests.swift in Sources */,
 				5A5663FC1AC955B400190068 /* OverviewImageCollectionViewCell.swift in Sources */,
+				4127D7A51AD30E09007D6EE5 /* DummyClearViewController.swift in Sources */,
 				5AEF2A5B1AC4FA4A00B2B6FB /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

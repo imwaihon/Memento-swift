@@ -17,6 +17,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // ImageView = whole screen
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var editModeButton: UIButton!
     private var newMedia: Bool?
     
     var mementoManager = MementoManager.sharedInstance
@@ -35,12 +36,13 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var associationList = [Association]()
     
     private var rotationToggler: Bool = true
-    
+    private var editToggler: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageView.userInteractionEnabled = true
+        self.imageView.userInteractionEnabled = false
         self.view.userInteractionEnabled = true
+        self.editModeButton.alpha = 0.3
         
         //setUpGestures()
         panRec.addTarget(self, action: "handlePan:")
@@ -82,6 +84,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         for eachAssociation in associationList {
             var newFrame = eachAssociation.placeHolder.view.frame
             var newLabel = eachAssociation.placeHolder.label
+            allCGRects.append(newFrame)
             
             var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, background: imageView, graphName: graphName, roomLabel:roomLabel)
             newAnnotatableView.backgroundColor = .whiteColor()
@@ -92,6 +95,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
+    /* Removing functionaliy for replacing background images 
+
     // Camera button
     @IBAction func useCamera(sender: AnyObject) {
         
@@ -118,11 +123,27 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         isMainView = true
         getImageFromPhotoLibrary(sender)
     }
+    */
     
+    // Toggles on edit mode
+    @IBAction func toggleEditMode(sender: AnyObject) {
+        if self.editToggler == false {
+            self.editToggler = true
+            self.imageView.userInteractionEnabled = true
+            self.editModeButton.alpha = 1.0
+        } else {
+            self.editToggler = false
+            self.imageView.userInteractionEnabled = false
+            self.editModeButton.alpha = 0.3
+        }
+    }
     
     // Adds an overlaying image from camera roll ( possibly in-app sprites next time?)
     // Possible future portability for cropping images.
     @IBAction func addOverlayImage(sender: AnyObject){
+        if (editToggler == false) {
+            return
+        }
         isMainView = false
         getImageFromPhotoLibrary(sender)
         
@@ -140,7 +161,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             })
             rotationToggler = true
         }
-        
     }
     
     // Helper functions for main photo pickers
@@ -237,6 +257,10 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // Method to draw rectangles for annotation
     // In the form of CGRect, UIView with alpha to display to user
     func handlePan(sender: AnyObject) {
+        if (editToggler == false) {
+            return
+        }
+        
         // Method to draw a rectangle
         if (sender.state == UIGestureRecognizerState.Began) {
             startPoint = sender.locationInView(imageView)
@@ -270,7 +294,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             newViewToTest.alpha = 0.25
             imageView.addSubview(newViewToTest)
         }
-
     }
     
     private func getImageNamed(fileName : String) -> UIImage{
@@ -291,5 +314,40 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
         return UIImage()
     }
+    
+    // Next Node button
+    @IBAction func nextNodePressed(sender: UIButton) {
+        performSegueWithIdentifier("clearTransition", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (segue.identifier == "clearTransition") {
+            /* Previous implementation without dummy
+            let nextNodeViewController = segue.destinationViewController as BlurCreateNodePopoverController
+            nextNodeViewController.graphName = self.graphName
+            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
+                var nextLabel = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)?.label
+                nextNodeViewController.nextRoomLabel = nextLabel!
+                nextNodeViewController.nodeAlreadyExist = true
+            }
+            */
+            let nextNodeViewController = segue.destinationViewController as DummyClearViewController
+            nextNodeViewController.graphName = self.graphName
+            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
+                var nextLabel = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)?.label
+                nextNodeViewController.nextRoomLabel = nextLabel!
+                nextNodeViewController.nodeAlreadyExist = true
+            }
+
+        }
+        
+        if (segue.identifier == "backButton") {
+            // Goes to Select Palace page for consistency 
+            let selectPalaceViewController = segue.destinationViewController as SelectPalaceViewController
+            // Refresh the save/load if we wanna go back to overview
+        }
+    }
+    
 
 }
