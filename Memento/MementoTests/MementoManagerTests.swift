@@ -232,6 +232,36 @@ class MementoManagerTests: XCTestCase {
         
     }
     
+    func testGetNextNodeView() {
+        let manager = MementoManager.sharedInstance
+        let model = MementoModel.sharedInstance
+        let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
+        let room2 = MementoNode(imageFile: "B.png")
+        let room3 = MementoNode(imageFile: "C.png")
+        
+        model.addPalace(graph)
+        model.addPalaceRoom(graph.name, room: room2)
+        model.addPalaceRoom(graph.name, room: room3)
+        XCTAssertEqual(room2.label, 1)
+        XCTAssertEqual(room3.label, 2)
+        
+        XCTAssertEqual(manager.getNextNode(graph.name, roomLabel: 0)!.label, 1)
+        XCTAssertEqual(manager.getNextNode(graph.name, roomLabel: 1)!.label, 2)
+        XCTAssertTrue(manager.getNextNode(graph.name, roomLabel: 2) == nil)
+        
+        manager.removeMemoryPalaceRoom(graph.name, roomLabel: 1)
+        XCTAssertEqual(manager.getNextNode(graph.name, roomLabel: 0)!.label, 2)
+        XCTAssertEqual(manager.getNextNode(graph.name, roomLabel: 1)!.label, 2)
+        XCTAssertTrue(manager.getNextNode(graph.name, roomLabel: 2) == nil)
+        
+        //Clean up directory
+        model.removePalace(graph.name)
+        
+        dispatch_sync(model.saveQueue, {() -> Void in
+            //Do nothing. Wait for cleanup to complete.
+        })
+    }
+    
     /*func testCleanup() {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String

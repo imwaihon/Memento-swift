@@ -380,7 +380,7 @@ class Map<K: Comparable, V> {
         if key < curNode.key {
             return curNode.hasLeftChild ? lowerBoundNodeForKey(key, curNode: curNode.leftChild!): curNode
         }
-        return curNode.hasRightChild ? lowerBoundNodeForKey(key, curNode: curNode.rightChild!): nil
+        return curNode.hasRightChild ? lowerBoundNodeForKey(key, curNode: curNode.rightChild!): successor(curNode)
     }
     
     //Returns the node with the next smallest value or nil if no such node exists
