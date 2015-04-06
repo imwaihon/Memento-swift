@@ -19,7 +19,7 @@ protocol MemoryPalaceRoom: class {
     var numPlaceHolders: Int { get }
     var associations: [Association] { get }
     
-    func addPlaceHolder(placeHolder: PlaceHolder)
+    func addPlaceHolder(placeHolder: PlaceHolder) -> Bool
     func getAssociation(placeHolerLabel: Int) -> Association?
     func getPlaceHolder(placeHolderLabel: Int) -> PlaceHolder?
     func setPlaceHolderFrame(label: Int, newFrame: CGRect)

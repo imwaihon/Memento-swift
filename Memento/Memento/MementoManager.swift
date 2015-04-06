@@ -131,9 +131,13 @@ class MementoManager: MemoryPalaceManager {
     }
     
     //Adds the given palceholder to the specified memory palace room.
-    //Does nothing if the memory palace room is not found or if the placeholder overlaps with existing placeholders.
-    func addPlaceHolder(palaceName: String, roomLabel: Int, placeHolder: PlaceHolder) {
-        model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.addPlaceHolder(placeHolder)
+    //Returns false if the room is not found or the placeholder cannot be added due to overlap with an
+    //existin placeholder.
+    func addPlaceHolder(palaceName: String, roomLabel: Int, placeHolder: PlaceHolder) -> Bool {
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
+            return room.addPlaceHolder(placeHolder)
+        }
+        return false
     }
     
     //Sets the palceholder's frame.

@@ -116,12 +116,25 @@ class MementoNode: MemoryPalaceRoom {
     }
     
     //Adds the given placeholder to this memory palace room.
-    //Does nothing if it overlaps with any of the existing placeholedrs.
-    func addPlaceHolder(placeHolder: PlaceHolder) {
+    //Returns false if the placeholder cannot be added because it overlaps with an existing placeholder.
+    func addPlaceHolder(placeHolder: PlaceHolder) -> Bool {
+        
+        //Checks for overlap
+        let pHolders = _placeHolders.inOrderTraversal()
+        var hasOverlap = false
+        dispatch_apply(UInt(pHolders.count), dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {(idx: UInt) -> Void in
+            hasOverlap |= PlaceHolder.hasOverlap(placeHolder, placeHolder2: pHolders[Int(idx)].1)
+        })
+        if hasOverlap {
+            return false
+        }
+        
+        //Else add the placeholder.
         let label = _placeHolders.isEmpty ? 0: _placeHolders.largestKey! + 1
         placeHolder.label = label
         _placeHolders[label] = placeHolder
         _values[label] = String()
+        return true
     }
     
     //Gets the placeholder identified by the given label.

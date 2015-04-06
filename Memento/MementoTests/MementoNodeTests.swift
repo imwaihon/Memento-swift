@@ -28,20 +28,20 @@ class MementoNodeTests: XCTestCase {
         let assoc2 = Association(placeHolder: placeHolder2, value: "")
         let assoc3 = Association(placeHolder: placeHolder3, value: "")
         
-        node.addPlaceHolder(placeHolder1)
+        XCTAssertTrue(node.addPlaceHolder(placeHolder1))
         XCTAssertEqual(node.numPlaceHolders, 1)
         XCTAssertEqual(placeHolder1.label, 0)
         XCTAssertEqual(node.associations, [assoc1])
         
-        node.addPlaceHolder(placeHolder2)
+        XCTAssertTrue(node.addPlaceHolder(placeHolder2))
         XCTAssertEqual(node.numPlaceHolders, 2)
         XCTAssertEqual(placeHolder2.label, 1)
         XCTAssertEqual(node.associations, [assoc1, assoc2])
         
-        node.addPlaceHolder(placeHolder3)
-        XCTAssertEqual(node.numPlaceHolders, 3)
-        XCTAssertEqual(placeHolder3.label, 2)
-        XCTAssertEqual(node.associations, [assoc1, assoc2, assoc3])
+        XCTAssertFalse(node.addPlaceHolder(placeHolder3))
+        XCTAssertEqual(node.numPlaceHolders, 2)
+        XCTAssertEqual(placeHolder3.label, 0)
+        XCTAssertEqual(node.associations, [assoc1, assoc2])
     }
     
     func testRemovePlaceHolder() {
