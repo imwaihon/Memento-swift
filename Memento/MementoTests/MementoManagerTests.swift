@@ -112,8 +112,11 @@ class MementoManagerTests: XCTestCase {
         XCTAssertFalse(manager.getPalaceOverview(palaceName) == nil)
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1])
         
-        manager.addMemoryPalaceRoom(palaceName, roomImage: "B.png")
+        XCTAssertEqual(manager.addMemoryPalaceRoom(palaceName, roomImage: "B.png")!, 1)
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
+        
+        //Tests adding room to non-existent memory palce.
+        XCTAssertTrue(manager.addMemoryPalaceRoom("somePalace", roomImage: "B.png") == nil)
         
         //Clean up directory
         model.removePalace(palaceName)
