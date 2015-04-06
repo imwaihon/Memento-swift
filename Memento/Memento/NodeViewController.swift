@@ -83,7 +83,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             var newFrame = eachAssociation.placeHolder.view.frame
             var newLabel = eachAssociation.placeHolder.label
             
-            var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, background: imageView)
+            var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, background: imageView, graphName: graphName, roomLabel:roomLabel)
             newAnnotatableView.backgroundColor = .whiteColor()
             newAnnotatableView.alpha = 0.25
             newAnnotatableView.label.text = eachAssociation.value
@@ -265,7 +265,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             allCGRects.append(newRect)
             var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: newRect)
             mementoManager.addPlaceHolder(graphName, roomLabel: roomLabel, placeHolder: newRectPlaceHolder)
-            var newViewToTest = AnnotatableUIView(frame: newRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView)
+            var newViewToTest = AnnotatableUIView(frame: newRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView, graphName: graphName, roomLabel:roomLabel)
             newViewToTest.backgroundColor = .whiteColor()
             newViewToTest.alpha = 0.25
             imageView.addSubview(newViewToTest)
