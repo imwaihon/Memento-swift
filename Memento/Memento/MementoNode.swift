@@ -157,6 +157,25 @@ class MementoNode: MemoryPalaceRoom {
             _placeHolders[label] = newPlaceholder
         }
     }
+    
+    //Swaps the 2 placeholders.
+    //Returns false if no swapping takes place due to absence of 1 of the specified placeholders.
+    func swapPlaceHolders(pHolder1Label: Int, pHolder2Label: Int) -> Bool {
+        if let pHolder1 = _placeHolders[pHolder1Label] {
+            if let pHolder2 = _placeHolders[pHolder2Label] {
+                let value1 = _values[pHolder1Label]
+                let value2 = _values[pHolder2Label]
+                pHolder1.label = pHolder2Label
+                pHolder2.label = pHolder1Label
+                _placeHolders[pHolder1Label] = pHolder2
+                _placeHolders[pHolder2Label] = pHolder1
+                _values[pHolder1Label] = value2
+                _values[pHolder2Label] = value1
+                return true
+            }
+        }
+        return false
+    }
 
     //Removes the placeholder identified by the label, and its corresponding associated value.
     //Does nothing if the placeholder cannot be found.

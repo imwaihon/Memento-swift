@@ -12,6 +12,7 @@
 //
 
 import Foundation
+import UIKit
 import XCTest
 
 class MementoManagerTests: XCTestCase {
@@ -155,6 +156,77 @@ class MementoManagerTests: XCTestCase {
         dispatch_sync(model.saveQueue, {() -> Void in
            //Do nothing. Wait for clean up to complete.
         })
+    }
+    
+    func testAddPlaceHolder() {
+    
+    }
+    
+    func testSetPlaceHolderFrame() {
+    
+    }
+    
+    func testSwapPlaceHolders() {
+        let manager = MementoManager.sharedInstance
+        let model = MementoModel.sharedInstance
+        let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
+        let pHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 10, 20))
+        let pHolder2 = RectanglePlaceHolder(highlightArea: CGRectMake(10, 0, 20, 20))
+        
+        //Memory palace not present.
+        XCTAssertFalse(manager.swapPlaceHolders(graph.name, roomLabel: 0, pHolder1Label: 0, pHolder2Label: 1))
+        
+        model.addPalace(graph)
+        
+        //Both placeholers are not present
+        XCTAssertFalse(manager.swapPlaceHolders(graph.name, roomLabel: 0, pHolder1Label: 0, pHolder2Label: 1))
+        
+        XCTAssertTrue(manager.addPlaceHolder(graph.name, roomLabel: 0, placeHolder: pHolder1))
+        XCTAssertTrue(manager.addPlaceHolder(graph.name, roomLabel: 0, placeHolder: pHolder2))
+        XCTAssertEqual(pHolder1.label, 0)
+        XCTAssertEqual(pHolder2.label, 1)
+        
+        //Room not present.
+        XCTAssertFalse(manager.swapPlaceHolders(graph.name, roomLabel: 1, pHolder1Label: 0, pHolder2Label: 1))
+        
+        //Swap actually takes place.
+        XCTAssertTrue(manager.swapPlaceHolders(graph.name, roomLabel: 0, pHolder1Label: 0, pHolder2Label: 1))
+        XCTAssertEqual(pHolder1.label, 1)
+        XCTAssertEqual(pHolder2.label, 0)
+        
+        //Both placeholders do not exist.
+        XCTAssertFalse(manager.swapPlaceHolders(graph.name, roomLabel: 0, pHolder1Label: 2, pHolder2Label: 8))
+        
+        //1 of the placeholders does not exist.
+        manager.removePlaceHolder(graph.name, roomLabel: 0, placeHolderLabel: 0)
+        XCTAssertFalse(manager.swapPlaceHolders(graph.name, roomLabel: 0, pHolder1Label: 1, pHolder2Label: 0))
+        
+        //Clean up directory
+        model.removePalace(graph.name)
+        
+        dispatch_sync(model.saveQueue, {() -> Void in
+            //Do nothing. Wait for cleanup to finish.
+        })
+    }
+    
+    func testSetAssociationValue() {
+    
+    }
+    
+    func testRemovePlaceHolder() {
+        
+    }
+    
+    func testAddOverlay() {
+    
+    }
+    
+    func testSetOverlayFrame() {
+        
+    }
+    
+    func testRemoveOverlay() {
+        
     }
     
     /*func testCleanup() {
