@@ -354,6 +354,35 @@ class Map<K: Comparable, V> {
         }
     }
     
+    //Gets the value for the successor key of the given key.
+    //Returns nil if no such successor is found.
+    func successorValueForCurrentKey(curKey: K) -> V? {
+        if isEmpty {
+            return nil
+        }
+        if let lowerBoundNode = lowerBoundNodeForKey(curKey, curNode: _root!) {
+            return lowerBoundNode.key == curKey ? successor(lowerBoundNode)?.value: lowerBoundNode.value
+        }
+        return nil
+    }
+    
+    //Gets the smallest key in this map that is not less than the given key.
+    //Returns nil if no such key is found in this map.
+    func lowerBoundOfKey(key: K) -> K? {
+        return isEmpty ? nil: lowerBoundNodeForKey(key, curNode: _root!)?.key
+    }
+    
+    //Gets the node with key that does not compare less than the given key in the tree rooted at the given node.
+    private func lowerBoundNodeForKey(key: K, curNode: MapNode<K, V>) -> MapNode<K, V>? {
+        if key == curNode.key {
+            return curNode
+        }
+        if key < curNode.key {
+            return curNode.hasLeftChild ? lowerBoundNodeForKey(key, curNode: curNode.leftChild!): curNode
+        }
+        return curNode.hasRightChild ? lowerBoundNodeForKey(key, curNode: curNode.rightChild!): nil
+    }
+    
     //Returns the node with the next smallest value or nil if no such node exists
     private func successor(node: MapNode<K, V>) -> MapNode<K, V>? {
         if node.hasRightChild {

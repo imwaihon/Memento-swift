@@ -233,4 +233,21 @@ class MapTests: XCTestCase {
         map[keys[1]] = Character("e")
         XCTAssertEqual(map[keys[1]]!, Character("e"))
     }
+    
+    func testSuccessorValue() {
+        let map = Map<Int, Character>()
+        let keys = [2, 1, 4, 7, 5, 18]
+        let values = Array<Character>("badger")
+        
+        XCTAssertTrue(map.successorValueForCurrentKey(0) == nil)
+        
+        for i in 0..<keys.count {
+            map[keys[i]] = values[i]
+        }
+        
+        XCTAssertEqual(map.successorValueForCurrentKey(4)!, values[4])
+        XCTAssertEqual(map.successorValueForCurrentKey(10)!, values[5])
+        XCTAssertEqual(map.successorValueForCurrentKey(-3)!, values[1])
+        XCTAssertTrue(map.successorValueForCurrentKey(20) == nil)
+    }
 }
