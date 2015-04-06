@@ -66,10 +66,6 @@ class DraggableImageView : UIImageView
             layer.shadowOffset = CGSize(width: 0, height: 3)
             layer.shadowOpacity = 0.5
             layer.shadowRadius = 2
-            println(graphName)
-            println(roomLabel)
-            println(self.labelIdentifier)
-            println(self.frame)
             mementoManager.setOverlayFrame(graphName, roomLabel: roomLabel, overlayLabel: self.labelIdentifier, newFrame: self.frame)
             
             return

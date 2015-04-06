@@ -7,6 +7,8 @@
 //
 
 
+//  TODO: Record ordering of nodes using model.
+
 import UIKit
 import MobileCoreServices
 
@@ -15,33 +17,34 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // ImageView = whole screen
     
     @IBOutlet weak var imageView: UIImageView!
-    var newMedia: Bool?
+    private var newMedia: Bool?
     
     var mementoManager = MementoManager.sharedInstance
     var saveLoadManager = SaveLoadManager.sharedInstance
     
-    var isMainView: Bool = true
-    var newImage: DraggableImageView!
-    var lastRotation = CGFloat()
-    let panRec = UIPanGestureRecognizer()
-    var startPoint = CGPoint()
-    var annotationCount: Int = 100
+    private var isMainView: Bool = true
+    private var newImage: DraggableImageView!
+    private var lastRotation = CGFloat()
+    private let panRec = UIPanGestureRecognizer()
+    private var startPoint = CGPoint()
+    private var annotationCount: Int = 0
     
     var roomLabel = Int()
     var graphName = String()
-    var overlayList = [Overlay]()
-    var associationList = [Association]()
+    private var overlayList = [Overlay]()
+    private var associationList = [Association]()
     
-    var rotationToggler: Bool = true
+    private var rotationToggler: Bool = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageView.userInteractionEnabled = true
+        self.view.userInteractionEnabled = true
         
         //setUpGestures()
         panRec.addTarget(self, action: "handlePan:")
         self.view.addGestureRecognizer(panRec)
-        self.view.userInteractionEnabled = true
         
         // Get view representation of room
         var roomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
@@ -80,7 +83,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             var newFrame = eachAssociation.placeHolder.view.frame
             var newLabel = eachAssociation.placeHolder.label
             
-            var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel)
+            var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, background: imageView)
             newAnnotatableView.backgroundColor = .whiteColor()
             newAnnotatableView.alpha = 0.1
             imageView.addSubview(newAnnotatableView)
@@ -252,11 +255,10 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Add the rectangle into main view
         var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: toDrawRect)
         mementoManager.addPlaceHolder(graphName, roomLabel: roomLabel, placeHolder: newRectPlaceHolder)
-        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self, tagNumber: newRectPlaceHolder.label)
+        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView)
         newViewToTest.backgroundColor = .whiteColor()
         newViewToTest.alpha = 0.1
         imageView.addSubview(newViewToTest)
-        
     }
     
     
