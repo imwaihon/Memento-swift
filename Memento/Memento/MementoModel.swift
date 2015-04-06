@@ -123,8 +123,8 @@ class MementoModel {
     }
     
     //Adds the given room to the specified memory palace.
-    //Does nothing if the memory palace does not exist.
-    func addPalaceRoom(palaceName: String, room: MemoryPalaceRoom) {
+    //Returns false if the memory palace does not exist.
+    func addPalaceRoom(palaceName: String, room: MemoryPalaceRoom) -> Bool {
         if let palace = getPalace(palaceName) {
             palace.addRoom(room)
             
@@ -132,7 +132,9 @@ class MementoModel {
             dispatch_async(saveQueue, {() -> Void in
                 self.savePalace(palace)
             })
+            return true
         }
+        return false
     }
     
     //Gets the memory palace room with the given room number from the specified memory palace.

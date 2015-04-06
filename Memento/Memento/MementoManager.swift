@@ -84,9 +84,10 @@ class MementoManager: MemoryPalaceManager {
     }
     
     //Adds a new room to the current memory palace.
-    //Does nothing if no memory palace is selected.
-    func addMemoryPalaceRoom(palaceName: String, roomImage: String){
-        model.addPalaceRoom(palaceName, room: nodeFactory.makeNode(roomImage))
+    //Does nothing if the memory palace is not found.
+    func addMemoryPalaceRoom(palaceName: String, roomImage: String) -> Int? {
+        let newRoom = nodeFactory.makeNode(roomImage)
+        return model.addPalaceRoom(palaceName, room: newRoom) ? newRoom.label: nil
     }
     
     //Gets the memory palace room.
@@ -165,6 +166,12 @@ class MementoManager: MemoryPalaceManager {
     //Does nothing if the placeholder is not found.
     func removePlaceHolder(palaceName: String, roomLabel: Int, placeHolderLabel: Int) {
         model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.removePlaceHolder(placeHolderLabel)
+    }
+    
+    //Gets the memory palace room that comes after the specified memory palace room.
+    //Returns nil if the palace is not found or if there is no room to be returned.
+    func getNextNode(palaceName: String, roomLabel: Int) -> MemoryPalaceRoomView? {
+        return model.getPalace(palaceName)?.getNextRoomViewForRoom(roomLabel)
     }
     
     //Saves the memory palace with the given name.
