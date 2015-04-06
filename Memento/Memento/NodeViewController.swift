@@ -27,7 +27,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var lastRotation = CGFloat()
     private let panRec = UIPanGestureRecognizer()
     private var startPoint = CGPoint()
-    private var annotationCount: Int = 0
+    private var allCGRects = [CGRect]()
     
     var roomLabel = Int()
     var graphName = String()
@@ -85,7 +85,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
             var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, background: imageView)
             newAnnotatableView.backgroundColor = .whiteColor()
-            newAnnotatableView.alpha = 0.1
+            newAnnotatableView.alpha = 0.25
+            newAnnotatableView.label.text = eachAssociation.value
             imageView.addSubview(newAnnotatableView)
         }
         
@@ -249,18 +250,28 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
 
     private func drawNewRect(startPoint: CGPoint, endPoint: CGPoint) {
+        var newRectDoesNotIntersect = true
         // Make rectangle
-        var toDrawRect = CGRect(x: min(startPoint.x, endPoint.x), y: min(startPoint.y, endPoint.y), width: abs(startPoint.x - endPoint.x), height: abs(startPoint.y - endPoint.y))
+        var newRect = CGRect(x: min(startPoint.x, endPoint.x), y: min(startPoint.y, endPoint.y), width: abs(startPoint.x - endPoint.x), height: abs(startPoint.y - endPoint.y))
+        
+        for eachRect in allCGRects{
+            if (CGRectIntersectsRect(eachRect, newRect)) {
+                newRectDoesNotIntersect = false
+            }
+        }
+        
+        if (newRectDoesNotIntersect) {
+            // Add the rectangle into main view
+            allCGRects.append(newRect)
+            var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: newRect)
+            mementoManager.addPlaceHolder(graphName, roomLabel: roomLabel, placeHolder: newRectPlaceHolder)
+            var newViewToTest = AnnotatableUIView(frame: newRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView)
+            newViewToTest.backgroundColor = .whiteColor()
+            newViewToTest.alpha = 0.25
+            imageView.addSubview(newViewToTest)
+        }
 
-        // Add the rectangle into main view
-        var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: toDrawRect)
-        mementoManager.addPlaceHolder(graphName, roomLabel: roomLabel, placeHolder: newRectPlaceHolder)
-        var newViewToTest = AnnotatableUIView(frame: toDrawRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView)
-        newViewToTest.backgroundColor = .whiteColor()
-        newViewToTest.alpha = 0.1
-        imageView.addSubview(newViewToTest)
     }
-    
     
     private func getImageNamed(fileName : String) -> UIImage{
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
