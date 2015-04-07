@@ -317,33 +317,64 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Next Node button
     @IBAction func nextNodePressed(sender: UIButton) {
-        performSegueWithIdentifier("clearTransition", sender: self)
+        if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) == nil ) {
+            performSegueWithIdentifier("CreateNewNodeSegue", sender: self)
+        }
+        
+    }
+    
+    @IBAction func backButtonPressed(sender: AnyObject) {
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
+        if identifier == "GoToExistingNextNodeSegue" {
+            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
+                return true
+            }
+        }
+        
+        return false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if (segue.identifier == "clearTransition") {
-            /* Previous implementation without dummy
+        if (segue.identifier == "GoToExistingNextNodeSegue"){
+            // Go to previously created next node
+            let nextNodeViewController = segue.destinationViewController as NodeViewController
+            var nextNode = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)
+            if ( nextNode != nil ) {
+                nextNodeViewController.graphName = self.graphName
+                nextNodeViewController.roomLabel = nextNode!.label
+            }
+        }
+        if (segue.identifier == "CreateNewNodeSegue") {
             let nextNodeViewController = segue.destinationViewController as BlurCreateNodePopoverController
             nextNodeViewController.graphName = self.graphName
-            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
-                var nextLabel = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)?.label
-                nextNodeViewController.nextRoomLabel = nextLabel!
-                nextNodeViewController.nodeAlreadyExist = true
-            }
-            */
-            let nextNodeViewController = segue.destinationViewController as DummyClearViewController
-            nextNodeViewController.graphName = self.graphName
-            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
-                var nextLabel = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)?.label
-                nextNodeViewController.nextRoomLabel = nextLabel!
-                nextNodeViewController.nodeAlreadyExist = true
-            }
-
         }
         
+//        if (segue.identifier == "clearTransition") {
+//            /* Previous implementation without dummy
+//            let nextNodeViewController = segue.destinationViewController as BlurCreateNodePopoverController
+//            nextNodeViewController.graphName = self.graphName
+//            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
+//                var nextLabel = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)?.label
+//                nextNodeViewController.nextRoomLabel = nextLabel!
+//                nextNodeViewController.nodeAlreadyExist = true
+//            }
+//            */
+//            let nextNodeViewController = segue.destinationViewController as DummyClearViewController
+//            nextNodeViewController.graphName = self.graphName
+//            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
+//                var nextLabel = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)?.label
+//                nextNodeViewController.nextRoomLabel = nextLabel!
+//                nextNodeViewController.nodeAlreadyExist = true
+//            }
+//
+//        }
+        
         if (segue.identifier == "backButton") {
-            // Goes to Select Palace page for consistency 
+            // Goes to Select Palace page for consistency
             let selectPalaceViewController = segue.destinationViewController as SelectPalaceViewController
             // Refresh the save/load if we wanna go back to overview
         }

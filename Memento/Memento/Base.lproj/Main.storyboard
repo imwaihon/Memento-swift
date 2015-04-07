@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -354,7 +354,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" identifier="backButton" id="1Xt-xa-qh2"/>
+                                            <action selector="backButtonPressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="0cW-6I-4Jf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oob-gV-7jL">
@@ -399,6 +399,7 @@
                                         </state>
                                         <connections>
                                             <action selector="nextNodePressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="Xad-Fh-Vhn"/>
+                                            <segue destination="QAb-Y3-WmI" kind="showDetail" identifier="GoToExistingNextNodeSegue" id="5si-Au-k4a"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -412,7 +413,7 @@
                     <connections>
                         <outlet property="editModeButton" destination="xmX-py-EFm" id="3nA-Wh-mmv"/>
                         <outlet property="imageView" destination="LzC-0M-630" id="vwI-s6-IjB"/>
-                        <segue destination="i5H-qo-ahd" kind="presentation" identifier="clearTransition" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" animates="NO" id="luw-jc-K8M"/>
+                        <segue destination="f5g-fC-prm" kind="presentation" identifier="CreateNewNodeSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Vgm-ts-AbI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZoN-is-xQV" sceneMemberID="firstResponder"/>
@@ -422,7 +423,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1989" y="1374"/>
+            <point key="canvasLocation" x="1697" y="1362"/>
         </scene>
         <!--Select Challenge View Controller-->
         <scene sceneID="1D2-uu-EWO">
@@ -709,36 +710,11 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="nameTextField" destination="LuN-kV-9d7" id="1j4-19-Lme"/>
-                        <segue destination="QAb-Y3-WmI" kind="show" identifier="goToNextNode" id="JWR-Ul-xwC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeZ-gc-HsU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1989" y="194"/>
-        </scene>
-        <!--Dummy Clear View Controller-->
-        <scene sceneID="IFb-Iq-GuY">
-            <objects>
-                <viewController id="i5H-qo-ahd" customClass="DummyClearViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L1Z-X2-Dv8"/>
-                        <viewControllerLayoutGuide type="bottom" id="Egi-je-dgn"/>
-                    </layoutGuides>
-                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="lCS-1o-kza">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.23999999999999999" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
-                    <connections>
-                        <segue destination="f5g-fC-prm" kind="presentation" identifier="goToSelectPicture" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Kpe-aI-78M"/>
-                        <segue destination="QAb-Y3-WmI" kind="show" identifier="goToExistingNextNode" id="oIa-u6-W6u"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x79-J7-89U" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="255" y="2574"/>
+            <point key="canvasLocation" x="1681" y="2582"/>
         </scene>
     </scenes>
     <resources>
@@ -754,8 +730,7 @@
         <image name="webIcon" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Xt-xa-qh2"/>
-        <segue reference="oIa-u6-W6u"/>
-        <segue reference="DlS-Ad-FtQ"/>
+        <segue reference="cfi-6M-yo4"/>
+        <segue reference="2W0-zM-hGH"/>
     </inferredMetricsTieBreakers>
 </document>
