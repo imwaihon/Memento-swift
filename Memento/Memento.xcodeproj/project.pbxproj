@@ -42,6 +42,8 @@
 		5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */; };
 		5A28A8BA1AD0436F00518AB1 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A28A8B91AD0436F00518AB1 /* Map.swift */; };
 		5A28A8BB1AD0436F00518AB1 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A28A8B91AD0436F00518AB1 /* Map.swift */; };
+		5A2988EF1AD3BC7E005B999E /* ResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2988EE1AD3BC7E005B999E /* ResourceManager.swift */; };
+		5A2988F01AD3BC7E005B999E /* ResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2988EE1AD3BC7E005B999E /* ResourceManager.swift */; };
 		5A3F386E1ACA76050096AB6C /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F386D1ACA76050096AB6C /* Overlay.swift */; };
 		5A3F386F1ACA76050096AB6C /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F386D1ACA76050096AB6C /* Overlay.swift */; };
 		5A3F38711ACA76A90096AB6C /* MutableOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F38701ACA76A90096AB6C /* MutableOverlay.swift */; };
@@ -143,6 +145,7 @@
 		5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomIcon.swift; sourceTree = "<group>"; };
 		5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphTests.swift; sourceTree = "<group>"; };
 		5A28A8B91AD0436F00518AB1 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		5A2988EE1AD3BC7E005B999E /* ResourceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceManager.swift; sourceTree = "<group>"; };
 		5A3F386D1ACA76050096AB6C /* Overlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		5A3F38701ACA76A90096AB6C /* MutableOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableOverlay.swift; sourceTree = "<group>"; };
 		5A497A321AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurCreatePalaceViewController.swift; sourceTree = "<group>"; };
@@ -228,7 +231,7 @@
 				5A3F38731ACA776B0096AB6C /* RepresentationObjects */,
 				5AB73EAF1AC9528C005AE728 /* ModelFramework */,
 				5A3F38751ACA78D10096AB6C /* FactoryClasses */,
-				5A01A3431ACE433800351423 /* Data Structures and Algorithms */,
+				5A2988EC1AD3BC48005B999E /* Library Code */,
 				4F9D150B1ACAD3CF00BEE609 /* ChallengeMode */,
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
 				4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */,
@@ -297,6 +300,15 @@
 				5A28A8B91AD0436F00518AB1 /* Map.swift */,
 			);
 			name = "Data Structures and Algorithms";
+			sourceTree = "<group>";
+		};
+		5A2988EC1AD3BC48005B999E /* Library Code */ = {
+			isa = PBXGroup;
+			children = (
+				5A01A3431ACE433800351423 /* Data Structures and Algorithms */,
+				5A2988EE1AD3BC7E005B999E /* ResourceManager.swift */,
+			);
+			name = "Library Code";
 			sourceTree = "<group>";
 		};
 		5A3F38731ACA776B0096AB6C /* RepresentationObjects */ = {
@@ -477,6 +489,7 @@
 				5AEF2A631AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				41359EBD1AC84F3C00CBCC82 /* DraggableImageView.swift in Sources */,
 				4FCE35F01ABA8CEF00417763 /* ViewController.swift in Sources */,
+				5A2988EF1AD3BC7E005B999E /* ResourceManager.swift in Sources */,
 				5A01A3451ACE438900351423 /* FenwickTree.swift in Sources */,
 				5AEF2A6C1AC5260100B2B6FB /* MemoryPalaceRoom.swift in Sources */,
 				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,
@@ -537,6 +550,7 @@
 				5A5663FC1AC955B400190068 /* OverviewImageCollectionViewCell.swift in Sources */,
 				4127D7A51AD30E09007D6EE5 /* DummyClearViewController.swift in Sources */,
 				5AEF2A5B1AC4FA4A00B2B6FB /* Constants.swift in Sources */,
+				5A2988F01AD3BC7E005B999E /* ResourceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
