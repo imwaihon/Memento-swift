@@ -63,10 +63,10 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     
     func handleTap(sender: UITapGestureRecognizer){
         // Pop dummy view controller
-        let previousViewController = self.presentingViewController as DummyClearViewController
-        self.dismissViewControllerAnimated(true, completion: {
-            previousViewController.dismissViewControllerAnimated(true, completion: nil)
-        })
+//        let previousViewController = self.presentingViewController as DummyClearViewController
+//        self.dismissViewControllerAnimated(true, completion: {
+//            previousViewController.dismissViewControllerAnimated(true, completion: nil)
+//        })
     }
     
     
@@ -149,13 +149,11 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
             nextRoomLabel = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.png")!
             println("\(nameTextField.text)0.png")
         }
-        self.dismissViewControllerAnimated(true, completion: {finished in
-            self.performSegueWithIdentifier("goToNextNode", sender: self)
-        })
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "goToNextNode"){
+        if(segue.identifier == "GoToNextNodeSegue"){
             // Go to previously created next node
             let nextNodeViewController = segue.destinationViewController as NodeViewController
             nextNodeViewController.graphName = self.graphName

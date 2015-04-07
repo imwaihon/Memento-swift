@@ -28,6 +28,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        scrollableOverviewCollectionView.reloadData()
     }
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
