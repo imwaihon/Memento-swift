@@ -16,6 +16,8 @@ class GameEngine {
     var currRoomIndex: Int
     var currRoomAssociations: [Association]
     var palaceRooms: [MemoryPalaceRoomView]
+    var delegate: GameEngineDelegate?
+    var timeElapsed: Int
     
     init() {
         self.activePalaceName = String()
@@ -23,6 +25,8 @@ class GameEngine {
         self.palaceRooms = [MemoryPalaceRoomView]()
         self.currRoomIndex = 0
         self.currRoomAssociations = [Association]()
+        self.timeElapsed = 0
+
     }
     
     // Set up the initial game
@@ -37,6 +41,9 @@ class GameEngine {
         }
         
         currRoomAssociations.extend(palaceRooms.first!.associations)
+        
+        delegate?.startGame()
+
     }
     
     func setUpNext() {
@@ -44,6 +51,7 @@ class GameEngine {
         
         if currRoomIndex < palaceRooms.count {
             currRoomAssociations.extend(palaceRooms[currRoomIndex].associations)
+            delegate?.reloadView()
         } else {
             finishedGame()
         }
@@ -77,10 +85,11 @@ class GameEngine {
         if currRoomAssociations.isEmpty {
             setUpNext()
         }
+        print(currRoomAssociations)
     }
     
     func finishedGame() {
-        
+        delegate?.displayEndGame()
     }
     
     

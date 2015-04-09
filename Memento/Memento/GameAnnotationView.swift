@@ -49,6 +49,10 @@ class GameAnnotationView: UIView {
         self.gameViewController.presentViewController(loadPrompt, animated: true, completion: nil)
     }
     
+    func showCorrectAnimation() {
+        self.backgroundColor = .greenColor()
+    }
+    
     func disableView() {
         self.userInteractionEnabled = false
     }
