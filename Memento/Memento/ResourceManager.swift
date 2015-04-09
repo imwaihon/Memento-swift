@@ -35,7 +35,11 @@ class ResourceManager {
         } else {
             _referenceCountTable = [String: UInt]()
         }
-        //println(_resourceListPath)
+    }
+    
+    //Gets the reference count for the given resource.
+    func referenceCountForResource(resourceName: String) -> Int {
+        return _referenceCountTable[resourceName] == nil ? 0: _referenceCountTable[resourceName]! as Int
     }
     
     //Increases reference count for the resource object identified by the given name.
@@ -43,10 +47,11 @@ class ResourceManager {
     func retainResource(resourceName: String) {
         if _referenceCountTable[resourceName] != nil {
             _referenceCountTable[resourceName]!++
-            /*dispatch_async(saveQueue, {() -> Void in
-                NSDictionary(dictionary: self._referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
-            })*/
             NSDictionary(dictionary: _referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
+            
+            /*dispatch_async(saveQueue, {() -> Void in
+            NSDictionary(dictionary: self._referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
+            })*/
         }
     }
     
@@ -54,10 +59,11 @@ class ResourceManager {
     //Overrides if there exists another file with the same name in the directory.
     func retainResource(resourceName: String, image: UIImage) {
         _referenceCountTable[resourceName] = 1
-        /*dispatch_async(saveQueue, {() -> Void in
-            UIImageJPEGRepresentation(image, 0.9).writeToFile(self._dirPath+resourceName, atomically: true)
-        })*/
         UIImageJPEGRepresentation(image, 0.9).writeToFile(_dirPath+resourceName, atomically: true)
+        
+        /*dispatch_async(saveQueue, {() -> Void in
+        UIImageJPEGRepresentation(image, 0.9).writeToFile(self._dirPath+resourceName, atomically: true)
+        })*/
     }
     
     //Reduces the reference count for the resource object identified by the given name.
