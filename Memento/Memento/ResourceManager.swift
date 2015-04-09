@@ -27,7 +27,7 @@ class ResourceManager {
         //Computing the path to save the resource tracking file
         let docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
         _dirPath = docDir+"/\(directory)/"
-        _resourceListPath = docDir+"/\(_dirPath).plist"
+        _resourceListPath = docDir+"/\(directory).plist"
         
         //Loads the reference counting table.
         if NSFileManager.defaultManager().fileExistsAtPath(_resourceListPath) {
@@ -35,11 +35,13 @@ class ResourceManager {
         } else {
             _referenceCountTable = [String: UInt]()
         }
+        
+        println(_resourceListPath)
     }
     
     //Gets the reference count for the given resource.
     func referenceCountForResource(resourceName: String) -> Int {
-        return _referenceCountTable[resourceName] == nil ? 0: _referenceCountTable[resourceName]! as Int
+        return _referenceCountTable[resourceName] == nil ? 0: Int(_referenceCountTable[resourceName]!)
     }
     
     //Increases reference count for the resource object identified by the given name.
@@ -55,6 +57,14 @@ class ResourceManager {
         }
     }
     
+    //Saves the text resource to the specified file.
+    //If there exists a file with the same name, the existing file is overridden.
+    func retainResource(resourceName: String, text: String) {
+        _referenceCountTable[resourceName] = 1
+        text.writeToFile(_dirPath+resourceName, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    }
+    
+    //Double check what resource object will be passed.
     //Saves the given image using the given name and sets reference count to 1.
     //Overrides if there exists another file with the same name in the directory.
     func retainResource(resourceName: String, image: UIImage) {
