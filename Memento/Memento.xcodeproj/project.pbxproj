@@ -59,6 +59,7 @@
 		5A4E78A31AC2A42900013728 /* MementoGraphFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E78A11AC2A42900013728 /* MementoGraphFactory.swift */; };
 		5A4E78A51AC2A44800013728 /* MementoNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E78A41AC2A44800013728 /* MementoNodeFactory.swift */; };
 		5A4E78A61AC2A44800013728 /* MementoNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E78A41AC2A44800013728 /* MementoNodeFactory.swift */; };
+		5A4FDF451AD6356500B8F3CA /* ResourceManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FDF441AD6356500B8F3CA /* ResourceManagerTests.swift */; };
 		5A5663FB1AC955B200190068 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82F8F21AC44D7100D89166 /* OverviewViewController.swift */; };
 		5A5663FC1AC955B400190068 /* OverviewImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82F8F41AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift */; };
 		5A5735181ACFC1D200A18107 /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
@@ -152,6 +153,7 @@
 		5A4E789E1AC2A2F700013728 /* MementoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoModel.swift; sourceTree = "<group>"; };
 		5A4E78A11AC2A42900013728 /* MementoGraphFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphFactory.swift; sourceTree = "<group>"; };
 		5A4E78A41AC2A44800013728 /* MementoNodeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNodeFactory.swift; sourceTree = "<group>"; };
+		5A4FDF441AD6356500B8F3CA /* ResourceManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceManagerTests.swift; sourceTree = "<group>"; };
 		5A5FB0A11AC63D6E00EA0EE7 /* MementoModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoModelTests.swift; sourceTree = "<group>"; };
 		5A5FB0A31AC6601100EA0EE7 /* MementoNodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNodeTests.swift; sourceTree = "<group>"; };
 		5A5FB0A51AC6628E00EA0EE7 /* Association.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Association.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 		4FCE36001ABA8CF000417763 /* MementoTests */ = {
 			isa = PBXGroup;
 			children = (
+				5A4FDF441AD6356500B8F3CA /* ResourceManagerTests.swift */,
 				5AEE2F851AD0C59900E0DD81 /* MapTests.swift */,
 				5A5FB0A11AC63D6E00EA0EE7 /* MementoModelTests.swift */,
 				5A5FB0A81AC67FB400EA0EE7 /* MementoManagerTests.swift */,
@@ -535,6 +538,7 @@
 				5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */,
 				5A4E78A61AC2A44800013728 /* MementoNodeFactory.swift in Sources */,
 				5A497A2F1AC7ECFF00D6C9C5 /* SelectPalaceViewController.swift in Sources */,
+				5A4FDF451AD6356500B8F3CA /* ResourceManagerTests.swift in Sources */,
 				4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */,
 				5AEE2F861AD0C59900E0DD81 /* MapTests.swift in Sources */,
 				5A3F386F1ACA76050096AB6C /* Overlay.swift in Sources */,
