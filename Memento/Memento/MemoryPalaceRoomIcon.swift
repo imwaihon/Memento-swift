@@ -4,6 +4,9 @@
 //
 //  The icon representation of a node on the graph.
 //
+//  IMPORTANT!
+//  To load the image file, use the exact path = imgResourceDir.stringByAppendingPathComponent(filename)
+//
 //  Created by Qua Zi Xian on 23/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
@@ -13,7 +16,7 @@ import Foundation
 struct MemoryPalaceRoomIcon: Equatable {
     let graphName: String
     let label: Int              //Used to retrieve/remove node from graph
-    let filename: String        //Used by view controller to load icon's image file
+    let filename: String        //Name of the image file to use, without any path component
     let overlays: [Overlay]
     
     init(graphName: String, label: Int, filename: String, overlays: [Overlay]) {
