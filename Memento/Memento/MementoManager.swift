@@ -31,6 +31,7 @@ class MementoManager: MemoryPalaceManager {
     private var selectedPalace: MementoGraph?
     private var selectedRoom: MementoNode?
     private let model: MementoModel
+    private let resourceManager: ResourceManager
     private let graphFactory: MementoGraphFactory
     private let nodeFactory: MementoNodeFactory
 
@@ -43,6 +44,7 @@ class MementoManager: MemoryPalaceManager {
         selectedPalace = nil
         selectedRoom = nil
         model = MementoModel.sharedInstance
+        resourceManager = ResourceManager(directory: imgResourceDir)
         graphFactory = MementoGraphFactory()
         nodeFactory = MementoNodeFactory()
     }
