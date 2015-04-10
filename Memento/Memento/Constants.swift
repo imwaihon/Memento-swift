@@ -31,5 +31,6 @@ let placeHolderKey = "placeHolders"
 let valueKey = "values"
 
 //Image resource constants
+let imgResourceDir = "sharedResource"
 let jpegExtension = "jpg"
 let pngExtention = "png"
