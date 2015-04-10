@@ -30,7 +30,8 @@ let overlayKey = "overlays"
 let placeHolderKey = "placeHolders"
 let valueKey = "values"
 
-//Image resource constants
+//Resources-related constants
 let imgResourceDir = "sharedResource"
 let jpegExtension = "jpg"
 let pngExtention = "png"
+let textExtension = "txt"

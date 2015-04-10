@@ -19,6 +19,13 @@ import Foundation
 import UIKit
 
 class ResourceManager {
+    //Defines the types of resources managed by this class
+    enum ResourceType {
+        case Text
+        case Image
+        case All
+    }
+    
     private let _dirPath: String    //The base directory to read/write resource files.
     private let _resourceListPath: String   //The full path of the resource tracking file.
     private var _referenceCountTable: [String: UInt]    //The reference counting table
@@ -45,6 +52,32 @@ class ResourceManager {
             _referenceCountTable = [String: UInt]()
             NSFileManager.defaultManager().createDirectoryAtPath(dir, withIntermediateDirectories: true, attributes: nil, error: nil)
         }
+    }
+    
+    //Gets the list of resources of the given type in th edirectory managed by this resource manager.
+    func resourceOfType(type: ResourceType) -> [String] {
+        let files = _referenceCountTable.keys.array
+        
+        if type == ResourceType.All {
+            return files
+        }
+        
+        //Sets the desired file extensions.
+        let ext = NSMutableSet()
+        if type == ResourceType.Image {
+            ext.addObjectsFromArray([jpegExtension, pngExtention])
+        } else {
+            ext.addObject(textExtension)
+        }
+        
+        //Filtering the resources.
+        var arr = [String]()
+        for file in files {
+            if ext.containsObject(file.pathExtension) {
+                arr.append(file)
+            }
+        }
+        return arr
     }
     
     //Gets the reference count for the given resource.
