@@ -25,16 +25,18 @@ class ResourceManager {
         case Image
         case All
     }
+    //File extensions
+    private let jpegExtension = "jpg"
+    private let pngExtention = "png"
+    private let textExtension = "txt"
     
     private let _dirPath: String    //The base directory to read/write resource files.
     private let _resourceListPath: String   //The full path of the resource tracking file.
     private var _referenceCountTable: [String: UInt]    //The reference counting table
-    private var saveQueue: dispatch_queue_t     //The queue used to dispatch all file save operations.
     
     //Directory is the name of the directory inside the app's Document directory.
     //Creates the directory if it does not already exists.
     init(directory: String) {
-        saveQueue = dispatch_queue_create("com.cs3217.Memento.ResourceManager", DISPATCH_QUEUE_SERIAL)
         
         //Computing the path to save the resource tracking file
         let docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String

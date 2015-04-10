@@ -32,6 +32,3 @@ let valueKey = "values"
 
 //Resources-related constants
 let imgResourceDir = "sharedResource"
-let jpegExtension = "jpg"
-let pngExtention = "png"
-let textExtension = "txt"
