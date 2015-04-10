@@ -213,7 +213,9 @@ class MementoManagerTests: XCTestCase {
     }
     
     func testSetAssociationValue() {
-    
+        let manager = MementoManager.sharedInstance
+        let model = MementoModel.sharedInstance
+        let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
     }
     
     func testRemovePlaceHolder() {
