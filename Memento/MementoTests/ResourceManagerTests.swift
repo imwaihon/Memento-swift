@@ -15,23 +15,23 @@ class ResourceManagerTests: XCTestCase {
         let manager = ResourceManager(directory: "sharedResource")
     }
     
-    /*func testRetainResource() {
+    func testAddAndRetainResource() {
         let manager = ResourceManager(directory: "sharedResource")
-        let imageFile = UIImage(named: "A.png") //Replace with an existing UIImage
-        XCTAssertFalse(fileExists("A.png"))
+        let imageFile = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)
+        XCTAssertFalse(fileExists("linuxpenguin.jpg"))
         
-        manager.retainResource("A.png", image: imageFile!)
-        XCTAssertTrue(fileExists("A.png"))
-        XCTAssertEqual(manager.referenceCountForResource("A.png"), 1)
+        manager.retainResource("linuxpenguin.jpg", image: imageFile!)
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 1)
         
-        manager.retainResource("A.png")
-        XCTAssertEqual(manager.referenceCountForResource("A.png"), 2)
+        manager.retainResource("linuxpenguin.jpg")
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 2)
         
         //Tests retaining on non-existent resource.
         XCTAssertEqual(manager.referenceCountForResource("B.png"), 0)
         manager.retainResource("B.png")
         XCTAssertEqual(manager.referenceCountForResource("B.png"), 0)
-    }*/
+    }
     
     func testRemoveResource() {
         

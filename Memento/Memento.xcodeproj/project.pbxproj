@@ -67,6 +67,8 @@
 		5A5735191ACFC24E00A18107 /* AnnotatableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */; };
 		5A57351A1ACFC25000A18107 /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */; };
 		5A57351B1ACFC25600A18107 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE35EF1ABA8CEF00417763 /* ViewController.swift */; };
+		5A574BCE1AD76082007571C9 /* linuxpenguin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A574BCD1AD76082007571C9 /* linuxpenguin.jpg */; };
+		5A574BCF1AD76573007571C9 /* linuxpenguin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A574BCD1AD76082007571C9 /* linuxpenguin.jpg */; };
 		5A5FB0A21AC63D6E00EA0EE7 /* MementoModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FB0A11AC63D6E00EA0EE7 /* MementoModelTests.swift */; };
 		5A5FB0A41AC6601100EA0EE7 /* MementoNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FB0A31AC6601100EA0EE7 /* MementoNodeTests.swift */; };
 		5A5FB0A61AC6628E00EA0EE7 /* Association.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FB0A51AC6628E00EA0EE7 /* Association.swift */; };
@@ -156,6 +158,7 @@
 		5A4E78A11AC2A42900013728 /* MementoGraphFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphFactory.swift; sourceTree = "<group>"; };
 		5A4E78A41AC2A44800013728 /* MementoNodeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNodeFactory.swift; sourceTree = "<group>"; };
 		5A4FDF441AD6356500B8F3CA /* ResourceManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceManagerTests.swift; sourceTree = "<group>"; };
+		5A574BCD1AD76082007571C9 /* linuxpenguin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = linuxpenguin.jpg; path = MementoTests/linuxpenguin.jpg; sourceTree = SOURCE_ROOT; };
 		5A5FB0A11AC63D6E00EA0EE7 /* MementoModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoModelTests.swift; sourceTree = "<group>"; };
 		5A5FB0A31AC6601100EA0EE7 /* MementoNodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoNodeTests.swift; sourceTree = "<group>"; };
 		5A5FB0A51AC6628E00EA0EE7 /* Association.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Association.swift; sourceTree = "<group>"; };
@@ -293,6 +296,7 @@
 		4FCE36011ABA8CF000417763 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5A574BCD1AD76082007571C9 /* linuxpenguin.jpg */,
 				4FCE36021ABA8CF000417763 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -442,6 +446,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FCE35F31ABA8CF000417763 /* Main.storyboard in Resources */,
+				5A574BCF1AD76573007571C9 /* linuxpenguin.jpg in Resources */,
 				4FCE35F81ABA8CF000417763 /* LaunchScreen.xib in Resources */,
 				4FCE35F51ABA8CF000417763 /* Images.xcassets in Resources */,
 			);
@@ -451,6 +456,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A574BCE1AD76082007571C9 /* linuxpenguin.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
