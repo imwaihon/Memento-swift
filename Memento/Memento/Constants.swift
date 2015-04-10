@@ -29,3 +29,7 @@ let bgImageKey = "backgroundImage"
 let overlayKey = "overlays"
 let placeHolderKey = "placeHolders"
 let valueKey = "values"
+
+//Image resource constants
+let jpegExtension = "jpg"
+let pngExtention = "png"

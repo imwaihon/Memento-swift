@@ -58,30 +58,40 @@ class ResourceManager {
         if _referenceCountTable[resourceName] != nil {
             _referenceCountTable[resourceName]!++
             NSDictionary(dictionary: _referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
-            
-            /*dispatch_async(saveQueue, {() -> Void in
-            NSDictionary(dictionary: self._referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
-            })*/
         }
     }
     
     //Saves the text resource to the specified file.
     //If there exists a file with the same name, the existing file is overridden.
-    func retainResource(resourceName: String, text: String) {
+    /*func retainResource(resourceName: String, text: String) {
         _referenceCountTable[resourceName] = 1
         text.writeToFile(_dirPath+resourceName, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
-    }
+    }*/
     
-    //Double check what resource object will be passed.
     //Saves the given image using the given name and sets reference count to 1.
     //Overrides if there exists another file with the same name in the directory.
-    func retainResource(resourceName: String, image: UIImage) {
-        _referenceCountTable[resourceName] = 1
-        UIImageJPEGRepresentation(image, 0.9).writeToFile(_dirPath+resourceName, atomically: true)
-        
-        /*dispatch_async(saveQueue, {() -> Void in
-        UIImageJPEGRepresentation(image, 0.9).writeToFile(self._dirPath+resourceName, atomically: true)
-        })*/
+    //Resource name should have extensions .jpg or .png
+    func retainResource(resourceName: String, image: UIImage) -> String {
+        let ext = resourceName.pathExtension
+        var filename = resourceName
+        if _referenceCountTable[filename] != nil {
+            filename = filename.stringByDeletingPathExtension
+            for var i = 1; ; i++ {
+                if _referenceCountTable[(filename+"(\(i))").stringByAppendingPathExtension(ext)!] == nil {
+                    filename+="(\(i))"
+                    break
+                }
+            }
+            filename = filename.stringByAppendingPathExtension(ext)!
+        }
+        _referenceCountTable[filename] = 1
+        if ext == jpegExtension {
+            UIImageJPEGRepresentation(image, 0.9).writeToFile(_dirPath+filename, atomically: true)
+        } else {
+            UIImagePNGRepresentation(image).writeToFile(_dirPath+filename, atomically: true)
+        }
+        NSDictionary(dictionary: _referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
+        return filename
     }
     
     //Reduces the reference count for the resource object identified by the given name.

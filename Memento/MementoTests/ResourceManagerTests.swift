@@ -22,12 +22,18 @@ class ResourceManagerTests: XCTestCase {
         let manager = ResourceManager(directory: "sharedResource")
         let imageFile = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)
         
-        manager.retainResource("linuxpenguin.jpg", image: imageFile!)
+        XCTAssertEqual(manager.retainResource("linuxpenguin.jpg", image: imageFile!), "linuxpenguin.jpg")
         XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 1)
         
         manager.retainResource("linuxpenguin.jpg")
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 2)
+        
+        //Tests adding image resource with duplicate name
+        XCTAssertEqual(manager.retainResource("linuxpenguin.jpg", image: imageFile!), "linuxpenguin(1).jpg")
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin(1).jpg"))
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 2)
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin(1).jpg"), 1)
         
         //Tests retaining on non-existent resource.
         XCTAssertEqual(manager.referenceCountForResource("B.png"), 0)
@@ -39,6 +45,9 @@ class ResourceManagerTests: XCTestCase {
         let manager = ResourceManager(directory: "sharedResource")
         XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 2)
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin(1).jpg"), 1)
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin(1).jpg"))
         
         //Check reference count decrementing.
         manager.releaseResource("linuxpenguin.jpg")
@@ -48,6 +57,13 @@ class ResourceManagerTests: XCTestCase {
         //Check resource deletion when reference count falls to 0.
         manager.releaseResource("linuxpenguin.jpg")
         XCTAssertFalse(fileExists("sharedResource/linuxpenguin.jpg"))
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 0)
+        manager.releaseResource("linuxpenguin(1).jpg")
+        XCTAssertFalse(fileExists("sharedResource/linuxpenguin(1).jpg"))
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin(1).jpg"), 0)
+        
+        //Tests releasing non-existent resource
+        manager.releaseResource("linuxpenguin.jpg")
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 0)
     }
     
