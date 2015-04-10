@@ -54,14 +54,26 @@ class MementoManager: MemoryPalaceManager {
         return model.palaceIcons
     }
     
-    //Adds a new memory palace
+    //Adds a new memory palace using an existing image in resources folder as the image of the 1st room.
     //If there exists another memory palace with the same name, a number will be appended to the
     //new memory palace's name.
     //Returns the name of the added memory palace as a confirmation.
     func addMemoryPalace(named name: String, imageFile: String) -> String {
+        //assert(resourceManager.referenceCountForResource(imageFile) > 0)
+        resourceManager.retainResource(imageFile)
         let newGraph = graphFactory.makeGraph(named: name, imageFile: imageFile)
         model.addPalace(newGraph)
         return newGraph.name
+    }
+    
+    //Adds memory palace with given name using the image provided as the 1st room's background image.
+    //It is recommended to use this method if the image does not exist in the resources folder yet.
+    //Returns a tuple (graph name, image name) representing names assigned to the grah and the given image.
+    func addMemoryPalace(named name: String, imageFile: String, image: UIImage) -> (String, String) {
+        let imgFile = resourceManager.retainResource(imageFile, image: image)
+        let newGraph = graphFactory.makeGraph(named: name, imageFile: imgFile)
+        model.addPalace(newGraph)
+        return (newGraph.name, imgFile)
     }
     
     //Gets the specified memory palace
