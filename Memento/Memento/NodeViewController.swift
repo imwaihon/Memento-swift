@@ -52,7 +52,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         var roomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
         
         // Get image from graphical view
-        imageView.image = getImageNamed(roomRep.backgroundImage)
+        imageView.image = Utilities.getImageNamed(roomRep.backgroundImage)
         
         // Load
         overlayList = roomRep.overlays
@@ -296,7 +296,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
     
-    private func getImageNamed(fileName : String) -> UIImage{
+    /*private func getImageNamed(fileName : String) -> UIImage{
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
         if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
@@ -313,7 +313,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
         }
         return UIImage()
-    }
+    }*/
     
     // Next Node button
     @IBAction func nextNodePressed(sender: UIButton) {
