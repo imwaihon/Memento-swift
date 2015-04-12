@@ -287,6 +287,11 @@ class MementoManager: MemoryPalaceManager {
         model.savePalace(palaceName)
     }
     
+    //Gets the list of image resources in sharedResource folder
+    func getImageResource() -> [String] {
+        return resourceManager.resourceOfType(ResourceManager.ResourceType.Image)
+    }
+    
     private func generateImageName() -> String {
         let flags: NSCalendarUnit = .YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit
         let components = NSCalendar.currentCalendar().components(flags, fromDate: NSDate())
