@@ -198,7 +198,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 // Get paths for saving
                 saveLoadManager.saveOverlayImage("test", imageToSave: image)
                 var newMutableOverlay = MutableOverlay(frame: newImage.frame, imageFile: "test")
-                newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: newMutableOverlay)
+                newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: newMutableOverlay)!
                 
             }
             
