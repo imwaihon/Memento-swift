@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -368,17 +368,6 @@
                                             <action selector="rotateImage:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="shX-3V-jKO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-py-EFm">
-                                        <rect key="frame" x="747" y="0.0" width="99" height="65"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
-                                        <state key="normal" title="Editing Mode">
-                                            <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="toggleEditMode:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="1c6-Jq-vRa"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-gd-6UF">
                                         <rect key="frame" x="427" y="0.0" width="223" height="65"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
@@ -399,12 +388,18 @@
                                         </state>
                                         <connections>
                                             <action selector="nextNodePressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="Xad-Fh-Vhn"/>
-                                            <segue destination="QAb-Y3-WmI" kind="showDetail" identifier="GoToExistingNextNodeSegue" id="5si-Au-k4a"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.16" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-py-EFm" customClass="DraggableEditButton" customModule="Memento" customModuleProvider="target">
+                                <rect key="frame" x="877" y="344" width="150" height="150"/>
+                                <state key="normal" image="Edit Icon.png"/>
+                                <connections>
+                                    <action selector="toggleEditMode:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="1c6-Jq-vRa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -776,6 +771,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Edit Icon.png" width="256" height="256"/>
         <image name="background" width="2048" height="1536"/>
         <image name="backgroundGrey" width="1024" height="768"/>
         <image name="buttonBorder" width="862" height="146"/>
@@ -789,6 +785,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cfi-6M-yo4"/>
-        <segue reference="2W0-zM-hGH"/>
     </inferredMetricsTieBreakers>
 </document>

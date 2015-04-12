@@ -46,7 +46,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         } else{
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier("OverviewImageCell", forIndexPath: indexPath) as OverviewImageCollectionViewCell
             let currentIcon = rooms[indexPath.row - 1]
-            cell.image.image = self.getImageNamed(currentIcon.filename)
+            cell.image.image = Utilities.getImageNamed(currentIcon.filename)
             //cell.image.image = UIImage(named: "landscape\(indexPath.row)")
             return cell
         }
@@ -85,7 +85,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         return UIStatusBarStyle.BlackOpaque
     }
     
-    func getImageNamed(fileName : String) -> UIImage{
+    /*func getImageNamed(fileName : String) -> UIImage{
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
         if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
@@ -102,5 +102,5 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
             }
         }
         return UIImage()
-    }
+    }*/
 }

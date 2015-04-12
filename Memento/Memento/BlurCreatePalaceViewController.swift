@@ -130,7 +130,7 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
             } else {
                 image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Up)!
             }
-            let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+            /*let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
             let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
             if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) {
                 if paths.count > 0 {
@@ -140,7 +140,8 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
                     }
                 }
             }
-            model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.png")
+            model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.png")*/
+            model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.png", image:Utilities.convertToThumbnail(image))
         }
         parent.dataModelHasBeenChanged()
         self.dismissViewControllerAnimated(true, completion: {finished in

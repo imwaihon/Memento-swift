@@ -62,11 +62,10 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     }
     
     func handleTap(sender: UITapGestureRecognizer){
-        // Pop dummy view controller
-//        let previousViewController = self.presentingViewController as DummyClearViewController
-//        self.dismissViewControllerAnimated(true, completion: {
-//            previousViewController.dismissViewControllerAnimated(true, completion: nil)
-//        })
+        let previousViewController = self.presentingViewController as NodeViewController
+        self.dismissViewControllerAnimated(true, completion: {
+            previousViewController.dismissViewControllerAnimated(true, completion: nil)
+        })
     }
     
     
@@ -147,7 +146,6 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
                 }
             }
             nextRoomLabel = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.png")!
-            println("\(nameTextField.text)0.png")
         }
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }

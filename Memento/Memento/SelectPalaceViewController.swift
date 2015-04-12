@@ -79,7 +79,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         } else {
             let currentIcon : MemoryPalaceIcon = palaces[indexPath.item-1]
             if(imagesCache[currentIcon.imageFile] == nil || imagesCache[currentIcon.imageFile] == UIImage()){
-                imagesCache[currentIcon.imageFile] = getImageNamed(currentIcon.imageFile)
+                imagesCache[currentIcon.imageFile] = Utilities.getImageNamed(currentIcon.imageFile)
             }
             cell.imageView.image = imagesCache[currentIcon.imageFile]
             cell.nameLabel.text = currentIcon.graphName
@@ -131,7 +131,8 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         }
     }
     
-    func getImageNamed(fileName : String) -> UIImage!{
+    /*func getImageNamed(name : String) -> UIImage!{
+        let fileName = imgResourceDir.stringByAppendingPathComponent(name)
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
         if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
@@ -143,12 +144,16 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
                     let readPath = dirPath.stringByAppendingPathComponent(fileName)
                     let image    = UIImage(contentsOfFile: readPath)
                     // Do whatever you want with the image
-                    return image!
+                    if(image == nil){
+                        return UIImage()
+                    } else{
+                        return image!
+                    }
                 }
             }
         }
         return UIImage()
-    }
+    }*/
     
     @IBAction func backButtonPress(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

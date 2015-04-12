@@ -94,14 +94,45 @@ class MementoManager: MemoryPalaceManager {
     //Removes the specified memory palace
     //Does nothing if no memory palace has the given name
     func removeMemoryPalace(palaceName: String){
-        model.removePalace(palaceName)
+        if let roomIcons = model.getPalace(palaceName)?.nodeIcons {
+            //Release all image resources
+            for icon in roomIcons {
+                for overlay in icon.overlays {
+                    resourceManager.releaseResource(overlay.imageFile)
+                }
+                resourceManager.releaseResource(icon.filename)
+            }
+            //Remove the palace from the model
+            model.removePalace(palaceName)
+        }
     }
     
     //Adds a new room to the current memory palace.
     //Does nothing if the memory palace is not found.
+    //Returns the room label for the newly-added room or nil if the operation fails.
     func addMemoryPalaceRoom(palaceName: String, roomImage: String) -> Int? {
-        let newRoom = nodeFactory.makeNode(roomImage)
-        return model.addPalaceRoom(palaceName, room: newRoom) ? newRoom.label: nil
+        if model.containsPalace(palaceName) {
+            resourceManager.retainResource(roomImage)
+            let newRoom = nodeFactory.makeNode(roomImage)
+            model.addPalaceRoom(palaceName, room: newRoom)
+            return newRoom.label
+        }
+        return nil
+    }
+    
+    //Adds a new memory palace room with the given image.
+    //Recommended to use this for images that does not currently exist in shared resources folder.
+    //Returns the room label and the file name assigned to the image upon success.
+    //Returns nil if the memory palace does not exist.
+    func addMemoryPalaceRoom(palaceName: String, roomImage: String, image: UIImage) -> (Int, String)? {
+        if model.containsPalace(palaceName) {
+            //Add the image resource and get assigned file name
+            let imgFile = resourceManager.retainResource(roomImage, image: image)
+            let newRoom = nodeFactory.makeNode(imgFile)
+            model.addPalaceRoom(palaceName, room: newRoom)
+            return (newRoom.label, imgFile)
+        }
+        return nil
     }
     
     //Gets the memory palace room.
@@ -119,7 +150,13 @@ class MementoManager: MemoryPalaceManager {
     //Removes the specified room from the specified memory palace.
     //Does nothign if either the memory palace or the room is invalid.
     func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
-        model.removeMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            for overlay in room.overlays {
+                resourceManager.releaseResource(overlay.imageFile)
+            }
+            resourceManager.releaseResource(room.backgroundImageFile)
+            model.removeMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
+        }
     }
     
     //Gets the name that will be used for the memory
@@ -127,22 +164,61 @@ class MementoManager: MemoryPalaceManager {
         return model.generatePalaceName(baseName)
     }
     
-    //Adds the given overlay object to the speicified memory palace room.
-    // Does nothing if the memory palace room is not found.
-    func addOverlay(palaceName: String, roomLabel: Int, overlay: MutableOverlay) -> Int {
-        return (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).addOverlay(overlay)
+    //Adds the given overlay object to the speicified memory palace room, using an existing image.
+    //Does nothing if the memory palace room is not found.
+    func addOverlay(palaceName: String, roomLabel: Int, overlay: MutableOverlay) -> Int? {
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            resourceManager.retainResource(overlay.imageFile)
+            let overlayLabel = room.addOverlay(overlay)
+            model.savePalace(palaceName)
+            return overlayLabel
+        }
+        return nil
+    }
+    
+    //Adds a new overlay object using a new image resource to be save to sharedResource folder.
+    //Returns the added overlay object on success and nil if the palace or room is not found.
+    //This is the recommended method to use if the image does not currently exist in the shared resource folder.
+    func addOverlay(palaceName: String, roomLabel: Int, frame: CGRect, image: UIImage) -> Overlay? {
+        
+        //If room exists
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            
+            //Add the given image as a resource
+            let imgName = resourceManager.retainResource(generateImageName(), image: image)
+            
+            //Make and add the overlay
+            var overlay = MutableOverlay(frame: frame, imageFile: imgName)
+            overlay.label = room.addOverlay(overlay)
+            model.savePalace(palaceName)
+            return overlay.makeImmuatble()
+        }
+        return nil
     }
 
     //Sets the overlay's frame.
     //Does nothing if the overlay object is not found.
     func setOverlayFrame(palaceName: String, roomLabel: Int, overlayLabel: Int, newFrame: CGRect) {
-        (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).setOverlayFrame(overlayLabel, newFrame: newFrame)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            room.setOverlayFrame(overlayLabel, newFrame: newFrame)
+            model.savePalace(palaceName)
+        }
     }
     
     //Removes the overlay from the memory palace room.
     //Does nothing if the memory palace room or the overlay cannot be found.
     func removeOverlay(palaceName: String, roomLabel: Int, overlayLabel: Int) {
-        (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).removeOverlay(overlayLabel)
+        
+        //If overlay exists
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            if let overlay = room.getOverlay(overlayLabel) {
+                
+                //Release reference to overlay image and remove overlay
+                resourceManager.releaseResource(overlay.imageFile)
+                room.removeOverlay(overlayLabel)
+                model.savePalace(palaceName)
+            }
+        }
     }
     
     //Adds the given palceholder to the specified memory palace room.
@@ -150,7 +226,11 @@ class MementoManager: MemoryPalaceManager {
     //existin placeholder.
     func addPlaceHolder(palaceName: String, roomLabel: Int, placeHolder: PlaceHolder) -> Bool {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            return room.addPlaceHolder(placeHolder)
+            let res = room.addPlaceHolder(placeHolder)
+            if res {
+                model.savePalace(palaceName)
+            }
+            return res
         }
         return false
     }
@@ -158,14 +238,21 @@ class MementoManager: MemoryPalaceManager {
     //Sets the palceholder's frame.
     //Does nothing if the placehodler is not found.
     func setPlaceHolderFrame(palaceName: String, roomLabel: Int, placeHolderLabel: Int, newFrame: CGRect) {
-        (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).setPlaceHolderFrame(placeHolderLabel, newFrame: newFrame)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            room.setPlaceHolderFrame(placeHolderLabel, newFrame: newFrame)
+            model.savePalace(palaceName)
+        }
     }
     
     //Returns true if the swap is successful.
     //Returns false if swap is unsuccessful due to absence of 1 or both of the placeholders.
     func swapPlaceHolders(palaceName: String, roomLabel: Int, pHolder1Label: Int, pHolder2Label: Int) -> Bool {
-        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            return (room as MementoNode).swapPlaceHolders(pHolder1Label, pHolder2Label: pHolder2Label)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            let res = room.swapPlaceHolders(pHolder1Label, pHolder2Label: pHolder2Label)
+            if res {
+                model.savePalace(palaceName)
+            }
+            return res
         }
         return false
     }
@@ -173,13 +260,19 @@ class MementoManager: MemoryPalaceManager {
     //Sets the value of the specified placeholder in the given memory palace room.
     //Does nothing if the placeholder is not found.
     func setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String) {
-        model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.setAssociationValue(placeHolderLabel, value: value)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
+            room.setAssociationValue(placeHolderLabel, value: value)
+            model.savePalace(palaceName)
+        }
     }
     
     //Removes the specified placeholder.
     //Does nothing if the placeholder is not found.
     func removePlaceHolder(palaceName: String, roomLabel: Int, placeHolderLabel: Int) {
-        model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.removePlaceHolder(placeHolderLabel)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
+            room.removePlaceHolder(placeHolderLabel)
+            model.savePalace(palaceName)
+        }
     }
     
     //Gets the memory palace room that comes after the specified memory palace room.
@@ -192,5 +285,16 @@ class MementoManager: MemoryPalaceManager {
     //Does nothing if the memory palace cannot be found.
     func savePalace(palaceName: String) {
         model.savePalace(palaceName)
+    }
+    
+    //Gets the list of image resources in sharedResource folder
+    func getImageResource() -> [String] {
+        return resourceManager.resourceOfType(ResourceManager.ResourceType.Image)
+    }
+    
+    private func generateImageName() -> String {
+        let flags: NSCalendarUnit = .YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit
+        let components = NSCalendar.currentCalendar().components(flags, fromDate: NSDate())
+        return "\(components.year)\(components.month)\(components.day)\(components.hour)\(components.minute).jpg"
     }
 }

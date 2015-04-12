@@ -72,6 +72,11 @@ class MementoModel {
         return name
     }
     
+    //Checks if the memory palace with the given name exists.
+    func containsPalace(palaceName: String) -> Bool {
+        return graphMap[palaceName] != nil
+    }
+    
     //Adds the new graph to the collection.
     func addPalace(palace: MementoGraph){
         
