@@ -16,6 +16,7 @@
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
 		4F06E88E1AD2B2AD00436083 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88D1AD2B2AD00436083 /* GameEngine.swift */; };
 		4F06E8901AD2B3EA00436083 /* GameAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */; };
+		4F0824DF1AD80AAF00B091DA /* GameMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0824DE1AD80AAF00B091DA /* GameMenuViewController.swift */; };
 		4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */; };
 		4F90A5081AD6A76E00027201 /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */; };
 		4F9D150F1ACADB6000BEE609 /* SelectChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */; };
@@ -123,6 +124,7 @@
 		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
 		4F06E88D1AD2B2AD00436083 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAnnotationView.swift; sourceTree = "<group>"; };
+		4F0824DE1AD80AAF00B091DA /* GameMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenuViewController.swift; sourceTree = "<group>"; };
 		4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineDelegate.swift; sourceTree = "<group>"; };
 		4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectChallengeViewController.swift; sourceTree = "<group>"; };
 		4F9D15101ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCustomChallengeViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				4F9D15121ACADB9500BEE609 /* LoadPresetChallengeVIewController.swift */,
 				4F9D15141ACADBB400BEE609 /* GameChallengeViewController.swift */,
 				4F9D15161ACADBCD00BEE609 /* EndGameChallengeViewController.swift */,
+				4F0824DE1AD80AAF00B091DA /* GameMenuViewController.swift */,
 				4F06E88D1AD2B2AD00436083 /* GameEngine.swift */,
 				4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */,
 				4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */,
@@ -498,6 +501,7 @@
 				5A4E789F1AC2A2F700013728 /* MementoModel.swift in Sources */,
 				4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */,
 				4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */,
+				4F0824DF1AD80AAF00B091DA /* GameMenuViewController.swift in Sources */,
 				5AEF2A5A1AC4FA4A00B2B6FB /* Constants.swift in Sources */,
 				5AEF2A631AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				41359EBD1AC84F3C00CBCC82 /* DraggableImageView.swift in Sources */,

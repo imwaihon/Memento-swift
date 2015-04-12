@@ -65,24 +65,18 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
     
     // Function to load current room layout
     private func loadGameRoomLayout() {
+        // Clear the current view
         clearAllViews()
-        imageView.image = getImageNamed(gameEngine.getCurrRoom().backgroundImage)
         
-        var associationList = gameEngine.getCurrRoom().associations
+        // Transition to the next image
+        let toImage = getImageNamed(gameEngine.getCurrRoom().backgroundImage)
+        UIView.transitionWithView(self.imageView,
+            duration: 1.0,
+            options: UIViewAnimationOptions.TransitionFlipFromRight,
+            animations: { self.imageView.image = toImage },
+            completion: nil)
         
-        // Load association list
-        for eachAssociation in associationList {
-            var newFrame = eachAssociation.placeHolder.view.frame
-            var newLabel = eachAssociation.placeHolder.label
-            
-            var newAnnotatableView = GameAnnotationView(frame: newFrame, gameViewController: self, tagNumber: newLabel, graphName: palaceName, roomLabel:roomLabel)
-            newAnnotatableView.backgroundColor = .whiteColor()
-            newAnnotatableView.alpha = 0.25
-            newAnnotatableView.annotation = eachAssociation.value
-            gameAnnotationViews.append(newAnnotatableView)
-            imageView.addSubview(newAnnotatableView)
-        }
-        
+        // Load image layers
         var layerList = gameEngine.getCurrRoom().overlays
         var counter = 0
         for eachOverlay in layerList {
@@ -97,27 +91,48 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
             newDraggableImageView.labelIdentifier = counter
             counter += 1
             newDraggableImageView.frame = newFrame
+            
             gameLayerViews.append(newDraggableImageView)
             imageView.addSubview(newDraggableImageView)
         }
         
+        // Load association list
+        var associationList = gameEngine.getCurrRoom().associations
+        for eachAssociation in associationList {
+            var newFrame = eachAssociation.placeHolder.view.frame
+            var newLabel = eachAssociation.placeHolder.label
+            
+            var newAnnotatableView = GameAnnotationView(frame: newFrame, gameViewController: self, tagNumber: newLabel, graphName: palaceName, roomLabel:roomLabel)
+            newAnnotatableView.backgroundColor = .whiteColor()
+            newAnnotatableView.alpha = 0.25
+            
+            newAnnotatableView.annotation = eachAssociation.value
+            gameAnnotationViews.append(newAnnotatableView)
+            imageView.addSubview(newAnnotatableView)
+        }
     }
     
+    // A particular annotation is selected
+    // Asks game engine to check whether this is a valid move
     func selectAnnotation(associationLabel: Int, annotation: GameAnnotationView) {
         var valid = gameEngine.checkValidMove(associationLabel)
         
         if valid {
             annotation.disableView()
             annotation.showCorrectAnimation()
+            gameEngine.checkIfNext()
         } else {
             
         }
     }
     
+    // Game Starts
+    // Starts the timer
     func startGame() {
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
     }
     
+    // Game Ends
     func displayEndGame() {
         timer.invalidate()
         let endPrompt = UIAlertController(title: "FINISHED", message: "\(gameEngine.timeElapsed)", preferredStyle: UIAlertControllerStyle.Alert)
@@ -130,18 +145,30 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         self.presentViewController(endPrompt, animated: true, completion: nil)
     }
     
+    // Game Pauses
+    func pauseGame() {
+        timer.invalidate()
+    }
+    
+    // Game Resumes
+    func resumeGame() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
+    }
+    
+    // Reload the view
     func reloadView() {
         loadGameRoomLayout()
     }
     
+    // Updates time by 1 every second on both view and engine
     func updateTimer() {
         gameEngine.timeElapsed += 1
         timerLabel.text = String(gameEngine.timeElapsed)
     }
     
     
-    @IBAction func dismissView(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func menuView(sender: UIButton) {
+        pauseGame()
     }
     
     

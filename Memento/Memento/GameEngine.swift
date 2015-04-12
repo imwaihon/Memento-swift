@@ -46,6 +46,7 @@ class GameEngine {
 
     }
     
+    // Set up the next room
     func setUpNext() {
         currRoomIndex += 1
         
@@ -58,20 +59,18 @@ class GameEngine {
         
     }
     
-    
+    // Get the current active room
     func getCurrRoom() -> MemoryPalaceRoomView {
         return palaceRooms[currRoomIndex]
     }
     
+    // Check whether this move is valid
     func checkValidMove(associationLabel: Int) -> Bool {
         if mode == "order" {
             var validAssociationLabel = currRoomAssociations.first?.placeHolder.label
-            print(validAssociationLabel)
-            print(associationLabel)
             
             if validAssociationLabel == associationLabel {
                 currRoomAssociations.removeAtIndex(0)
-                checkIfNext()
                 return true
             } else {
                 return false
@@ -85,7 +84,6 @@ class GameEngine {
         if currRoomAssociations.isEmpty {
             setUpNext()
         }
-        print(currRoomAssociations)
     }
     
     func finishedGame() {
