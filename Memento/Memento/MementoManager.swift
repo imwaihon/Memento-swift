@@ -226,7 +226,11 @@ class MementoManager: MemoryPalaceManager {
     //existin placeholder.
     func addPlaceHolder(palaceName: String, roomLabel: Int, placeHolder: PlaceHolder) -> Bool {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            return room.addPlaceHolder(placeHolder)
+            let res = room.addPlaceHolder(placeHolder)
+            if res {
+                model.savePalace(palaceName)
+            }
+            return res
         }
         return false
     }
@@ -234,14 +238,21 @@ class MementoManager: MemoryPalaceManager {
     //Sets the palceholder's frame.
     //Does nothing if the placehodler is not found.
     func setPlaceHolderFrame(palaceName: String, roomLabel: Int, placeHolderLabel: Int, newFrame: CGRect) {
-        (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).setPlaceHolderFrame(placeHolderLabel, newFrame: newFrame)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            room.setPlaceHolderFrame(placeHolderLabel, newFrame: newFrame)
+            model.savePalace(palaceName)
+        }
     }
     
     //Returns true if the swap is successful.
     //Returns false if swap is unsuccessful due to absence of 1 or both of the placeholders.
     func swapPlaceHolders(palaceName: String, roomLabel: Int, pHolder1Label: Int, pHolder2Label: Int) -> Bool {
-        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            return (room as MementoNode).swapPlaceHolders(pHolder1Label, pHolder2Label: pHolder2Label)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            let res = room.swapPlaceHolders(pHolder1Label, pHolder2Label: pHolder2Label)
+            if res {
+                model.savePalace(palaceName)
+            }
+            return res
         }
         return false
     }
@@ -249,13 +260,19 @@ class MementoManager: MemoryPalaceManager {
     //Sets the value of the specified placeholder in the given memory palace room.
     //Does nothing if the placeholder is not found.
     func setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String) {
-        model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.setAssociationValue(placeHolderLabel, value: value)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
+            room.setAssociationValue(placeHolderLabel, value: value)
+            model.savePalace(palaceName)
+        }
     }
     
     //Removes the specified placeholder.
     //Does nothing if the placeholder is not found.
     func removePlaceHolder(palaceName: String, roomLabel: Int, placeHolderLabel: Int) {
-        model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.removePlaceHolder(placeHolderLabel)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
+            room.removePlaceHolder(placeHolderLabel)
+            model.savePalace(palaceName)
+        }
     }
     
     //Gets the memory palace room that comes after the specified memory palace room.
