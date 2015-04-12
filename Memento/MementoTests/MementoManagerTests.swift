@@ -155,41 +155,6 @@ class MementoManagerTests: XCTestCase {
         })
     }
     
-    /*func testRemoveMemoryPalaceRoom() {
-        let manager = MementoManager.sharedInstance
-        let model = MementoModel.sharedInstance
-        let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
-        let room1 = MemoryPalaceRoomIcon(graphName: "graph1", label: 0, filename: "A.png", overlays: [])
-        let room2 = MemoryPalaceRoomIcon(graphName: "graph1", label: 1, filename: "B.png", overlays: [])
-        
-        manager.addMemoryPalaceRoom(palaceName, roomImage: "B.png")
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
-        
-        //Invalid palace name
-        manager.removeMemoryPalaceRoom("graph0", roomLabel: 0)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
-        
-        //Invalid room labels
-        manager.removeMemoryPalaceRoom(palaceName, roomLabel: -1)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
-        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 100)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
-        
-        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 0)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room2])
-        
-        //Attempts to make graph empty
-        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 1)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room2])
-        
-        //Clean up directory.
-        model.removePalace(palaceName)
-        
-        dispatch_sync(model.saveQueue, {() -> Void in
-           //Do nothing. Wait for clean up to complete.
-        })
-    }*/
-    
     func testAddPlaceHolder() {
     
     }
