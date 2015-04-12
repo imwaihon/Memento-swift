@@ -109,9 +109,30 @@ class MementoManager: MemoryPalaceManager {
     
     //Adds a new room to the current memory palace.
     //Does nothing if the memory palace is not found.
+    //Returns the room label for the newly-added room or nil if the operation fails.
     func addMemoryPalaceRoom(palaceName: String, roomImage: String) -> Int? {
-        let newRoom = nodeFactory.makeNode(roomImage)
-        return model.addPalaceRoom(palaceName, room: newRoom) ? newRoom.label: nil
+        if model.containsPalace(palaceName) {
+            resourceManager.retainResource(roomImage)
+            let newRoom = nodeFactory.makeNode(roomImage)
+            model.addPalaceRoom(palaceName, room: newRoom)
+            return newRoom.label
+        }
+        return nil
+    }
+    
+    //Adds a new memory palace room with the given image.
+    //Recommended to use this for images that does not currently exist in shared resources folder.
+    //Returns the room label and the file name assigned to the image upon success.
+    //Returns nil if the memory palace does not exist.
+    func addMemoryPalaceRoom(palaceName: String, roomImage: String, image: UIImage) -> (Int, String)? {
+        if model.containsPalace(palaceName) {
+            //Add the image resource and get assigned file name
+            let imgFile = resourceManager.retainResource(roomImage, image: image)
+            let newRoom = nodeFactory.makeNode(imgFile)
+            model.addPalaceRoom(palaceName, room: newRoom)
+            return (newRoom.label, imgFile)
+        }
+        return nil
     }
     
     //Gets the memory palace room.
@@ -129,7 +150,13 @@ class MementoManager: MemoryPalaceManager {
     //Removes the specified room from the specified memory palace.
     //Does nothign if either the memory palace or the room is invalid.
     func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
-        model.removeMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            for overlay in room.overlays {
+                resourceManager.releaseResource(overlay.imageFile)
+            }
+            resourceManager.releaseResource(room.backgroundImageFile)
+            model.removeMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
+        }
     }
     
     //Gets the name that will be used for the memory
