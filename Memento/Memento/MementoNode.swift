@@ -40,13 +40,13 @@ class MementoNode: MemoryPalaceRoom {
     private let _placeHolders: Map<Int, PlaceHolder>
     private let _values: Map<Int, String>
     
-    let _backgroundImageFile: String
+    let backgroundImageFile: String
     var label: Int = 0      //The node's identification label in the graph
     var graphName: String = "sampleGraph"
     
     //Properties
     var icon: MemoryPalaceRoomIcon {
-        return MemoryPalaceRoomIcon(graphName: graphName, label: label, filename: _backgroundImageFile, overlays: overlays)
+        return MemoryPalaceRoomIcon(graphName: graphName, label: label, filename: backgroundImageFile, overlays: overlays)
     }
     var overlays: [Overlay] {
         var tempArr = _overlays.inOrderTraversal()
@@ -74,12 +74,12 @@ class MementoNode: MemoryPalaceRoom {
         return arr
     }
     var viewRepresentation: MemoryPalaceRoomView {  //The object representation used to render the node in view/edit mode
-        return MemoryPalaceRoomView(graphName: graphName, label: label, backgroundImage: _backgroundImageFile, overlays: overlays, associations: associations)
+        return MemoryPalaceRoomView(graphName: graphName, label: label, backgroundImage: backgroundImageFile, overlays: overlays, associations: associations)
     }
     
     var plistRepresentation: NSDictionary { //Currently assumes no deletion of overlays, placeholders and values
         var rep = NSMutableDictionary()
-        rep[bgImageKey] = NSString(string: _backgroundImageFile)
+        rep[bgImageKey] = NSString(string: backgroundImageFile)
         
         //Gets array of overlays
         let overlayArr = overlays
@@ -109,7 +109,7 @@ class MementoNode: MemoryPalaceRoom {
     }
 
     init(imageFile: String){
-        _backgroundImageFile = imageFile
+        backgroundImageFile = imageFile
         _overlays = Map<Int, MutableOverlay>()
         _placeHolders = Map<Int, PlaceHolder>()
         _values = Map<Int, String>()
