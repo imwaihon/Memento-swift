@@ -15,6 +15,7 @@ import Foundation
 import UIKit
 
 struct Overlay: Equatable {
+    let label: Int
     let frame: CGRect
     let imageFile: String   //Name of the overlay image file, without any path component
     
@@ -29,7 +30,8 @@ struct Overlay: Equatable {
         return str
     }
     
-    init(frame: CGRect, imageFile: String) {
+    init(label: Int, frame: CGRect, imageFile: String) {
+        self.label = label
         self.frame = frame
         self.imageFile = imageFile
     }
@@ -41,5 +43,5 @@ struct Overlay: Equatable {
 }
 
 func ==(lhs: Overlay, rhs: Overlay) -> Bool {
-    return lhs.frame == rhs.frame && lhs.imageFile == rhs.imageFile
+    return lhs.label == rhs.label && lhs.frame == rhs.frame && lhs.imageFile == rhs.imageFile
 }

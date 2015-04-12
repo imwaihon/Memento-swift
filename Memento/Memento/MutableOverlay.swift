@@ -41,7 +41,7 @@ struct MutableOverlay: Equatable {
     
     //Returns the immutable representation of this object.
     func makeImmuatble() -> Overlay {
-        return Overlay(frame: frame, imageFile: imageFile)
+        return Overlay(label: label, frame: frame, imageFile: imageFile)
     }
 }
 
