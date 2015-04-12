@@ -209,23 +209,68 @@ class MementoManagerTests: XCTestCase {
     func testSetAssociationValue() {
         let manager = MementoManager.sharedInstance
         let model = MementoModel.sharedInstance
-        let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
+        
     }
     
     func testRemovePlaceHolder() {
         
     }
     
-    func testAddOverlay() {
-    
-    }
-    
-    func testSetOverlayFrame() {
+    func testOverlayOperations() {
+        let manager = MementoManager.sharedInstance
+        let model = MementoModel.sharedInstance
+        let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
+        let room = manager.getMemoryPalaceRoom(palaceName, roomLabel: 0) as? MementoNode
+        let image = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)!
+        let frame1  = CGRectMake(0, 0, 10, 10)
+        let frame2 = CGRectMake(50, 50, 10, 10)
+        XCTAssertFalse(room == nil)
+        XCTAssertEqual(room!.numOverlays, 0)
         
-    }
-    
-    func testRemoveOverlay() {
+        //Add overlay with new image resource
+        let overlay1 = manager.addOverlay(palaceName, roomLabel: 0, frame: frame1, image: image)
+        if overlay1 != nil {
+            XCTAssertEqual(room!.numOverlays, 1)
+            XCTAssertEqual(room!.getOverlay(0)!, overlay1!)
+            XCTAssertEqual(overlay1!.label, 0)
+            XCTAssertEqual(overlay1!.frame, frame1)
+            XCTAssertTrue(fileExists("sharedResource/\(overlay1!.imageFile)"))
+        } else {
+            XCTFail("Overlay 1 not added")
+        }
         
+        //Add overlay using existing image resource
+        var overlay2 = MutableOverlay(frame: frame2, imageFile: overlay1!.imageFile)
+        if let label = manager.addOverlay(palaceName, roomLabel: 0, overlay: overlay2) {
+            overlay2.label = label
+            XCTAssertEqual(room!.numOverlays, 2)
+            XCTAssertEqual(label, 1)
+            XCTAssertEqual(room!.getOverlay(1)!, overlay2.makeImmuatble())
+        } else {
+            XCTFail("Overlay 2 not added")
+        }
+        
+        //Failed attempts to add overlay
+        XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, frame: frame1, image: image) == nil)
+        XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, overlay: overlay2) == nil)
+        
+        //Remove overlays
+        manager.removeOverlay(palaceName, roomLabel: 0, overlayLabel: 0)
+        XCTAssertEqual(room!.numOverlays, 1)
+        XCTAssertTrue(room!.getOverlay(0) == nil)
+        XCTAssertTrue(fileExists("sharedResource/\(overlay1!.imageFile)"))
+        
+        //Removing this overlays cause the image resource to be deleted
+        manager.removeOverlay(palaceName, roomLabel: 0, overlayLabel: 1)
+        XCTAssertEqual(room!.numOverlays, 0)
+        XCTAssertTrue(room!.getOverlay(1) == nil)
+        XCTAssertFalse(fileExists("sharedResource/\(overlay1!.imageFile)"))
+        
+        //Cleanup
+        manager.removeMemoryPalace(palaceName)
+        dispatch_sync(model.saveQueue, {() -> Void in
+            //Do nothing. Wait for cleanup to finish.
+        })
     }
     
     func testGetNextNodeView() {
