@@ -155,12 +155,50 @@ class MementoManagerTests: XCTestCase {
         })
     }
     
-    func testAddPlaceHolder() {
-    
-    }
-    
-    func testSetPlaceHolderFrame() {
-    
+    func testPlaceHolderOperations() {
+        let manager = MementoManager.sharedInstance
+        let model = MementoModel.sharedInstance
+        let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
+        let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(10, 20, 30, 40))
+        let frame2 = CGRectMake(100, 100, 100, 100)
+        let room = manager.getMemoryPalaceRoom(palaceName, roomLabel: 0)
+        XCTAssertFalse(room == nil)
+        XCTAssertEqual(room!.numPlaceHolders, 0)
+        placeHolder1.label = 1  //To test if the label gets updated when added to room
+        
+        //Adds the placeholder
+        XCTAssertTrue(manager.addPlaceHolder(palaceName, roomLabel: 0, placeHolder: placeHolder1))
+        XCTAssertEqual(room!.numPlaceHolders, 1)
+        XCTAssertEqual(placeHolder1.label, 0)
+        XCTAssertEqual(room!.getPlaceHolder(0)!, placeHolder1)
+        
+        //Tries to add same placeholder again. Simulate overlapping placeholder
+        XCTAssertFalse(manager.addPlaceHolder(palaceName, roomLabel: 0, placeHolder: placeHolder1))
+        XCTAssertEqual(room!.numPlaceHolders, 1)
+        
+        //Adds placeholder to non-existent room
+        XCTAssertFalse(manager.addPlaceHolder(palaceName, roomLabel: 1, placeHolder: placeHolder1))
+        
+        //Change frame of current placeholder
+        manager.setPlaceHolderFrame(palaceName, roomLabel: 0, placeHolderLabel: 0, newFrame: frame2)
+        XCTAssertEqual((room!.getPlaceHolder(0) as RectanglePlaceHolder).highlightArea, frame2)
+        
+        //Sets association value
+        XCTAssertEqual(room!.getAssociation(0)!.value, "")
+        manager.setAssociationValue(palaceName, roomLabel: 0, placeHolderLabel: 0, value: "Hello")
+        XCTAssertEqual(room!.getAssociation(0)!.value, "Hello")
+        
+        //Removes placeholder
+        manager.removePlaceHolder(palaceName, roomLabel: 0, placeHolderLabel: 0)
+        XCTAssertEqual(room!.numPlaceHolders, 0)
+        XCTAssertTrue(room!.getPlaceHolder(0) == nil)
+        XCTAssertTrue(room!.getAssociation(0) == nil)
+        
+        //Cleanup
+        manager.removeMemoryPalace(palaceName)
+        dispatch_sync(model.saveQueue, {() -> Void in
+            //Do nothing. Wait for cleanup to finish.
+        })
     }
     
     func testSwapPlaceHolders() {
@@ -204,16 +242,6 @@ class MementoManagerTests: XCTestCase {
         dispatch_sync(model.saveQueue, {() -> Void in
             //Do nothing. Wait for cleanup to finish.
         })
-    }
-    
-    func testSetAssociationValue() {
-        let manager = MementoManager.sharedInstance
-        let model = MementoModel.sharedInstance
-        
-    }
-    
-    func testRemovePlaceHolder() {
-        
     }
     
     func testOverlayOperations() {
