@@ -94,7 +94,17 @@ class MementoManager: MemoryPalaceManager {
     //Removes the specified memory palace
     //Does nothing if no memory palace has the given name
     func removeMemoryPalace(palaceName: String){
-        model.removePalace(palaceName)
+        if let roomIcons = model.getPalace(palaceName)?.nodeIcons {
+            //Release all image resources
+            for icon in roomIcons {
+                for overlay in icon.overlays {
+                    resourceManager.releaseResource(overlay.imageFile)
+                }
+                resourceManager.releaseResource(icon.filename)
+            }
+            //Remove the palace from the model
+            model.removePalace(palaceName)
+        }
     }
     
     //Adds a new room to the current memory palace.
