@@ -95,36 +95,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
-    /* Removing functionaliy for replacing background images 
-
-    // Camera button
-    @IBAction func useCamera(sender: AnyObject) {
-        
-        if UIImagePickerController.isSourceTypeAvailable(
-            UIImagePickerControllerSourceType.Camera) {
-                
-                let imagePicker = UIImagePickerController()
-                
-                imagePicker.delegate = self
-                imagePicker.sourceType =
-                    UIImagePickerControllerSourceType.Camera
-                imagePicker.mediaTypes = [kUTTypeImage as NSString]
-                self.presentViewController(imagePicker, animated: true, 
-                    completion: nil)
-                newMedia = true
-                
-                // For main view
-                isMainView = true
-        }
-    }
-    
-    // Camera roll button
-    @IBAction func useCameraRoll(sender: AnyObject) {
-        isMainView = true
-        getImageFromPhotoLibrary(sender)
-    }
-    */
-    
     // Toggles on edit mode
     @IBAction func toggleEditMode(sender: AnyObject) {
         if self.editToggler == false {
@@ -317,8 +287,12 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Next Node button
     @IBAction func nextNodePressed(sender: UIButton) {
+        // If node does not exist
         if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) == nil ) {
             performSegueWithIdentifier("CreateNewNodeSegue", sender: self)
+        } else {
+            // Node Exists. Reload view controller with appropriate data.
+            loadNextNode()
         }
         
     }
@@ -327,56 +301,34 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String!, sender: AnyObject!) -> Bool {
-        if identifier == "GoToExistingNextNodeSegue" {
-            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
-                return true
-            }
+    // Reload viewcontroller with next node's data
+    private func loadNextNode() {
+        if let nextNode = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) {
+            self.roomLabel = nextNode.label
         }
         
-        return false
+        // Get view representation of next room
+        var newRoomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
+        
+        // Get image from graphical view
+        imageView.image = Utilities.getImageNamed(newRoomRep.backgroundImage)
+        
+        // Remove all current overlays/placeholder
+        for eachSubview in self.imageView.subviews {
+            eachSubview.removeFromSuperview()
+        }
+        
+        // Load
+        overlayList = newRoomRep.overlays
+        associationList = newRoomRep.associations
+        loadLayouts()
+        allCGRects = [CGRect]()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if (segue.identifier == "GoToExistingNextNodeSegue"){
-            // Go to previously created next node
-            let nextNodeViewController = segue.destinationViewController as NodeViewController
-            var nextNode = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)
-            if ( nextNode != nil ) {
-                nextNodeViewController.graphName = self.graphName
-                nextNodeViewController.roomLabel = nextNode!.label
-            }
-        }
         if (segue.identifier == "CreateNewNodeSegue") {
             let nextNodeViewController = segue.destinationViewController as BlurCreateNodePopoverController
             nextNodeViewController.graphName = self.graphName
-        }
-        
-//        if (segue.identifier == "clearTransition") {
-//            /* Previous implementation without dummy
-//            let nextNodeViewController = segue.destinationViewController as BlurCreateNodePopoverController
-//            nextNodeViewController.graphName = self.graphName
-//            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
-//                var nextLabel = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)?.label
-//                nextNodeViewController.nextRoomLabel = nextLabel!
-//                nextNodeViewController.nodeAlreadyExist = true
-//            }
-//            */
-//            let nextNodeViewController = segue.destinationViewController as DummyClearViewController
-//            nextNodeViewController.graphName = self.graphName
-//            if ( mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel) != nil ) {
-//                var nextLabel = mementoManager.getNextNode(self.graphName, roomLabel: self.roomLabel)?.label
-//                nextNodeViewController.nextRoomLabel = nextLabel!
-//                nextNodeViewController.nodeAlreadyExist = true
-//            }
-//
-//        }
-        
-        if (segue.identifier == "backButton") {
-            // Goes to Select Palace page for consistency
-            let selectPalaceViewController = segue.destinationViewController as SelectPalaceViewController
-            // Refresh the save/load if we wanna go back to overview
         }
     }
     

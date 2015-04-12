@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -399,7 +399,6 @@
                                         </state>
                                         <connections>
                                             <action selector="nextNodePressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="Xad-Fh-Vhn"/>
-                                            <segue destination="QAb-Y3-WmI" kind="showDetail" identifier="GoToExistingNextNodeSegue" id="5si-Au-k4a"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -739,6 +738,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cfi-6M-yo4"/>
-        <segue reference="2W0-zM-hGH"/>
     </inferredMetricsTieBreakers>
 </document>
