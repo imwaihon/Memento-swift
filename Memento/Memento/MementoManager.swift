@@ -199,8 +199,10 @@ class MementoManager: MemoryPalaceManager {
     //Sets the overlay's frame.
     //Does nothing if the overlay object is not found.
     func setOverlayFrame(palaceName: String, roomLabel: Int, overlayLabel: Int, newFrame: CGRect) {
-        (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as MementoNode).setOverlayFrame(overlayLabel, newFrame: newFrame)
-        model.savePalace(palaceName)
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            room.setOverlayFrame(overlayLabel, newFrame: newFrame)
+            model.savePalace(palaceName)
+        }
     }
     
     //Removes the overlay from the memory palace room.

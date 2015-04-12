@@ -254,6 +254,17 @@ class MementoManagerTests: XCTestCase {
         XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, frame: frame1, image: image) == nil)
         XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, overlay: overlay2) == nil)
         
+        //Change overlay frames
+        let newFrame1 = CGRectMake(30, 40, 50, 60)
+        manager.setOverlayFrame(palaceName, roomLabel: 0, overlayLabel: 0, newFrame: newFrame1)
+        XCTAssertNotEqual(room!.getOverlay(0)!, overlay1!)
+        XCTAssertEqual(room!.getOverlay(0)!.frame, newFrame1)
+        XCTAssertEqual(room!.getOverlay(0)!.imageFile, overlay1!.imageFile)
+        
+        //Change overlay for non-existent room/overlay
+        manager.setOverlayFrame(palaceName, roomLabel: 1, overlayLabel: 1, newFrame: newFrame1)
+        XCTAssertEqual(room!.getOverlay(1)!, overlay2.makeImmuatble())
+        
         //Remove overlays
         manager.removeOverlay(palaceName, roomLabel: 0, overlayLabel: 0)
         XCTAssertEqual(room!.numOverlays, 1)
@@ -325,6 +336,6 @@ class MementoManagerTests: XCTestCase {
         fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph2(2)"), error: nil)
         fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1(2)"), error: nil)
         fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1(3)"), error: nil)
-        fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1(4)"), error: nil)
+        fileManager.removeItemAtPath(path.stringByAppendingPathComponent("graph1"), error: nil)
     }*/
 }
