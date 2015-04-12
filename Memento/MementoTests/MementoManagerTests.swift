@@ -16,51 +16,50 @@ import UIKit
 import XCTest
 
 class MementoManagerTests: XCTestCase {
-    func testAddMemoryPalace() {
+    func testAddAndRemoveMemoryPalace() {
         let manager = MementoManager.sharedInstance
         let model = MementoModel.sharedInstance
+        let image = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)!
         var initialNumPalace = manager.numberOfMemoryPalace
         
-        XCTAssertEqual(manager.addMemoryPalace(named: "graph1", imageFile: "A.png"), "graph1")
+        let res = manager.addMemoryPalace(named: "graph1", imageFile: "linuxpenguin.jpg", image: image)
+        XCTAssertEqual(res.0, "graph1")
+        XCTAssertEqual(res.1, "linuxpenguin.jpg")
         XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+1)
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
         XCTAssertFalse(manager.getMemoryPalace("graph1") == nil)
-        XCTAssertEqual(manager.getMemoryPalace("graph1")!.icon, MemoryPalaceIcon(graphName: "graph1", imageFile: "A.png"))
+        XCTAssertEqual(manager.getMemoryPalace("graph1")!.icon, MemoryPalaceIcon(graphName: "graph1", imageFile: "linuxpenguin.jpg"))
+        
+        //Add memory palace with duplicate name
         XCTAssertEqual(manager.addMemoryPalace(named: "graph1", imageFile: "B.png"), "graph1(1)")
+        XCTAssertFalse(manager.getMemoryPalace("graph1(1)") == nil)
         XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+2)
         
-        model.removePalace("graph1")
-        model.removePalace("graph1(1)")
+        //Adds another palace using the same image as graph1 to test reference counting in deletion
+        XCTAssertEqual(manager.addMemoryPalace(named: "graph2", imageFile: "linuxpenguin.jpg"), "graph2")
+        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+3)
+        XCTAssertFalse(manager.getMemoryPalace("graph2") == nil)
+        XCTAssertEqual(manager.getMemoryPalace("graph2")!.icon, MemoryPalaceIcon(graphName: "graph2", imageFile: "linuxpenguin.jpg"))
         
-        dispatch_sync(model.saveQueue, {() -> Void in
-            
-        })
-        
-        XCTAssertTrue(manager.getMemoryPalace("graph1") == nil)
-        XCTAssertTrue(manager.getMemoryPalace("graph1(1)") == nil)
-    }
-    
-    //Exact memory palace counting tests to be modified after adding save/load capabilities
-    func testDeleteMemoryPalace() {
-        let manager = MementoManager.sharedInstance
-        let model = MementoModel.sharedInstance
-        
-        XCTAssertEqual(manager.addMemoryPalace(named: "graph1", imageFile: "A.png"), "graph1")
-        manager.addMemoryPalace(named: "graph1", imageFile: "B.png")
-        XCTAssertFalse(manager.getMemoryPalace("graph1") == nil)
-        XCTAssertFalse(manager.getMemoryPalace("graph1(1)") == nil)
-        
-        let initialNumPalaces = manager.numberOfMemoryPalace
-        
+        //Deletes 1 of the memory palace using the existing image
         manager.removeMemoryPalace("graph1")
-        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalaces-1)
+        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+2)
         XCTAssertTrue(manager.getMemoryPalace("graph1") == nil)
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))    //Check for existing reference.
         
+        //Remove last reference to the actual image.
+        manager.removeMemoryPalace("graph2")
+        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+1)
+        XCTAssertTrue(manager.getMemoryPalace("graph2") == nil)
+        XCTAssertFalse(fileExists("sharedResource/linuxpenguin.jpg"))
+        
+        //Clean up the remaining test graph
         manager.removeMemoryPalace("graph1(1)")
-        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalaces-2)
+        XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace)
         XCTAssertTrue(manager.getMemoryPalace("graph1(1)") == nil)
         
         dispatch_sync(model.saveQueue, {() -> Void in
-            //Do nothing. Wait for file operations to complete before ending test case.
+            //Wait for all asynchronous cleanup operations to be done.
         })
     }
     
@@ -262,6 +261,11 @@ class MementoManagerTests: XCTestCase {
         dispatch_sync(model.saveQueue, {() -> Void in
             //Do nothing. Wait for cleanup to complete.
         })
+    }
+    
+    private func fileExists(filename: String) -> Bool {
+        let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+        return NSFileManager.defaultManager().fileExistsAtPath(dir+"/\(filename)")
     }
     
     /*func testCleanup() {
