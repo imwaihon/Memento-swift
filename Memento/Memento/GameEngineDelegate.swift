@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameEngineDelegate {
+protocol GameEngineDelegate: class {
     func reloadView()
     func startGame()
     func displayEndGame()

@@ -35,13 +35,15 @@ class GameMenuViewController: UIViewController {
     
 
     @IBAction func backButtonPress(sender: AnyObject) {
-        let controller = self.presentingViewController as? GameChallengeViewController
+        var controller = self.presentingViewController as? GameChallengeViewController
         controller?.resumeGame()
         self.dismissViewControllerAnimated(true, completion: nil)
+        controller = nil
     }
     
     @IBAction func backToMenuButtonPress(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+
     }
 }
