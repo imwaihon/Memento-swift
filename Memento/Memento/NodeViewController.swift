@@ -43,7 +43,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.viewDidLoad()
         self.imageView.userInteractionEnabled = true
         self.view.userInteractionEnabled = true
-        self.editModeButton.alpha = 0.3
         
         //setUpGestures()
         panRec.addTarget(self, action: "handlePan:")
@@ -101,7 +100,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         if self.editToggler == false {
             self.editToggler = true
-            self.editModeButton.alpha = 1.0
             // Enable editing -> Show menu bar
             UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
                 var moveFrameUp = CGRectMake(0, self.view.frame.height - self.menuBarView.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)
@@ -110,7 +108,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
         } else {
             self.editToggler = false
-            self.editModeButton.alpha = 0.3
             // Disable editing -> Hide menu bar
             UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
                 var moveFrameDown = CGRectMake(0, self.view.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)

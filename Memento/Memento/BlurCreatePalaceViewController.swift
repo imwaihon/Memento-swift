@@ -124,13 +124,14 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
             var image = info[UIImagePickerControllerOriginalImage]
                 as UIImage
             
+            /*
             // Adjustments to show UIImageView in proper rotation according to input types
             if picker.sourceType == UIImagePickerControllerSourceType.Camera{
                 image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Down)!
             } else {
                 image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Up)!
             }
-            /*let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+            let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
             let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
             if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) {
                 if paths.count > 0 {

@@ -43,9 +43,6 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         self.nameTextField.layer.borderWidth = 1.5
         self.nameTextField.layer.cornerRadius = 5
         self.nameTextField.delegate = self
-        
-
-
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
@@ -128,13 +125,6 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         if mediaType.isEqualToString(kUTTypeImage as NSString) {
             var image = info[UIImagePickerControllerOriginalImage]
                 as UIImage
-            
-            // Adjustments to show UIImageView in proper rotation according to input types
-            if picker.sourceType == UIImagePickerControllerSourceType.Camera{
-                image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Down)!
-            } else {
-                image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Up)!
-            }
 
             var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.png", image: Utilities.convertToThumbnail(image))
             
