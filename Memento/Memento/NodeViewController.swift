@@ -37,7 +37,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var associationList = [Association]()
     
     private var rotationToggler: Bool = true
-    private var editToggler: Bool = false
+    private var editToggler: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +100,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         if self.editToggler == false {
             self.editToggler = true
+            self.imageView.userInteractionEnabled = true
             // Enable editing -> Show menu bar
             UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
                 var moveFrameUp = CGRectMake(0, self.view.frame.height - self.menuBarView.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)
@@ -108,6 +109,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
         } else {
             self.editToggler = false
+            self.imageView.userInteractionEnabled = false
             // Disable editing -> Hide menu bar
             UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
                 var moveFrameDown = CGRectMake(0, self.view.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)
@@ -188,6 +190,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
         }
     }
+    
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafePointer<Void>) {
         
         if error != nil {
@@ -272,25 +275,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             imageView.addSubview(newViewToTest)
         }
     }
-    
-    /*private func getImageNamed(fileName : String) -> UIImage{
-        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        {
-            if paths.count > 0
-            {
-                if let dirPath = paths[0] as? String
-                {
-                    let readPath = dirPath.stringByAppendingPathComponent(fileName)
-                    let image    = UIImage(contentsOfFile: readPath)
-                    // Do whatever you want with the image
-                    return image!
-                }
-            }
-        }
-        return UIImage()
-    }*/
     
     // Next Node button
     @IBAction func nextNodePressed(sender: UIButton) {
