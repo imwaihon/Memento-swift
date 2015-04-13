@@ -65,7 +65,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private func loadLayouts() {
         // Load draggable image views/layers
         var draggableImageViewsToAdd = [DraggableImageView]()
-        var counter = 0
         for eachOverlay in overlayList {
             var newFrame = eachOverlay.frame
             var newImageFile = eachOverlay.imageFile
@@ -74,8 +73,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             var newDraggableImageView = DraggableImageView(image: newImage!)
             newDraggableImageView.graphName = self.graphName
             newDraggableImageView.roomLabel = self.roomLabel
-            newDraggableImageView.labelIdentifier = counter
-            counter += 1
+            newDraggableImageView.labelIdentifier = eachOverlay.label
             newDraggableImageView.frame = newFrame
             self.imageView.addSubview(newDraggableImageView)
         }
@@ -174,10 +172,12 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 newImage.graphName = self.graphName
                 newImage.roomLabel = self.roomLabel
                 newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
+                //newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: image.size.width/10.0, height: image.size.width/10.0)
                 imageView.addSubview(newImage)
                 
                 // Get paths for saving
-                mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: Utilities.convertToThumbnail(image))!
+                var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: Utilities.convertToThumbnail(newImage.image!))!
+                newImage.labelIdentifier = newOverlay.label
                 
             }
             
@@ -264,7 +264,9 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
         }
         
-        if (newRectDoesNotIntersect) {
+        let minHeight = 100.0 as CGFloat
+        let minWidth = 100.0 as CGFloat
+        if (newRectDoesNotIntersect && newRect.height>minHeight && newRect.width>minWidth) {
             // Add the rectangle into main view
             allCGRects.append(newRect)
             var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: newRect)

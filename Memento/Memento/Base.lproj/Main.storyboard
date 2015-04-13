@@ -367,7 +367,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-gd-6UF" userLabel="Annotate">
-                                        <rect key="frame" x="487" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="300" y="8" width="50" height="50"/>
                                         <state key="normal" image="insertImageAnnotationButton.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -377,7 +377,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="baG-to-RYt" userLabel="Next">
-                                        <rect key="frame" x="945" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="960" y="8" width="50" height="50"/>
                                         <state key="normal" image="rightArrow.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -389,8 +389,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-py-EFm" userLabel="Edit Button" customClass="DraggableEditButton" customModule="Memento" customModuleProvider="target">
-                                <rect key="frame" x="890" y="344" width="85" height="85"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-py-EFm" userLabel="Edit Button">
+                                <rect key="frame" x="487" y="705" width="60" height="60"/>
                                 <state key="normal" image="editModeButton.png"/>
                                 <connections>
                                     <action selector="toggleEditMode:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="1c6-Jq-vRa"/>
