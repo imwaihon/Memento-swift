@@ -37,8 +37,8 @@ class SaveLoadManager {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
         let path = documentsDirectory.stringByAppendingPathComponent("data")
-        let sharedPath = documentsDirectory.stringByAppendingPathComponent("sharedResources")
-        let overlayPath = documentsDirectory.stringByAppendingPathComponent("sharedResources").stringByAppendingPathComponent("overlays")
+        let sharedPath = documentsDirectory.stringByAppendingPathComponent(imgResourceDir)
+        let overlayPath = documentsDirectory.stringByAppendingPathComponent(imgResourceDir).stringByAppendingPathComponent("overlays")
         
         let fileManager = NSFileManager.defaultManager()
         var error: NSError?
@@ -104,7 +104,6 @@ class SaveLoadManager {
             graphData = palace.plistRepresentation
             
             graphData!.writeToFile(graphPath, atomically: true)
-            NSLog(graphPath)
             
         }
     }
@@ -161,8 +160,8 @@ class SaveLoadManager {
     func saveOverlayImage(imageName: String, imageToSave: UIImage) {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
-        let path = documentsDirectory.stringByAppendingPathComponent("sharedResources").stringByAppendingPathComponent("overlays")
-        let overlayPath = path.stringByAppendingPathComponent("\(imageName).png")
+        let path = documentsDirectory.stringByAppendingPathComponent(imgResourceDir)
+        let overlayPath = path.stringByAppendingPathComponent("\(imageName)")
         
         let fileManager = NSFileManager.defaultManager()
         
@@ -175,8 +174,9 @@ class SaveLoadManager {
     func loadOverlayImage(imageName: String) -> UIImage? {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
-        let path = documentsDirectory.stringByAppendingPathComponent("sharedResources").stringByAppendingPathComponent("overlays")
-        let overlayPath = path.stringByAppendingPathComponent("\(imageName).png")
+        let path = documentsDirectory.stringByAppendingPathComponent(imgResourceDir)
+        let overlayPath = path.stringByAppendingPathComponent("\(imageName)")
+    
         
         let fileManager = NSFileManager.defaultManager()
         

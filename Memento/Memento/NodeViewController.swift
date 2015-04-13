@@ -70,7 +70,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             var newFrame = eachOverlay.frame
             var newImageFile = eachOverlay.imageFile
             var newImage = saveLoadManager.loadOverlayImage(newImageFile)
-            
+            NSLog(newImageFile)
             var newDraggableImageView = DraggableImageView(image: newImage!)
             newDraggableImageView.graphName = self.graphName
             newDraggableImageView.roomLabel = self.roomLabel
@@ -166,9 +166,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 imageView.addSubview(newImage)
                 
                 // Get paths for saving
-                saveLoadManager.saveOverlayImage("test", imageToSave: image)
-                var newMutableOverlay = MutableOverlay(frame: newImage.frame, imageFile: "test")
-                newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: newMutableOverlay)!
+                mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: Utilities.convertToThumbnail(image))!
                 
             }
             
