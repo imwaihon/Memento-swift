@@ -110,19 +110,23 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
             gameAnnotationViews.append(newAnnotatableView)
             imageView.addSubview(newAnnotatableView)
         }
+        
+        // Check if there are any associations in this room
+        gameEngine.checkIfNext()
     }
     
     // A particular annotation is selected
     // Asks game engine to check whether this is a valid move
-    func selectAnnotation(associationLabel: Int, annotation: GameAnnotationView) {
+    func selectAnnotation(associationLabel: Int, annotation: GameAnnotationView) -> Bool {
         var valid = gameEngine.checkValidMove(associationLabel)
         
         if valid {
             annotation.disableView()
             annotation.showCorrectAnimation()
             gameEngine.checkIfNext()
+            return true
         } else {
-            
+            return false
         }
     }
     
