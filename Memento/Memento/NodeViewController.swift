@@ -16,6 +16,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // ImageView = whole screen
     
+    @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var editModeButton: UIButton!
     private var newMedia: Bool?
@@ -40,7 +41,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageView.userInteractionEnabled = false
+        self.imageView.userInteractionEnabled = true
         self.view.userInteractionEnabled = true
         self.editModeButton.alpha = 0.3
         
@@ -97,15 +98,26 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Toggles on edit mode
     @IBAction func toggleEditMode(sender: AnyObject) {
+        
         if self.editToggler == false {
             self.editToggler = true
-            self.imageView.userInteractionEnabled = true
             self.editModeButton.alpha = 1.0
+            // Enable editing -> Show menu bar
+            UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
+                var moveFrameUp = CGRectMake(0, self.view.frame.height - self.menuBarView.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)
+                self.menuBarView.frame = moveFrameUp
+            })
+            
         } else {
             self.editToggler = false
-            self.imageView.userInteractionEnabled = false
             self.editModeButton.alpha = 0.3
+            // Disable editing -> Hide menu bar
+            UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
+                var moveFrameDown = CGRectMake(0, self.view.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)
+                self.menuBarView.frame = moveFrameDown
+            })
         }
+        
     }
     
     // Adds an overlaying image from camera roll ( possibly in-app sprites next time?)

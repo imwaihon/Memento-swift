@@ -344,7 +344,7 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mjy-lt-dtU" userLabel="Menu Bar View">
-                                <rect key="frame" x="0.0" y="702" width="1024" height="66"/>
+                                <rect key="frame" x="0.0" y="768" width="1024" height="66"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLq-za-ws0">
                                         <rect key="frame" x="12" y="14" width="62" height="38"/>
@@ -408,6 +408,7 @@
                     <connections>
                         <outlet property="editModeButton" destination="xmX-py-EFm" id="3nA-Wh-mmv"/>
                         <outlet property="imageView" destination="LzC-0M-630" id="vwI-s6-IjB"/>
+                        <outlet property="menuBarView" destination="mjy-lt-dtU" id="n95-6G-b8e"/>
                         <segue destination="f5g-fC-prm" kind="presentation" identifier="CreateNewNodeSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Vgm-ts-AbI"/>
                     </connections>
                 </viewController>
