@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -620,11 +620,11 @@
                                         </state>
                                         <connections>
                                             <action selector="menuView:" destination="Etg-Wp-UrL" eventType="touchUpInside" id="WlS-Ne-BZM"/>
-                                            <segue destination="PVj-Mw-Utn" kind="presentation" id="LTt-pt-Zy7"/>
+                                            <segue destination="ZcJ-mg-0Pd" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="EM5-Et-4cv"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.16" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WH3-Xo-SEc">
                                 <rect key="frame" x="436" y="20" width="152" height="77"/>
@@ -717,54 +717,52 @@
             </objects>
             <point key="canvasLocation" x="1681" y="2582"/>
         </scene>
-        <!--Game Menu View Controller-->
-        <scene sceneID="0hI-gu-o1k">
+        <!--Game Mode Pause Menu View Controller-->
+        <scene sceneID="h9G-DL-dys">
             <objects>
-                <viewController modalPresentationStyle="formSheet" id="PVj-Mw-Utn" customClass="GameMenuViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZcJ-mg-0Pd" customClass="GameModePauseMenuViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nay-KP-TtX"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZU2-qx-NAh"/>
+                        <viewControllerLayoutGuide type="top" id="LMZ-db-o7p"/>
+                        <viewControllerLayoutGuide type="bottom" id="uS2-ur-xXZ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="E0B-Ak-dwH">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                    <view key="view" contentMode="scaleToFill" id="rKq-w9-MWc">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RuS-SV-w0q">
-                                <rect key="frame" x="173" y="260" width="195" height="53"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Resume Game">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="backButtonPress:" destination="PVj-Mw-Utn" eventType="touchUpInside" id="zeh-J1-G8U"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Paused" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Va-oh-Mw9">
-                                <rect key="frame" x="146" y="52" width="248" height="91"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GAME PAUSED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIK-1q-dUa">
+                                <rect key="frame" x="249" y="154" width="527" height="111"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="45"/>
+                                <color key="textColor" white="0.84814814810000005" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjA-Th-dLh">
-                                <rect key="frame" x="179" y="336" width="183" height="53"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Back to Menu">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VrG-2u-fSu">
+                                <rect key="frame" x="354" y="320" width="317" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Resume Game" backgroundImage="buttonBorder">
+                                    <color key="titleColor" white="0.84814814810000005" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="md0-xx-bRF">
+                                <rect key="frame" x="354" y="402" width="317" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Back to Menu" backgroundImage="buttonBorder">
+                                    <color key="titleColor" white="0.84814814810000005" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backToMenuButtonPress:" destination="PVj-Mw-Utn" eventType="touchUpInside" id="OaM-jK-eva"/>
+                                    <action selector="backToMenuButtonPress:" destination="ZcJ-mg-0Pd" eventType="touchUpInside" id="Rdg-1A-E4G"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d8F-z1-SAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ivd-kr-TLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1966" y="3415"/>
+            <point key="canvasLocation" x="-1972" y="3084"/>
         </scene>
     </scenes>
     <resources>
@@ -785,6 +783,6 @@
         <image name="webIcon" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cfi-6M-yo4"/>
+        <segue reference="DlS-Ad-FtQ"/>
     </inferredMetricsTieBreakers>
 </document>

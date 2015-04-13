@@ -26,7 +26,6 @@
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
 		4F06E88E1AD2B2AD00436083 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88D1AD2B2AD00436083 /* GameEngine.swift */; };
 		4F06E8901AD2B3EA00436083 /* GameAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */; };
-		4F0824DF1AD80AAF00B091DA /* GameMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0824DE1AD80AAF00B091DA /* GameMenuViewController.swift */; };
 		4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */; };
 		4F90A5081AD6A76E00027201 /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */; };
 		4F9D150F1ACADB6000BEE609 /* SelectChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */; };
@@ -99,6 +98,8 @@
 		5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */; };
 		5AA1B06A1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
 		5AA1B06B1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
+		5AB3F7801ADBED4C00906B76 /* GameModePauseMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB3F77F1ADBED4C00906B76 /* GameModePauseMenuViewController.swift */; };
+		5AB3F7811ADBED4C00906B76 /* GameModePauseMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB3F77F1ADBED4C00906B76 /* GameModePauseMenuViewController.swift */; };
 		5AD9C8401ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */; };
 		5AD9C8411ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */; };
 		5AEE2F861AD0C59900E0DD81 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEE2F851AD0C59900E0DD81 /* MapTests.swift */; };
@@ -141,7 +142,6 @@
 		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
 		4F06E88D1AD2B2AD00436083 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAnnotationView.swift; sourceTree = "<group>"; };
-		4F0824DE1AD80AAF00B091DA /* GameMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenuViewController.swift; sourceTree = "<group>"; };
 		4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineDelegate.swift; sourceTree = "<group>"; };
 		4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectChallengeViewController.swift; sourceTree = "<group>"; };
 		4F9D15101ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCustomChallengeViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +190,7 @@
 		5A837B911ABBE86E00E52F80 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelChangeUpdateDelegate.swift; sourceTree = "<group>"; };
 		5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoManager.swift; sourceTree = "<group>"; };
+		5AB3F77F1ADBED4C00906B76 /* GameModePauseMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModePauseMenuViewController.swift; sourceTree = "<group>"; };
 		5AD9C83F1ACB9AEC007B7125 /* MemoryPalaceRoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomView.swift; sourceTree = "<group>"; };
 		5AEE2F851AD0C59900E0DD81 /* MapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		5AEF2A591AC4FA4A00B2B6FB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -227,7 +228,7 @@
 				4F9D15121ACADB9500BEE609 /* LoadPresetChallengeVIewController.swift */,
 				4F9D15141ACADBB400BEE609 /* GameChallengeViewController.swift */,
 				4F9D15161ACADBCD00BEE609 /* EndGameChallengeViewController.swift */,
-				4F0824DE1AD80AAF00B091DA /* GameMenuViewController.swift */,
+				5AB3F77F1ADBED4C00906B76 /* GameModePauseMenuViewController.swift */,
 				4F06E88D1AD2B2AD00436083 /* GameEngine.swift */,
 				4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */,
 				4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */,
@@ -521,6 +522,7 @@
 				4F9D15191ACAEF6A00BEE609 /* SaveLoadManager.swift in Sources */,
 				4F9D150F1ACADB6000BEE609 /* SelectChallengeViewController.swift in Sources */,
 				4F9D15131ACADB9500BEE609 /* LoadPresetChallengeVIewController.swift in Sources */,
+				5AB3F7801ADBED4C00906B76 /* GameModePauseMenuViewController.swift in Sources */,
 				5A3F38711ACA76A90096AB6C /* MutableOverlay.swift in Sources */,
 				5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
 				4F06E88E1AD2B2AD00436083 /* GameEngine.swift in Sources */,
@@ -536,7 +538,6 @@
 				4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */,
 				4116CADD1ADAF50700D54AE2 /* DraggableEditButton.swift in Sources */,
 				4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */,
-				4F0824DF1AD80AAF00B091DA /* GameMenuViewController.swift in Sources */,
 				5AEF2A5A1AC4FA4A00B2B6FB /* Constants.swift in Sources */,
 				5AEF2A631AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				41359EBD1AC84F3C00CBCC82 /* DraggableImageView.swift in Sources */,
@@ -560,6 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A5FB0A71AC6628E00EA0EE7 /* Association.swift in Sources */,
+				5AB3F7811ADBED4C00906B76 /* GameModePauseMenuViewController.swift in Sources */,
 				5A5FB0A91AC67FB400EA0EE7 /* MementoManagerTests.swift in Sources */,
 				5A497A311AC7ED0F00D6C9C5 /* CreateNewPalaceViewController.swift in Sources */,
 				5A278FF51AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */,
