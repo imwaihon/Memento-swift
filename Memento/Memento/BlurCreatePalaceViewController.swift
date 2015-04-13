@@ -123,16 +123,18 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         if mediaType.isEqualToString(kUTTypeImage as NSString) {
             var image = info[UIImagePickerControllerOriginalImage]
                 as UIImage
-            var editor = CLImageEditor(image: image)
-            editor.delegate = self
-            picker.pushViewController(editor, animated: true)
-            
-            //model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.jpg", image:Utilities.convertToScreenSize(image))
+            if(picker.sourceType == UIImagePickerControllerSourceType.Camera){
+                var editor = CLImageEditor(image: image)
+                editor.delegate = self
+                picker.pushViewController(editor, animated: true)
+            } else{
+                model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.jpg", image:Utilities.convertToScreenSize(image))
+                parent.dataModelHasBeenChanged()
+                self.dismissViewControllerAnimated(true, completion: {finished in
+                self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
         }
-        /*parent.dataModelHasBeenChanged()
-        self.dismissViewControllerAnimated(true, completion: {finished in
-            self.dismissViewControllerAnimated(true, completion: nil)
-        })*/
     }
     
     func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
