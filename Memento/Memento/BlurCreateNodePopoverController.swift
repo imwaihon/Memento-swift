@@ -135,17 +135,12 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
             } else {
                 image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Up)!
             }
-            let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-            let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-            if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) {
-                if paths.count > 0 {
-                    if let dirPath = paths[0] as? String {
-                        let writePath = dirPath.stringByAppendingPathComponent("\(nameTextField.text)0.png")
-                        UIImagePNGRepresentation(image).writeToFile(writePath, atomically: true)
-                    }
-                }
+
+            var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.png", image: Utilities.convertToThumbnail(image))
+            
+            if resourceRep != nil {
+                nextRoomLabel = resourceRep!.0
             }
-            nextRoomLabel = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.png")!
         }
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
