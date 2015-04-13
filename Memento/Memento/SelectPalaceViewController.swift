@@ -11,11 +11,11 @@ import UIKit
 class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIGestureRecognizerDelegate, ModelChangeUpdateDelegate {
     
     @IBOutlet var palaceTiles: UICollectionView!
-    var model = MementoManager()
+    var model = MementoManager.sharedInstance
     var palaces : [MemoryPalaceIcon]!
     var nextPalace = ""
     var selectedPalace = ""
-    var imagesCache = [String:UIImage]()
+    var imagesCache : [String:UIImage]!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,7 +29,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         self.setNeedsStatusBarAppearanceUpdate()
         
         self.setUpGestures()
-        
+        imagesCache = [String:UIImage]()
         self.palaces = model.getMemoryPalaceIcons()
         
     }
@@ -130,30 +130,6 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
             dvc.palaceName = self.nextPalace
         }
     }
-    
-    /*func getImageNamed(name : String) -> UIImage!{
-        let fileName = imgResourceDir.stringByAppendingPathComponent(name)
-        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        {
-            if paths.count > 0
-            {
-                if let dirPath = paths[0] as? String
-                {
-                    let readPath = dirPath.stringByAppendingPathComponent(fileName)
-                    let image    = UIImage(contentsOfFile: readPath)
-                    // Do whatever you want with the image
-                    if(image == nil){
-                        return UIImage()
-                    } else{
-                        return image!
-                    }
-                }
-            }
-        }
-        return UIImage()
-    }*/
     
     @IBAction func backButtonPress(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

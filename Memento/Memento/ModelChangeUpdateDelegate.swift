@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ModelChangeUpdateDelegate{
+protocol ModelChangeUpdateDelegate : class{
     func dataModelHasBeenChanged()
     func deletePalace(named : String)
 }

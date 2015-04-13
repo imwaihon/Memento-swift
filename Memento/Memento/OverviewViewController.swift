@@ -84,23 +84,4 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.BlackOpaque
     }
-    
-    /*func getImageNamed(fileName : String) -> UIImage{
-        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        {
-            if paths.count > 0
-            {
-                if let dirPath = paths[0] as? String
-                {
-                    let readPath = dirPath.stringByAppendingPathComponent(fileName)
-                    let image    = UIImage(contentsOfFile: readPath)
-                    // Do whatever you want with the image
-                    return image!
-                }
-            }
-        }
-        return UIImage()
-    }*/
 }
