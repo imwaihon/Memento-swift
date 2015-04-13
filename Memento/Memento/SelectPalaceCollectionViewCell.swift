@@ -15,7 +15,7 @@ class SelectPalaceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var opacityBackground: UIView!
     @IBOutlet weak var deleteButton: UIButton!
-    var parent : ModelChangeUpdateDelegate!
+    weak var parent : ModelChangeUpdateDelegate!
     
     func addShadows(){
         imageView.layer.shadowColor = UIColor.blackColor().CGColor

@@ -16,7 +16,7 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
     var palaces : [MemoryPalaceIcon]!
     var nextPalace = ""
     var selectedPalace = ""
-    var imagesCache = [String:UIImage]()
+    var imagesCache : [String:UIImage]!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -28,7 +28,7 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
         
         palaceTiles.backgroundColor = UIColor.clearColor()
         self.setNeedsStatusBarAppearanceUpdate()
-        
+        imagesCache = [String:UIImage]()
         self.palaces = mementoManager.getMemoryPalaceIcons()
         
     }

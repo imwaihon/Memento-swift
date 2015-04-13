@@ -10,6 +10,16 @@ import Foundation
 import UIKit
 
 class Utilities{
+    
+    class func convertToScreenSize(image : UIImage) -> UIImage{
+        let destinationSize = CGSize(width: 1024, height: 768)
+        UIGraphicsBeginImageContext(destinationSize);
+        image.drawInRect(CGRectMake(0,0,destinationSize.width,destinationSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return newImage
+    }
+    
     class func convertToThumbnail(image : UIImage) -> UIImage{
         let destinationSize = CGSize(width: image.size.width/3, height: image.size.height/3)
         UIGraphicsBeginImageContext(destinationSize);
