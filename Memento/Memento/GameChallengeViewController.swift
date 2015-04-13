@@ -69,7 +69,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         clearAllViews()
         
         // Transition to the next image
-        let toImage = getImageNamed(gameEngine.getCurrRoom().backgroundImage)
+        let toImage = Utilities.getImageNamed(gameEngine.getCurrRoom().backgroundImage)
         UIView.transitionWithView(self.imageView,
             duration: 1.0,
             options: UIViewAnimationOptions.TransitionFlipFromRight,
@@ -172,23 +172,5 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
     }
     
     
-    private func getImageNamed(fileName : String) -> UIImage{
-        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        {
-            if paths.count > 0
-            {
-                if let dirPath = paths[0] as? String
-                {
-                    let readPath = dirPath.stringByAppendingPathComponent(fileName)
-                    let image    = UIImage(contentsOfFile: readPath)
-                    // Do whatever you want with the image
-                    return image!
-                }
-            }
-        }
-        return UIImage()
-    }
     
 }

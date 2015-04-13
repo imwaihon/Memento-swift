@@ -52,7 +52,7 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
         // First cell is reserved for the add button
         let currentIcon : MemoryPalaceIcon = palaces[indexPath.item]
         if(imagesCache[currentIcon.imageFile] == nil || imagesCache[currentIcon.imageFile] == UIImage()) {
-            imagesCache[currentIcon.imageFile] = getImageNamed(currentIcon.imageFile)
+            imagesCache[currentIcon.imageFile] = Utilities.getImageNamed(currentIcon.imageFile)
         }
         cell.imageView.image = imagesCache[currentIcon.imageFile]
         cell.nameLabel.text = currentIcon.graphName
@@ -94,25 +94,6 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
             dvc.palaceName = self.nextPalace
             dvc.gameMode = "order"
         }
-    }
-    
-    func getImageNamed(fileName : String) -> UIImage!{
-        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        {
-            if paths.count > 0
-            {
-                if let dirPath = paths[0] as? String
-                {
-                    let readPath = dirPath.stringByAppendingPathComponent(fileName)
-                    let image    = UIImage(contentsOfFile: readPath)
-                    // Do whatever you want with the image
-                    return image!
-                }
-            }
-        }
-        return UIImage()
     }
     
     @IBAction func backButtonPress(sender: AnyObject) {
