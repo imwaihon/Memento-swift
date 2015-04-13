@@ -37,15 +37,16 @@ class GameAnnotationView: UIView {
     
     func handleTap(nizer: UITapGestureRecognizer!) {
         
+        var valid = self.gameViewController.selectAnnotation(self.viewTag, annotation: self)
         
-        let loadPrompt = UIAlertController(title: "Correct!", message: "\(self.annotation)", preferredStyle: UIAlertControllerStyle.Alert)
-        loadPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            
-            self.gameViewController.selectAnnotation(self.viewTag, annotation: self)
+        if valid {
+            let loadPrompt = UIAlertController(title: "Correct!", message: "\(self.annotation)", preferredStyle: UIAlertControllerStyle.Alert)
+            loadPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
 
-        }))
+            }))
         
-        self.gameViewController.presentViewController(loadPrompt, animated: true, completion: nil)
+            self.gameViewController.presentViewController(loadPrompt, animated: true, completion: nil)
+        }
     }
     
     func showCorrectAnimation() {

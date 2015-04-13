@@ -16,7 +16,7 @@ class GameEngine {
     var currRoomIndex: Int
     var currRoomAssociations: [Association]
     var palaceRooms: [MemoryPalaceRoomView]
-    var delegate: GameEngineDelegate?
+    weak var delegate: GameEngineDelegate?
     var timeElapsed: Int
     
     init() {
