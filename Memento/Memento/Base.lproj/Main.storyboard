@@ -429,37 +429,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Cni-2K-Ptb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backgroundGrey" translatesAutoresizingMaskIntoConstraints="NO" id="Cni-2K-Ptb">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiv-eS-rjT">
-                                <rect key="frame" x="312" y="284" width="400" height="58"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ORDER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ht1-XR-vXS">
+                                <rect key="frame" x="249" y="250" width="527" height="111"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="45"/>
+                                <color key="textColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcq-yn-vUX">
+                                <rect key="frame" x="356" y="420" width="313" height="58"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Order" backgroundImage="buttonBorder">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="S2f-0e-FOh" kind="show" id="ECb-XY-aUS"/>
+                                    <action selector="playButtonPressed:" destination="1Nx-ri-I95" eventType="touchUpInside" id="mQp-3V-V9I"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Xu-DG-NSC">
-                                <rect key="frame" x="312" y="390" width="400" height="58"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Find" backgroundImage="buttonBorder">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lak-Eg-lnH">
-                                <rect key="frame" x="312" y="491" width="400" height="58"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Back" backgroundImage="buttonBorder">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0c-NM-dUp">
+                                <rect key="frame" x="0.0" y="699" width="1024" height="69"/>
+                                <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2f-Tq-gBD">
+                                <rect key="frame" x="10" y="709" width="50" height="50"/>
+                                <state key="normal" backgroundImage="leftArrow">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backButtonPress:" destination="1Nx-ri-I95" eventType="touchUpInside" id="gzY-Tp-hS5"/>
+                                    <action selector="backButtonPress:" destination="S2f-0e-FOh" eventType="touchUpInside" id="B1H-bN-W51"/>
+                                    <action selector="backButtonPress:" destination="1Nx-ri-I95" eventType="touchUpInside" id="aOv-uN-giJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xir-sY-MhZ">
+                                <rect key="frame" x="22" y="342" width="83" height="82.5"/>
+                                <state key="normal" backgroundImage="Left4-100">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="leftButtonClicked:" destination="1Nx-ri-I95" eventType="touchUpInside" id="KM7-ot-Fro"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uu9-e1-YnL">
+                                <rect key="frame" x="921" y="342" width="83" height="82.5"/>
+                                <state key="normal" backgroundImage="Forward-100">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="rightButtonClicked:" destination="1Nx-ri-I95" eventType="touchUpInside" id="XgH-sq-VkR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -467,6 +486,13 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="leftButton" destination="xir-sY-MhZ" id="ltt-bE-xrb"/>
+                        <outlet property="modeTitleLabel" destination="Ht1-XR-vXS" id="yP3-Cf-CtS"/>
+                        <outlet property="playButton" destination="tcq-yn-vUX" id="pvP-cU-esd"/>
+                        <outlet property="rightButton" destination="uu9-e1-YnL" id="CsX-04-WgI"/>
+                        <segue destination="S2f-0e-FOh" kind="show" identifier="loadOrderChallenge" id="hpc-OK-pb7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xQB-E2-24Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -612,9 +638,9 @@
                                 <rect key="frame" x="0.0" y="702" width="1024" height="66"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VgL-3V-sUj">
-                                        <rect key="frame" x="12" y="14" width="62" height="38"/>
+                                        <rect key="frame" x="16" y="14" width="35" height="38"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
-                                        <state key="normal" title="Menu">
+                                        <state key="normal" backgroundImage="menuButton">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -624,7 +650,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WH3-Xo-SEc">
                                 <rect key="frame" x="436" y="20" width="152" height="77"/>
@@ -766,6 +792,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Forward-100" width="100" height="100"/>
+        <image name="Left4-100" width="100" height="100"/>
         <image name="background" width="2048" height="1536"/>
         <image name="backgroundGrey" width="1024" height="768"/>
         <image name="buttonBorder" width="862" height="146"/>
@@ -777,6 +805,7 @@
         <image name="leftArrow" width="50" height="50"/>
         <image name="leftArrow.png" width="50" height="50"/>
         <image name="logoSet" width="660" height="659"/>
+        <image name="menuButton" width="78" height="70"/>
         <image name="photosIcon" width="64" height="64"/>
         <image name="rightArrow.png" width="50" height="50"/>
         <image name="rotateImageButton.png" width="100" height="100"/>
