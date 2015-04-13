@@ -11,7 +11,7 @@ import UIKit
 import MobileCoreServices
 import QuartzCore
 
-class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CLImageEditorDelegate {
     
     
     var newMedia: Bool?
@@ -123,27 +123,27 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         if mediaType.isEqualToString(kUTTypeImage as NSString) {
             var image = info[UIImagePickerControllerOriginalImage]
                 as UIImage
+            var editor = CLImageEditor(image: image)
+            editor.delegate = self
+            picker.pushViewController(editor, animated: true)
             
-            /*
-            // Adjustments to show UIImageView in proper rotation according to input types
-            if picker.sourceType == UIImagePickerControllerSourceType.Camera{
-                image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Down)!
-            } else {
-                image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Up)!
-            }
-            let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-            let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-            if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) {
-                if paths.count > 0 {
-                    if let dirPath = paths[0] as? String {
-                        let writePath = dirPath.stringByAppendingPathComponent("\(nameTextField.text)0.png")
-                        UIImagePNGRepresentation(image).writeToFile(writePath, atomically: true)
-                    }
-                }
-            }
-            model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.png")*/
-            model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.jpg", image:Utilities.convertToScreenSize(image))
+            //model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.jpg", image:Utilities.convertToScreenSize(image))
         }
+        /*parent.dataModelHasBeenChanged()
+        self.dismissViewControllerAnimated(true, completion: {finished in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })*/
+    }
+    
+    func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
+        model.addMemoryPalace(named: nameTextField.text, imageFile: "\(nameTextField.text)0.jpg", image:Utilities.convertToScreenSize(image))
+        parent.dataModelHasBeenChanged()
+        self.dismissViewControllerAnimated(true, completion: {finished in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+    
+    func imageEditorDidCancel(editor: CLImageEditor!) {
         parent.dataModelHasBeenChanged()
         self.dismissViewControllerAnimated(true, completion: {finished in
             self.dismissViewControllerAnimated(true, completion: nil)
