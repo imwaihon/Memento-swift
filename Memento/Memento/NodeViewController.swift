@@ -19,6 +19,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var editModeButton: UIButton!
+    @IBOutlet weak var deleteModeButton: UIButton!
     private var newMedia: Bool?
     
     var mementoManager = MementoManager.sharedInstance
@@ -38,6 +39,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     private var rotationToggler: Bool = true
     private var editToggler: Bool = true
+    var deleteToggler: Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +78,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             newDraggableImageView.roomLabel = self.roomLabel
             newDraggableImageView.labelIdentifier = eachOverlay.label
             newDraggableImageView.frame = newFrame
+            newDraggableImageView.parentViewController = self
             self.imageView.addSubview(newDraggableImageView)
         }
         
@@ -172,6 +176,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 newImage.graphName = self.graphName
                 newImage.roomLabel = self.roomLabel
                 newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
+                newImage.parentViewController = self
                 //newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: image.size.width/10.0, height: image.size.width/10.0)
                 imageView.addSubview(newImage)
                 
@@ -275,6 +280,26 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             newViewToTest.backgroundColor = .whiteColor()
             newViewToTest.alpha = 0.25
             imageView.addSubview(newViewToTest)
+        }
+    }
+    
+    func deleteView(view: UIView) {
+        view.removeFromSuperview()
+        
+        var roomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
+        
+        overlayList = roomRep.overlays
+        associationList = roomRep.associations
+    }
+    
+    // Delete Mode Activated
+    @IBAction func deleteButtonPressed(sender: UIButton) {
+        if deleteToggler {
+            deleteToggler = false
+            deleteModeButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        } else {
+            deleteToggler = true
+            deleteModeButton.setTitleColor(UIColor.yellowColor(), forState: UIControlState.Normal)
         }
     }
     

@@ -11,7 +11,7 @@ import UIKit
 
 class AnnotatableUIView: UIView {
     
-    var parentViewController = UIViewController()
+    weak var parentViewController = UIViewController()
     var viewTag = Int()
     var backgroundImage = UIImageView()
     var roomLabel = Int()
@@ -38,25 +38,34 @@ class AnnotatableUIView: UIView {
     
 
     
-    // Add a simple annotation
+    // Add a simple annotation or delete, depending on NodeViewController parent
     func handleTap(nizer: UITapGestureRecognizer!) {
-        
-        var inputTextField: UITextField?
+        weak var nodeViewController = parentViewController as? NodeViewController
+        if nodeViewController != nil {
+            if nodeViewController!.deleteToggler {
+                // Delete mode active
+                mementoManager.removePlaceHolder(graphName, roomLabel: roomLabel, placeHolderLabel: viewTag)
+                nodeViewController!.deleteView(self)
+                
+            } else {
+                var inputTextField: UITextField?
 
-        let loadPrompt = UIAlertController(title: "placeholder title", message: "\(self.annotation)", preferredStyle: UIAlertControllerStyle.Alert)
-        loadPrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-        loadPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            
-            // Adding text to UILabel
-            self.annotation = inputTextField?.text as String!
-            self.mementoManager.setAssociationValue(self.graphName, roomLabel: self.roomLabel, placeHolderLabel: self.viewTag, value: self.annotation)
-        }))
-        loadPrompt.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-            textField.placeholder = "Annotation here"
-            inputTextField = textField
-        })
-        
-        self.parentViewController.presentViewController(loadPrompt, animated: true, completion: nil)
+                let loadPrompt = UIAlertController(title: "placeholder title", message: "\(self.annotation)", preferredStyle: UIAlertControllerStyle.Alert)
+                loadPrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                loadPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                    
+                    // Adding text to UILabel
+                    self.annotation = inputTextField?.text as String!
+                    self.mementoManager.setAssociationValue(self.graphName, roomLabel: self.roomLabel, placeHolderLabel: self.viewTag, value: self.annotation)
+                }))
+                loadPrompt.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                    textField.placeholder = "Annotation here"
+                    inputTextField = textField
+                })
+                
+                self.parentViewController?.presentViewController(loadPrompt, animated: true, completion: nil)
+            }
+        }
     }
     
 }

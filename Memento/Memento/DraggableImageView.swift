@@ -15,6 +15,7 @@ class DraggableImageView : UIImageView
 {
     var dragStartPositionRelativeToCenter : CGPoint?
     
+    weak var parentViewController = UIViewController()
     var lastRotation = CGFloat()
     var labelIdentifier = Int()
     var roomLabel = Int()
@@ -30,7 +31,6 @@ class DraggableImageView : UIImageView
         
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "handlePan:"))
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
-        
         
         // Function rotate images
         //rotateRec.addTarget(self, action: "rotatedView:")
@@ -80,9 +80,20 @@ class DraggableImageView : UIImageView
     }
     
     func handleTap(nizer: UITapGestureRecognizer!) {
-        nizer.numberOfTapsRequired = 2
-        self.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2));
+        nizer.numberOfTapsRequired = 1
+        
+        weak var nodeViewController = parentViewController as? NodeViewController
+        if nodeViewController != nil {
+            if nodeViewController!.deleteToggler {
+                // Delete mode active
+                mementoManager.removeOverlay(graphName, roomLabel: roomLabel, overlayLabel: labelIdentifier)
+                nodeViewController!.deleteView(self)
+                
+            }
+        }
     }
+    
+    
     
     
     func rotatedView(sender:UIRotationGestureRecognizer){
