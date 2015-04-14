@@ -11,7 +11,7 @@ import UIKit
 import MobileCoreServices
 import QuartzCore
 
-class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CLImageEditorDelegate {
     
     
     var newMedia: Bool?
@@ -123,14 +123,37 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         if mediaType.isEqualToString(kUTTypeImage as NSString) {
             var image = info[UIImagePickerControllerOriginalImage]
                 as UIImage
-
-            var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.png", image: Utilities.convertToScreenSize(image))
             
-            if resourceRep != nil {
-                nextRoomLabel = resourceRep!.0
+            if (picker.sourceType == UIImagePickerControllerSourceType.Camera) {
+                var editor = CLImageEditor(image: image)
+                editor.delegate = self
+                picker.pushViewController(editor, animated: true)
+                
+            } else {
+                var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.jpg", image: Utilities.convertToScreenSize(image))
+                if resourceRep != nil {
+                    nextRoomLabel = resourceRep!.0
+                }
+    
+                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
+        var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.jpg", image: Utilities.convertToScreenSize(image))
+        if resourceRep != nil {
+            nextRoomLabel = resourceRep!.0
+        }
+        self.dismissViewControllerAnimated(true, completion: {finished in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+    
+    func imageEditorDidCancel(editor: CLImageEditor!) {
+        self.dismissViewControllerAnimated(true, completion: {finished in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
