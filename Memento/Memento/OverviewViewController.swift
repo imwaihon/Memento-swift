@@ -26,9 +26,12 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         rooms = model.getPalaceOverview(palaceName)!
         
     }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(animated: Bool) {
+        // Referesh before everytime collection view is shown
+        super.viewWillAppear(animated)
+        rooms = model.getPalaceOverview(palaceName)!
         scrollableOverviewCollectionView.reloadData()
+        
     }
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
