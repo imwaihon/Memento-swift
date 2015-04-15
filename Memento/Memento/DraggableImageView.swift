@@ -31,6 +31,7 @@ class DraggableImageView : UIImageView
         
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "handlePan:"))
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
+        addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "handlePinch:"))
         
         // Function rotate images
         //rotateRec.addTarget(self, action: "rotatedView:")
@@ -90,6 +91,16 @@ class DraggableImageView : UIImageView
                 nodeViewController!.deleteView(self)
                 
             }
+        }
+    }
+    
+    func handlePinch(nizer: UIPinchGestureRecognizer!) {
+        if (nizer.state == UIGestureRecognizerState.Began || nizer.state == UIGestureRecognizerState.Changed) {
+            self.transform = CGAffineTransformScale(self.transform, nizer.scale, nizer.scale)
+            nizer.scale = 1
+        }
+        if nizer.state == UIGestureRecognizerState.Ended {
+            mementoManager.setOverlayFrame(graphName, roomLabel: roomLabel, overlayLabel: self.labelIdentifier, newFrame: self.frame)
         }
     }
     
