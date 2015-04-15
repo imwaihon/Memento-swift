@@ -23,6 +23,11 @@ class DraggableImageView : UIImageView
     let rotateRec = UIRotationGestureRecognizer()
     var mementoManager = MementoManager.sharedInstance
     
+    // Screen size
+    //let screenSize: CGRect = UIScreen.mainScreen().bounds
+    let screenWidth: CGFloat = 1024.0
+    let screenHeight: CGFloat = 768.0
+    
     override init(image: UIImage) {
         super.init(image: image)
         
@@ -37,7 +42,6 @@ class DraggableImageView : UIImageView
         //rotateRec.addTarget(self, action: "rotatedView:")
         //self.addGestureRecognizer(rotateRec)
         
-
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.5
@@ -52,6 +56,7 @@ class DraggableImageView : UIImageView
     func handlePan(nizer: UIPanGestureRecognizer!) {
         if nizer.state == UIGestureRecognizerState.Began {
             let locationInView = nizer.locationInView(superview)
+            // To prevent out of bounds
             dragStartPositionRelativeToCenter = CGPoint(x: locationInView.x - center.x, y: locationInView.y - center.y)
             
             layer.shadowOffset = CGSize(width: 0, height: 20)
@@ -69,14 +74,28 @@ class DraggableImageView : UIImageView
             layer.shadowRadius = 2
             mementoManager.setOverlayFrame(graphName, roomLabel: roomLabel, overlayLabel: self.labelIdentifier, newFrame: self.frame)
             
+            // Place it on top of other subviews
+            //self.superview?.bringSubviewToFront(self)
+            
             return
         }
         
         let locationInView = nizer.locationInView(superview)
+        var xCenter = locationInView.x - self.dragStartPositionRelativeToCenter!.x
+        var yCenter = locationInView.y - self.dragStartPositionRelativeToCenter!.y
         
+        // Check for out of screen boundary
+        if  (self.isWithinBounds()){
+            UIView.animateWithDuration(0.1) {
+                self.center = CGPoint(x: xCenter, y: yCenter)
+            }
+        }
         UIView.animateWithDuration(0.1) {
-            self.center = CGPoint(x: locationInView.x - self.dragStartPositionRelativeToCenter!.x,
-                y: locationInView.y - self.dragStartPositionRelativeToCenter!.y)
+            if  (self.isWithinBounds()){
+                self.center = CGPoint(x: xCenter, y: yCenter)
+            }
+            // Call method again to realign for corners
+            self.isWithinBounds()
         }
     }
     
@@ -96,16 +115,27 @@ class DraggableImageView : UIImageView
     
     func handlePinch(nizer: UIPinchGestureRecognizer!) {
         if (nizer.state == UIGestureRecognizerState.Began || nizer.state == UIGestureRecognizerState.Changed) {
-            self.transform = CGAffineTransformScale(self.transform, nizer.scale, nizer.scale)
-            nizer.scale = 1
+            // Scale up
+            if (nizer.scale > 1.0){
+                if (isWithinBounds()){
+                    self.transform = CGAffineTransformScale(self.transform, nizer.scale, nizer.scale)
+                    nizer.scale = 1.0
+                }
+            } else {
+                // Scale down
+                self.transform = CGAffineTransformScale(self.transform, nizer.scale, nizer.scale)
+                nizer.scale = 1.0
+            }
+            // Call method again to realign for corners
+            self.isWithinBounds()
         }
+        
         if nizer.state == UIGestureRecognizerState.Ended {
             mementoManager.setOverlayFrame(graphName, roomLabel: roomLabel, overlayLabel: self.labelIdentifier, newFrame: self.frame)
+            // Place it on top of other subviews
+            //self.superview?.bringSubviewToFront(self)
         }
     }
-    
-    
-    
     
     func rotatedView(sender:UIRotationGestureRecognizer){
         var lastRotation = CGFloat()
@@ -118,6 +148,31 @@ class DraggableImageView : UIImageView
         var newTrans = CGAffineTransformRotate(currentTrans, rotation)
         sender.view!.transform = newTrans
         lastRotation = sender.rotation
+    }
+    
+    // Helper function to check if this view is still within the 1024*768 boundary
+    // Aids in slight offsetting back to within bounds
+    private func isWithinBounds() -> Bool {
+        let minX = CGRectGetMinX(self.frame)
+        let maxX = CGRectGetMaxX(self.frame)
+        let minY = CGRectGetMinY(self.frame)
+        let maxY = CGRectGetMaxY(self.frame)
+        
+        if ( minX < 0) {
+            self.center.x = self.frame.width/2.0 + 2.0
+            return false
+        } else if ( maxX >= screenWidth) {
+            self.center.x = screenWidth - self.frame.width/2.0 - 1.0
+            return false
+        } else if ( maxY >= screenHeight) {
+            self.center.y = screenHeight - self.frame.height/2.0 - 1.0
+            return false
+        } else if ( minY < 0){
+            self.center.y = self.frame.height/2.0 + 2.0
+            return false
+        } else {
+            return true
+        }
     }
 
     
