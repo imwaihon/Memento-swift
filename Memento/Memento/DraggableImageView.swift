@@ -20,7 +20,6 @@ class DraggableImageView : UIImageView
     var labelIdentifier = Int()
     var roomLabel = Int()
     var graphName = String()
-    let rotateRec = UIRotationGestureRecognizer()
     var mementoManager = MementoManager.sharedInstance
     
     // Screen size
@@ -37,6 +36,7 @@ class DraggableImageView : UIImageView
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "handlePan:"))
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
         addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "handlePinch:"))
+        addGestureRecognizer(UIRotationGestureRecognizer(target: self, action: "handleRotate:"))
         
         // Function rotate images
         //rotateRec.addTarget(self, action: "rotatedView:")
@@ -51,6 +51,12 @@ class DraggableImageView : UIImageView
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // Allow simultaneous
+    func gestureRecognizer(UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
+            return true
     }
     
     func handlePan(nizer: UIPanGestureRecognizer!) {
@@ -137,6 +143,11 @@ class DraggableImageView : UIImageView
         }
     }
     
+    func handleRotate(nizer: UIRotationGestureRecognizer!) {
+        self.transform = CGAffineTransformRotate(nizer.view!.transform, nizer.rotation)
+        nizer.rotation = 0.0
+    }
+    /*
     func rotatedView(sender:UIRotationGestureRecognizer){
         var lastRotation = CGFloat()
         if(sender.state == UIGestureRecognizerState.Ended){
@@ -149,7 +160,7 @@ class DraggableImageView : UIImageView
         sender.view!.transform = newTrans
         lastRotation = sender.rotation
     }
-    
+    */
     // Helper function to check if this view is still within the 1024*768 boundary
     // Aids in slight offsetting back to within bounds
     private func isWithinBounds() -> Bool {
