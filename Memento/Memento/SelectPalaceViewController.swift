@@ -128,6 +128,7 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
             self.selectedPalace = ""
             let dvc = segue.destinationViewController as OverviewViewController
             dvc.palaceName = self.nextPalace
+            dvc.parentVC = self
         }
     }
     

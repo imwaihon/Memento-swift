@@ -15,6 +15,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     var palaceName: String!
     var model = MementoManager.sharedInstance
     var rooms: [MemoryPalaceRoomIcon]!
+    var parentVC: SelectPalaceViewController!
     
     var selectedCellLabel: Int!
     override func viewDidLoad() {
@@ -117,9 +118,9 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     }
     
     @IBAction func backButtonPress(sender: AnyObject) {
+        parentVC.dataModelHasBeenChanged()
         model.savePalace(palaceName)
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
