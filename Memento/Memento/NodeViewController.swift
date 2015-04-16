@@ -316,8 +316,14 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
+    // Back button pressed
     @IBAction func backButtonPressed(sender: AnyObject) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // Change image
+    @IBAction func changeImageView(sender: AnyObject) {
+        performSegueWithIdentifier("ReplaceNodeSegue", sender: self)
     }
     
     // Reload viewcontroller with next node's data
@@ -348,6 +354,13 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if (segue.identifier == "CreateNewNodeSegue") {
             let nextNodeViewController = segue.destinationViewController as BlurCreateNodePopoverController
             nextNodeViewController.graphName = self.graphName
+            nextNodeViewController.isNextNode = true
+        } else if (segue.identifier == "ReplaceNodeSegue") {
+            let nextNodeViewController = segue.destinationViewController as BlurCreateNodePopoverController
+            nextNodeViewController.graphName = self.graphName
+            nextNodeViewController.isNextNode = false
+            nextNodeViewController.nextRoomLabel = self.roomLabel
+            nextNodeViewController.parentVC = self
         }
     }
     
