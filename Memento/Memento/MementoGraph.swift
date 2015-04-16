@@ -20,7 +20,7 @@
 
 import Foundation
 
-class MementoGraph: MemoryPalace {
+class MementoGraph {
     private let _nodes: Map<Int, MementoNode>
     
     var name: String        //The name of the graph. Also the filename used for saving/loading.
@@ -67,14 +67,14 @@ class MementoGraph: MemoryPalace {
     }
     
     //Adds a room to the memory palace.
-    func addRoom(room: MemoryPalaceRoom) {
-        (room as MementoNode).label = _nodes.isEmpty ? 0: _nodes.largestKey! + 1
+    func addRoom(room: MementoNode) {
+        room.label = _nodes.isEmpty ? 0: _nodes.largestKey! + 1
         room.graphName = name
         _nodes[room.label] = (room as MementoNode)
     }
     
     //Gets the room identified by the given number.
-    func getRoom(roomNumber: Int) -> MemoryPalaceRoom? {
+    func getRoom(roomNumber: Int) -> MementoNode? {
         return _nodes[roomNumber]
     }
     

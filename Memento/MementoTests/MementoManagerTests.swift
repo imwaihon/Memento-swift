@@ -161,7 +161,7 @@ class MementoManagerTests: XCTestCase {
         let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
         let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(10, 20, 30, 40))
         let frame2 = CGRectMake(100, 100, 100, 100)
-        let room = manager.getMemoryPalaceRoom(palaceName, roomLabel: 0)
+        let room = model.getMemoryPalaceRoom(palaceName, roomLabel: 0)
         XCTAssertFalse(room == nil)
         XCTAssertEqual(room!.numPlaceHolders, 0)
         placeHolder1.label = 1  //To test if the label gets updated when added to room
@@ -248,7 +248,7 @@ class MementoManagerTests: XCTestCase {
         let manager = MementoManager.sharedInstance
         let model = MementoModel.sharedInstance
         let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
-        let room = manager.getMemoryPalaceRoom(palaceName, roomLabel: 0) as? MementoNode
+        let room = model.getMemoryPalaceRoom(palaceName, roomLabel: 0)
         let image = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)!
         let frame1  = CGRectMake(0, 0, 10, 10)
         let frame2 = CGRectMake(50, 50, 10, 10)
