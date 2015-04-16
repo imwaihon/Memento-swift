@@ -330,6 +330,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         var newRoomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
         
         // Get image from graphical view
+        var oldImage = UIImageView(image: imageView.image)
+        oldImage.frame = imageView.frame
         imageView.image = Utilities.getImageNamed(newRoomRep.backgroundImage)
         
         // Remove all current overlays/placeholder
@@ -342,6 +344,14 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         associationList = newRoomRep.associations
         loadLayouts()
         allCGRects = [CGRect]()
+        
+        self.view.addSubview(oldImage)
+        
+        UIView.animateWithDuration(NSTimeInterval(1.0), animations: {
+            oldImage.frame.origin = CGPoint(x: -1024.0, y: 768.0)
+            }, completion: { finished in
+            oldImage.removeFromSuperview()
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
