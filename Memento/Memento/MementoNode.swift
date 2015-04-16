@@ -40,7 +40,7 @@ class MementoNode: MemoryPalaceRoom {
     private let _placeHolders: Map<Int, PlaceHolder>
     private let _values: Map<Int, String>
     
-    let backgroundImageFile: String
+    var backgroundImageFile: String
     var label: Int = 0      //The node's identification label in the graph
     var graphName: String = "sampleGraph"
     
