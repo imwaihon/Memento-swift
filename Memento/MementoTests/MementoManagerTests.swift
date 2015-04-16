@@ -117,6 +117,10 @@ class MementoManagerTests: XCTestCase {
         })
     }
     
+    func testSetBackgroundImage() {
+        //To be implemented
+    }
+    
     func testPlaceHolderOperations() {
         let manager = MementoManager.sharedInstance
         let model = MementoModel.sharedInstance
