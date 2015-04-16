@@ -35,7 +35,7 @@
 import Foundation
 import UIKit
 
-class MementoNode: MemoryPalaceRoom {
+class MementoNode {
     private let _overlays: Map<Int, MutableOverlay>
     private let _placeHolders: Map<Int, PlaceHolder>
     private let _values: Map<Int, String>
