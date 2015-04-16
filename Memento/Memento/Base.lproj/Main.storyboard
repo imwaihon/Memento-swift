@@ -501,7 +501,7 @@
                         <outlet property="modeTitleLabel" destination="Ht1-XR-vXS" id="yP3-Cf-CtS"/>
                         <outlet property="playButton" destination="tcq-yn-vUX" id="pvP-cU-esd"/>
                         <outlet property="rightButton" destination="uu9-e1-YnL" id="CsX-04-WgI"/>
-                        <segue destination="S2f-0e-FOh" kind="show" identifier="loadOrderChallenge" id="hpc-OK-pb7"/>
+                        <segue destination="S2f-0e-FOh" kind="show" identifier="LoadCustomChallengeSegue" id="hpc-OK-pb7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xQB-E2-24Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -822,6 +822,6 @@
         <image name="webIcon" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DlS-Ad-FtQ"/>
+        <segue reference="cfi-6M-yo4"/>
     </inferredMetricsTieBreakers>
 </document>

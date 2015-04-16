@@ -40,7 +40,11 @@ class GameEngine {
             palaceRooms.append(mementoManager.getMemoryPalaceRoomView(activePalaceName, roomLabel: room.label)!)
         }
         
-        currRoomAssociations.extend(palaceRooms.first!.associations)
+        if mode == "Order" {
+            currRoomAssociations.extend(palaceRooms.first!.associations)
+        } else if mode == "Find" {
+            currRoomAssociations.extend(Utilities.shuffleArray(palaceRooms.first!.associations))
+        }
         
         delegate?.startGame()
 
@@ -66,7 +70,8 @@ class GameEngine {
     
     // Check whether this move is valid
     func checkValidMove(associationLabel: Int) -> Bool {
-        if mode == "order" {
+        // Order Mode
+        if mode == "Order" {
             var validAssociationLabel = currRoomAssociations.first?.placeHolder.label
             
             if validAssociationLabel == associationLabel {
@@ -74,6 +79,21 @@ class GameEngine {
                 return true
             } else {
                 return false
+            }
+        
+        // Find Mode
+        } else if mode == "Find" {
+            var validAssociationValue = currRoomAssociations.first?.value
+            
+            for i in 0..<currRoomAssociations.count {
+                if currRoomAssociations[i].placeHolder.label == associationLabel {
+                    if currRoomAssociations[i].value == validAssociationValue {
+                        currRoomAssociations.removeAtIndex(i)
+                        return true
+                    } else {
+                        return false
+                    }
+                }
             }
         }
         

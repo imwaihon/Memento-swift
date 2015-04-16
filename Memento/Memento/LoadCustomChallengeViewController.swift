@@ -16,6 +16,7 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
     var palaces : [MemoryPalaceIcon]!
     var nextPalace = ""
     var selectedPalace = ""
+    var gameMode = ""
     var imagesCache : [String:UIImage]!
     
     required init(coder aDecoder: NSCoder) {
@@ -49,7 +50,6 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
         var cell = palaceTiles.dequeueReusableCellWithReuseIdentifier("SelectPalaceCollectionViewCell", forIndexPath: indexPath) as SelectPalaceCollectionViewCell
         cell.parent = self
         //cell.addShadows()
-        // First cell is reserved for the add button
         let currentIcon : MemoryPalaceIcon = palaces[indexPath.item]
         if(imagesCache[currentIcon.imageFile] == nil || imagesCache[currentIcon.imageFile] == UIImage()) {
             imagesCache[currentIcon.imageFile] = Utilities.getImageNamed(currentIcon.imageFile)
@@ -73,10 +73,6 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
         self.performSegueWithIdentifier("StartGameSegue", sender: self)
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.BlackOpaque
-    }
-    
     func dataModelHasBeenChanged() {
         self.palaces = mementoManager.getMemoryPalaceIcons()
         self.palaceTiles.reloadData()
@@ -87,12 +83,16 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
         self.dataModelHasBeenChanged()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.BlackOpaque
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "StartGameSegue"){
             self.selectedPalace = ""
             let dvc = segue.destinationViewController as GameChallengeViewController
             dvc.palaceName = self.nextPalace
-            dvc.gameMode = "order"
+            dvc.gameMode = self.gameMode
         }
     }
     

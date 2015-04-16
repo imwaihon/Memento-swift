@@ -103,7 +103,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
             var newLabel = eachAssociation.placeHolder.label
             
             var newAnnotatableView = GameAnnotationView(frame: newFrame, gameViewController: self, tagNumber: newLabel, graphName: palaceName, roomLabel:roomLabel)
-            newAnnotatableView.backgroundColor = .whiteColor()
+            newAnnotatableView.backgroundColor = .clearColor()
             newAnnotatableView.alpha = 0.25
             
             newAnnotatableView.annotation = eachAssociation.value
