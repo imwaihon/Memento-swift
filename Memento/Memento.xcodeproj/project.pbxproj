@@ -105,6 +105,8 @@
 		5A82F8F51AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82F8F41AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift */; };
 		5A837B921ABBE86E00E52F80 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A837B911ABBE86E00E52F80 /* Set.swift */; };
 		5A837B931ABBE86E00E52F80 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A837B911ABBE86E00E52F80 /* Set.swift */; };
+		5A8FA76F1ADF9AB0001EB76D /* AnnotationCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */; };
+		5A8FA7701ADFA1D2001EB76D /* AnnotationCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */; };
 		5A98038A1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */; };
 		5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */; };
 		5AA1B06A1AC1528B00AC3C65 /* MementoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */; };
@@ -272,6 +274,7 @@
 		5A82F8F21AC44D7100D89166 /* OverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		5A82F8F41AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A837B911ABBE86E00E52F80 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationCardViewController.swift; sourceTree = "<group>"; };
 		5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelChangeUpdateDelegate.swift; sourceTree = "<group>"; };
 		5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoManager.swift; sourceTree = "<group>"; };
 		5AB3F77F1ADBED4C00906B76 /* GameModePauseMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModePauseMenuViewController.swift; sourceTree = "<group>"; };
@@ -451,6 +454,7 @@
 				4FCE35E81ABA8CEF00417763 /* Supporting Files */,
 				5A7E7CFB1ADA358200BD3310 /* Utilities.swift */,
 				5AB3F8261ADC081100906B76 /* Memento-Bridging-Header.h */,
+				5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */,
 			);
 			path = Memento;
 			sourceTree = "<group>";
@@ -923,6 +927,7 @@
 				4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */,
 				4116CADD1ADAF50700D54AE2 /* DraggableEditButton.swift in Sources */,
 				4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */,
+				5A8FA76F1ADF9AB0001EB76D /* AnnotationCardViewController.swift in Sources */,
 				5AB3F7F21ADC070F00906B76 /* CLSpotEffect.m in Sources */,
 				5AEF2A5A1AC4FA4A00B2B6FB /* Constants.swift in Sources */,
 				5AEF2A631AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
@@ -1009,6 +1014,7 @@
 				5AB3F7FF1ADC070F00906B76 /* CLRotateTool.m in Sources */,
 				5AEF2A6A1AC51F9000B2B6FB /* MemoryPalace.swift in Sources */,
 				5AB3F8191ADC070F00906B76 /* _CLImageEditorViewController.m in Sources */,
+				5A8FA7701ADFA1D2001EB76D /* AnnotationCardViewController.swift in Sources */,
 				5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */,
 				5A4E78A61AC2A44800013728 /* MementoNodeFactory.swift in Sources */,
 				5AB3F7E91ADC070F00906B76 /* CLGloomEffect.m in Sources */,

@@ -9,7 +9,7 @@
 
 import UIKit
 
-class AnnotatableUIView: UIView {
+class AnnotatableUIView: UIView, UIPopoverPresentationControllerDelegate {
     
     weak var parentViewController = UIViewController()
     var viewTag = Int()
@@ -36,8 +36,6 @@ class AnnotatableUIView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-    
     // Add a simple annotation or delete, depending on NodeViewController parent
     func handleTap(nizer: UITapGestureRecognizer!) {
         weak var nodeViewController = parentViewController as? NodeViewController
@@ -48,24 +46,33 @@ class AnnotatableUIView: UIView {
                 nodeViewController!.deleteView(self)
                 
             } else {
-                var inputTextField: UITextField?
-
-                let loadPrompt = UIAlertController(title: "placeholder title", message: "\(self.annotation)", preferredStyle: UIAlertControllerStyle.Alert)
-                loadPrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-                loadPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                    
-                    // Adding text to UILabel
-                    self.annotation = inputTextField?.text as String!
-                    self.mementoManager.setAssociationValue(self.graphName, roomLabel: self.roomLabel, placeHolderLabel: self.viewTag, value: self.annotation)
-                }))
-                loadPrompt.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-                    textField.placeholder = "Annotation here"
-                    inputTextField = textField
-                })
+                var mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+                var popoverContent = mainStoryBoard.instantiateViewControllerWithIdentifier("AnnotationCard") as AnnotationCardViewController
+                popoverContent.modalPresentationStyle = .Popover
+                popoverContent.preferredContentSize = CGSizeMake(400,200)
+                let popoverViewController = popoverContent.popoverPresentationController
+                popoverViewController?.permittedArrowDirections = .Any
+                popoverViewController?.delegate = self
+                popoverViewController?.sourceView = self
+                popoverViewController?.sourceRect = CGRect(
+                    x: self.frame.width/2,
+                    y: self.frame.height/2,
+                    width: 0,
+                    height: 0)
+                popoverContent.previousText = self.annotation
+                popoverContent.parent = self
+                popoverContent.edittingEnabled = true
+                self.parentViewController?.presentViewController(
+                    popoverContent,
+                    animated: true,
+                    completion: nil)
                 
-                self.parentViewController?.presentViewController(loadPrompt, animated: true, completion: nil)
             }
         }
+    }
+    
+    func persistAnnotation(){
+        self.mementoManager.setAssociationValue(self.graphName, roomLabel: self.roomLabel, placeHolderLabel: self.viewTag, value: self.annotation)
     }
     
 }
