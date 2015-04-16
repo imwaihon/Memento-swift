@@ -46,6 +46,13 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         setUpGestures()
         
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+        checkFinished()
+        
+    }
+    
     private func setUpGestures() {
         
     }
@@ -113,6 +120,8 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         
         // Check if there are any associations in this room
         gameEngine.checkIfNext()
+        
+        checkFinished()
     }
     
     // A particular annotation is selected
@@ -170,6 +179,9 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         timerLabel.text = String(gameEngine.timeElapsed)
     }
     
+    func checkFinished() {
+        gameEngine.checkIfFinished()
+    }
     
     @IBAction func menuView(sender: UIButton) {
         pauseGame()
