@@ -174,12 +174,17 @@ class MementoManager {
     //Removes the specified room from the specified memory palace.
     //Does nothign if either the memory palace or the room is invalid.
     func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
-        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            for overlay in room.overlays {
-                resourceManager.releaseResource(overlay.imageFile)
+        if let palace = model.getPalace(palaceName) {
+            if palace.numRooms == 1 {
+                return
             }
-            resourceManager.releaseResource(room.backgroundImageFile)
-            model.removeMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
+            if let room = palace.getRoom(roomLabel) {
+                for overlay in room.overlays {
+                    resourceManager.releaseResource(overlay.imageFile)
+                }
+                resourceManager.releaseResource(room.backgroundImageFile)
+                model.removeMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
+            }
         }
     }
     
