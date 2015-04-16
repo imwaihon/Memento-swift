@@ -26,6 +26,17 @@
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
 		4F06E88E1AD2B2AD00436083 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88D1AD2B2AD00436083 /* GameEngine.swift */; };
 		4F06E8901AD2B3EA00436083 /* GameAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */; };
+		4F0824E31ADFAC5A00B091DA /* GameBeforeStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0824E21ADFAC5A00B091DA /* GameBeforeStartViewController.swift */; };
+		4F0824E51ADFBA8E00B091DA /* GamePauseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0824E41ADFBA8E00B091DA /* GamePauseDelegate.swift */; };
+		4F0824E61ADFC6A300B091DA /* GamePauseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0824E41ADFBA8E00B091DA /* GamePauseDelegate.swift */; };
+		4F0824E71ADFC6AA00B091DA /* GameBeforeStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0824E21ADFAC5A00B091DA /* GameBeforeStartViewController.swift */; };
+		4F0824E81ADFC6AE00B091DA /* GameChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15141ACADBB400BEE609 /* GameChallengeViewController.swift */; };
+		4F0824E91ADFC6B400B091DA /* LoadPresetChallengeVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15121ACADB9500BEE609 /* LoadPresetChallengeVIewController.swift */; };
+		4F0824EA1ADFC6B700B091DA /* SelectChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */; };
+		4F0824EB1ADFC6BA00B091DA /* LoadCustomChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15101ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift */; };
+		4F0824EC1ADFC6C500B091DA /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88D1AD2B2AD00436083 /* GameEngine.swift */; };
+		4F0824ED1ADFC6C800B091DA /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */; };
+		4F0824EE1ADFC6CC00B091DA /* GameAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */; };
 		4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */; };
 		4F90A5081AD6A76E00027201 /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */; };
 		4F9D150F1ACADB6000BEE609 /* SelectChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */; };
@@ -215,6 +226,8 @@
 		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
 		4F06E88D1AD2B2AD00436083 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAnnotationView.swift; sourceTree = "<group>"; };
+		4F0824E21ADFAC5A00B091DA /* GameBeforeStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBeforeStartViewController.swift; sourceTree = "<group>"; };
+		4F0824E41ADFBA8E00B091DA /* GamePauseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePauseDelegate.swift; sourceTree = "<group>"; };
 		4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineDelegate.swift; sourceTree = "<group>"; };
 		4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectChallengeViewController.swift; sourceTree = "<group>"; };
 		4F9D15101ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCustomChallengeViewController.swift; sourceTree = "<group>"; };
@@ -379,8 +392,10 @@
 				4F9D15141ACADBB400BEE609 /* GameChallengeViewController.swift */,
 				4F9D15161ACADBCD00BEE609 /* EndGameChallengeViewController.swift */,
 				5AB3F77F1ADBED4C00906B76 /* GameModePauseMenuViewController.swift */,
+				4F0824E21ADFAC5A00B091DA /* GameBeforeStartViewController.swift */,
 				4F06E88D1AD2B2AD00436083 /* GameEngine.swift */,
 				4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */,
+				4F0824E41ADFBA8E00B091DA /* GamePauseDelegate.swift */,
 				4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */,
 			);
 			name = ChallengeMode;
@@ -859,6 +874,7 @@
 				5A3F386E1ACA76050096AB6C /* Overlay.swift in Sources */,
 				5AB3F7EA1ADC070F00906B76 /* CLHighlightShadowEffect.m in Sources */,
 				5AEF2A691AC51F9000B2B6FB /* MemoryPalace.swift in Sources */,
+				4F0824E51ADFBA8E00B091DA /* GamePauseDelegate.swift in Sources */,
 				5AB3F8161ADC070F00906B76 /* UIView+Frame.m in Sources */,
 				5AB3F8081ADC070F00906B76 /* CLImageToolInfo+Private.m in Sources */,
 				5AB3F8101ADC070F00906B76 /* CLSplineInterpolator.m in Sources */,
@@ -893,6 +909,7 @@
 				5A78D30D1ABAC7F6003A3DD7 /* MementoNode.swift in Sources */,
 				4F06E88E1AD2B2AD00436083 /* GameEngine.swift in Sources */,
 				5A497A331AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift in Sources */,
+				4F0824E31ADFAC5A00B091DA /* GameBeforeStartViewController.swift in Sources */,
 				5A78D30A1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
 				5AA1B06A1AC1528B00AC3C65 /* MementoManager.swift in Sources */,
 				5AB3F7F61ADC070F00906B76 /* CLEffectTool.m in Sources */,
@@ -942,6 +959,7 @@
 			files = (
 				5AB3F7EF1ADC070F00906B76 /* CLPixellateEffect.m in Sources */,
 				5AB3F7E71ADC070F00906B76 /* CLBloomEffect.m in Sources */,
+				4F0824E81ADFC6AE00B091DA /* GameChallengeViewController.swift in Sources */,
 				5A5FB0A71AC6628E00EA0EE7 /* Association.swift in Sources */,
 				5AB3F7811ADBED4C00906B76 /* GameModePauseMenuViewController.swift in Sources */,
 				5A5FB0A91AC67FB400EA0EE7 /* MementoManagerTests.swift in Sources */,
@@ -953,6 +971,7 @@
 				5AB3F8031ADC070F00906B76 /* CLCircleView.m in Sources */,
 				5AEF2A611AC510DB00B2B6FB /* PlaceHolder.swift in Sources */,
 				5AB3F7ED1ADC070F00906B76 /* CLHueEffect.m in Sources */,
+				4F0824EA1ADFC6B700B091DA /* SelectChallengeViewController.swift in Sources */,
 				5A5735191ACFC24E00A18107 /* AnnotatableUIView.swift in Sources */,
 				5AB3F7E51ADC070F00906B76 /* CLDrawTool.m in Sources */,
 				5AEF2A641AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
@@ -960,14 +979,17 @@
 				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
 				4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */,
 				5A28A8BB1AD0436F00518AB1 /* Map.swift in Sources */,
+				4F0824ED1ADFC6C800B091DA /* GameEngineDelegate.swift in Sources */,
 				5AB3F7DF1ADC070F00906B76 /* CLAdjustmentTool.m in Sources */,
 				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
 				5A7E7CFD1ADA35E300BD3310 /* Utilities.swift in Sources */,
+				4F0824E61ADFC6A300B091DA /* GamePauseDelegate.swift in Sources */,
 				5AB3F8091ADC070F00906B76 /* CLImageToolInfo+Private.m in Sources */,
 				5A5663FB1AC955B200190068 /* OverviewViewController.swift in Sources */,
 				5AB3F7F31ADC070F00906B76 /* CLSpotEffect.m in Sources */,
 				5AB3F8111ADC070F00906B76 /* CLSplineInterpolator.m in Sources */,
 				5A497A341AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift in Sources */,
+				4F0824EC1ADFC6C500B091DA /* GameEngine.swift in Sources */,
 				5A78D30B1ABABC69003A3DD7 /* MementoGraph.swift in Sources */,
 				5A57351A1ACFC25000A18107 /* DraggableImageView.swift in Sources */,
 				5AB3F7F91ADC070F00906B76 /* CLFilterBase.m in Sources */,
@@ -981,8 +1003,11 @@
 				5AB3F7FB1ADC070F00906B76 /* CLFilterTool.m in Sources */,
 				5AEF2A6D1AC5260100B2B6FB /* MemoryPalaceRoom.swift in Sources */,
 				5AEF2A5E1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */,
+				4F0824EE1ADFC6CC00B091DA /* GameAnnotationView.swift in Sources */,
+				4F0824E71ADFC6AA00B091DA /* GameBeforeStartViewController.swift in Sources */,
 				5A497A301AC7ED0C00D6C9C5 /* SelectPalaceCollectionViewCell.swift in Sources */,
 				5A01A3481ACE4CEE00351423 /* FenwickTreeTests.swift in Sources */,
+				4F0824EB1ADFC6BA00B091DA /* LoadCustomChallengeViewController.swift in Sources */,
 				5A57351B1ACFC25600A18107 /* ViewController.swift in Sources */,
 				5A4E78A01AC2A2F700013728 /* MementoModel.swift in Sources */,
 				5AB3F7DD1ADC070F00906B76 /* CLImageToolInfo.m in Sources */,
@@ -1017,6 +1042,7 @@
 				5AB3F7E31ADC070F00906B76 /* CLClippingTool.m in Sources */,
 				5A5663FC1AC955B400190068 /* OverviewImageCollectionViewCell.swift in Sources */,
 				5AB3F8011ADC070F00906B76 /* CLToneCurveTool.m in Sources */,
+				4F0824E91ADFC6B400B091DA /* LoadPresetChallengeVIewController.swift in Sources */,
 				5AEF2A5B1AC4FA4A00B2B6FB /* Constants.swift in Sources */,
 				5A2988F01AD3BC7E005B999E /* ResourceManager.swift in Sources */,
 				5AB3F80B1ADC070F00906B76 /* CLToolbarMenuItem.m in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -234,10 +234,22 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qjJ-xy-D9z">
                                                     <rect key="frame" x="5" y="10" width="512" height="384"/>
                                                 </imageView>
+                                                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQs-wA-0jP">
+                                                    <rect key="frame" x="111" y="320" width="300" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="Delete" backgroundImage="deleteButton">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteButtonPressed:" destination="cSp-aR-enZ" eventType="touchUpInside" id="Klf-cN-4zm"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="deleteButtonView" destination="fQs-wA-0jP" id="QET-Yq-myu"/>
                                             <outlet property="image" destination="qjJ-xy-D9z" id="xrj-om-JCE"/>
                                         </connections>
                                     </collectionViewCell>
@@ -395,6 +407,15 @@
                                             <action selector="deleteButtonPressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="uck-Ty-ouL"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="tv5-MU-xtt" userLabel="Change Background">
+                                        <rect key="frame" x="675" y="9" width="94" height="50"/>
+                                        <state key="normal" title="Change BG">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeImageView:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="clA-SN-McG"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
@@ -416,6 +437,7 @@
                         <outlet property="imageView" destination="LzC-0M-630" id="vwI-s6-IjB"/>
                         <outlet property="menuBarView" destination="mjy-lt-dtU" id="n95-6G-b8e"/>
                         <segue destination="f5g-fC-prm" kind="presentation" identifier="CreateNewNodeSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Vgm-ts-AbI"/>
+                        <segue destination="f5g-fC-prm" kind="presentation" identifier="ReplaceNodeSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="7t5-Nb-MAl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZoN-is-xQV" sceneMemberID="firstResponder"/>
@@ -515,7 +537,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xir-sY-MhZ">
-                                <rect key="frame" x="22" y="342" width="83" height="82.5"/>
+                                <rect key="frame" x="22" y="342" width="83" height="83"/>
                                 <state key="normal" backgroundImage="Left4-100">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -524,7 +546,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uu9-e1-YnL">
-                                <rect key="frame" x="921" y="342" width="83" height="82.5"/>
+                                <rect key="frame" x="921" y="342" width="83" height="83"/>
                                 <state key="normal" backgroundImage="Forward-100">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -697,7 +719,7 @@
                                         </state>
                                         <connections>
                                             <action selector="menuView:" destination="Etg-Wp-UrL" eventType="touchUpInside" id="WlS-Ne-BZM"/>
-                                            <segue destination="ZcJ-mg-0Pd" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="EM5-Et-4cv"/>
+                                            <segue destination="ZcJ-mg-0Pd" kind="presentation" identifier="PauseMenuSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="EM5-Et-4cv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -718,14 +740,11 @@
                     <connections>
                         <outlet property="imageView" destination="Juq-0v-UJW" id="IR0-YO-CQd"/>
                         <outlet property="timerLabel" destination="WH3-Xo-SEc" id="p8I-8Y-5Df"/>
+                        <segue destination="u2p-iv-RhB" kind="presentation" identifier="ShowBeforeStartSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="gdX-uL-SbT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I5o-cB-FzM" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="FcO-E8-YGx">
-                    <connections>
-                        <action selector="panGesture:" destination="Etg-Wp-UrL" id="B2L-Bc-OFN"/>
-                    </connections>
-                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="FcO-E8-YGx"/>
             </objects>
             <point key="canvasLocation" x="-1972" y="2162"/>
         </scene>
@@ -841,6 +860,50 @@
             </objects>
             <point key="canvasLocation" x="-1972" y="3084"/>
         </scene>
+        <!--Game Before Start View Controller-->
+        <scene sceneID="Qn9-gN-lU1">
+            <objects>
+                <viewController id="u2p-iv-RhB" customClass="GameBeforeStartViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YTs-wm-m8I"/>
+                        <viewControllerLayoutGuide type="bottom" id="VqA-os-kbK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FWY-mI-yif">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4F-Gi-HXp">
+                                <rect key="frame" x="354" y="661" width="317" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Back to Menu" backgroundImage="buttonBorder">
+                                    <color key="titleColor" white="0.84814814810000005" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToMenuButtonPress:" destination="u2p-iv-RhB" eventType="touchUpInside" id="KCJ-eH-qSu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEv-p8-xjg">
+                                <rect key="frame" x="354" y="583" width="317" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Start Game" backgroundImage="buttonBorder">
+                                    <color key="titleColor" white="0.84814814810000005" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startGame:" destination="u2p-iv-RhB" eventType="touchUpInside" id="FlF-i1-UfI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uft-90-idt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-664" y="2792"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Forward-100" width="100" height="100"/>
@@ -864,5 +927,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cfi-6M-yo4"/>
+        <segue reference="7t5-Nb-MAl"/>
     </inferredMetricsTieBreakers>
 </document>
