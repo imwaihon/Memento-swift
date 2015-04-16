@@ -22,6 +22,10 @@
 		4127D7A11AD30103007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */; };
 		4127D7A21AD30112007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */; };
 		41359EBD1AC84F3C00CBCC82 /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */; };
+		414272CC1ADFF0CC00809570 /* Eraser Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 414272CA1ADFF0CC00809570 /* Eraser Filled-100.png */; };
+		414272CD1ADFF0CC00809570 /* Eraser Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 414272CA1ADFF0CC00809570 /* Eraser Filled-100.png */; };
+		414272CE1ADFF0CC00809570 /* Paint Palette-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 414272CB1ADFF0CC00809570 /* Paint Palette-100.png */; };
+		414272CF1ADFF0CC00809570 /* Paint Palette-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 414272CB1ADFF0CC00809570 /* Paint Palette-100.png */; };
 		41941ABE1ACFA71000035302 /* AnnotatableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */; };
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
 		4F06E88E1AD2B2AD00436083 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88D1AD2B2AD00436083 /* GameEngine.swift */; };
@@ -216,6 +220,8 @@
 		4116CAFB1ADBBA4000D54AE2 /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
 		4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurCreateNodePopoverController.swift; sourceTree = "<group>"; };
 		41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableImageView.swift; sourceTree = "<group>"; };
+		414272CA1ADFF0CC00809570 /* Eraser Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Eraser Filled-100.png"; sourceTree = "<group>"; };
+		414272CB1ADFF0CC00809570 /* Paint Palette-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Paint Palette-100.png"; sourceTree = "<group>"; };
 		41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotatableUIView.swift; sourceTree = "<group>"; };
 		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
 		4F06E88D1AD2B2AD00436083 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
@@ -452,6 +458,8 @@
 		4FCE35E81ABA8CEF00417763 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				414272CA1ADFF0CC00809570 /* Eraser Filled-100.png */,
+				414272CB1ADFF0CC00809570 /* Paint Palette-100.png */,
 				4FCE35E91ABA8CEF00417763 /* Info.plist */,
 				4116CAEF1ADBB93D00D54AE2 /* editModeButton.png */,
 				4116CAF01ADBB93D00D54AE2 /* insertImageAnnotationButton.png */,
@@ -813,12 +821,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FCE35F31ABA8CF000417763 /* Main.storyboard in Resources */,
+				414272CE1ADFF0CC00809570 /* Paint Palette-100.png in Resources */,
 				5A574BCF1AD76573007571C9 /* linuxpenguin.jpg in Resources */,
 				4116CAF71ADBB93D00D54AE2 /* rightArrow.png in Resources */,
 				4FCE35F81ABA8CF000417763 /* LaunchScreen.xib in Resources */,
 				4116CAF51ADBB93D00D54AE2 /* insertImageAnnotationButton.png in Resources */,
 				4116CAF31ADBB93D00D54AE2 /* editModeButton.png in Resources */,
 				4116CAF91ADBB93D00D54AE2 /* rotateImageButton.png in Resources */,
+				414272CC1ADFF0CC00809570 /* Eraser Filled-100.png in Resources */,
 				5AB3F7D61ADC070F00906B76 /* CLImageEditor.bundle in Resources */,
 				4FCE35F51ABA8CF000417763 /* Images.xcassets in Resources */,
 				4116CAFC1ADBBA4000D54AE2 /* leftArrow.png in Resources */,
@@ -829,12 +839,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				414272CD1ADFF0CC00809570 /* Eraser Filled-100.png in Resources */,
 				4116CAF61ADBB93D00D54AE2 /* insertImageAnnotationButton.png in Resources */,
 				4116CAF41ADBB93D00D54AE2 /* editModeButton.png in Resources */,
 				4116CAFD1ADBBA4000D54AE2 /* leftArrow.png in Resources */,
 				4116CAF81ADBB93D00D54AE2 /* rightArrow.png in Resources */,
 				5A574BCE1AD76082007571C9 /* linuxpenguin.jpg in Resources */,
 				5AB3F7D71ADC070F00906B76 /* CLImageEditor.bundle in Resources */,
+				414272CF1ADFF0CC00809570 /* Paint Palette-100.png in Resources */,
 				4116CAFA1ADBB93D00D54AE2 /* rotateImageButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

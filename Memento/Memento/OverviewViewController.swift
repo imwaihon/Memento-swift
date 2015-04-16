@@ -42,7 +42,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     
     func setUpGestures(){
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: "longPressHandler:")
-        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.minimumPressDuration = 1.0
         self.view.addGestureRecognizer(longPressGesture)
     }
     
@@ -94,9 +94,11 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as OverviewImageCollectionViewCell
-        self.selectedCellLabel = selectedCell.roomLabel
-        self.performSegueWithIdentifier("goToNode", sender: self)
+        if let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as? OverviewImageCollectionViewCell {
+            self.selectedCellLabel = selectedCell.roomLabel
+            self.performSegueWithIdentifier("goToNode", sender: self)
+        }
+
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
