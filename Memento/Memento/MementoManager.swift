@@ -166,6 +166,7 @@ class MementoManager: MemoryPalaceManager {
             resourceManager.releaseResource(room.backgroundImageFile)
             room.backgroundImageFile = imageName
             model.savePalace(palaceName)
+            return imageName
         }
         return nil
     }
