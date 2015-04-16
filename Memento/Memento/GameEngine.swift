@@ -18,6 +18,7 @@ class GameEngine {
     var palaceRooms: [MemoryPalaceRoomView]
     weak var delegate: GameEngineDelegate?
     var timeElapsed: Int
+    var startedGame: Bool
     
     init() {
         self.activePalaceName = String()
@@ -26,11 +27,14 @@ class GameEngine {
         self.currRoomIndex = 0
         self.currRoomAssociations = [Association]()
         self.timeElapsed = 0
+        self.startedGame = false
 
     }
     
     // Set up the initial game
     func setUpGame(palaceName: String, mode: String) {
+        self.startedGame = true
+        
         self.activePalaceName = palaceName
         self.mode = mode
         
@@ -45,8 +49,6 @@ class GameEngine {
         } else if mode == "Find" {
             currRoomAssociations.extend(Utilities.shuffleArray(palaceRooms.first!.associations))
         }
-        
-        delegate?.startGame()
 
     }
     

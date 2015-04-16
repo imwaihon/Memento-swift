@@ -1,8 +1,8 @@
 //
-//  GameModePauseMenu.swift
+//  GameBeforeStartViewController.swift
 //  Memento
 //
-//  Created by Abdulla Contractor on 13/4/15.
+//  Created by Chee Wai Hon on 16/4/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import UIKit
 import MobileCoreServices
 import QuartzCore
 
-class GameModePauseMenuViewController: UIViewController, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
+class GameBeforeStartViewController: UIViewController, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
     
     weak var delegate: GamePauseDelegate?
     
@@ -23,10 +23,6 @@ class GameModePauseMenuViewController: UIViewController, UIGestureRecognizerDele
         visualEffectView.frame = self.view.bounds
         visualEffectView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
         visualEffectView.setTranslatesAutoresizingMaskIntoConstraints(true)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
-        tapGesture.numberOfTapsRequired = 1
-        visualEffectView.addGestureRecognizer(tapGesture)
         
         self.view.addSubview(visualEffectView)
         self.view.sendSubviewToBack(visualEffectView)
@@ -40,13 +36,15 @@ class GameModePauseMenuViewController: UIViewController, UIGestureRecognizerDele
         super.viewDidDisappear(animated)
     }
     
-    func handleTap(sender: UITapGestureRecognizer) {
-        delegate?.resumeGame()
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.BlackOpaque
+    }
+    
+
+    @IBAction func startGame(sender: AnyObject) {
+        self.delegate?.startGame()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func backToMenuButtonPress(sender: AnyObject) {
