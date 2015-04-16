@@ -43,8 +43,8 @@ class GameBeforeStartViewController: UIViewController, UIGestureRecognizerDelega
     
 
     @IBAction func startGame(sender: AnyObject) {
-        print("lol")
         self.delegate?.startGame()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func backToMenuButtonPress(sender: AnyObject) {

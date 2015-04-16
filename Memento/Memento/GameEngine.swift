@@ -34,7 +34,6 @@ class GameEngine {
     // Set up the initial game
     func setUpGame(palaceName: String, mode: String) {
         self.startedGame = true
-        delegate?.startGame()
         
         self.activePalaceName = palaceName
         self.mode = mode
