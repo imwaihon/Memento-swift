@@ -130,7 +130,13 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
                 var editor = CLImageEditor(image: image)
                 editor.delegate = self
                 picker.pushViewController(editor, animated: true)
+            } else {
+                var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.jpg", image: Utilities.convertToScreenSize(image))
+                if resourceRep != nil {
+                    nextRoomLabel = resourceRep!.0
+                }
                 
+                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }
