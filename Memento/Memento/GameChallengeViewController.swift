@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GameChallengeViewController: UIViewController, GameEngineDelegate {
+class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePauseDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var timerLabel: UILabel!
@@ -22,7 +22,9 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
     var roomLabel: Int
     var palaceName: String
     var gameMode: String
+    var showAnnotation: Bool
     var timer: NSTimer
+    var firstLoad: Bool
     
     required init(coder aDecoder: NSCoder) {
         self.gameEngine = GameEngine()
@@ -32,6 +34,8 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         self.palaceName = String()
         self.gameMode = String()
         self.timer = NSTimer()
+        self.showAnnotation = true
+        self.firstLoad = true
         super.init(coder: aDecoder)
     }
     
@@ -41,20 +45,17 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         self.view.userInteractionEnabled = true
         
         gameEngine.delegate = self
-        gameEngine.setUpGame(palaceName, mode: gameMode)
-        loadGameRoomLayout()
-        setUpGestures()
         
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(false)
-        checkFinished()
-        
-    }
-    
-    private func setUpGestures() {
-        
+        if !gameEngine.startedGame && firstLoad {
+            self.performSegueWithIdentifier("ShowBeforeStartSegue", sender: self)
+            firstLoad = false
+        } else if gameEngine.startedGame && !firstLoad {
+            checkFinished()
+        }
     }
     
     private func clearAllViews() {
@@ -85,7 +86,6 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         
         // Load image layers
         var layerList = gameEngine.getCurrRoom().overlays
-        var counter = 0
         for eachOverlay in layerList {
             var newFrame = eachOverlay.frame
             var newImageFile = eachOverlay.imageFile
@@ -95,8 +95,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
             newDraggableImageView.userInteractionEnabled = false
             newDraggableImageView.graphName = self.palaceName
             newDraggableImageView.roomLabel = self.roomLabel
-            newDraggableImageView.labelIdentifier = counter
-            counter += 1
+            newDraggableImageView.labelIdentifier = eachOverlay.label
             newDraggableImageView.frame = newFrame
             
             gameLayerViews.append(newDraggableImageView)
@@ -110,7 +109,13 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
             var newLabel = eachAssociation.placeHolder.label
             
             var newAnnotatableView = GameAnnotationView(frame: newFrame, gameViewController: self, tagNumber: newLabel, graphName: palaceName, roomLabel:roomLabel)
-            newAnnotatableView.backgroundColor = .clearColor()
+            
+            if showAnnotation {
+                newAnnotatableView.backgroundColor = .whiteColor()
+            } else {
+                newAnnotatableView.backgroundColor = .clearColor()
+            }
+            
             newAnnotatableView.alpha = 0.25
             
             newAnnotatableView.annotation = eachAssociation.value
@@ -140,9 +145,11 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
     }
     
     // Game Starts
-    // Starts the timer
+    // Starts the timer and game engine
     func startGame() {
+        gameEngine.setUpGame(palaceName, mode: gameMode)
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
+        loadGameRoomLayout()
     }
     
     // Game Ends
@@ -187,6 +194,14 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate {
         pauseGame()
     }
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "ShowBeforeStartSegue") {
+            let gameStartViewController = segue.destinationViewController as GameBeforeStartViewController
+            gameStartViewController.delegate = self
+        } else if (segue.identifier == "PauseMenuSegue") {
+            let pauseMenuViewController = segue.destinationViewController as GameModePauseMenuViewController
+            pauseMenuViewController.delegate = self
+        }
+    }
     
 }

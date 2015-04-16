@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -656,7 +656,7 @@
                                         </state>
                                         <connections>
                                             <action selector="menuView:" destination="Etg-Wp-UrL" eventType="touchUpInside" id="WlS-Ne-BZM"/>
-                                            <segue destination="ZcJ-mg-0Pd" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="EM5-Et-4cv"/>
+                                            <segue destination="ZcJ-mg-0Pd" kind="presentation" identifier="PauseMenuSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="EM5-Et-4cv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -677,14 +677,11 @@
                     <connections>
                         <outlet property="imageView" destination="Juq-0v-UJW" id="IR0-YO-CQd"/>
                         <outlet property="timerLabel" destination="WH3-Xo-SEc" id="p8I-8Y-5Df"/>
+                        <segue destination="u2p-iv-RhB" kind="presentation" identifier="ShowBeforeStartSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="gdX-uL-SbT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I5o-cB-FzM" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="FcO-E8-YGx">
-                    <connections>
-                        <action selector="panGesture:" destination="Etg-Wp-UrL" id="B2L-Bc-OFN"/>
-                    </connections>
-                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="FcO-E8-YGx"/>
             </objects>
             <point key="canvasLocation" x="-1972" y="2162"/>
         </scene>
@@ -799,6 +796,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivd-kr-TLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1972" y="3084"/>
+        </scene>
+        <!--Game Before Start View Controller-->
+        <scene sceneID="Qn9-gN-lU1">
+            <objects>
+                <viewController id="u2p-iv-RhB" customClass="GameBeforeStartViewController" customModule="Memento" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YTs-wm-m8I"/>
+                        <viewControllerLayoutGuide type="bottom" id="VqA-os-kbK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FWY-mI-yif">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4F-Gi-HXp">
+                                <rect key="frame" x="354" y="661" width="317" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Back to Menu" backgroundImage="buttonBorder">
+                                    <color key="titleColor" white="0.84814814810000005" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToMenuButtonPress:" destination="u2p-iv-RhB" eventType="touchUpInside" id="KCJ-eH-qSu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEv-p8-xjg">
+                                <rect key="frame" x="354" y="583" width="317" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Start Game" backgroundImage="buttonBorder">
+                                    <color key="titleColor" white="0.84814814810000005" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToMenuButtonPress:" destination="u2p-iv-RhB" eventType="touchUpInside" id="bvc-vE-WLl"/>
+                                    <action selector="startGame:" destination="u2p-iv-RhB" eventType="touchUpInside" id="FlF-i1-UfI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uft-90-idt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-664" y="2792"/>
         </scene>
     </scenes>
     <resources>
