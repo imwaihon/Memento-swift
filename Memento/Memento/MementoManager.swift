@@ -147,6 +147,29 @@ class MementoManager: MemoryPalaceManager {
         return (model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)? as MementoNode).viewRepresentation
     }
     
+    //Sets the background image of the room to another existing image resource
+    func setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImageFile: String) {
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            resourceManager.releaseResource(room.backgroundImageFile)
+            resourceManager.retainResource(newImageFile)
+            model.savePalace(palaceName)
+        }
+    }
+    
+    //Sets the background image of the specified memory palace room with the given image as a new resource.
+    //Recommended to use this if the image does not yet exist in the shared resource folder.
+    //Returns the name assigned to the given image on success.
+    //Retuens nil if the memory palace room cannot be found.
+    func setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImage: UIImage) -> String? {
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) as? MementoNode {
+            let imageName = resourceManager.retainResource(generateImageName(), image: newImage)
+            resourceManager.releaseResource(room.backgroundImageFile)
+            room.backgroundImageFile = imageName
+            model.savePalace(palaceName)
+        }
+        return nil
+    }
+    
     //Removes the specified room from the specified memory palace.
     //Does nothign if either the memory palace or the room is invalid.
     func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
