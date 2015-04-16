@@ -18,6 +18,8 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     var mementoManager = MementoManager.sharedInstance
     var graphName: String = ""
     var nextRoomLabel = Int()
+    var isNextNode: Bool = true
+    var parentVC: NodeViewController?
     
     @IBOutlet weak var nameTextField: UITextField!
     
@@ -129,22 +131,27 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
                 editor.delegate = self
                 picker.pushViewController(editor, animated: true)
                 
-            } else {
-                var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.jpg", image: Utilities.convertToScreenSize(image))
-                if resourceRep != nil {
-                    nextRoomLabel = resourceRep!.0
-                }
-    
-                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }
     
     func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
-        var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.jpg", image: Utilities.convertToScreenSize(image))
-        if resourceRep != nil {
-            nextRoomLabel = resourceRep!.0
+        if (isNextNode == true){
+            var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0.jpg", image: Utilities.convertToScreenSize(image))
+            if resourceRep != nil {
+                nextRoomLabel = resourceRep!.0
+            }
+        } else {
+            self.parentVC?.imageView.image = image
+            
+            /* 
+            Change image in manager
+
+            var resourceRep = mementoManager.
+            */
         }
+
+
         self.dismissViewControllerAnimated(true, completion: {finished in
             self.dismissViewControllerAnimated(true, completion: nil)
         })
@@ -158,6 +165,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "GoToNextNodeSegue"){
+            println("Going to node")
             // Go to previously created next node
             let nextNodeViewController = segue.destinationViewController as NodeViewController
             nextNodeViewController.graphName = self.graphName

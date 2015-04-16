@@ -42,7 +42,7 @@ class GameAnnotationView: UIView {
         if valid {
             let loadPrompt = UIAlertController(title: "Correct!", message: "\(self.annotation)", preferredStyle: UIAlertControllerStyle.Alert)
             loadPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-
+                self.gameViewController.checkFinished()
             }))
         
             self.gameViewController.presentViewController(loadPrompt, animated: true, completion: nil)

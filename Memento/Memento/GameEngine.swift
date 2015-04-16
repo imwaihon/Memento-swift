@@ -57,8 +57,6 @@ class GameEngine {
         if currRoomIndex < palaceRooms.count {
             currRoomAssociations.extend(palaceRooms[currRoomIndex].associations)
             delegate?.reloadView()
-        } else {
-            finishedGame()
         }
         
     }
@@ -103,6 +101,12 @@ class GameEngine {
     func checkIfNext() {
         if currRoomAssociations.isEmpty {
             setUpNext()
+        }
+    }
+    
+    func checkIfFinished() {
+        if currRoomIndex >= palaceRooms.count {
+            finishedGame()
         }
     }
     
