@@ -14,9 +14,6 @@ import UIKit
 import XCTest
 
 class ResourceManagerTests: XCTestCase {
-    func test() {
-        let manager = ResourceManager(directory: "sharedResource")
-    }
     
     func testAddAndRetainResource() {
         let manager = ResourceManager(directory: "sharedResource")
@@ -51,7 +48,7 @@ class ResourceManagerTests: XCTestCase {
         
         //Check reference count decrementing.
         manager.releaseResource("linuxpenguin.jpg")
-        XCTAssertTrue(fileExists("sharedResource/linuxPenguin.jpg"))
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 1)
         
         //Check resource deletion when reference count falls to 0.
