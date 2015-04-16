@@ -22,6 +22,9 @@ class DraggableImageView : UIImageView
     var graphName = String()
     var mementoManager = MementoManager.sharedInstance
     
+    // Need to store total rotation for saving
+    var totalRotation: CGFloat = 0.0
+    
     // Screen size
     //let screenSize: CGRect = UIScreen.mainScreen().bounds
     let screenWidth: CGFloat = 1024.0
@@ -37,10 +40,6 @@ class DraggableImageView : UIImageView
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
         addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "handlePinch:"))
         addGestureRecognizer(UIRotationGestureRecognizer(target: self, action: "handleRotate:"))
-        
-        // Function rotate images
-        //rotateRec.addTarget(self, action: "rotatedView:")
-        //self.addGestureRecognizer(rotateRec)
         
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
@@ -143,10 +142,19 @@ class DraggableImageView : UIImageView
         }
     }
     
+    /*
     func handleRotate(nizer: UIRotationGestureRecognizer!) {
         self.transform = CGAffineTransformRotate(nizer.view!.transform, nizer.rotation)
+        totalRotation = totalRotation + nizer.rotation
         nizer.rotation = 0.0
+        mementoManager.setOverlayFrame(graphName, roomLabel: roomLabel, overlayLabel: self.labelIdentifier, newFrame: self.frame)
+        //println(totalRotation)
+        
+        println(self.frame)
+        isWithinBounds()
     }
+
+    */
     /*
     func rotatedView(sender:UIRotationGestureRecognizer){
         var lastRotation = CGFloat()
@@ -161,6 +169,7 @@ class DraggableImageView : UIImageView
         lastRotation = sender.rotation
     }
     */
+    
     // Helper function to check if this view is still within the 1024*768 boundary
     // Aids in slight offsetting back to within bounds
     private func isWithinBounds() -> Bool {

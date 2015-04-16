@@ -284,6 +284,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func deleteView(view: UIView) {
+        allCGRects.removeAtIndex(find(allCGRects, view.frame)!)
         view.removeFromSuperview()
         
         var roomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!

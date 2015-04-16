@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Utilities{
+class Utilities {
     
     class func convertToScreenSize(image : UIImage) -> UIImage{
         let destinationSize = CGSize(width: 1024, height: 768)
@@ -51,6 +51,15 @@ class Utilities{
             }
         }
         return UIImage()
+    }
+    
+    class func shuffleArray<T>(var array: [T]) -> [T] {
+        for index in reverse(0..<array.count) {
+            let randomIndex = Int(arc4random_uniform(UInt32(index)))
+            (array[index], array[randomIndex]) = (array[randomIndex], array[index])
+        }
+        
+        return array
     }
 
 }

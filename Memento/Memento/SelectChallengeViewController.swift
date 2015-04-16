@@ -11,7 +11,7 @@ import UIKit
 
 class SelectChallengeViewController: UIViewController {
     
-    enum gameModes : String{
+    enum gameModes : String {
         case orderMode = "Order"
         case findMode = "Find"
     }
@@ -28,6 +28,7 @@ class SelectChallengeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        modeTitleLabel.text = gameModes.orderMode.rawValue
         playButton.layer.borderColor = UIColor.darkGrayColor().CGColor
         playButton.layer.borderWidth = 1.5
         playButton.layer.cornerRadius = 5
@@ -47,16 +48,14 @@ class SelectChallengeViewController: UIViewController {
         modeTitleLabel.text = gameModes.findMode.rawValue
     }
     @IBAction func playButtonPressed(sender: AnyObject) {
-        if(modeTitleLabel.text == gameModes.orderMode.rawValue){
-            self.performSegueWithIdentifier("loadOrderChallenge", sender: self)
-        } else if(modeTitleLabel.text == gameModes.findMode.rawValue){
-            
-        }
+        self.performSegueWithIdentifier("LoadCustomChallengeSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "LoadCustomChallengeSegue"){
-        } else if(segue.identifier == "LoadPresetChallengeSegue"){
+        if (segue.identifier == "LoadCustomChallengeSegue") {
+            let dvc = segue.destinationViewController as LoadCustomChallengeViewController
+            dvc.gameMode = self.modeTitleLabel.text!
+            
         }
     }
     
