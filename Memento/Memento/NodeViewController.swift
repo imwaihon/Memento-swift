@@ -122,7 +122,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     // Adds an overlaying image from camera roll ( possibly in-app sprites next time?)
-    // Possible future portability for cropping images.
     @IBAction func addOverlayImage(sender: AnyObject){
         if (editToggler == false) {
             return
@@ -130,20 +129,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         isMainView = false
         getImageFromPhotoLibrary(sender)
         
-    }
-    
-    @IBAction func rotateImage(sender: AnyObject) {
-        if rotationToggler == true {
-            UIView.animateWithDuration(1.0, animations: {
-                self.imageView.transform = CGAffineTransformMakeRotation((180.0 * CGFloat(M_PI)) / 180.0)
-            })
-            rotationToggler = false
-        } else {
-            UIView.animateWithDuration(1.0, animations: {
-                self.imageView.transform = CGAffineTransformMakeRotation(0)
-            })
-            rotationToggler = true
-        }
     }
     
     // Helper functions for main photo pickers
@@ -284,7 +269,9 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func deleteView(view: UIView) {
-        allCGRects.removeAtIndex(find(allCGRects, view.frame)!)
+        if let indexToRect = find(allCGRects, view.frame) {
+            allCGRects.removeAtIndex(indexToRect)
+        }
         view.removeFromSuperview()
         
         var roomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
@@ -292,6 +279,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         overlayList = roomRep.overlays
         associationList = roomRep.associations
     }
+    
+    /************************************** Menu buttons **************************************/
     
     // Delete Mode Activated
     @IBAction func deleteButtonPressed(sender: UIButton) {
@@ -321,9 +310,14 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // Change image
+    // Change background image
     @IBAction func changeImageView(sender: AnyObject) {
         performSegueWithIdentifier("ReplaceNodeSegue", sender: self)
+    }
+    
+    // TODO: Edit background image with CLImageEditor
+    @IBAction func editImageView(sender: AnyObject) {
+        
     }
     
     // Reload viewcontroller with next node's data

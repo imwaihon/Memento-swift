@@ -10,6 +10,5 @@ import Foundation
 
 protocol GameEngineDelegate: class {
     func reloadView()
-    func startGame()
     func displayEndGame()
 }

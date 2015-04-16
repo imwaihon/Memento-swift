@@ -39,7 +39,7 @@ class DraggableImageView : UIImageView
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "handlePan:"))
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
         addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "handlePinch:"))
-        addGestureRecognizer(UIRotationGestureRecognizer(target: self, action: "handleRotate:"))
+        //addGestureRecognizer(UIRotationGestureRecognizer(target: self, action: "handleRotate:"))
         
         layer.shadowColor = UIColor.blackColor().CGColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
