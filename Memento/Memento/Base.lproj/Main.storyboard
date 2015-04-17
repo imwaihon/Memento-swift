@@ -359,7 +359,7 @@
                                 <rect key="frame" x="0.0" y="700" width="1024" height="68"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLq-za-ws0" userLabel="Left">
-                                        <rect key="frame" x="12" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="14" y="8" width="50" height="50"/>
                                         <state key="normal" image="leftArrow.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -368,18 +368,8 @@
                                             <action selector="backButtonPressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="0cW-6I-4Jf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oob-gV-7jL" userLabel="Rotate">
-                                        <rect key="frame" x="143" y="8" width="50" height="50"/>
-                                        <state key="normal" image="rotateImageButton.png">
-                                            <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="rotateImage:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="shX-3V-jKO"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-gd-6UF" userLabel="Annotate">
-                                        <rect key="frame" x="300" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="326" y="8" width="50" height="50"/>
                                         <state key="normal" image="insertImageAnnotationButton.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -388,8 +378,15 @@
                                             <action selector="addOverlayImage:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="UfG-XP-koN"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="kUB-G3-f9b" userLabel="Annotate">
+                                        <rect key="frame" x="170" y="9" width="50" height="50"/>
+                                        <state key="normal" image="Paint Palette-100.png">
+                                            <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="baG-to-RYt" userLabel="Next">
-                                        <rect key="frame" x="960" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="953" y="8" width="50" height="50"/>
                                         <state key="normal" image="rightArrow.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -399,7 +396,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZS2-FO-GCJ" userLabel="Delete">
-                                        <rect key="frame" x="804" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="796" y="8" width="50" height="50"/>
                                         <state key="normal" image="Eraser Filled-100.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -408,7 +405,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="tv5-MU-xtt" userLabel="Change Background">
-                                        <rect key="frame" x="648" y="9" width="50" height="50"/>
+                                        <rect key="frame" x="639" y="9" width="50" height="50"/>
                                         <state key="normal" image="rotateImageButton.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -420,7 +417,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-py-EFm" userLabel="Edit Button">
-                                <rect key="frame" x="487" y="705" width="60" height="60"/>
+                                <rect key="frame" x="482" y="709" width="50" height="50"/>
                                 <state key="normal" image="editModeButton.png"/>
                                 <connections>
                                     <action selector="toggleEditMode:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="1c6-Jq-vRa"/>
@@ -916,6 +913,7 @@
         <image name="Eraser Filled-100.png" width="100" height="100"/>
         <image name="Forward-100" width="100" height="100"/>
         <image name="Left4-100" width="100" height="100"/>
+        <image name="Paint Palette-100.png" width="100" height="100"/>
         <image name="background" width="2048" height="1536"/>
         <image name="backgroundGrey" width="1024" height="768"/>
         <image name="buttonBorder" width="862" height="146"/>

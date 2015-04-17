@@ -63,44 +63,6 @@ class MementoManagerTests: XCTestCase {
         })
     }
     
-    //Exact testing to be modified after adding save/load capabilities
-    func testGetMemoryPalaceIcons() {
-        let manager = MementoManager.sharedInstance
-        let model = MementoModel.sharedInstance
-        
-        for icon in manager.getMemoryPalaceIcons() {
-            println(icon.graphName)
-        }
-        
-        XCTAssertEqual(manager.getMemoryPalaceIcons(), [])
-        
-        let graph1Icon = MemoryPalaceIcon(graphName: "graph1", imageFile: "A.png")
-        let graph2Icon = MemoryPalaceIcon(graphName: "graph2", imageFile: "B.png")
-        let graph3Icon = MemoryPalaceIcon(graphName: "graph3", imageFile: "C.png")
-        
-        manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
-        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon])
-        
-        manager.addMemoryPalace(named: "graph2", imageFile: "B.png")
-        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon, graph2Icon])
-        
-        manager.addMemoryPalace(named: "graph3", imageFile: "C.png")
-        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon, graph2Icon, graph3Icon])
-        
-        manager.removeMemoryPalace("graph2")
-        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon, graph3Icon])
-        
-        manager.removeMemoryPalace("graph3")
-        XCTAssertEqual(manager.getMemoryPalaceIcons(), [graph1Icon])
-        
-        manager.removeMemoryPalace("graph1")
-        XCTAssertEqual(manager.getMemoryPalaceIcons(), [])
-        
-        dispatch_sync(model.saveQueue, {() -> Void in
-            //Do nothing. Wait for file operations to complete.
-        })
-    }
-    
     func testInsertAndRemoveMemoryPalaceRoom() {
         let manager = MementoManager.sharedInstance
         let model = MementoModel.sharedInstance

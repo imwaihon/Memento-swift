@@ -54,10 +54,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
             let selectedCell = scrollableOverviewCollectionView.cellForItemAtIndexPath(indexPath!) as OverviewImageCollectionViewCell?
             if(selectedCell != nil){
                 selectedCell?.graphName = self.palaceName
-                // PROBLEM IS HERE!
-                //selectedCell?.roomLabel = indexPath!.item - 1
                 selectedCell?.roomLabel = rooms[indexPath!.item - 1].label
-                println(indexPath!.item - 1)
                 selectedCell?.deleteButtonView.alpha = 1.0
                 selectedCell?.parent = self
             }
