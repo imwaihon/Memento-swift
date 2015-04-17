@@ -412,6 +412,22 @@ class Map<K: Comparable, V> {
         }
         return node
     }
+
+    //Recursively removes child nodes of the given node
+    private func removeSubtreeOf(node: MapNode<K, V>?) {
+        if node == nil {
+            return
+        }
+        removeSubtreeOf(node?.leftChild)
+        removeSubtreeOf(node?.rightChild)
+        node?.leftChild = nil
+        node?.rightChild = nil
+    }
+    
+    deinit {
+        removeSubtreeOf(_root)
+        _root = nil
+    }
 }
 
 class MapNode<K: Comparable, V> {
