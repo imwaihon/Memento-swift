@@ -13,12 +13,14 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var annotationText: UILabel!
     
     var mementoManager = MementoManager.sharedInstance
     var saveLoadManager = SaveLoadManager.sharedInstance
     var gameEngine: GameEngine
     var gameAnnotationViews: [GameAnnotationView]
     var gameLayerViews: [DraggableImageView]
+    var gameTickViews: [UIImageView]
     var roomLabel: Int
     var palaceName: String
     var gameMode: String
@@ -30,6 +32,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         self.gameEngine = GameEngine()
         self.gameAnnotationViews = [GameAnnotationView]()
         self.gameLayerViews = [DraggableImageView]()
+        self.gameTickViews = [UIImageView]()
         self.roomLabel = Int()
         self.palaceName = String()
         self.gameMode = String()
@@ -67,8 +70,13 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
             view.removeFromSuperview()
         }
         
+        for view in gameTickViews {
+            view.removeFromSuperview()
+        }
+        
         gameAnnotationViews.removeAll()
         gameLayerViews.removeAll()
+        gameTickViews.removeAll()
     }
     
     // Function to load current room layout
@@ -136,8 +144,25 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         
         if valid {
             annotation.disableView()
-            annotation.showCorrectAnimation()
+            self.annotationText.text = annotation.annotation
+            let tickImageView = UIImageView(image: UIImage(named: "greenTick"))
+            tickImageView.frame =  CGRect(origin: CGPoint(x: annotation.center.x, y: annotation.center.y), size: CGSize(width: 1, height: 1))
+            self.imageView.addSubview(tickImageView)
+            self.gameTickViews.append(tickImageView)
+            
+            UIView.animateWithDuration(0.6,
+                delay: 0.0,
+                options: UIViewAnimationOptions.CurveEaseInOut ,
+                animations: {
+                    tickImageView.transform = CGAffineTransformMakeScale(50, 50)
+                    
+                },
+                completion: { finished in
+                    annotation.showCorrectAnimation()
+            })
+            
             gameEngine.checkIfNext()
+            
             return true
         } else {
             return false
