@@ -188,7 +188,7 @@ class Set<T: Comparable> {
     
     //Removes all elements from this set.
     func clear() {
-        _root = nil
+        removeSubtreeOf(_root)
         _size = 0
     }
     
@@ -346,6 +346,22 @@ class Set<T: Comparable> {
             node = node.rightChild!
         }
         return node
+    }
+    
+    //Remcursively removes child nodes
+    private func removeSubtreeOf(node: SetNode<T>?) {
+        if node == nil {
+            return
+        }
+        removeSubtreeOf(node?.leftChild)
+        removeSubtreeOf(node?.rightChild)
+        node?.leftChild = nil
+        node?.rightChild = nil
+    }
+    
+    deinit {
+        removeSubtreeOf(_root)
+        _root = nil
     }
 }
 
