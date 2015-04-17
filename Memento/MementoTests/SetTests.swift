@@ -49,24 +49,6 @@ class SetTests: XCTestCase {
         XCTAssertEqual(set.largestElement!, 17)
     }
     
-    func testClear() {
-        let set = Set<Int>()
-        let values = [7, 10, 13, 17, 15, 5, 4, 14, 16, 2, 6, 3, 1, 15, 8, 9]
-        for value in values {
-            set.insert(value)
-        }
-        for value in values {
-            XCTAssertTrue(set.contains(value))
-        }
-        XCTAssertEqual(set.size, 15)
-        
-        set.clear()
-        XCTAssertTrue(set.isEmpty)
-        for value in values {
-            XCTAssertFalse(set.contains(value))
-        }
-    }
-    
     func testErase() {
         let set = Set<Int>()
         let values = [7, 10, 13, 17, 15, 5, 4, 14, 16, 2, 6, 3, 1, 15, 8, 9]
@@ -151,5 +133,23 @@ class SetTests: XCTestCase {
         }
         
         XCTAssertEqual(set.inOrderTraversal(), sortedArr)
+    }
+    
+    func testClear() {
+        let set = Set<Int>()
+        let unsortedArr = [5, 2, 6, 8, 13, 77, 1, 16]
+        let sortedArr = [1, 2, 5, 6, 8, 13, 16, 77]
+        
+        for val in unsortedArr {
+            set.insert(val)
+        }
+        
+        XCTAssertEqual(set.inOrderTraversal(), sortedArr)
+        
+        set.clear()
+        XCTAssertTrue(set.inOrderTraversal().isEmpty)
+        
+        set.insert(3)
+        XCTAssertEqual(set.inOrderTraversal(), [3])
     }
 }
