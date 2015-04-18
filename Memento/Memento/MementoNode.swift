@@ -3,30 +3,25 @@
 //  Memento
 //
 //  Defines the model of a memory palace room.
+//  Each room contains background image, list of overlay images and associations.
 //
-//  Specifications:
-//  Contains necessary information for display.
-//  Changes that will affect the displayed information should update the appropriate view components.
-//  Contains associations and links created by user.
-//  Identify association/overlay selected by user.
-//  Convert into representation that can be saved as a plist.
+//  Abstraction Functions and Specifications:
+//  Add association placeholder:                            addPlaceHolder(placeHolder: PlaceHolder) -> Bool
+//  Get association:                                        getAssociation(placeHolderLabel: Int) -> Association?
+//  Shift/Resize association placeholder:                   setPlaceHolderFrame(label: Int, newFrame: CGRect)
+//  Set association value:                                  setAssociationValue(placeHolderLabel: Int, value: String)
+//  Swap association ordering:                              swapPlaceHolders(pHolder1Label: Int, pHolder2Label: Int) -> Bool
+//  Remove association:                                     removePlaceHolder(placeHolderLabel: Int)
+//  Add overlay:                                            addOverlay(overlay: MutableOverlay) -> Int
+//  Get overlay:                                            getOverlay(overlayLabel: Int) -> Overlay?
+//  Shift/Resize overlay:                                   setOverlayFrame(overlayLabel: Int, newFrame: CGRect)
+//  Remove overlay:                                         removeOverlay(overlayLabel: Int)
+//  Convert into plist representation for saving:           plistRepresentation: NSDictionary
 //
 //  Non-functional specifications
 //  Easily identified by the graph containing it.
 //  Remove placeholders/overlays without changing the labels of existing overlays/placeholders.
 //  Retrieve the correct placeholder/overlay using the same label even after removing some other overlay/placeholder.
-//
-//  Implementation Explanation for deletion:
-//  Can easily use removeAtIndex on the array, but retrieving the correct object requires O(N) scan as labels no longer
-//  reflect the index.
-//  We want to know the index that stores the object with the given label.
-//  By using cumulative counting, we can know how many items with labels in the range [0, given label] were removed.
-//  Using this, we can identify the index that the object is most likely in.
-//  If the object woth given label does not exist, the object at the index will have a different label.
-//  Cumulative table can be done efficiently in O(log N) time using Binary-Indexed Tree.
-//  Hence, the Binary-Indexed Tree is used in computing the index of the specified object.
-//  Fenwick Tree solution is scraped as it leads to occupying even more memory and does not improve deletion time complexity.
-//  Current implementation is using balanced Binary Search Tree to map label to object.
 //
 //  Created by Qua Zi Xian on 19/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
