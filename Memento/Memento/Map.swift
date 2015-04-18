@@ -4,6 +4,21 @@
 //
 //  Defines an ordered collection of mapping of keys to values using balanced Binary Search Tree.
 //
+//  Abstraction functions:
+//  *Note: map is an instance of this class.
+//  Insert mapping:                         insertValueForKey(key: K, value: V) OR map[key] = value
+//  Get value for key:                      valueForKey(key: K) -> V? OR map[key]
+//  Remove mapping:                         eraseValueForKey(key: K) OR map[key] = nil
+//  Find key:                               containsKey(key: K) -> Bool
+//  Get smallest key:                       smallestKey: K?
+//  Get largest key:                        largestKey: K?
+//  Get value mapped to smallest key:       valueForSmallestKey: V?
+//  Get value mapped to largest key:        valueForLargestKey: V?
+//
+//  Non-functional specifications:
+//  No duplicate keys.
+//  All abstraction functions should run in sublinear time complexity.
+//
 //  Created by Qua Zi Xian on 5/4/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
@@ -254,7 +269,7 @@ class Map<K: Comparable, V> {
             erase(key, curNode: curNode.rightChild!)
             curNode.updateHeight()
             node = curNode
-        } else {
+        } else {    //No child, delete from parent
             if !curNode.hasLeftChild && !curNode.hasRightChild {
                 if let p = curNode.parent {
                     if curNode === p.leftChild {
@@ -262,12 +277,12 @@ class Map<K: Comparable, V> {
                     } else {
                         p.rightChild = nil
                     }
-                } else {
+                } else {    //No parent implies this is root node
                     _root = nil
                 }
                 _size--
                 return
-            } else if curNode.hasLeftChild ^ curNode.hasRightChild {
+            } else if curNode.hasLeftChild ^ curNode.hasRightChild {    //Only 1 child, replace itself with child node
                 let c = curNode.hasLeftChild ? curNode.leftChild!: curNode.rightChild!
                 c.parent = curNode.parent
                 if let p = curNode.parent {
@@ -280,7 +295,7 @@ class Map<K: Comparable, V> {
                     _root = c
                 }
                 node = c
-            } else {
+            } else {    //2 child nodes, replace itself with successor node
                 let s = minElement(curNode.rightChild!)
                 let sp = s.parent!
                 s.parent = curNode.parent
