@@ -152,4 +152,30 @@ class SetTests: XCTestCase {
         set.insert(3)
         XCTAssertEqual(set.inOrderTraversal(), [3])
     }
+    
+    func testLowerBound() {
+        let set = Set<Int>()
+        let primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+        
+        for prime in primes {
+            set.insert(prime)
+        }
+        
+        XCTAssertEqual(set.lowerBound(13)!, 13)     //Test border case of lowerBound function
+        XCTAssertEqual(set.lowerBound(15)!, 17)
+        XCTAssertTrue(set.lowerBound(38) == nil)    //No element is greater than or equal to 38 in the set
+    }
+    
+    func testUpperBound() {
+        let set = Set<Int>()
+        let primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+        
+        for prime in primes {
+            set.insert(prime)
+        }
+        
+        XCTAssertEqual(set.upperBound(13)!, 17)
+        XCTAssertEqual(set.upperBound(20)!, 23)
+        XCTAssertTrue(set.upperBound(37) == nil)
+    }
 }

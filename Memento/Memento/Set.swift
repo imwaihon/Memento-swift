@@ -333,6 +333,32 @@ class Set<T: Comparable> {
         return p
     }
     
+    func lowerBound(elem: T) -> T? {
+        return isEmpty ? nil: lowerBound(elem, curNode: _root!)
+    }
+    
+    private func lowerBound(elem: T, curNode: SetNode<T>) -> T? {
+        if curNode.value == elem {
+            return elem
+        }
+        if elem > curNode.value {
+            return curNode.hasRightChild ? lowerBound(elem, curNode: curNode.rightChild!): nil
+        }
+        return curNode.hasLeftChild ? lowerBound(elem, curNode: curNode.leftChild!): curNode.value
+    }
+    
+    func upperBound(elem: T) -> T? {
+        return isEmpty ? nil: upperBound(elem, curNode: _root!)
+    }
+    
+    private func upperBound(elem: T, curNode: SetNode<T>) -> T? {
+        if curNode.value <= elem {
+            return curNode.hasRightChild ? upperBound(elem, curNode: curNode.rightChild!): nil
+        }
+        let ans = curNode.hasLeftChild ? upperBound(elem, curNode: curNode.leftChild!): nil
+        return ans == nil ? curNode.value: ans
+    }
+    
     private func minElement(root: SetNode<T>) -> SetNode<T> {
         var node = root
         while node.hasLeftChild {
