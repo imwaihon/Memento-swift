@@ -26,8 +26,10 @@ class MementoGraphTests: XCTestCase {
     func testGetRoom() {
         let graph = MementoGraph(name: "sampleGraph", rootNode: MementoNode(imageFile: "A.png"))
         XCTAssertEqual(graph.getRoom(0)!.icon, MemoryPalaceRoomIcon(graphName: "sampleGraph", label: 0, filename: "A.png", overlays: []))
+        
+        //Invalid room numbers as palace has only 1 room
         XCTAssertTrue(graph.getRoom(-1) == nil)
-        XCTAssertTrue(graph.getRoom(2) == nil)
+        XCTAssertTrue(graph.getRoom(1) == nil)
     }
     
     func testAddRoom() {
@@ -80,5 +82,26 @@ class MementoGraphTests: XCTestCase {
         XCTAssertEqual(rep.objectForKey(nameKey) as String, graph.name)
         XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).count, 1);
         XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).objectAtIndex(0) as NSDictionary, newNode.plistRepresentation)
+    }
+    
+    func testGetNextRoomViewForRoom() {
+        let graph = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
+        let newNode = MementoNode(imageFile: "B.png")
+        graph.addRoom(newNode)
+        
+        XCTAssertEqual(graph.getNextRoomViewForRoom(0)!.label, 1)
+        
+        //The specified room is the last room, so there should not be any room
+        XCTAssertTrue(graph.getNextRoomViewForRoom(1) == nil)
+        
+        //Tests invalid room numbers for the memory palace
+        XCTAssertEqual(graph.getNextRoomViewForRoom(-1)!.label, 0)
+        XCTAssertTrue(graph.getNextRoomViewForRoom(2) == nil)
+        
+        graph.removeRoom(0)
+        
+        //Gets the next logical room for a non-existent room
+        XCTAssertEqual(graph.getNextRoomViewForRoom(0)!.label, 1)
+        XCTAssertEqual(graph.getNextRoomViewForRoom(-1)!.label, 1)
     }
 }
