@@ -2,14 +2,12 @@
 //  MementoGraph.swift
 //  Memento
 //
-//  Represents a linear graph of images
+//  Represents a linear graph of rooms.
 //
-//  Specifications:
-//  Insert nodes.
-//  Remove nodes.
-//  Convert into memory palace template.
-//
-//  Non-functional requirements:
+//  Abstraction functions:
+//  Add room:       addRoom(room: MementoNode)
+//  Get room:       getRoom(roomNumber: Int) -> MementoNode?
+//  Remove room:    removeRoom(roomNumber: Int)
 //
 //  Representation Invariant(s)
 //  Graph should have at least 1 node.
