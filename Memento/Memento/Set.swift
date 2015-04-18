@@ -5,11 +5,11 @@
 //  Represents the balanced Binary Search Tree data structure.
 //
 //  Functional Specifications
-//  Insert element
-//  Remove element
-//  Find an element
-//  Get smallest element
-//  Get largest element
+//  Insert element:             insert(elem: T)
+//  Remove element:             erase(elem: T)
+//  Find an element:            contains(elem: T) -> Bool
+//  Get smallest element:       smallestElement: T?
+//  Get largest element:        largestElement: T?
 //
 //  Non-functional Specifications
 //  O(log n) time complexity for functional operations.
@@ -219,19 +219,19 @@ class Set<T: Comparable> {
             curNode.updateHeight()
             node = curNode
         } else {
-            if !curNode.hasLeftChild && !curNode.hasRightChild {
+            if !curNode.hasLeftChild && !curNode.hasRightChild {    //No child, go to parent to delete this node.
                 if let p = curNode.parent {
                     if curNode === p.leftChild {
                         p.leftChild = nil
                     } else {
                         p.rightChild = nil
                     }
-                } else {
+                } else {    //No parent implies this node is root
                     _root = nil
                 }
                 _size--
                 return
-            } else if curNode.hasLeftChild ^ curNode.hasRightChild {
+            } else if curNode.hasLeftChild ^ curNode.hasRightChild {    //1 child, replace itself with that child.
                 let c = curNode.hasLeftChild ? curNode.leftChild!: curNode.rightChild!
                 c.parent = curNode.parent
                 if let p = curNode.parent {
@@ -244,7 +244,7 @@ class Set<T: Comparable> {
                     _root = c
                 }
                 node = c
-            } else {
+            } else {    //2 children, replace with successor node.
                 let s = minElement(curNode.rightChild!)
                 let sp = s.parent!
                 s.parent = curNode.parent
@@ -333,6 +333,7 @@ class Set<T: Comparable> {
         return p
     }
     
+    //Gets the smallest element that does not compare less than the given element.
     func lowerBound(elem: T) -> T? {
         return isEmpty ? nil: lowerBound(elem, curNode: _root!)
     }
@@ -347,6 +348,7 @@ class Set<T: Comparable> {
         return curNode.hasLeftChild ? lowerBound(elem, curNode: curNode.leftChild!): curNode.value
     }
     
+    //Gets the smallest element that compares larger than the given element.
     func upperBound(elem: T) -> T? {
         return isEmpty ? nil: upperBound(elem, curNode: _root!)
     }
