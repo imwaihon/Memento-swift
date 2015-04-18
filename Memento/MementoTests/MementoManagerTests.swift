@@ -113,12 +113,40 @@ class MementoManagerTests: XCTestCase {
         manager.removeMemoryPalace(palaceName)
         
         dispatch_sync(model.saveQueue, {() -> Void in
-            //DO nothing. Wait for deletion to complete.
+            //Do nothing. Wait for deletion to complete.
         })
     }
     
     func testSetBackgroundImage() {
-        //To be implemented
+        let manager = MementoManager.sharedInstance
+        let model = MementoModel.sharedInstance
+        let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
+        let room = model.getMemoryPalaceRoom(palaceName, roomLabel: 0)
+        let image = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)!
+        
+        XCTAssertEqual(room!.backgroundImageFile, "A.png")
+        
+        //Tests normal operation
+        let imageName = manager.setBackgroundImageForRoom(palaceName, roomLabel: 0, newImage: image)
+        if imageName != nil {
+            XCTAssertEqual(room!.backgroundImageFile, imageName!)
+            XCTAssertTrue(fileExists("sharedResource".stringByAppendingPathComponent(imageName!)))
+            
+            //Changes back the background image
+            manager.setBackgroundImageForRoom(palaceName, roomLabel: 0, newImageFile: "A.png")
+            XCTAssertEqual(room!.backgroundImageFile, "A.png")
+            XCTAssertFalse(fileExists("sharedResource".stringByAppendingPathComponent(imageName!)))
+        }
+        
+        //Attempts to set background image on non-existent room
+        XCTAssertTrue(manager.setBackgroundImageForRoom(palaceName, roomLabel: 1, newImage: image) == nil)
+        
+        //Clean up directory
+        manager.removeMemoryPalace(palaceName)
+        
+        dispatch_sync(model.saveQueue, {() -> Void in
+            //Do nothing. Wait for deletion to complete.
+        })
     }
     
     func testPlaceHolderOperations() {

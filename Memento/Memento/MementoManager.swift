@@ -152,6 +152,7 @@ class MementoManager {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             resourceManager.releaseResource(room.backgroundImageFile)
             resourceManager.retainResource(newImageFile)
+            room.backgroundImageFile = newImageFile
             model.savePalace(palaceName)
         }
     }
