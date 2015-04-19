@@ -161,6 +161,9 @@ class MementoManagerTests: XCTestCase {
         placeHolder1.label = 1  //To test if the label gets updated when added to room
         
         //Adds the placeholder
+        //Note: This part is prone to runtime error.
+        //Last error recived was 'cannot index empty buffer'.
+        //Cause to be investigated.
         XCTAssertTrue(manager.addPlaceHolder(palaceName, roomLabel: 0, placeHolder: placeHolder1))
         XCTAssertEqual(room!.numPlaceHolders, 1)
         XCTAssertEqual(placeHolder1.label, 0)
