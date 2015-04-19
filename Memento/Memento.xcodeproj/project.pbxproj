@@ -62,6 +62,7 @@
 		5A01A3451ACE438900351423 /* FenwickTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01A3441ACE438900351423 /* FenwickTree.swift */; };
 		5A01A3461ACE438900351423 /* FenwickTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01A3441ACE438900351423 /* FenwickTree.swift */; };
 		5A01A3481ACE4CEE00351423 /* FenwickTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01A3471ACE4CEE00351423 /* FenwickTreeTests.swift */; };
+		5A12D6701AE3C30400BF1523 /* SaveLoadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A12D66F1AE3C30400BF1523 /* SaveLoadManagerTests.swift */; };
 		5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */; };
 		5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
 		5A278FF51AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
@@ -251,6 +252,7 @@
 		4FCE36031ABA8CF000417763 /* MementoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementoTests.swift; sourceTree = "<group>"; };
 		5A01A3441ACE438900351423 /* FenwickTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FenwickTree.swift; path = ../FenwickTree.swift; sourceTree = "<group>"; };
 		5A01A3471ACE4CEE00351423 /* FenwickTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FenwickTreeTests.swift; sourceTree = "<group>"; };
+		5A12D66F1AE3C30400BF1523 /* SaveLoadManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveLoadManagerTests.swift; sourceTree = "<group>"; };
 		5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomIcon.swift; sourceTree = "<group>"; };
 		5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphTests.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				5A4FDF441AD6356500B8F3CA /* ResourceManagerTests.swift */,
+				5A12D66F1AE3C30400BF1523 /* SaveLoadManagerTests.swift */,
 				5AEE2F851AD0C59900E0DD81 /* MapTests.swift */,
 				5A5FB0A11AC63D6E00EA0EE7 /* MementoModelTests.swift */,
 				5A5FB0A81AC67FB400EA0EE7 /* MementoManagerTests.swift */,
@@ -1012,6 +1015,7 @@
 				4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */,
 				5AEE2F861AD0C59900E0DD81 /* MapTests.swift in Sources */,
 				5A3F386F1ACA76050096AB6C /* Overlay.swift in Sources */,
+				5A12D6701AE3C30400BF1523 /* SaveLoadManagerTests.swift in Sources */,
 				5AB3F7D91ADC070F00906B76 /* CLImageEditor.m in Sources */,
 				5A01A3461ACE438900351423 /* FenwickTree.swift in Sources */,
 				4127D7A21AD30112007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */,
