@@ -2,7 +2,7 @@
 //  MutableOverlay.swift
 //  Memento
 //
-//  Defiens the overlay object managed by the MementoNode.
+//  Defines the overlay object managed by the MementoNode.
 //
 //  Created by Qua Zi Xian on 31/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
