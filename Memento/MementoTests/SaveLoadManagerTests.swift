@@ -2,6 +2,8 @@
 //  SaveLoadManagerTests.swift
 //  Memento
 //
+//  Unit test for SaveLoadManager class
+//
 //  Created by Qua Zi Xian on 19/4/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
@@ -30,6 +32,21 @@ class SaveLoadManagerTests: XCTestCase {
 
         //Cleanup
         deleteFile("graph1.plist")
+    }
+    
+    func testDeletePalace() {
+        let manager = SaveLoadManager.sharedInstance
+        let filename = "graph1.plist"
+        let palace = MementoGraph(name: "graph1", rootNode: MementoNode(imageFile: "A.png"))
+        
+        //Adds the palace
+        XCTAssertFalse(fileExists(filename))
+        manager.savePalaceToFile(palace)
+        XCTAssertTrue(fileExists(filename))
+
+        //Deletes the palace
+        manager.deletePalace("graph1")
+        XCTAssertFalse(fileExists("graph1.plist"))
     }
     
     private func fileExists(filename: String) -> Bool {

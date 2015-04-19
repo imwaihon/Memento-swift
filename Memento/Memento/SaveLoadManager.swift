@@ -2,6 +2,14 @@
 //  SaveLoadManager.swift
 //  Memento
 //
+//  The component that is responsible for saving and loading memory palace to/from files.
+//
+//  Abstraction Functions and Specifications:
+//  Save memory palace:         savePalaceToFile(palace: MementoGraph)
+//  Load memory palace:         loadPalace(palaceName: String) -> MementoGraph?
+//  Load all memory palace:     loadAllPalace() -> [MementoGraph]
+//  Remove memory palace:       deletePalace(palaceName: String)
+//
 //  Created by Chee Wai Hon on 31/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
@@ -59,21 +67,11 @@ class SaveLoadManager {
         let path = dirPath.stringByAppendingPathComponent(palaceName).stringByAppendingPathExtension(plistExtension)!
         palace.plistRepresentation.writeToFile(path, atomically: true)
     }
-    
-
 
     // Deletes Palace directory
     func deletePalace(palaceName: String) {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
-        let documentsDirectory = paths.objectAtIndex(0) as String
-        let path = documentsDirectory.stringByAppendingPathComponent("data").stringByAppendingPathComponent("\(palaceName)")
-        
-        let fileManager = NSFileManager.defaultManager()
-        
-        if (fileManager.fileExistsAtPath(path)) {
-            fileManager.removeItemAtPath(path, error: nil)
-        }
-        
+        let path = dirPath.stringByAppendingPathComponent(palaceName).stringByAppendingPathExtension(plistExtension)!
+        NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
     }
     
     //Gets the list of saved memory palaces.
@@ -103,6 +101,7 @@ class SaveLoadManager {
         return nil
     }
     
+    //To be deleted once the game controller changes over to loading image using UIImage constructor
     func loadOverlayImage(imageName: String) -> UIImage? {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
