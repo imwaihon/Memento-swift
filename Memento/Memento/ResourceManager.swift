@@ -37,6 +37,7 @@ class ResourceManager {
     private let jpegExtension = "jpg"
     private let pngExtention = "png"
     private let textExtension = "txt"
+    private let plistExtension = "plist"
     
     private let _dirPath: String    //The base directory to read/write resource files.
     private let _resourceListPath: String   //The full path of the resource tracking file.
@@ -48,20 +49,19 @@ class ResourceManager {
         
         //Computing the path to save the resource tracking file
         let docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
-        let dir = docDir+"/\(directory)"
-        _dirPath = docDir+"/\(directory)/"
-        _resourceListPath = docDir+"/\(directory).plist"
+        _dirPath = docDir.stringByAppendingPathComponent(directory)
+        _resourceListPath = _dirPath.stringByAppendingPathExtension(plistExtension)!
         
         //Loads the reference counting table and creates directory if needed.
         var isDir: ObjCBool = false
         let trackingFileExists = NSFileManager.defaultManager().fileExistsAtPath(_resourceListPath)
-        let directoryExists = NSFileManager.defaultManager().fileExistsAtPath(dir, isDirectory: &isDir) && isDir
+        let directoryExists = NSFileManager.defaultManager().fileExistsAtPath(_dirPath, isDirectory: &isDir) && isDir
         if trackingFileExists && directoryExists {
             _referenceCountTable = NSDictionary(contentsOfFile: _resourceListPath) as [String: UInt]
         } else {
             _referenceCountTable = [String: UInt]()
-            NSFileManager.defaultManager().createDirectoryAtPath(dir, withIntermediateDirectories: true, attributes: nil, error: nil)
-            NSDictionary(dictionary: _referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
+            NSFileManager.defaultManager().createDirectoryAtPath(_dirPath, withIntermediateDirectories: true, attributes: nil, error: nil)
+            NSDictionary(dictionary: _referenceCountTable).writeToFile(_resourceListPath, atomically: true)
         }
     }
     
@@ -103,7 +103,7 @@ class ResourceManager {
     func retainResource(resourceName: String) {
         if _referenceCountTable[resourceName] != nil {
             _referenceCountTable[resourceName]!++
-            NSDictionary(dictionary: _referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
+            NSDictionary(dictionary: _referenceCountTable).writeToFile(_resourceListPath, atomically: true)
         }
     }
     
@@ -132,10 +132,10 @@ class ResourceManager {
         
         //Write to the file.
         _referenceCountTable[filename] = 1
-        text.writeToFile(_dirPath+filename, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        text.writeToFile(_dirPath.stringByAppendingPathComponent(filename), atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         
         //Save the updated reference table
-        NSDictionary(dictionary: _referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
+        NSDictionary(dictionary: _referenceCountTable).writeToFile(_resourceListPath, atomically: true)
         return filename
     }
     
@@ -146,7 +146,7 @@ class ResourceManager {
         let ext = resourceName.pathExtension
         var filename = resourceName
         
-        //Cinstruct new file name if file with same name exists.
+        //Construct new file name if file with same name exists.
         if _referenceCountTable[filename] != nil {
             filename = filename.stringByDeletingPathExtension
             for var i = 1; ; i++ {
@@ -161,13 +161,13 @@ class ResourceManager {
         //Write to file.
         _referenceCountTable[filename] = 1
         if ext == jpegExtension {
-            UIImageJPEGRepresentation(image, 0.9).writeToFile(_dirPath+filename, atomically: true)
+            UIImageJPEGRepresentation(image, 0.9).writeToFile(_dirPath.stringByAppendingPathComponent(filename), atomically: true)
         } else {
-            UIImagePNGRepresentation(image).writeToFile(_dirPath+filename, atomically: true)
+            UIImagePNGRepresentation(image).writeToFile(_dirPath.stringByAppendingPathComponent(filename), atomically: true)
         }
         
         //Save the update reference table
-        NSDictionary(dictionary: _referenceCountTable).writeToFile(self._resourceListPath, atomically: true)
+        NSDictionary(dictionary: _referenceCountTable).writeToFile(_resourceListPath, atomically: true)
         return filename
     }
     
@@ -178,7 +178,7 @@ class ResourceManager {
         if _referenceCountTable[resourceName] != nil {
             if _referenceCountTable[resourceName] == 1 {
                 _referenceCountTable[resourceName] = nil
-                NSFileManager.defaultManager().removeItemAtPath(_dirPath+resourceName, error: nil)
+                NSFileManager.defaultManager().removeItemAtPath(_dirPath.stringByAppendingPathComponent(resourceName), error: nil)
             } else {
                 _referenceCountTable[resourceName]!--
             }
