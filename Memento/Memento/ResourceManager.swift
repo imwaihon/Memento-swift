@@ -66,6 +66,7 @@ class ResourceManager {
     }
     
     //Gets the list of resources of the given type in th edirectory managed by this resource manager.
+    //Returns: An array of file names of resources of the specified type.
     func resourceOfType(type: ResourceType) -> [String] {
         let files = _referenceCountTable.keys.array
         
@@ -92,6 +93,7 @@ class ResourceManager {
     }
     
     //Gets the reference count for the given resource.
+    //Returns: The reference count for the specified resource.
     func referenceCountForResource(resourceName: String) -> Int {
         return _referenceCountTable[resourceName] == nil ? 0: Int(_referenceCountTable[resourceName]!)
     }
@@ -106,9 +108,15 @@ class ResourceManager {
     }
     
     //Saves the text resource to the specified file.
-    //Returns the actual name of the text file being saved to.
+    //Returns: The actual name of the text file being saved to.
+    //Requires: Resource name should have .txt extension.
     func retainResource(resourceName: String, text: String) -> String {
         var filename = resourceName
+        
+        //Fixes file extension
+        if filename.pathExtension != textExtension {
+            filename = filename.stringByDeletingPathExtension.stringByAppendingPathExtension(textExtension)!
+        }
         
         //Construct new file name if file with same name exists.
         if _referenceCountTable[resourceName] != nil {
@@ -119,10 +127,10 @@ class ResourceManager {
                     break
                 }
             }
+            filename = filename.stringByAppendingPathExtension(textExtension)!
         }
         
-        //Complete the file name and write to the file.
-        filename = filename.stringByAppendingPathExtension(textExtension)!
+        //Write to the file.
         _referenceCountTable[filename] = 1
         text.writeToFile(_dirPath+filename, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         
@@ -132,8 +140,8 @@ class ResourceManager {
     }
     
     //Saves the given image using the given name and sets reference count to 1.
-    //Returns the actual name of the image file used.
-    //Resource name should have extensions .jpg or .png
+    //Returns: The actual name of the image file used.
+    //Requires: Resource name should have extensions .jpg or .png
     func retainResource(resourceName: String, image: UIImage) -> String {
         let ext = resourceName.pathExtension
         var filename = resourceName

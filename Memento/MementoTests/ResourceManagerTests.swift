@@ -18,7 +18,9 @@ class ResourceManagerTests: XCTestCase {
     func testAddAndRetainResource() {
         let manager = ResourceManager(directory: "sharedResource")
         let imageFile = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)
+        let text = "Hello world"
         
+        //Adds image resource
         XCTAssertEqual(manager.retainResource("linuxpenguin.jpg", image: imageFile!), "linuxpenguin.jpg")
         XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 1)
@@ -36,6 +38,15 @@ class ResourceManagerTests: XCTestCase {
         XCTAssertEqual(manager.referenceCountForResource("B.png"), 0)
         manager.retainResource("B.png")
         XCTAssertEqual(manager.referenceCountForResource("B.png"), 0)
+        
+        //Adds text resource
+        XCTAssertEqual(manager.retainResource("sampleText.txt", text: text), "sampleText.txt")
+        XCTAssertEqual(manager.referenceCountForResource("sampleText.txt"), 1)
+        
+        //Tests conversion of file extension to txt
+        XCTAssertEqual(manager.retainResource("sampleText2", text: text), "sampleText2.txt")
+        XCTAssertEqual(manager.referenceCountForResource("sampleText2"), 0)
+        XCTAssertEqual(manager.referenceCountForResource("sampleText2.txt"), 1)
     }
     
     func testReleaseAndRemoveResource() {
@@ -62,6 +73,12 @@ class ResourceManagerTests: XCTestCase {
         //Tests releasing non-existent resource
         manager.releaseResource("linuxpenguin.jpg")
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 0)
+        
+        //Release text resources
+        manager.releaseResource("sampleText.txt")
+        XCTAssertEqual(manager.referenceCountForResource("sampleText.txt"), 0)
+        manager.releaseResource("sampleText2.txt")
+        XCTAssertEqual(manager.referenceCountForResource("sampleText2.txt"), 0)
     }
     
     private func fileExists(filename: String) -> Bool {
