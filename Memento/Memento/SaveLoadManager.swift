@@ -6,7 +6,7 @@
 //
 //  Abstraction Functions and Specifications:
 //  Save memory palace:         savePalaceToFile(palace: MementoGraph)
-//  Load memory palace:         loadPalace(palaceName: String) -> MementoGraph?
+//  Load memory palace:         loadPalaceFromFile(filename: String) -> MementoGraph?
 //  Load all memory palace:     loadAllPalace() -> [MementoGraph]
 //  Remove memory palace:       deletePalace(palaceName: String)
 //
@@ -51,13 +51,12 @@ class SaveLoadManager {
     // Check folder if exist, if not, create one
     private func checkFolder() {
         let fileManager = NSFileManager.defaultManager()
-        var error: NSError?
         
         //Create data folder if it does not exist.
         var isDirectory: ObjCBool = false
         let directoryExists = fileManager.fileExistsAtPath(dirPath, isDirectory: &isDirectory)
         if !directoryExists || !isDirectory {
-            fileManager.createDirectoryAtPath(dirPath, withIntermediateDirectories: false, attributes: nil, error: nil)
+            assert(fileManager.createDirectoryAtPath(dirPath, withIntermediateDirectories: true, attributes: nil, error: nil))
         }
     }
     
@@ -68,7 +67,7 @@ class SaveLoadManager {
         palace.plistRepresentation.writeToFile(path, atomically: true)
     }
 
-    // Deletes Palace directory
+    // Deletes the memory palace identified by the given name.
     func deletePalace(palaceName: String) {
         let path = dirPath.stringByAppendingPathComponent(palaceName).stringByAppendingPathExtension(plistExtension)!
         NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
@@ -80,7 +79,7 @@ class SaveLoadManager {
         var arr = [MementoGraph]()
         if let filenames = (NSFileManager.defaultManager().contentsOfDirectoryAtPath(dirPath, error: nil) as? [String]) {
             for filename in filenames {
-                if let palace = loadPalace(filename) {
+                if let palace = loadPalaceFromFile(filename) {
                     arr.append(palace)
                 }
             }
@@ -91,8 +90,8 @@ class SaveLoadManager {
     //Loads the memory palace with the given name.
     //Returns: The constructed memory palace if the file corresponding to the specified memory palace is found. Returns
     //          nil otherwise.
-    func loadPalace(palaceName: String) -> MementoGraph? {
-        let path = dirPath.stringByAppendingPathComponent(palaceName).stringByAppendingPathExtension(plistExtension)!
+    func loadPalaceFromFile(filename: String) -> MementoGraph? {
+        let path = dirPath.stringByAppendingPathComponent(filename)
         
         if let graphData = NSDictionary(contentsOfFile: path) {
             return graphFactory.decodeAndMakeGraph(graphData)

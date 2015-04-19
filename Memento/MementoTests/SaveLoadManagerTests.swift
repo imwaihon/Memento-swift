@@ -25,7 +25,7 @@ class SaveLoadManagerTests: XCTestCase {
         
         //Test loading of single palace.
         //Also verifies that the save functionality is working correctly.
-        var loadedPalace = manager.loadPalace("graph1")
+        var loadedPalace = manager.loadPalaceFromFile("graph1.plist")
         if loadedPalace != nil {
             XCTAssertEqual(loadedPalace!.plistRepresentation, palace.plistRepresentation)
         }
