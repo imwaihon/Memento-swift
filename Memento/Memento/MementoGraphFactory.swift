@@ -28,8 +28,8 @@ class MementoGraphFactory {
     }
     
     func decodeAndMakeGraph(data: NSDictionary) -> MementoGraph {
-        var name = data[nameKey] as String
-        var nodes = data[nodesKey] as NSArray
+        var name = data[Constants.nameKey] as String
+        var nodes = data[Constants.nodesKey] as NSArray
         var createdNodes = [MementoNode]()
         
         for node in nodes {

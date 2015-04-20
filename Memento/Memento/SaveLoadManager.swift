@@ -104,7 +104,7 @@ class SaveLoadManager {
     func loadOverlayImage(imageName: String) -> UIImage? {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
         let documentsDirectory = paths.objectAtIndex(0) as String
-        let path = documentsDirectory.stringByAppendingPathComponent(imgResourceDir)
+        let path = documentsDirectory.stringByAppendingPathComponent(Constants.imgResourceDir)
         let overlayPath = path.stringByAppendingPathComponent("\(imageName)")
     
         

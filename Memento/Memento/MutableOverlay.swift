@@ -12,6 +12,8 @@ import Foundation
 import UIKit
 
 struct MutableOverlay: Equatable {
+    private static let overlayValueSeparator = ";"
+    
     var label: Int
     var frame: CGRect
     var imageFile: String
@@ -21,7 +23,7 @@ struct MutableOverlay: Equatable {
     //This makes hashing using CGRect string or image file name not feasible.
     var stringEncoding: String {
         var str = NSStringFromCGRect(frame)
-        str = str.stringByAppendingString(overlayValueSeparator)
+        str = str.stringByAppendingString(MutableOverlay.overlayValueSeparator)
         str = str.stringByAppendingString(imageFile)
         return str
     }

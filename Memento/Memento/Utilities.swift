@@ -30,7 +30,7 @@ class Utilities {
     }
     
     class func getImageNamed(name : String) -> UIImage!{
-        let fileName = imgResourceDir.stringByAppendingPathComponent(name)
+        let fileName = Constants.imgResourceDir.stringByAppendingPathComponent(name)
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
         if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
