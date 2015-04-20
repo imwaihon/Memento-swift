@@ -15,6 +15,7 @@ import QuartzCore
 
 class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate {
     
+    @IBOutlet weak var annotateWordButton: UIButton!
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -38,6 +39,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var rotationToggler: Bool = true
     private var editToggler: Bool = true
     var deleteToggler: Bool = false
+    private var annotateWordToggler: Bool = false
     
     
     override func viewDidLoad() {
@@ -45,9 +47,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.imageView.userInteractionEnabled = true
         self.view.userInteractionEnabled = true
         
-        //setUpGestures()
         panRec.addTarget(self, action: "handlePan:")
-        self.view.addGestureRecognizer(panRec)
         
         // Get view representation of room
         var roomRep = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
@@ -58,6 +58,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Button border settings
         deleteModeButton.layer.borderWidth = 2.0
         deleteModeButton.layer.borderColor = UIColor.clearColor().CGColor
+        annotateWordButton.layer.borderWidth = 2.0
+        annotateWordButton.layer.borderColor = UIColor.clearColor().CGColor
         
         // Load
         overlayList = roomRep.overlays
@@ -330,6 +332,24 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         UIView.animateWithDuration(NSTimeInterval(2.0), animations: {
             self.downloadButton.backgroundColor = UIColor.clearColor()
         })
+    }
+    
+    // Toggle mode for annotation words
+    @IBAction func wordAnnotationButtonPressed(sender: AnyObject) {
+        if annotateWordToggler {
+            // Deactivate
+            annotateWordToggler = false
+            annotateWordButton.layer.borderColor = UIColor.clearColor().CGColor
+            self.view.removeGestureRecognizer(panRec)
+            self.imageView.alpha = 1.0
+        } else {
+            // Activate
+            annotateWordToggler = true
+            annotateWordButton.layer.borderColor = UIColor.whiteColor().CGColor
+            self.view.removeGestureRecognizer(panRec)
+            self.view.addGestureRecognizer(panRec)
+            self.imageView.alpha = 0.75
+        }
     }
     
     // Reload viewcontroller with next node's data

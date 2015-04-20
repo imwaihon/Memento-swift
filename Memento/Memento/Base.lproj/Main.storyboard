@@ -369,7 +369,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-gd-6UF" userLabel="Annotate">
-                                        <rect key="frame" x="642" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="621" y="8" width="50" height="50"/>
                                         <state key="normal" image="insertImageAnnotationButton.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -398,13 +398,22 @@
                                             <action selector="nextNodePressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="Xad-Fh-Vhn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZS2-FO-GCJ" userLabel="Delete">
-                                        <rect key="frame" x="802" y="8" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZS2-FO-GCJ" userLabel="Annotate Words">
+                                        <rect key="frame" x="738" y="8" width="51" height="51"/>
+                                        <state key="normal" image="AnnotateWords.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="wordAnnotationButtonPressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="SMc-db-U0M"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="doj-ih-ps5" userLabel="Delete">
+                                        <rect key="frame" x="855" y="9" width="50" height="50"/>
                                         <state key="normal" image="Eraser Filled-100.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="deleteButtonPressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="uck-Ty-ouL"/>
+                                            <action selector="deleteButtonPressed:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="o7F-oa-NWK"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="tv5-MU-xtt" userLabel="Change Background">
@@ -441,7 +450,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
-                        <outlet property="deleteModeButton" destination="ZS2-FO-GCJ" id="STQ-8v-Or3"/>
+                        <outlet property="annotateWordButton" destination="ZS2-FO-GCJ" id="GyB-8U-230"/>
+                        <outlet property="deleteModeButton" destination="doj-ih-ps5" id="0Zf-Co-Ucx"/>
                         <outlet property="downloadButton" destination="4e4-do-GFi" id="4CF-dX-uQP"/>
                         <outlet property="editModeButton" destination="xmX-py-EFm" id="3nA-Wh-mmv"/>
                         <outlet property="imageView" destination="LzC-0M-630" id="vwI-s6-IjB"/>
@@ -985,6 +995,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AnnotateWords.png" width="132" height="132"/>
         <image name="Download.png" width="208" height="208"/>
         <image name="Eraser Filled-100.png" width="100" height="100"/>
         <image name="Forward-100" width="100" height="100"/>
