@@ -13,10 +13,10 @@ import UIKit
 
 struct Constants {
     //Graph Icon Display Constants(modify as needed by UI developer)
-    static let graphIconSize = CGSizeMake(100, 50)    //Tentative value
+    //static let graphIconSize = CGSizeMake(100, 50)    //Tentative value
 
     //Graph Node Icon Display Constants(modify as needed by UI developer)
-    static let graphNodeIconSize = CGSizeMake(100, 50)
+    //static let graphNodeIconSize = CGSizeMake(100, 50)
 
     //Overlay encoding
     static let overlayValueSeparator = ";"
