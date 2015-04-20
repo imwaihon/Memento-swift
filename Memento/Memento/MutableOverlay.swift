@@ -12,8 +12,6 @@ import Foundation
 import UIKit
 
 struct MutableOverlay: Equatable {
-    private static let overlayValueSeparator = ";"
-    
     var label: Int
     var frame: CGRect
     var imageFile: String
@@ -23,7 +21,7 @@ struct MutableOverlay: Equatable {
     //This makes hashing using CGRect string or image file name not feasible.
     var stringEncoding: String {
         var str = NSStringFromCGRect(frame)
-        str = str.stringByAppendingString(MutableOverlay.overlayValueSeparator)
+        str = str.stringByAppendingString(Constants.overlayValueSeparator)
         str = str.stringByAppendingString(imageFile)
         return str
     }
@@ -37,7 +35,7 @@ struct MutableOverlay: Equatable {
     //Decode the given string representation into a MutableOverlay object.
     //rep must be a string returned by stringEncoding property of a MutableOverlay instance.
     static func decodeFromString(rep: String) -> MutableOverlay {
-        let strArray = rep.componentsSeparatedByString(overlayValueSeparator)
+        let strArray = rep.componentsSeparatedByString(Constants.overlayValueSeparator)
         return MutableOverlay(frame: CGRectFromString(strArray[0]), imageFile: strArray[1])
     }
     

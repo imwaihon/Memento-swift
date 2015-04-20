@@ -66,22 +66,22 @@ class MementoGraphTests: XCTestCase {
         let newNode = MementoNode(imageFile: "B.png")
         
         var rep = graph.plistRepresentation
-        XCTAssertEqual(rep.objectForKey(nameKey) as String, graph.name)
-        XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).count, 1);
-        XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).objectAtIndex(0) as NSDictionary, (graph.getRoom(0)! as MementoNode).plistRepresentation)
+        XCTAssertEqual(rep.objectForKey(Constants.nameKey) as String, graph.name)
+        XCTAssertEqual((rep.objectForKey(Constants.nodesKey) as NSArray).count, 1);
+        XCTAssertEqual((rep.objectForKey(Constants.nodesKey) as NSArray).objectAtIndex(0) as NSDictionary, (graph.getRoom(0)! as MementoNode).plistRepresentation)
         
         graph.addRoom(newNode)
         rep = graph.plistRepresentation
-        XCTAssertEqual(rep.objectForKey(nameKey) as String, graph.name)
-        XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).count, 2);
-        XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).objectAtIndex(0) as NSDictionary, (graph.getRoom(0)! as MementoNode).plistRepresentation)
-        XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).objectAtIndex(1) as NSDictionary, (graph.getRoom(1)! as MementoNode).plistRepresentation)
+        XCTAssertEqual(rep.objectForKey(Constants.nameKey) as String, graph.name)
+        XCTAssertEqual((rep.objectForKey(Constants.nodesKey) as NSArray).count, 2);
+        XCTAssertEqual((rep.objectForKey(Constants.nodesKey) as NSArray).objectAtIndex(0) as NSDictionary, (graph.getRoom(0)! as MementoNode).plistRepresentation)
+        XCTAssertEqual((rep.objectForKey(Constants.nodesKey) as NSArray).objectAtIndex(1) as NSDictionary, (graph.getRoom(1)! as MementoNode).plistRepresentation)
         
         graph.removeRoom(0)
         rep = graph.plistRepresentation
-        XCTAssertEqual(rep.objectForKey(nameKey) as String, graph.name)
-        XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).count, 1);
-        XCTAssertEqual((rep.objectForKey(nodesKey) as NSArray).objectAtIndex(0) as NSDictionary, newNode.plistRepresentation)
+        XCTAssertEqual(rep.objectForKey(Constants.nameKey) as String, graph.name)
+        XCTAssertEqual((rep.objectForKey(Constants.nodesKey) as NSArray).count, 1);
+        XCTAssertEqual((rep.objectForKey(Constants.nodesKey) as NSArray).objectAtIndex(0) as NSDictionary, newNode.plistRepresentation)
     }
     
     func testGetNextRoomViewForRoom() {

@@ -70,7 +70,7 @@ class MementoManager {
         selectedPalace = nil
         selectedRoom = nil
         model = MementoModel.sharedInstance
-        resourceManager = ResourceManager(directory: imgResourceDir)
+        resourceManager = ResourceManager(directory: Constants.imgResourceDir)
         graphFactory = MementoGraphFactory()
         nodeFactory = MementoNodeFactory()
     }
