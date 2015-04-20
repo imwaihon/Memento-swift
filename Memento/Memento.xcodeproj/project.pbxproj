@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4116CADD1ADAF50700D54AE2 /* DraggableEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CADC1ADAF50700D54AE2 /* DraggableEditButton.swift */; };
-		4116CADE1ADAF50700D54AE2 /* DraggableEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4116CADC1ADAF50700D54AE2 /* DraggableEditButton.swift */; };
 		4116CAF31ADBB93D00D54AE2 /* editModeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4116CAEF1ADBB93D00D54AE2 /* editModeButton.png */; };
 		4116CAF41ADBB93D00D54AE2 /* editModeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4116CAEF1ADBB93D00D54AE2 /* editModeButton.png */; };
 		4116CAF51ADBB93D00D54AE2 /* insertImageAnnotationButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4116CAF01ADBB93D00D54AE2 /* insertImageAnnotationButton.png */; };
@@ -27,6 +25,8 @@
 		414272CE1ADFF0CC00809570 /* Paint Palette-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 414272CB1ADFF0CC00809570 /* Paint Palette-100.png */; };
 		414272CF1ADFF0CC00809570 /* Paint Palette-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 414272CB1ADFF0CC00809570 /* Paint Palette-100.png */; };
 		41941ABE1ACFA71000035302 /* AnnotatableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */; };
+		41F4E4B81AE57F7F001CE1ED /* Download.png in Resources */ = {isa = PBXBuildFile; fileRef = 41F4E4B71AE57F7F001CE1ED /* Download.png */; };
+		41F4E4B91AE57F7F001CE1ED /* Download.png in Resources */ = {isa = PBXBuildFile; fileRef = 41F4E4B71AE57F7F001CE1ED /* Download.png */; };
 		4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F000D751AC1188F00720E7E /* NodeViewController.swift */; };
 		4F06E88E1AD2B2AD00436083 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88D1AD2B2AD00436083 /* GameEngine.swift */; };
 		4F06E8901AD2B3EA00436083 /* GameAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */; };
@@ -210,7 +210,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4116CADC1ADAF50700D54AE2 /* DraggableEditButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableEditButton.swift; sourceTree = "<group>"; };
 		4116CAEF1ADBB93D00D54AE2 /* editModeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editModeButton.png; sourceTree = "<group>"; };
 		4116CAF01ADBB93D00D54AE2 /* insertImageAnnotationButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insertImageAnnotationButton.png; sourceTree = "<group>"; };
 		4116CAF11ADBB93D00D54AE2 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
@@ -221,6 +220,7 @@
 		414272CA1ADFF0CC00809570 /* Eraser Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Eraser Filled-100.png"; sourceTree = "<group>"; };
 		414272CB1ADFF0CC00809570 /* Paint Palette-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Paint Palette-100.png"; sourceTree = "<group>"; };
 		41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotatableUIView.swift; sourceTree = "<group>"; };
+		41F4E4B71AE57F7F001CE1ED /* Download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Download.png; sourceTree = "<group>"; };
 		4F000D751AC1188F00720E7E /* NodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
 		4F06E88D1AD2B2AD00436083 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAnnotationView.swift; sourceTree = "<group>"; };
@@ -424,7 +424,6 @@
 				4F9D150B1ACAD3CF00BEE609 /* ChallengeMode */,
 				5A2761AD1AE4DE1500055BAE /* VisitPalaceMode */,
 				41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */,
-				4116CADC1ADAF50700D54AE2 /* DraggableEditButton.swift */,
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
 				4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */,
 				41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */,
@@ -449,6 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				414272CA1ADFF0CC00809570 /* Eraser Filled-100.png */,
+				41F4E4B71AE57F7F001CE1ED /* Download.png */,
 				414272CB1ADFF0CC00809570 /* Paint Palette-100.png */,
 				4FCE35E91ABA8CEF00417763 /* Info.plist */,
 				4116CAEF1ADBB93D00D54AE2 /* editModeButton.png */,
@@ -824,6 +824,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41F4E4B81AE57F7F001CE1ED /* Download.png in Resources */,
 				4FCE35F31ABA8CF000417763 /* Main.storyboard in Resources */,
 				414272CE1ADFF0CC00809570 /* Paint Palette-100.png in Resources */,
 				5A574BCF1AD76573007571C9 /* linuxpenguin.jpg in Resources */,
@@ -848,6 +849,7 @@
 				4116CAF41ADBB93D00D54AE2 /* editModeButton.png in Resources */,
 				4116CAFD1ADBBA4000D54AE2 /* leftArrow.png in Resources */,
 				4116CAF81ADBB93D00D54AE2 /* rightArrow.png in Resources */,
+				41F4E4B91AE57F7F001CE1ED /* Download.png in Resources */,
 				5A574BCE1AD76082007571C9 /* linuxpenguin.jpg in Resources */,
 				5AB3F7D71ADC070F00906B76 /* CLImageEditor.bundle in Resources */,
 				414272CF1ADFF0CC00809570 /* Paint Palette-100.png in Resources */,
@@ -919,7 +921,6 @@
 				5AB3F8141ADC070F00906B76 /* UIImage+Utility.m in Sources */,
 				5A4E789F1AC2A2F700013728 /* MementoModel.swift in Sources */,
 				4FC6DD3F1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift in Sources */,
-				4116CADD1ADAF50700D54AE2 /* DraggableEditButton.swift in Sources */,
 				4F000D761AC1188F00720E7E /* NodeViewController.swift in Sources */,
 				5A8FA76F1ADF9AB0001EB76D /* AnnotationCardViewController.swift in Sources */,
 				5AB3F7F21ADC070F00906B76 /* CLSpotEffect.m in Sources */,
@@ -987,7 +988,6 @@
 				5AD9C8411ACB9AEC007B7125 /* MemoryPalaceRoomView.swift in Sources */,
 				5AB3F7E11ADC070F00906B76 /* CLBlurTool.m in Sources */,
 				5AB3F8151ADC070F00906B76 /* UIImage+Utility.m in Sources */,
-				4116CADE1ADAF50700D54AE2 /* DraggableEditButton.swift in Sources */,
 				5A5FB0A41AC6601100EA0EE7 /* MementoNodeTests.swift in Sources */,
 				5AB3F7EB1ADC070F00906B76 /* CLHighlightShadowEffect.m in Sources */,
 				5AB3F7FB1ADC070F00906B76 /* CLFilterTool.m in Sources */,

@@ -11,11 +11,11 @@
 
 import UIKit
 import MobileCoreServices
+import QuartzCore
 
 class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate {
     
-    // ImageView = whole screen
-    
+    @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var menuBarView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var editModeButton: UIButton!
@@ -24,7 +24,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     var mementoManager = MementoManager.sharedInstance
     
-    private var isMainView: Bool = true
     private var newImage: DraggableImageView!
     private var lastRotation = CGFloat()
     private let panRec = UIPanGestureRecognizer()
@@ -55,6 +54,10 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         // Get image from graphical view
         imageView.image = Utilities.getImageNamed(roomRep.backgroundImage)
+        
+        // Button border settings
+        deleteModeButton.layer.borderWidth = 2.0
+        deleteModeButton.layer.borderColor = UIColor.clearColor().CGColor
         
         // Load
         overlayList = roomRep.overlays
@@ -125,7 +128,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if (editToggler == false) {
             return
         }
-        isMainView = false
         getImageFromPhotoLibrary(sender)
         
     }
@@ -148,27 +150,20 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Up)!
             }
 
-            if isMainView == true {
-                imageView.image = image
-            }
-            else {
-                // Adding draggable images
-                // Scaling factor for inserted images is default at height 150
-                var scalingFactor = image.size.height/150.0
-                var newWidth = image.size.width / scalingFactor
-                newImage = DraggableImageView(image: image)
-                newImage.graphName = self.graphName
-                newImage.roomLabel = self.roomLabel
-                newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
-                newImage.parentViewController = self
-                //newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: image.size.width/10.0, height: image.size.width/10.0)
-                imageView.addSubview(newImage)
-                
-                // Get paths for saving
-                var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: Utilities.convertToThumbnail(newImage.image!))!
-                newImage.labelIdentifier = newOverlay.label
-                
-            }
+            // Adding draggable images
+            // Scaling factor for inserted images is default at height 150
+            var scalingFactor = image.size.height/150.0
+            var newWidth = image.size.width / scalingFactor
+            newImage = DraggableImageView(image: image)
+            newImage.graphName = self.graphName
+            newImage.roomLabel = self.roomLabel
+            newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
+            newImage.parentViewController = self
+            imageView.addSubview(newImage)
+            
+            // Get paths for saving
+            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: (newImage.image!))!
+            newImage.labelIdentifier = newOverlay.label
             
             if (newMedia == true) {
                 // Option to save to camera roll/ Photo album
@@ -284,11 +279,13 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // Delete Mode Activated
     @IBAction func deleteButtonPressed(sender: UIButton) {
         if deleteToggler {
+            // Deactivate
             deleteToggler = false
-            deleteModeButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            deleteModeButton.layer.borderColor = UIColor.clearColor().CGColor
         } else {
+            // Activate
             deleteToggler = true
-            deleteModeButton.setTitleColor(UIColor.yellowColor(), forState: UIControlState.Normal)
+            deleteModeButton.layer.borderColor = UIColor.whiteColor().CGColor
         }
     }
     
@@ -314,10 +311,25 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         performSegueWithIdentifier("ReplaceNodeSegue", sender: self)
     }
     
+    // Edit imageview with CLImageEditor
     @IBAction func editImageView(sender: AnyObject) {
         var editor = CLImageEditor(image: self.imageView.image)
         editor.delegate = self
         self.presentViewController(editor, animated: true, completion: nil)
+    }
+    
+    // Save imageView to camera roll
+    @IBAction func captureView(sender: AnyObject) {
+        UIGraphicsBeginImageContextWithOptions(self.imageView.bounds.size, view.opaque, 0.0)
+        self.imageView.layer.renderInContext(UIGraphicsGetCurrentContext())
+        var imageToCapture = UIGraphicsGetImageFromCurrentImageContext()
+        UIImageWriteToSavedPhotosAlbum(imageToCapture, nil, nil, nil);
+        UIGraphicsEndImageContext()
+        
+        downloadButton.backgroundColor = UIColor.whiteColor()
+        UIView.animateWithDuration(NSTimeInterval(2.0), animations: {
+            self.downloadButton.backgroundColor = UIColor.clearColor()
+        })
     }
     
     // Reload viewcontroller with next node's data

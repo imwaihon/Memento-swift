@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -369,7 +369,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-gd-6UF" userLabel="Annotate">
-                                        <rect key="frame" x="326" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="642" y="8" width="50" height="50"/>
                                         <state key="normal" image="insertImageAnnotationButton.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -378,8 +378,8 @@
                                             <action selector="addOverlayImage:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="UfG-XP-koN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="kUB-G3-f9b" userLabel="Annotate">
-                                        <rect key="frame" x="170" y="9" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="kUB-G3-f9b" userLabel="Edit picture">
+                                        <rect key="frame" x="132" y="9" width="50" height="50"/>
                                         <state key="normal" image="Paint Palette-100.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -389,7 +389,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="baG-to-RYt" userLabel="Next">
-                                        <rect key="frame" x="953" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="962" y="8" width="50" height="50"/>
                                         <state key="normal" image="rightArrow.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -399,7 +399,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZS2-FO-GCJ" userLabel="Delete">
-                                        <rect key="frame" x="796" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="802" y="8" width="50" height="50"/>
                                         <state key="normal" image="Eraser Filled-100.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -408,7 +408,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="tv5-MU-xtt" userLabel="Change Background">
-                                        <rect key="frame" x="639" y="9" width="50" height="50"/>
+                                        <rect key="frame" x="250" y="9" width="50" height="50"/>
                                         <state key="normal" image="rotateImageButton.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -416,11 +416,20 @@
                                             <action selector="changeImageView:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="clA-SN-McG"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e4-do-GFi" userLabel="Capture Image">
+                                        <rect key="frame" x="368" y="9" width="53" height="50"/>
+                                        <state key="normal" image="Download.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="captureView:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="9H1-5Y-lnw"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-py-EFm" userLabel="Edit Button">
-                                <rect key="frame" x="482" y="709" width="50" height="50"/>
+                                <rect key="frame" x="482" y="703" width="60" height="60"/>
                                 <state key="normal" image="editModeButton.png"/>
                                 <connections>
                                     <action selector="toggleEditMode:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="1c6-Jq-vRa"/>
@@ -433,6 +442,7 @@
                     <size key="freeformSize" width="1024" height="768"/>
                     <connections>
                         <outlet property="deleteModeButton" destination="ZS2-FO-GCJ" id="STQ-8v-Or3"/>
+                        <outlet property="downloadButton" destination="4e4-do-GFi" id="4CF-dX-uQP"/>
                         <outlet property="editModeButton" destination="xmX-py-EFm" id="3nA-Wh-mmv"/>
                         <outlet property="imageView" destination="LzC-0M-630" id="vwI-s6-IjB"/>
                         <outlet property="menuBarView" destination="mjy-lt-dtU" id="n95-6G-b8e"/>
@@ -975,6 +985,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Download.png" width="208" height="208"/>
         <image name="Eraser Filled-100.png" width="100" height="100"/>
         <image name="Forward-100" width="100" height="100"/>
         <image name="Left4-100" width="100" height="100"/>
