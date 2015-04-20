@@ -41,7 +41,7 @@ class MementoGraph {
     }
     var plistRepresentation: NSDictionary {
         var rep = NSMutableDictionary()
-        rep[nameKey] = name
+        rep[Constants.nameKey] = name
         
         //Gets the nodes represetnations into an array
         let nodeArr = _nodes.inOrderTraversal()
@@ -50,7 +50,7 @@ class MementoGraph {
         for node in nodeArr {
             nodePlist.append(node.1.plistRepresentation)
         }
-        rep[nodesKey] = NSArray(array: nodePlist)
+        rep[Constants.nodesKey] = NSArray(array: nodePlist)
         return rep
     }
     

@@ -5,6 +5,32 @@
 //  The facade class that receives ALL requests from the controller.
 //  This class hides all the complexity of native backend operations.
 //
+//  Abstraction Functions:
+//  Add memory palace:                                  addMemoryPalace(named: String, imageFile: String) -> String
+//  Add memory palace with new resource:                addMemoryPalace(named: String, imageFile: String, image: UIImage) -> (String, String)
+//  Get palace overview:                                getPalaceOverview(palaceName: String) -> [Memory]
+//  Remove palace:                                      removeMemoryPalace(palaceName: String)
+//  Add room to memory palace:                          addMemoryPalaceRoom(palaceName: String, roomImage: String) -> Int?
+//  Add room to memory palace with new resource:        addMemoryPalaceRoom(palaceName: String, roomImage: String, image: UIImage) -> (Int, String)?
+//  Get view representation for room:                   getMemoryPalaceRoomView(palaceName: String, roomLabel: Int) -> MemoryPalaceRoomView?
+//  Set background image for room:                      setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImageFile: String)
+//  Set background image for room with new resource:    setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImage: UIImage) -> String?
+//  Remove memory palace room:                          removeMemoryPalaceRoom(palaceName: String, roomLabel: Int)
+//  Add overlay:                                        addOverlay(palaceName: String, roomLabel: Int, overlay: MutableOverlay) -> Int?
+//  Add overlay with new resource:                      addOverlay(palaceName: String, roomLabel: Int, frame: CGRect, image: UIImage) -> Overlay?
+//  Shift/Resize overlay:                               setOverlayFrame(palaceName: String, roomLabel: Int, overlayLabel: Int, newFrame: CGRect)
+//  Remove overlay:                                     removeOverlay(palaceName: String, roomLabel: Int, overlayLabel: Int)
+//  Add placeholder:                                    addPlaceHolder(palaceName: String, roomLabel: Int, placeHolder: PlaceHolder) -> Bool
+//  Shift/Resize placeholder:                           setPlaceHolderFrame(palaceName: String, roomLabel: Int, placeHolderLabel: Int, newFrame: CGRect)
+//  Set association value:                              setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String)
+//  Swap placeholder order:                             swapPlaceHolders(palaceName: String, roomLabel: Int, pHolder1Label: Int, pHolder2Label: Int) -> Bool
+//  Remove placeholder:                                 removePlaceHolder(palaceName: String, roomLabel: Int, placeHolderLabel: Int)
+//  Get view for next room:                             getNextNode(palaceName: String, roomLabel: Int) -> MemoryPalaceRoomView?
+//  List image resources:                               getImageResource() -> [String]
+//
+//  Non-functional Specifications:
+//  Save every change made to memory palace/room
+//
 //  Created by Qua Zi Xian on 24/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
@@ -44,7 +70,7 @@ class MementoManager {
         selectedPalace = nil
         selectedRoom = nil
         model = MementoModel.sharedInstance
-        resourceManager = ResourceManager(directory: imgResourceDir)
+        resourceManager = ResourceManager(directory: Constants.imgResourceDir)
         graphFactory = MementoGraphFactory()
         nodeFactory = MementoNodeFactory()
     }

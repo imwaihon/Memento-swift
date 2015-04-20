@@ -74,7 +74,7 @@ class MementoNode {
     
     var plistRepresentation: NSDictionary { //Currently assumes no deletion of overlays, placeholders and values
         var rep = NSMutableDictionary()
-        rep[bgImageKey] = NSString(string: backgroundImageFile)
+        rep[Constants.bgImageKey] = NSString(string: backgroundImageFile)
         
         //Gets array of overlays
         let overlayArr = overlays
@@ -83,7 +83,7 @@ class MementoNode {
         for overlay in overlayArr {
             overlayStrArr.append(overlay.stringEncoding)
         }
-        rep[overlayKey] = NSArray(array: overlayStrArr)
+        rep[Constants.overlayKey] = NSArray(array: overlayStrArr)
         
         //Gets arrays of placeholders and values
         let assoc = associations
@@ -97,8 +97,8 @@ class MementoNode {
             val.append(elem.value)
         }
         
-        rep[placeHolderKey] = NSArray(array: pHolderStrArr)
-        rep[valueKey] = NSArray(array: val)
+        rep[Constants.placeHolderKey] = NSArray(array: pHolderStrArr)
+        rep[Constants.valueKey] = NSArray(array: val)
         
         return rep
     }

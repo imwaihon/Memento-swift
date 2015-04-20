@@ -12,7 +12,7 @@
 import UIKit
 import MobileCoreServices
 
-class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate {
     
     // ImageView = whole screen
     
@@ -314,9 +314,10 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         performSegueWithIdentifier("ReplaceNodeSegue", sender: self)
     }
     
-    // TODO: Edit background image with CLImageEditor
     @IBAction func editImageView(sender: AnyObject) {
-        
+        var editor = CLImageEditor(image: self.imageView.image)
+        editor.delegate = self
+        self.presentViewController(editor, animated: true, completion: nil)
     }
     
     // Reload viewcontroller with next node's data
@@ -347,7 +348,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.view.addSubview(oldImage)
         
         UIView.animateWithDuration(NSTimeInterval(1.0), animations: {
-            oldImage.frame.origin = CGPoint(x: -1024.0, y: 768.0)
+            oldImage.frame.origin = CGPoint(x: -1024.0, y: 0)
             }, completion: { finished in
             oldImage.removeFromSuperview()
         })
@@ -367,5 +368,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
     
+    //CLEditor functions
+    func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
+            self.imageView.image = image
+            mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: self.roomLabel, newImage: Utilities.convertToScreenSize(image))
+            self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
 }

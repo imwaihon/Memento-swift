@@ -11,24 +11,32 @@
 import Foundation
 import UIKit
 
-//Graph Icon Display Constants(modify as needed by UI developer)
- let graphIconSize = CGSizeMake(100, 50)    //Tentative value
+struct Constants {
+    //Graph Icon Display Constants(modify as needed by UI developer)
+    //static let graphIconSize = CGSizeMake(100, 50)    //Tentative value
 
-//Graph Node Icon Display Constants(modify as needed by UI developer)
-let graphNodeIconSize = CGSizeMake(100, 50)
+    //Graph Node Icon Display Constants(modify as needed by UI developer)
+    //static let graphNodeIconSize = CGSizeMake(100, 50)
+    
+    //UIImage-related constants
+    static let fullScreenImageFrame = CGRectMake(0, 0, 1024, 768)
 
-//Overlay encoding
-let overlayValueSeparator = ";"
+    //Overlay encoding
+    static let overlayValueSeparator = ";"
 
-//Graph plist representation keys
-let nameKey = "name"
-let nodesKey = "nodes"
+    //Graph plist representation keys
+    static let nameKey = "name"
+    static let nodesKey = "nodes"
 
-//Node plist representation keys
-let bgImageKey = "backgroundImage"
-let overlayKey = "overlays"
-let placeHolderKey = "placeHolders"
-let valueKey = "values"
+    //Node plist representation keys
+    static let bgImageKey = "backgroundImage"
+    static let overlayKey = "overlays"
+    static let placeHolderKey = "placeHolders"
+    static let valueKey = "values"
+    
+    //App document directory path
+    static let docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
 
-//Resources-related constants
-let imgResourceDir = "sharedResource"
+    //Resources-related constants
+    static let imgResourceDir = "sharedResource"
+}

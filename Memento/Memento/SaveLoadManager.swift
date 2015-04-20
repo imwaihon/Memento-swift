@@ -99,22 +99,4 @@ class SaveLoadManager {
         
         return nil
     }
-    
-    //To be deleted once the game controller changes over to loading image using UIImage constructor
-    func loadOverlayImage(imageName: String) -> UIImage? {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as NSArray
-        let documentsDirectory = paths.objectAtIndex(0) as String
-        let path = documentsDirectory.stringByAppendingPathComponent(imgResourceDir)
-        let overlayPath = path.stringByAppendingPathComponent("\(imageName)")
-    
-        
-        let fileManager = NSFileManager.defaultManager()
-        
-        if (fileManager.fileExistsAtPath(overlayPath)) {
-            var image = UIImage(contentsOfFile: overlayPath)
-            return image
-        } else {
-            return nil
-        }
-    }
 }

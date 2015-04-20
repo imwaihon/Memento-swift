@@ -25,7 +25,7 @@ struct Overlay: Equatable {
     //This makes hashing using CGRect string or image file name not feasible.
     var stringEncoding: String {
         var str = NSStringFromCGRect(frame)
-        str = str.stringByAppendingString(overlayValueSeparator)
+        str = str.stringByAppendingString(Constants.overlayValueSeparator)
         str = str.stringByAppendingString(imageFile)
         return str
     }
