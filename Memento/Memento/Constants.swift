@@ -17,6 +17,9 @@ struct Constants {
 
     //Graph Node Icon Display Constants(modify as needed by UI developer)
     //static let graphNodeIconSize = CGSizeMake(100, 50)
+    
+    //UIImage-related constants
+    static let fullScreenImageFrame = CGRectMake(0, 0, 1024, 768)
 
     //Overlay encoding
     static let overlayValueSeparator = ";"
