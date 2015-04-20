@@ -49,7 +49,7 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = palaceTiles.dequeueReusableCellWithReuseIdentifier("SelectPalaceCollectionViewCell", forIndexPath: indexPath) as SelectPalaceCollectionViewCell
         cell.parent = self
-        //cell.addShadows()
+
         let currentIcon : MemoryPalaceIcon = palaces[indexPath.item]
         if(imagesCache[currentIcon.imageFile] == nil || imagesCache[currentIcon.imageFile] == UIImage()) {
             imagesCache[currentIcon.imageFile] = Utilities.getImageNamed(currentIcon.imageFile)
@@ -58,11 +58,6 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
         cell.nameLabel.text = currentIcon.graphName
         cell.nameLabel.hidden = false
         cell.opacityBackground.hidden = false
-        if(cell.nameLabel.text == selectedPalace){
-            cell.deleteButton.hidden = false
-        } else{
-            cell.deleteButton.hidden = true
-        }
     
         return cell
     }

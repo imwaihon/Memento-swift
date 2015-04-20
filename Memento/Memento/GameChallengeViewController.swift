@@ -158,10 +158,9 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
                     
                 },
                 completion: { finished in
-                    annotation.showCorrectAnimation()
+                    self.gameEngine.checkIfNext()
             })
             
-            gameEngine.checkIfNext()
             
             return true
         } else {
