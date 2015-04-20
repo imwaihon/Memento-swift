@@ -13,7 +13,11 @@ import QuartzCore
 
 class GameBeforeStartViewController: UIViewController, UIGestureRecognizerDelegate, UINavigationControllerDelegate {
     
-    weak var delegate: GamePauseDelegate?
+    var palaceName = String()
+    var gameMode = String()
+    var guideSwitch = true
+
+    @IBOutlet weak var guideAnnotationSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +45,28 @@ class GameBeforeStartViewController: UIViewController, UIGestureRecognizerDelega
         return UIStatusBarStyle.BlackOpaque
     }
     
+    @IBAction func guideSwitchChanged(sender: UISwitch) {
+        if sender.on {
+            guideSwitch = true
+        } else {
+            guideSwitch = false
+        }
+    }
 
     @IBAction func startGame(sender: AnyObject) {
-        self.delegate?.startGame()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.performSegueWithIdentifier("StartGameSegue", sender: self)
     }
     
     @IBAction func backToMenuButtonPress(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "StartGameSegue"){
+            let dvc = segue.destinationViewController as GameChallengeViewController
+            dvc.palaceName = self.palaceName
+            dvc.gameMode = self.gameMode
+            dvc.showAnnotation = self.guideSwitch
+        }
     }
 }

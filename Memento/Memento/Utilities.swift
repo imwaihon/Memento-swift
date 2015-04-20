@@ -55,7 +55,7 @@ class Utilities {
     
     class func shuffleArray<T>(var array: [T]) -> [T] {
         for index in reverse(0..<array.count) {
-            let randomIndex = Int(arc4random_uniform(UInt32(index)))
+            let randomIndex = Int(arc4random_uniform(UInt32(index)+1))
             (array[index], array[randomIndex]) = (array[randomIndex], array[index])
         }
         

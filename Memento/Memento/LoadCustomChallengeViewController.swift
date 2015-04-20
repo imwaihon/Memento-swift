@@ -65,7 +65,7 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cellClicked = collectionView.cellForItemAtIndexPath(indexPath) as SelectPalaceCollectionViewCell
         self.nextPalace = cellClicked.nameLabel.text!
-        self.performSegueWithIdentifier("StartGameSegue", sender: self)
+        self.performSegueWithIdentifier("ShowBeforeStartSegue", sender: self)
     }
     
     func dataModelHasBeenChanged() {
@@ -83,9 +83,9 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "StartGameSegue"){
+        if(segue.identifier == "ShowBeforeStartSegue"){
             self.selectedPalace = ""
-            let dvc = segue.destinationViewController as GameChallengeViewController
+            let dvc = segue.destinationViewController as GameBeforeStartViewController
             dvc.palaceName = self.nextPalace
             dvc.gameMode = self.gameMode
         }

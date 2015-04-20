@@ -11,4 +11,5 @@ import Foundation
 protocol GameEngineDelegate: class {
     func reloadView()
     func displayEndGame()
+    func updateNextFindQuestion(updateText: String)
 }

@@ -18,6 +18,7 @@ class GameEngine {
     var palaceRooms: [MemoryPalaceRoomView]
     weak var delegate: GameEngineDelegate?
     var timeElapsed: Int
+    var mistakeCount: Int
     var startedGame: Bool
     
     init() {
@@ -27,6 +28,7 @@ class GameEngine {
         self.currRoomIndex = 0
         self.currRoomAssociations = [Association]()
         self.timeElapsed = 0
+        self.mistakeCount = 0
         self.startedGame = false
 
     }
@@ -48,6 +50,7 @@ class GameEngine {
             currRoomAssociations.extend(palaceRooms.first!.associations)
         } else if mode == "Find" {
             currRoomAssociations.extend(Utilities.shuffleArray(palaceRooms.first!.associations))
+            ifFindModeDoNext()
         }
 
     }
@@ -59,6 +62,8 @@ class GameEngine {
         if currRoomIndex < palaceRooms.count {
             currRoomAssociations.extend(palaceRooms[currRoomIndex].associations)
             delegate?.reloadView()
+            ifFindModeDoNext()
+            
         } else {
             finishedGame()
         }
@@ -80,6 +85,7 @@ class GameEngine {
                 currRoomAssociations.removeAtIndex(0)
                 return true
             } else {
+                mistakeCount += 1
                 return false
             }
         
@@ -93,6 +99,7 @@ class GameEngine {
                         currRoomAssociations.removeAtIndex(i)
                         return true
                     } else {
+                        mistakeCount += 1
                         return false
                     }
                 }
@@ -105,6 +112,8 @@ class GameEngine {
     func checkIfNext() {
         if currRoomAssociations.isEmpty {
             setUpNext()
+        } else {
+            ifFindModeDoNext()
         }
     }
     
@@ -116,6 +125,15 @@ class GameEngine {
     
     func finishedGame() {
         delegate?.displayEndGame()
+    }
+    
+    private func ifFindModeDoNext() {
+        if mode == "Find" {
+            var validAssociationValue = currRoomAssociations.first?.value
+            if validAssociationValue != nil {
+                delegate?.updateNextFindQuestion(validAssociationValue!)
+            }
+        }
     }
     
     

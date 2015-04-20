@@ -42,6 +42,7 @@
 		4F0824ED1ADFC6C800B091DA /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */; };
 		4F0824EE1ADFC6CC00B091DA /* GameAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */; };
 		4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */; };
+		4F83A6B81AE504340025BC25 /* EndGameChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15161ACADBCD00BEE609 /* EndGameChallengeViewController.swift */; };
 		4F90A5081AD6A76E00027201 /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */; };
 		4F9D150F1ACADB6000BEE609 /* SelectChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */; };
 		4F9D15111ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15101ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift */; };
@@ -1017,6 +1018,7 @@
 				5A3F386F1ACA76050096AB6C /* Overlay.swift in Sources */,
 				5A12D6701AE3C30400BF1523 /* SaveLoadManagerTests.swift in Sources */,
 				5AB3F7D91ADC070F00906B76 /* CLImageEditor.m in Sources */,
+				4F83A6B81AE504340025BC25 /* EndGameChallengeViewController.swift in Sources */,
 				5A01A3461ACE438900351423 /* FenwickTree.swift in Sources */,
 				4127D7A21AD30112007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */,
 				5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */,

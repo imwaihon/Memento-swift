@@ -52,11 +52,9 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(false)
-        if !gameEngine.startedGame && firstLoad {
-            self.performSegueWithIdentifier("ShowBeforeStartSegue", sender: self)
+        if firstLoad {
+            startGame()
             firstLoad = false
-        } else if gameEngine.startedGame && !firstLoad {
-            checkFinished()
         }
     }
     
@@ -133,7 +131,6 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         // Check if there are any associations in this room
         gameEngine.checkIfNext()
         
-        checkFinished()
     }
     
     // A particular annotation is selected
@@ -143,13 +140,16 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         
         if valid {
             annotation.disableView()
-            self.annotationText.text = annotation.annotation
             let tickImageView = UIImageView(image: UIImage(named: "greenTick"))
             tickImageView.frame =  CGRect(origin: CGPoint(x: annotation.center.x, y: annotation.center.y), size: CGSize(width: 1, height: 1))
-            self.imageView.addSubview(tickImageView)
-            self.gameTickViews.append(tickImageView)
+            imageView.addSubview(tickImageView)
+            gameTickViews.append(tickImageView)
             
-            UIView.animateWithDuration(0.6,
+            if gameMode == "Order" {
+                annotationText.text = annotation.annotation
+            }
+            
+            UIView.animateWithDuration(0.3,
                 delay: 0.0,
                 options: UIViewAnimationOptions.CurveEaseInOut ,
                 animations: {
@@ -178,14 +178,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
     // Game Ends
     func displayEndGame() {
         timer.invalidate()
-        let endPrompt = UIAlertController(title: "FINISHED", message: "\(gameEngine.timeElapsed)", preferredStyle: UIAlertControllerStyle.Alert)
-        endPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            
-            self.dismissViewControllerAnimated(true, completion: nil)
-            
-        }))
-        
-        self.presentViewController(endPrompt, animated: true, completion: nil)
+        self.performSegueWithIdentifier("EndGameSegue", sender: self)
     }
     
     // Game Pauses
@@ -213,17 +206,23 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         gameEngine.checkIfFinished()
     }
     
+    // Update the next question annotation if it is in order mode
+    func updateNextFindQuestion(updateText: String) {
+        annotationText.text = updateText
+    }
+    
     @IBAction func menuView(sender: UIButton) {
         pauseGame()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "ShowBeforeStartSegue") {
-            let gameStartViewController = segue.destinationViewController as GameBeforeStartViewController
-            gameStartViewController.delegate = self
-        } else if (segue.identifier == "PauseMenuSegue") {
+        if (segue.identifier == "PauseMenuSegue") {
             let pauseMenuViewController = segue.destinationViewController as GameModePauseMenuViewController
             pauseMenuViewController.delegate = self
+        } else if (segue.identifier == "EndGameSegue") {
+            let endViewController = segue.destinationViewController as EndGameChallengeViewController
+            endViewController.timeValue = gameEngine.timeElapsed
+            endViewController.mistakeValue = gameEngine.mistakeCount
         }
     }
     
