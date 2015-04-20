@@ -359,7 +359,7 @@
                                 <rect key="frame" x="0.0" y="700" width="1024" height="68"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLq-za-ws0" userLabel="Left">
-                                        <rect key="frame" x="14" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="12" y="8" width="50" height="50"/>
                                         <state key="normal" image="leftArrow.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -369,7 +369,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-gd-6UF" userLabel="Annotate">
-                                        <rect key="frame" x="621" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="375" y="8" width="50" height="50"/>
                                         <state key="normal" image="insertImageAnnotationButton.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -379,7 +379,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="kUB-G3-f9b" userLabel="Edit picture">
-                                        <rect key="frame" x="132" y="9" width="50" height="50"/>
+                                        <rect key="frame" x="100" y="9" width="50" height="50"/>
                                         <state key="normal" image="Paint Palette-100.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -417,7 +417,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="tv5-MU-xtt" userLabel="Change Background">
-                                        <rect key="frame" x="250" y="9" width="50" height="50"/>
+                                        <rect key="frame" x="190" y="9" width="50" height="50"/>
                                         <state key="normal" image="rotateImageButton.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -426,12 +426,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e4-do-GFi" userLabel="Capture Image">
-                                        <rect key="frame" x="368" y="9" width="53" height="50"/>
+                                        <rect key="frame" x="278" y="9" width="53" height="50"/>
                                         <state key="normal" image="Download.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="captureView:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="9H1-5Y-lnw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="6KL-8h-n8W" userLabel="Annotate Words">
+                                        <rect key="frame" x="616" y="7" width="51" height="51"/>
+                                        <state key="normal" title="Show">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="swapAnnotationLabels:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="VnP-DT-e6s"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -456,6 +465,7 @@
                         <outlet property="editModeButton" destination="xmX-py-EFm" id="3nA-Wh-mmv"/>
                         <outlet property="imageView" destination="LzC-0M-630" id="vwI-s6-IjB"/>
                         <outlet property="menuBarView" destination="mjy-lt-dtU" id="n95-6G-b8e"/>
+                        <outlet property="swapButton" destination="6KL-8h-n8W" id="ZTs-88-z2s"/>
                         <segue destination="f5g-fC-prm" kind="presentation" identifier="CreateNewNodeSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Vgm-ts-AbI"/>
                         <segue destination="f5g-fC-prm" kind="presentation" identifier="ReplaceNodeSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="7t5-Nb-MAl"/>
                     </connections>
