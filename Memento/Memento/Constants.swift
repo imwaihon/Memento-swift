@@ -33,6 +33,9 @@ struct Constants {
     static let overlayKey = "overlays"
     static let placeHolderKey = "placeHolders"
     static let valueKey = "values"
+    
+    //App document directory path
+    static let docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
 
     //Resources-related constants
     static let imgResourceDir = "sharedResource"
