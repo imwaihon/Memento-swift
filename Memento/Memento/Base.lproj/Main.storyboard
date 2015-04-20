@@ -436,7 +436,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="6KL-8h-n8W" userLabel="Annotate Words">
                                         <rect key="frame" x="616" y="7" width="51" height="51"/>
-                                        <state key="normal" title="Show">
+                                        <state key="normal" title="Swap">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>

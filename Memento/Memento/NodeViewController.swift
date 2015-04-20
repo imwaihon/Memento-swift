@@ -30,7 +30,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private let panRec = UIPanGestureRecognizer()
     private var startPoint = CGPoint()
     private var allCGRects = [CGRect]()
-    private var allLabels = [UILabel]()
+    private var allButtons = [UIButton]()
     
     var roomLabel = Int()
     var graphName = String()
@@ -41,6 +41,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     var deleteToggler: Bool = false
     private var annotateWordToggler: Bool = false
     private var swappingToggler: Bool = false
+    private var previouslySelectedLabel :String = "_"
     
     
     override func viewDidLoad() {
@@ -134,8 +135,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
         }
         
-        let minHeight = 100.0 as CGFloat
-        let minWidth = 100.0 as CGFloat
+        let minHeight = 75.0 as CGFloat
+        let minWidth = 75.0 as CGFloat
         if (newRectDoesNotIntersect && newRect.height>minHeight && newRect.width>minWidth) {
             // Add the rectangle into main view
             allCGRects.append(newRect)
@@ -324,36 +325,49 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     private func removeAllLabels() {
-        for eachLabel in allLabels {
-            eachLabel.removeFromSuperview()
+        for eachButton in allButtons {
+            eachButton.removeFromSuperview()
         }
+        previouslySelectedLabel = "_"
     }
     
     private func showAllLabels() {
-        allLabels.removeAll(keepCapacity: false)
+        allButtons.removeAll(keepCapacity: false)
         // Update association list
         var roomRepresentation = mementoManager.getMemoryPalaceRoomView(graphName, roomLabel: roomLabel)!
         associationList = roomRepresentation.associations
         
         // Load association list
         for eachAssociation in associationList {
-            var placeHolderFrame = eachAssociation.placeHolder.view.frame
-            var placeHolderLabel = eachAssociation.placeHolder.label
-            self.showLabel(placeHolderFrame, labelNumber: placeHolderLabel)
+            // Make button
+            let newButton = UIButton()
+            newButton.frame = eachAssociation.placeHolder.view.frame
+            newButton.setTitle(String(eachAssociation.placeHolder.label), forState: UIControlState.Normal)
+            newButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            newButton.titleLabel?.font = UIFont(name: "Helvetica", size: 50)
+            newButton.titleLabel?.textAlignment = NSTextAlignment.Center
+            newButton.addTarget(self, action: "labelButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+            self.view.addSubview(newButton)
+            allButtons.append(newButton)
         }
     }
     
-    private func showLabel(annotatedFrame: CGRect, labelNumber: Int) {
-        var label = UILabel(frame: annotatedFrame)
-        label.text = String(labelNumber)
-        label.font = UIFont(name: "Helvetica", size: 50)
-        label.textColor = UIColor.whiteColor()
-        label.textAlignment = NSTextAlignment.Center
-        label.userInteractionEnabled = true
-        self.view.addSubview(label)
-        allLabels.append(label)
+    func labelButtonTapped(sender: UIButton!) {
+        if let labelSelected = sender.titleLabel?.text {
+            // Set current selection
+            if (previouslySelectedLabel == "_") {
+                previouslySelectedLabel = labelSelected
+                sender.backgroundColor = UIColor.grayColor()
+            } else {
+                // Swap the labels
+                mementoManager.swapPlaceHolders(self.graphName, roomLabel: self.roomLabel, pHolder1Label: previouslySelectedLabel.toInt()!, pHolder2Label: labelSelected.toInt()!)
+
+                // Refresh labels
+                removeAllLabels()
+                showAllLabels()
+            }
+        }
     }
-    
     
     
     // Helper functions for main photo pickers
