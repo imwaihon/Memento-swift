@@ -16,7 +16,6 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
     @IBOutlet weak var annotationText: UILabel!
     
     var mementoManager = MementoManager.sharedInstance
-    var saveLoadManager = SaveLoadManager.sharedInstance
     var gameEngine: GameEngine
     var gameAnnotationViews: [GameAnnotationView]
     var gameLayerViews: [DraggableImageView]
@@ -97,7 +96,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         for eachOverlay in layerList {
             var newFrame = eachOverlay.frame
             var newImageFile = eachOverlay.imageFile
-            var newImage = saveLoadManager.loadOverlayImage(newImageFile)
+            var newImage = Utilities.getImageNamed(newImageFile)
             
             var newDraggableImageView = DraggableImageView(image: newImage!)
             newDraggableImageView.userInteractionEnabled = false
