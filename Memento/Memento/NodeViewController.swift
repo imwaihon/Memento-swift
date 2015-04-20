@@ -23,7 +23,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var newMedia: Bool?
     
     var mementoManager = MementoManager.sharedInstance
-    var saveLoadManager = SaveLoadManager.sharedInstance
     
     private var isMainView: Bool = true
     private var newImage: DraggableImageView!
@@ -71,7 +70,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         for eachOverlay in overlayList {
             var newFrame = eachOverlay.frame
             var newImageFile = eachOverlay.imageFile
-            var newImage = saveLoadManager.loadOverlayImage(newImageFile)
+            var newImage = Utilities.getImageNamed(newImageFile)
             NSLog(newImageFile)
             var newDraggableImageView = DraggableImageView(image: newImage!)
             newDraggableImageView.graphName = self.graphName
