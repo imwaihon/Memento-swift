@@ -37,6 +37,7 @@ class SelectPalaceCollectionViewCell: UICollectionViewCell {
     
     @IBAction func deleteButtonPressed(sender: AnyObject) {
         var palaceName = nameLabel.text!
-        parent.deletePalace(palaceName)
+        MementoManager.sharedInstance.removeMemoryPalace(palaceName)
+        parent.dataModelHasBeenChanged()
     }
 }

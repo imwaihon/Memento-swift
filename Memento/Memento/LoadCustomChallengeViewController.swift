@@ -73,11 +73,6 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
         self.palaceTiles.reloadData()
     }
     
-    func deletePalace(named : String){
-        mementoManager.removeMemoryPalace(named)
-        self.dataModelHasBeenChanged()
-    }
-    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.BlackOpaque
     }

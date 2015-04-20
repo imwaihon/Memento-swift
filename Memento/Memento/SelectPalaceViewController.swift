@@ -114,11 +114,6 @@ class SelectPalaceViewController: UIViewController, UICollectionViewDelegateFlow
         self.palaceTiles.reloadData()
     }
     
-    func deletePalace(named : String){
-        model.removeMemoryPalace(named)
-        self.dataModelHasBeenChanged()
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "CreateNewPalaceSegue"){
             self.selectedPalace = ""

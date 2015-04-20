@@ -384,6 +384,9 @@
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="editImageView:" destination="QAb-Y3-WmI" eventType="touchUpInside" id="BIF-IY-8C3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="baG-to-RYt" userLabel="Next">
                                         <rect key="frame" x="953" y="8" width="50" height="50"/>

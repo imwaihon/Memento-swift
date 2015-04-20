@@ -436,7 +436,6 @@
 				4FCE35F41ABA8CF000417763 /* Images.xcassets */,
 				4FCE35F61ABA8CF000417763 /* LaunchScreen.xib */,
 				4FCE35EC1ABA8CEF00417763 /* Memento.xcdatamodeld */,
-				5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */,
 				4FCE35E81ABA8CEF00417763 /* Supporting Files */,
 				5A7E7CFB1ADA358200BD3310 /* Utilities.swift */,
 				5AB3F8261ADC081100906B76 /* Memento-Bridging-Header.h */,
@@ -500,6 +499,7 @@
 		5A2761AD1AE4DE1500055BAE /* VisitPalaceMode */ = {
 			isa = PBXGroup;
 			children = (
+				5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */,
 				4FC6DD3C1AC026AC0070F271 /* SelectPalaceViewController.swift */,
 				4FC6DD3E1AC027A30070F271 /* SelectPalaceCollectionViewCell.swift */,
 				5A497A321AC7F4F800D6C9C5 /* BlurCreatePalaceViewController.swift */,
