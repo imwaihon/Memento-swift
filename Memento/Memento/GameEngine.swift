@@ -59,6 +59,8 @@ class GameEngine {
         if currRoomIndex < palaceRooms.count {
             currRoomAssociations.extend(palaceRooms[currRoomIndex].associations)
             delegate?.reloadView()
+        } else {
+            finishedGame()
         }
         
     }

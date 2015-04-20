@@ -41,11 +41,6 @@ class GameAnnotationView: UIView {
         
     }
     
-    func showCorrectAnimation() {
-
-        self.backgroundColor = .greenColor()
-    }
-    
     func disableView() {
         self.userInteractionEnabled = false
     }

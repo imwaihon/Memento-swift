@@ -599,6 +599,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6L-0B-wov">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                                                </imageView>
                                                 <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIk-iM-odL">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -609,28 +612,13 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEw-Pw-7hi">
-                                                    <rect key="frame" x="10" y="179" width="300" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="Delete" backgroundImage="deleteButton">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="deleteButtonPressed:" destination="2s0-Ia-LKd" eventType="touchUpInside" id="25b-dT-sDR"/>
-                                                    </connections>
-                                                </button>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6L-0B-wov">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <outlet property="deleteButton" destination="jEw-Pw-7hi" id="uQn-0O-krq"/>
-                                            <outlet property="imageView" destination="b6L-0B-wov" id="bKw-vx-M5v"/>
-                                            <outlet property="nameLabel" destination="KYc-ck-IVB" id="TK2-Og-dGe"/>
-                                            <outlet property="opacityBackground" destination="WIk-iM-odL" id="Dqd-ME-Z2A"/>
+                                            <outlet property="imageView" destination="b6L-0B-wov" id="eij-Sw-6Mj"/>
+                                            <outlet property="nameLabel" destination="KYc-ck-IVB" id="Ldq-1A-dNw"/>
+                                            <outlet property="opacityBackground" destination="WIk-iM-odL" id="SYP-8b-BPC"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Oli-SO-dTt">
