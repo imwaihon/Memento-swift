@@ -522,7 +522,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     //CLEditor functions
     func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
             self.imageView.image = image
-            mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: self.roomLabel, newImage: Utilities.convertToScreenSize(image))
+            mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: self.roomLabel, newImage: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.PNG)
             self.dismissViewControllerAnimated(true, completion: nil)
     }
 
