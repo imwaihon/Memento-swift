@@ -184,7 +184,7 @@ class MementoManagerTests: XCTestCase {
         }
         
         //Attempts to set background image on non-existent room
-        XCTAssertTrue(manager.setBackgroundImageForRoom(palaceName, roomLabel: 1, newImage: image) == nil)
+        XCTAssertTrue(manager.setBackgroundImageForRoom(palaceName, roomLabel: 1, newImage: image, imageType: Constants.ImageType.JPG) == nil)
         
         //Clean up directory
         manager.removeMemoryPalace(palaceName)

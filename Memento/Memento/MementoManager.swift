@@ -159,22 +159,6 @@ class MementoManager {
         return nil
     }
     
-    //Deprecated
-    //Adds a new memory palace room with the given image.
-    //Recommended to use this for images that does not currently exist in shared resources folder.
-    //Returns the room label and the file name assigned to the image upon success.
-    //Returns nil if the memory palace does not exist.
-    func addMemoryPalaceRoom(palaceName: String, roomImage: String, image: UIImage) -> (Int, String)? {
-        if model.containsPalace(palaceName) {
-            //Add the image resource and get assigned file name
-            let imgFile = resourceManager.retainResource(roomImage, image: image)
-            let newRoom = nodeFactory.makeNode(imgFile)
-            model.addPalaceRoom(palaceName, room: newRoom)
-            return (newRoom.label, imgFile)
-        }
-        return nil
-    }
-    
     /* Adds room to memory palace with new resource as background.
      * @param palaceName The name of the memory palace to add room to.
      * @param roomImage The base name for the image resource to be saved as.
@@ -223,22 +207,6 @@ class MementoManager {
             room.backgroundImageFile = newImageFile
             model.savePalace(palaceName)
         }
-    }
-    
-    //Deprecated
-    //Sets the background image of the specified memory palace room with the given image as a new resource.
-    //Recommended to use this if the image does not yet exist in the shared resource folder.
-    //Returns the name assigned to the given image on success.
-    //Retuens nil if the memory palace room cannot be found.
-    func setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImage: UIImage) -> String? {
-        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            let imageName = resourceManager.retainResource(generateImageName(), image: newImage)
-            resourceManager.releaseResource(room.backgroundImageFile)
-            room.backgroundImageFile = imageName
-            model.savePalace(palaceName)
-            return imageName
-        }
-        return nil
     }
     
     /* Sets the background image for the target memory palace room.
@@ -297,27 +265,6 @@ class MementoManager {
             let overlayLabel = room.addOverlay(overlay)
             model.savePalace(palaceName)
             return overlayLabel
-        }
-        return nil
-    }
-    
-    //Deprecated
-    //Adds a new overlay object using a new image resource to be save to sharedResource folder.
-    //Returns the added overlay object on success and nil if the palace or room is not found.
-    //This is the recommended method to use if the image does not currently exist in the shared resource folder.
-    func addOverlay(palaceName: String, roomLabel: Int, frame: CGRect, image: UIImage) -> Overlay? {
-        
-        //If room exists
-        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            
-            //Add the given image as a resource
-            let imgName = resourceManager.retainResource(generateImageName(), image: image)
-            
-            //Make and add the overlay
-            var overlay = MutableOverlay(frame: frame, imageFile: imgName)
-            overlay.label = room.addOverlay(overlay)
-            model.savePalace(palaceName)
-            return overlay.makeImmuatble()
         }
         return nil
     }
