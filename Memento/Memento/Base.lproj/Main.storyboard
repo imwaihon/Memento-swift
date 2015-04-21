@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -369,7 +369,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-gd-6UF" userLabel="Annotate">
-                                        <rect key="frame" x="375" y="8" width="50" height="50"/>
+                                        <rect key="frame" x="355" y="8" width="50" height="50"/>
                                         <state key="normal" image="insertImageAnnotationButton.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -379,7 +379,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="kUB-G3-f9b" userLabel="Edit picture">
-                                        <rect key="frame" x="100" y="9" width="50" height="50"/>
+                                        <rect key="frame" x="130" y="9" width="50" height="50"/>
                                         <state key="normal" image="Paint Palette-100.png">
                                             <color key="titleColor" red="1" green="0.79526424360000003" blue="0.18139015059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -399,8 +399,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZS2-FO-GCJ" userLabel="Annotate Words">
-                                        <rect key="frame" x="738" y="8" width="51" height="51"/>
-                                        <state key="normal" image="AnnotateWords.png">
+                                        <rect key="frame" x="727" y="9" width="50" height="50"/>
+                                        <state key="normal" image="annotationModeImage">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -408,7 +408,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="doj-ih-ps5" userLabel="Delete">
-                                        <rect key="frame" x="855" y="9" width="50" height="50"/>
+                                        <rect key="frame" x="802" y="9" width="50" height="50"/>
                                         <state key="normal" image="Eraser Filled-100.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -417,7 +417,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="tv5-MU-xtt" userLabel="Change Background">
-                                        <rect key="frame" x="190" y="9" width="50" height="50"/>
+                                        <rect key="frame" x="205" y="9" width="50" height="50"/>
                                         <state key="normal" image="rotateImageButton.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -426,8 +426,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e4-do-GFi" userLabel="Capture Image">
-                                        <rect key="frame" x="278" y="9" width="53" height="50"/>
-                                        <state key="normal" image="Download.png">
+                                        <rect key="frame" x="280" y="9" width="50" height="50"/>
+                                        <state key="normal" image="captureImage">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -435,8 +435,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="6KL-8h-n8W" userLabel="Annotate Words">
-                                        <rect key="frame" x="616" y="7" width="51" height="51"/>
-                                        <state key="normal" title="Swap">
+                                        <rect key="frame" x="652" y="9" width="50" height="50"/>
+                                        <state key="normal" image="orderingModeImage">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1005,16 +1005,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AnnotateWords.png" width="132" height="132"/>
-        <image name="Download.png" width="208" height="208"/>
         <image name="Eraser Filled-100.png" width="100" height="100"/>
         <image name="Forward-100" width="100" height="100"/>
         <image name="Left4-100" width="100" height="100"/>
         <image name="Paint Palette-100.png" width="100" height="100"/>
+        <image name="annotationModeImage" width="100" height="100"/>
         <image name="background" width="2048" height="1536"/>
         <image name="backgroundGrey" width="1024" height="768"/>
         <image name="buttonBorder" width="862" height="146"/>
         <image name="cameraIcon" width="64" height="64"/>
+        <image name="captureImage" width="100" height="100"/>
         <image name="deleteButton" width="300" height="50"/>
         <image name="dropboxIcon" width="64" height="64"/>
         <image name="editModeButton.png" width="150" height="150"/>
@@ -1023,6 +1023,7 @@
         <image name="leftArrow.png" width="50" height="50"/>
         <image name="logoSet" width="660" height="659"/>
         <image name="menuButton" width="78" height="70"/>
+        <image name="orderingModeImage" width="100" height="100"/>
         <image name="photosIcon" width="64" height="64"/>
         <image name="rightArrow.png" width="50" height="50"/>
         <image name="rotateImageButton.png" width="100" height="100"/>

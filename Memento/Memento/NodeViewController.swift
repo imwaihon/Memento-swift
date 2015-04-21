@@ -64,6 +64,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         annotateWordButton.layer.borderColor = UIColor.clearColor().CGColor
         swapButton.layer.borderWidth = 2.0
         swapButton.layer.borderColor = UIColor.clearColor().CGColor
+        downloadButton.setImage(UIImage(named: "capturingImage"), forState: UIControlState.Selected)
+        downloadButton.setImage(UIImage(named: "capturingImage"), forState: UIControlState.Highlighted)
         
         // Load
         overlayList = roomRep.overlays
@@ -180,11 +182,17 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if deleteToggler {
             // Deactivate
             deleteToggler = false
-            deleteModeButton.layer.borderColor = UIColor.clearColor().CGColor
+            deleteModeButton.setImage(UIImage(named: "Eraser Filled-100.png"), forState: UIControlState.Normal)
         } else {
             // Activate
+            if(annotateWordToggler == true){
+                self.wordAnnotationButtonPressed(annotateWordButton)
+            }
+            if(swappingToggler == true){
+                self.swapAnnotationLabels(swapButton)
+            }
             deleteToggler = true
-            deleteModeButton.layer.borderColor = UIColor.whiteColor().CGColor
+            deleteModeButton.setImage(UIImage(named: "eraserSelected.png"), forState: UIControlState.Normal)
         }
     }
 
@@ -234,10 +242,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBAction func captureView(sender: AnyObject) {
         UIImageWriteToSavedPhotosAlbum(getImageView(), nil, nil, nil);
         
-        downloadButton.backgroundColor = UIColor.whiteColor()
-        UIView.animateWithDuration(NSTimeInterval(2.0), animations: {
-            self.downloadButton.backgroundColor = UIColor.clearColor()
-        })
     }
     
     // Returns imageView's image + all annotations
@@ -255,13 +259,19 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if annotateWordToggler {
             // Deactivate
             annotateWordToggler = false
-            annotateWordButton.layer.borderColor = UIColor.clearColor().CGColor
+            annotateWordButton.setImage(UIImage(named: "annotationModeImage.png"), forState: UIControlState.Normal)
             self.view.removeGestureRecognizer(panRec)
             self.imageView.alpha = 1.0
         } else {
+            if(deleteToggler == true){
+                self.deleteButtonPressed(deleteModeButton)
+            }
+            if(swappingToggler == true){
+                self.swapAnnotationLabels(swapButton)
+            }
             // Activate
             annotateWordToggler = true
-            annotateWordButton.layer.borderColor = UIColor.whiteColor().CGColor
+            annotateWordButton.setImage(UIImage(named: "annotationModeActiveImage.png"), forState: UIControlState.Normal)
             self.view.removeGestureRecognizer(panRec)
             self.view.addGestureRecognizer(panRec)
             self.imageView.alpha = 0.75
@@ -316,11 +326,17 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if swappingToggler {
             removeAllLabels()
             swappingToggler = false
-            swapButton.layer.borderColor = UIColor.clearColor().CGColor
+            swapButton.setImage(UIImage(named: "orderingModeImage.png"), forState: UIControlState.Normal)
         } else {
+            if(deleteToggler==true){
+                self.deleteButtonPressed(deleteModeButton)
+            }
+            if(annotateWordToggler == true){
+                self.wordAnnotationButtonPressed(annotateWordButton)
+            }
             showAllLabels()
             swappingToggler = true
-            swapButton.layer.borderColor = UIColor.whiteColor().CGColor
+            swapButton.setImage(UIImage(named: "orderingModeActiveImage.png"), forState: UIControlState.Normal)
         }
     }
     
