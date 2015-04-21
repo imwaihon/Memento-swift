@@ -131,17 +131,19 @@ class ResourceManager {
         filename = filename.stringByAppendingPathExtension(textExtension)!
         
         //Write to the file.
-        _referenceCountTable[filename] = 1
         text.writeToFile(_dirPath.stringByAppendingPathComponent(filename), atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         
         //Save the updated reference table
+        _referenceCountTable[filename] = 1
         NSDictionary(dictionary: _referenceCountTable).writeToFile(_resourceListPath, atomically: true)
         return filename
     }
     
-    //Saves the given image using the given name and sets reference count to 1.
-    //Returns: The actual name of the image file used.
-    //Requires: Resource name should have extensions .jpg or .png
+    /* Saves the given image using the given name and sets reference count to 1.
+    // @param resourceName The base name of the file to save as, without the file extension.
+     * @return The actual name of the image file used.
+     * Requires: Resource name should have extensions .jpg or .png
+     */
     func retainResource(resourceName: String, image: UIImage) -> String {
         let ext = resourceName.pathExtension
         var filename = resourceName
@@ -167,6 +169,43 @@ class ResourceManager {
         }
         
         //Save the update reference table
+        NSDictionary(dictionary: _referenceCountTable).writeToFile(_resourceListPath, atomically: true)
+        return filename
+    }
+    
+    /* Adds the given image resource as the given image type
+     * @param resourceName The base name of the file to save as, without the file extension.
+     * @param image The image to be saved.
+     * @param imageType The type of image to be saved as.
+     * @return The actual name of the image file used, with the file extension appended.
+     */
+    func retainResource(resourceName: String, image: UIImage, imageType: ImageType) -> String {
+        var filename = resourceName
+        let ext = imageType == ImageType.JPG ? jpegExtension: imageType == ImageType.PNG ? pngExtention: String()
+        
+        //Construct new file name if file with same name exists.
+        if _referenceCountTable[filename.stringByAppendingPathExtension(ext)!] != nil {
+            for var i = 1; ; i++ {
+                if _referenceCountTable[(filename+"(\(i))").stringByAppendingPathExtension(ext)!] == nil {
+                    filename+="(\(i))"
+                    break
+                }
+            }
+        }
+        filename = filename.stringByAppendingPathExtension(ext)!
+        
+        //Save image to file
+        //imageType is guaranteed to be either JPG or PNG
+        switch(imageType) {
+            case .JPG: UIImageJPEGRepresentation(image, 0.9).writeToFile(_dirPath.stringByAppendingPathComponent(filename), atomically: true)
+                        break
+            case .PNG: UIImagePNGRepresentation(image).writeToFile(_dirPath.stringByAppendingPathComponent(filename), atomically: true)
+                        break
+            default: break
+        }
+        
+        //Update and save reference count table
+        _referenceCountTable[filename] = 1
         NSDictionary(dictionary: _referenceCountTable).writeToFile(_resourceListPath, atomically: true)
         return filename
     }

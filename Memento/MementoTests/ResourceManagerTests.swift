@@ -17,22 +17,29 @@ class ResourceManagerTests: XCTestCase {
     
     func testAddAndRetainResource() {
         let manager = ResourceManager(directory: "sharedResource")
-        let imageFile = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)
+        let imageFile = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)!
         let text = "Hello world"
         
-        //Adds image resource
-        XCTAssertEqual(manager.retainResource("linuxpenguin.jpg", image: imageFile!), "linuxpenguin.jpg")
+        //Adds image resource as JPEG
+        //XCTAssertEqual(manager.retainResource("linuxpenguin.jpg", image: imageFile!), "linuxpenguin.jpg")
+        XCTAssertEqual(manager.retainResource("linuxpenguin", image: imageFile, imageType: ResourceManager.ImageType.JPG), "linuxpenguin.jpg")
         XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 1)
         
+        //Tests using existing resource
         manager.retainResource("linuxpenguin.jpg")
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 2)
         
         //Tests adding image resource with duplicate name
-        XCTAssertEqual(manager.retainResource("linuxpenguin.jpg", image: imageFile!), "linuxpenguin(1).jpg")
+        XCTAssertEqual(manager.retainResource("linuxpenguin", image: imageFile, imageType: ResourceManager.ImageType.JPG), "linuxpenguin(1).jpg")
         XCTAssertTrue(fileExists("sharedResource/linuxpenguin(1).jpg"))
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.jpg"), 2)
         XCTAssertEqual(manager.referenceCountForResource("linuxpenguin(1).jpg"), 1)
+        
+        //Tests adding image resource as PNG
+        XCTAssertEqual(manager.retainResource("linuxpenguin", image: imageFile, imageType: ResourceManager.ImageType.PNG), "linuxpenguin.png")
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.png"))
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.png"), 1)
         
         //Tests retaining on non-existent resource.
         XCTAssertEqual(manager.referenceCountForResource("B.png"), 0)
@@ -73,6 +80,11 @@ class ResourceManagerTests: XCTestCase {
         //Release text resources
         manager.releaseResource("sampleText.txt")
         XCTAssertEqual(manager.referenceCountForResource("sampleText.txt"), 0)
+        
+        //Cleanup other resources
+        manager.releaseResource("linuxpenguin.png")
+        XCTAssertFalse(fileExists("sharedResource/linuxpenguin.png"))
+        XCTAssertEqual(manager.referenceCountForResource("linuxpenguin.png"), 0)
     }
     
     private func fileExists(filename: String) -> Bool {
