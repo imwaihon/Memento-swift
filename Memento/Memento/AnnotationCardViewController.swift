@@ -15,24 +15,26 @@ class AnnotationCardViewController : UIViewController{
     var parent : AnnotatableUIView!
     var edittingEnabled: Bool!
     
-    @IBOutlet weak var editButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        editButton.hidden = !edittingEnabled
         textView.text = previousText
         textView.layer.borderColor = UIColor.lightGrayColor().CGColor
         textView.layer.borderWidth = 1.5
         textView.layer.cornerRadius = 5
+        if edittingEnabled == true{
+            textView.userInteractionEnabled = true
+        } else{
+            textView.userInteractionEnabled = false
+        }
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
     override func viewDidDisappear(animated: Bool) {
+        if edittingEnabled == true{
+            parent.annotation = textView.text
+            parent.persistAnnotation()
+        }
         super.viewDidDisappear(animated)
-    }
-    @IBAction func saveButtonPressed(sender: AnyObject) {
-        parent.annotation = textView.text
-        parent.persistAnnotation()
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
