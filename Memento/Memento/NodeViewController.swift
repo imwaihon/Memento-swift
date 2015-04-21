@@ -470,7 +470,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             imageView.addSubview(newImage)
             
             // Get paths for saving
-            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: (newImage.image!))!
+            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: (newImage.image!), imageType: Constants.ImageType.PNG)!
             newImage.labelIdentifier = newOverlay.label
             
             if (newMedia == true) {
