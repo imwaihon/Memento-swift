@@ -102,6 +102,20 @@ class MementoManager {
         return (newGraph.name, imgFile)
     }
     
+    /* Adds memory palace using new image resource as background for 1st room.
+     * @param named Teh memory palace name.
+     * @param imageFile The base name of the image file to be saved as.
+     * @param image The image resource to be saved.
+     * @param imageType The type of image to be saved as.
+     * @return A tuple (finalised palace name, finalised resource name)
+     */
+    func addMemoryPalace(named name: String, imageFile: String, image: UIImage, imageType: Constants.ImageType) -> (String, String) {
+        let imgFile = resourceManager.retainResource(imageFile, image: image, imageType: imageType == Constants.ImageType.JPG ? ResourceManager.ImageType.JPG: ResourceManager.ImageType.PNG)
+        let newGraph = graphFactory.makeGraph(named: name, imageFile: imgFile)
+        model.addPalace(newGraph)
+        return (newGraph.name, imgFile)
+    }
+    
     //Gets the specified memory palace
     //Returns nil if the specified memory palce does not exist.
     func getMemoryPalace(palaceName: String) -> MementoGraph? {

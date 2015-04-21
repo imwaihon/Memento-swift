@@ -12,11 +12,11 @@ import Foundation
 import UIKit
 
 struct Constants {
-    //Graph Icon Display Constants(modify as needed by UI developer)
-    //static let graphIconSize = CGSizeMake(100, 50)    //Tentative value
-
-    //Graph Node Icon Display Constants(modify as needed by UI developer)
-    //static let graphNodeIconSize = CGSizeMake(100, 50)
+    //Defines the types of images used in this app
+    enum ImageType {
+        case JPG
+        case PNG
+    }
     
     //UIImage-related constants
     static let fullScreenImageFrame = CGRectMake(0, 0, 1024, 768)

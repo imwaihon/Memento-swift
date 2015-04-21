@@ -22,7 +22,8 @@ class MementoManagerTests: XCTestCase {
         let image = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)!
         var initialNumPalace = manager.numberOfMemoryPalace
         
-        let res = manager.addMemoryPalace(named: "graph1", imageFile: "linuxpenguin.jpg", image: image)
+        //Tests adding palace with resource as JPG
+        let res = manager.addMemoryPalace(named: "graph1", imageFile: "linuxpenguin", image: image, imageType: Constants.ImageType.JPG)
         XCTAssertEqual(res.0, "graph1")
         XCTAssertEqual(res.1, "linuxpenguin.jpg")
         XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+1)
@@ -31,15 +32,19 @@ class MementoManagerTests: XCTestCase {
         XCTAssertEqual(manager.getMemoryPalace("graph1")!.icon, MemoryPalaceIcon(graphName: "graph1", imageFile: "linuxpenguin.jpg"))
         
         //Add memory palace with duplicate name
-        XCTAssertEqual(manager.addMemoryPalace(named: "graph1", imageFile: "B.png"), "graph1(1)")
+        XCTAssertEqual(manager.addMemoryPalace(named: "graph1", imageFile: "linuxpenguin.jpg"), "graph1(1)")
         XCTAssertFalse(manager.getMemoryPalace("graph1(1)") == nil)
+        XCTAssertEqual(manager.getMemoryPalace("graph1(1)")!.icon, MemoryPalaceIcon(graphName: "graph1(1)", imageFile: "linuxpenguin.jpg"))
         XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+2)
         
-        //Adds another palace using the same image as graph1 to test reference counting in deletion
-        XCTAssertEqual(manager.addMemoryPalace(named: "graph2", imageFile: "linuxpenguin.jpg"), "graph2")
+        //Adds another palace using the same image as graph1 but as PNG
+        let res2 = manager.addMemoryPalace(named: "graph2", imageFile: "linuxpenguin", image: image, imageType: Constants.ImageType.PNG)
+        XCTAssertEqual(res2.0, "graph2")
+        XCTAssertEqual(res2.1, "linuxpenguin.png")
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.png"))
         XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+3)
         XCTAssertFalse(manager.getMemoryPalace("graph2") == nil)
-        XCTAssertEqual(manager.getMemoryPalace("graph2")!.icon, MemoryPalaceIcon(graphName: "graph2", imageFile: "linuxpenguin.jpg"))
+        XCTAssertEqual(manager.getMemoryPalace("graph2")!.icon, MemoryPalaceIcon(graphName: "graph2", imageFile: "linuxpenguin.png"))
         
         //Deletes 1 of the memory palace using the existing image
         manager.removeMemoryPalace("graph1")
@@ -48,16 +53,17 @@ class MementoManagerTests: XCTestCase {
         XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))    //Check for existing reference.
         
         //Remove last reference to the actual image.
-        manager.removeMemoryPalace("graph2")
+        manager.removeMemoryPalace("graph1(1)")
         XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace+1)
-        XCTAssertTrue(manager.getMemoryPalace("graph2") == nil)
+        XCTAssertTrue(manager.getMemoryPalace("graph1(1)") == nil)
         XCTAssertFalse(fileExists("sharedResource/linuxpenguin.jpg"))
         
         //Clean up the remaining test graph
-        manager.removeMemoryPalace("graph1(1)")
+        manager.removeMemoryPalace("graph2")
         XCTAssertEqual(manager.numberOfMemoryPalace, initialNumPalace)
-        XCTAssertTrue(manager.getMemoryPalace("graph1(1)") == nil)
-        
+        XCTAssertTrue(manager.getMemoryPalace("graph2") == nil)
+        XCTAssertFalse(fileExists("sharedResource/linuxpenguin.png"))
+
         dispatch_sync(model.saveQueue, {() -> Void in
             //Wait for all asynchronous cleanup operations to be done.
         })
