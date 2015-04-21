@@ -31,6 +31,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var startPoint = CGPoint()
     private var allCGRects = [CGRect]()
     private var allButtons = [UIButton]()
+    private var allAnnotatableViews = [AnnotatableUIView]()
     
     var roomLabel = Int()
     var graphName = String()
@@ -42,6 +43,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var annotateWordToggler: Bool = false
     private var swappingToggler: Bool = false
     private var previouslySelectedLabel :String = "_"
+    private var previouslySelectedIndex : Int?
     
     
     override func viewDidLoad() {
@@ -58,12 +60,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         imageView.image = Utilities.getImageNamed(roomRep.backgroundImage)
         
         // Button border settings
-        deleteModeButton.layer.borderWidth = 2.0
-        deleteModeButton.layer.borderColor = UIColor.clearColor().CGColor
-        annotateWordButton.layer.borderWidth = 2.0
-        annotateWordButton.layer.borderColor = UIColor.clearColor().CGColor
-        swapButton.layer.borderWidth = 2.0
-        swapButton.layer.borderColor = UIColor.clearColor().CGColor
         downloadButton.setImage(UIImage(named: "capturingImage"), forState: UIControlState.Selected)
         downloadButton.setImage(UIImage(named: "capturingImage"), forState: UIControlState.Highlighted)
         
@@ -102,6 +98,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             newAnnotatableView.backgroundColor = .whiteColor()
             newAnnotatableView.alpha = 0.25
             newAnnotatableView.annotation = eachAssociation.value
+            allAnnotatableViews.append(newAnnotatableView)
             imageView.addSubview(newAnnotatableView)
         }
         
@@ -144,10 +141,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             allCGRects.append(newRect)
             var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: newRect)
             mementoManager.addPlaceHolder(graphName, roomLabel: roomLabel, placeHolder: newRectPlaceHolder)
-            var newViewToTest = AnnotatableUIView(frame: newRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView, graphName: graphName, roomLabel:roomLabel)
-            newViewToTest.backgroundColor = .whiteColor()
-            newViewToTest.alpha = 0.25
-            imageView.addSubview(newViewToTest)
+            var newView = AnnotatableUIView(frame: newRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView, graphName: graphName, roomLabel:roomLabel)
+            newView.backgroundColor = .whiteColor()
+            newView.alpha = 0.25
+            allAnnotatableViews.append(newView)
+            imageView.addSubview(newView)
         }
     }
     
@@ -200,6 +198,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func deleteView(view: UIView) {
         if let indexToRect = find(allCGRects, view.frame) {
             allCGRects.removeAtIndex(indexToRect)
+            allAnnotatableViews.removeAtIndex(indexToRect)
         }
         view.removeFromSuperview()
         
@@ -292,19 +291,33 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         oldImage.frame = imageView.frame
         imageView.image = Utilities.getImageNamed(newRoomRep.backgroundImage)
         
-        // Remove all current overlays/placeholder
+        // Remove views and empty datasets
         for eachSubview in self.imageView.subviews {
             eachSubview.removeFromSuperview()
+        }
+        removeAllLabels()
+        allCGRects.removeAll(keepCapacity: false)
+        allAnnotatableViews.removeAll(keepCapacity: false)
+        allButtons.removeAll(keepCapacity: false)
+        
+        // Off all toggleables
+        if(annotateWordToggler == true){
+            self.wordAnnotationButtonPressed(annotateWordButton)
+        }
+        if(swappingToggler == true){
+            self.swapAnnotationLabels(swapButton)
+        }
+        if(deleteToggler == true){
+            self.deleteButtonPressed(deleteModeButton)
         }
         
         // Load
         overlayList = newRoomRep.overlays
         associationList = newRoomRep.associations
         loadLayouts()
-        allCGRects = [CGRect]()
-        
         self.view.addSubview(oldImage)
         
+        // Animation
         UIView.animateWithDuration(NSTimeInterval(1.0), animations: {
             oldImage.frame.origin = CGPoint(x: -1024.0, y: 0)
             }, completion: { finished in
@@ -358,7 +371,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             // Make button
             let newButton = UIButton()
             newButton.frame = eachAssociation.placeHolder.view.frame
-            newButton.setTitle(String(eachAssociation.placeHolder.label), forState: UIControlState.Normal)
+            if let labelNumber = find(allCGRects, newButton.frame) {
+                newButton.setTitle(String(labelNumber + 1), forState: UIControlState.Normal)
+            }
+
+            newButton.tag = eachAssociation.placeHolder.label
             newButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             newButton.titleLabel?.font = UIFont(name: "Helvetica", size: 50)
             newButton.titleLabel?.textAlignment = NSTextAlignment.Center
@@ -369,16 +386,34 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func labelButtonTapped(sender: UIButton!) {
-        if let labelSelected = sender.titleLabel?.text {
+        if let labelSelected = sender?.tag {
             // Set current selection
             if (previouslySelectedLabel == "_") {
-                previouslySelectedLabel = labelSelected
+                previouslySelectedLabel = String(labelSelected)
+                previouslySelectedIndex = (sender?.titleLabel?.text?.toInt())! - 1
                 sender.backgroundColor = UIColor.grayColor()
             } else {
                 // Swap the labels
-                mementoManager.swapPlaceHolders(self.graphName, roomLabel: self.roomLabel, pHolder1Label: previouslySelectedLabel.toInt()!, pHolder2Label: labelSelected.toInt()!)
+                mementoManager.swapPlaceHolders(self.graphName, roomLabel: self.roomLabel, pHolder1Label: previouslySelectedLabel.toInt()!, pHolder2Label: labelSelected)
+                
+                
+                if let indexToSwap = sender?.titleLabel?.text?.toInt() {
+                    // Update viewtags of annotatable views for deletion
+                    var tempTag = allAnnotatableViews[indexToSwap - 1].viewTag
+                    allAnnotatableViews[indexToSwap - 1].viewTag = allAnnotatableViews[previouslySelectedIndex!].viewTag
+                    allAnnotatableViews[previouslySelectedIndex!].viewTag = tempTag
+                    
+                    // Swap content in array as well
+                    var tempRect = allCGRects[previouslySelectedIndex!]
+                    allCGRects[previouslySelectedIndex!] = allCGRects[indexToSwap - 1]
+                    allCGRects[indexToSwap - 1] = tempRect
+                    
+                    var tempAnnotatableView = allAnnotatableViews[previouslySelectedIndex!]
+                    allAnnotatableViews[previouslySelectedIndex!] = allAnnotatableViews[indexToSwap - 1]
+                    allAnnotatableViews[indexToSwap - 1] = tempAnnotatableView
+                }
 
-                // Refresh labels
+                // Refresh view
                 removeAllLabels()
                 showAllLabels()
             }
