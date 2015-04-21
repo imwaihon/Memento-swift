@@ -75,15 +75,18 @@ class MementoManager {
         nodeFactory = MementoNodeFactory()
     }
     
-    //Gets the list of con representation of existing memory palaces.
+    /* Gets the list of con representation of existing memory palaces.
+     * @return The list of icons representing the existing memory palaces.
+     */
     func getMemoryPalaceIcons() -> [MemoryPalaceIcon] {
         return model.palaceIcons
     }
     
-    //Adds a new memory palace using an existing image in resources folder as the image of the 1st room.
-    //If there exists another memory palace with the same name, a number will be appended to the
-    //new memory palace's name.
-    //Returns the name of the added memory palace as a confirmation.
+    /* Adds a new memory palace using an existing image in resources folder as the image of the 1st room.
+     * @param named The base name of the memory palace to add.
+     * @param imageFile The name of the existing image to use as 1st room's background.
+     * @return The assigned name of the added memory palace.
+     */
     func addMemoryPalace(named name: String, imageFile: String) -> String {
         //assert(resourceManager.referenceCountForResource(imageFile) > 0)
         resourceManager.retainResource(imageFile)
@@ -117,14 +120,17 @@ class MementoManager {
         return (newGraph.name, imgFile)
     }
     
-    //Gets the specified memory palace
-    //Returns nil if the specified memory palce does not exist.
+    /* Gets the specified memory palace.
+     * @return The specified memory palace or  nil if the specified memory palace is not found.
+     */
     func getMemoryPalace(palaceName: String) -> MementoGraph? {
         return model.getPalace(palaceName)
     }
     
-    //Returns an array of memory palace node icons
-    //Returns nil if there is no memory palace of the given name
+    /* Gets the overview of rooms in the specified memory palace.
+     * @param palaceName The name of the memory palace.
+     * @return A list of icons of rooms in the memory palace or nil if the memory palace is not found.
+     */
     func getPalaceOverview(palaceName: String) -> [MemoryPalaceRoomIcon]? {
         if let palace = model.getPalace(palaceName) {
             return palace.nodeIcons
@@ -132,8 +138,9 @@ class MementoManager {
         return nil
     }
     
-    //Removes the specified memory palace
-    //Does nothing if no memory palace has the given name
+    /* Removes the specified memory palace. Does nothing if the memory palace is not found.
+     * @param palaceName The name of the memory palace to remove.
+     */
     func removeMemoryPalace(palaceName: String){
         if let roomIcons = model.getPalace(palaceName)?.nodeIcons {
             //Release all image resources
@@ -148,9 +155,11 @@ class MementoManager {
         }
     }
     
-    //Adds a new room to the current memory palace.
-    //Does nothing if the memory palace is not found.
-    //Returns the room label for the newly-added room or nil if the operation fails.
+    /* Adds a new room to the current memory palace using existing resource. Does nothing if the memory palace is not found.
+     * @param palaceName The name of the memory palace to add the new room to.
+     * @param roomImage The name of the image file to use as the room's background.
+     * @return The room label for the newly-added room or nil if the memory palace is not found.
+     */
     func addMemoryPalaceRoom(palaceName: String, roomImage: String) -> Int? {
         if model.containsPalace(palaceName) {
             resourceManager.retainResource(roomImage)
@@ -195,14 +204,20 @@ class MementoManager {
         return nil
     }
     
-    //Gets the memory palace room.
-    //Returns nil if the memory palace or the room does not exist.
+    /* Gets the memory palace room.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel the label of the target room.
+     * @return The memory palace room or nil if the memory palace or the room does not exist.
+     */
     func getMemoryPalaceRoom(palaceName: String, roomLabel: Int) -> MementoNode? {
         return model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)
     }
     
-    //Gets the view object representation of the memory palace room.
-    //Returns nil if the memory palace or the room does not exist.
+    /* Gets the view object representation of the memory palace room.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the target room.
+     * @return The view representation of the room or nil if the memory palace room is not found.
+     */
     func getMemoryPalaceRoomView(palaceName: String, roomLabel: Int) -> MemoryPalaceRoomView? {
         return model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.viewRepresentation
     }
@@ -255,8 +270,11 @@ class MementoManager {
         return nil
     }
     
-    //Removes the specified room from the specified memory palace.
-    //Does nothign if either the memory palace or the room is invalid.
+    /* Removes the specified room from the specified memory palace.
+     * Does nothing if either the memory palace or the room is invalid.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the room to remove.
+     */
     func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
         if let palace = model.getPalace(palaceName) {
             if palace.numRooms == 1 {
@@ -277,8 +295,13 @@ class MementoManager {
         return model.generatePalaceName(baseName)
     }
     
-    //Adds the given overlay object to the speicified memory palace room, using an existing image.
-    //Does nothing if the memory palace room is not found.
+    /* Adds the given overlay object to the speicified memory palace room, using an existing image.
+     * Does nothing if the memory palace room is not found.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the room to add the overlay to.
+     * @param overlay The overlay to add.
+     * @return The label assigned to the new overlay.
+     */
     func addOverlay(palaceName: String, roomLabel: Int, overlay: MutableOverlay) -> Int? {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             resourceManager.retainResource(overlay.imageFile)
@@ -333,8 +356,12 @@ class MementoManager {
         return nil
     }
 
-    //Sets the overlay's frame.
-    //Does nothing if the overlay object is not found.
+    /* Sets the overlay's frame. Does nothing if the overlay object is not found.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the room the overlay is in.
+     * @param overlayLabel The label of the target overlay.
+     * @param newFrame The new frame of the overlay.
+     */
     func setOverlayFrame(palaceName: String, roomLabel: Int, overlayLabel: Int, newFrame: CGRect) {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             room.setOverlayFrame(overlayLabel, newFrame: newFrame)
@@ -342,15 +369,14 @@ class MementoManager {
         }
     }
     
-    //Removes the overlay from the memory palace room.
-    //Does nothing if the memory palace room or the overlay cannot be found.
+    /* Removes the overlay from the memory palace room. Does nothing if the overlay cannot be found.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the room the overlay is in.
+     * @param overlayLabel The label of the overlay to be removed.
+     */
     func removeOverlay(palaceName: String, roomLabel: Int, overlayLabel: Int) {
-        
-        //If overlay exists
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             if let overlay = room.getOverlay(overlayLabel) {
-                
-                //Release reference to overlay image and remove overlay
                 resourceManager.releaseResource(overlay.imageFile)
                 room.removeOverlay(overlayLabel)
                 model.savePalace(palaceName)
@@ -358,9 +384,13 @@ class MementoManager {
         }
     }
     
-    //Adds the given palceholder to the specified memory palace room.
-    //Returns false if the room is not found or the placeholder cannot be added due to overlap with an
-    //existin placeholder.
+    /* Adds the given palceholder to the specified memory palace room.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the room the placeholder is t be added.
+     * @param palceHolder The placeholder to be added.
+     * @return True if the palceholder is successfully added and false otherwise.
+     * Note: This method fails it room is not found or the placeholder overlaps with an existing placeholder.
+     */
     func addPlaceHolder(palaceName: String, roomLabel: Int, placeHolder: PlaceHolder) -> Bool {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             let res = room.addPlaceHolder(placeHolder)
@@ -372,8 +402,11 @@ class MementoManager {
         return false
     }
     
-    //Sets the palceholder's frame.
-    //Does nothing if the placehodler is not found.
+    /* Sets the association's frame. Does nothing if the association is not found.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the room the association is in.
+     * @param placeHolderLabel The label of the target association.
+     */
     func setPlaceHolderFrame(palaceName: String, roomLabel: Int, placeHolderLabel: Int, newFrame: CGRect) {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             room.setPlaceHolderFrame(placeHolderLabel, newFrame: newFrame)
@@ -381,8 +414,13 @@ class MementoManager {
         }
     }
     
-    //Returns true if the swap is successful.
-    //Returns false if swap is unsuccessful due to absence of 1 or both of the placeholders.
+    /* Swaps the 2 associations.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the room the placeholders are in.
+     * @param pHolder1Label The label of 1 of the associations to be swapped.
+     * @param pHolder2Label The label of the other association to be swapped.
+     * @return True if the operation is successful and false if one or both associations do not exist.
+     */
     func swapPlaceHolders(palaceName: String, roomLabel: Int, pHolder1Label: Int, pHolder2Label: Int) -> Bool {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             let res = room.swapPlaceHolders(pHolder1Label, pHolder2Label: pHolder2Label)
@@ -394,8 +432,12 @@ class MementoManager {
         return false
     }
     
-    //Sets the value of the specified placeholder in the given memory palace room.
-    //Does nothing if the placeholder is not found.
+    /* Sets the value for the specified association. Does nothing if the placeholder is not found.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the target room.
+     * @param placeHolderLabel The label of the association to set the value for.
+     * @param value The value to be set.
+     */
     func setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String) {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             room.setAssociationValue(placeHolderLabel, value: value)
@@ -403,8 +445,11 @@ class MementoManager {
         }
     }
     
-    //Removes the specified placeholder.
-    //Does nothing if the placeholder is not found.
+    /* Removes the specified placeholder. Does nothing if the placeholder is not found.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the target room.
+     * @param placeHolderLabel The label of the placeholder to remove.
+     */
     func removePlaceHolder(palaceName: String, roomLabel: Int, placeHolderLabel: Int) {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             room.removePlaceHolder(placeHolderLabel)
@@ -412,23 +457,29 @@ class MementoManager {
         }
     }
     
-    //Gets the memory palace room that comes after the specified memory palace room.
-    //Returns nil if the palace is not found or if there is no room to be returned.
+    /* Gets the memory palace room that comes after the specified memory palace room.
+     * @param palaceName The name of the memory palace the specified room is in.
+     * @param roomLabel The label of the target room whose successor is to be obtained.
+     * @return The memory palace room that comes immediately after the one specified or nil if there is no such room.
+     */
     func getNextNode(palaceName: String, roomLabel: Int) -> MemoryPalaceRoomView? {
         return model.getPalace(palaceName)?.getNextRoomViewForRoom(roomLabel)
     }
     
-    //Saves the memory palace with the given name.
-    //Does nothing if the memory palace cannot be found.
+    /* Saves the memory palace with the given name. Does nothing if the memory palace cannot be found.
+     */
     func savePalace(palaceName: String) {
         model.savePalace(palaceName)
     }
     
-    //Gets the list of image resources in sharedResource folder
+    /* Gets the list of image resources in sharedResource folder
+     * @return A list of existing image resource filenames
+     */
     func getImageResource() -> [String] {
         return resourceManager.resourceOfType(ResourceManager.ResourceType.Image)
     }
     
+    //Generates a file name based on the current timestamp.
     private func generateImageName() -> String {
         let flags: NSCalendarUnit = .YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit
         let components = NSCalendar.currentCalendar().components(flags, fromDate: NSDate())
