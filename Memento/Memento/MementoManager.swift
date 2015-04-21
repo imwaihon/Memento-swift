@@ -432,6 +432,6 @@ class MementoManager {
     private func generateImageName() -> String {
         let flags: NSCalendarUnit = .YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit
         let components = NSCalendar.currentCalendar().components(flags, fromDate: NSDate())
-        return "\(components.year)\(components.month)\(components.day)\(components.hour)\(components.minute)"
+        return "\(components.year)\(components.month)\(components.day)\(components.hour)\(components.minute)\(components.second)"
     }
 }
