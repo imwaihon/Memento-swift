@@ -72,22 +72,25 @@ class MementoManagerTests: XCTestCase {
     func testInsertAndRemoveMemoryPalaceRoom() {
         let manager = MementoManager.sharedInstance
         let model = MementoModel.sharedInstance
-        let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "A.png")
         let image = UIImage(named: NSBundle.mainBundle().pathForResource("linuxpenguin", ofType: ".jpg")!)!
-        let room1 = MemoryPalaceRoomIcon(graphName: palaceName, label: 0, filename: "A.png", overlays: [])
-        let room2 = MemoryPalaceRoomIcon(graphName: palaceName,label: 1, filename: "linuxpenguin.jpg", overlays: [])
+        let palaceName = manager.addMemoryPalace(named: "graph1", imageFile: "linuxpenguin", image: image, imageType: Constants.ImageType.JPG).0
+        let room1 = MemoryPalaceRoomIcon(graphName: palaceName, label: 0, filename: "linuxpenguin.jpg", overlays: [])
+        let room2 = MemoryPalaceRoomIcon(graphName: palaceName, label: 1, filename: "linuxpenguin.png", overlays: [])
         let room3 = MemoryPalaceRoomIcon(graphName: palaceName, label: 2, filename: "linuxpenguin.jpg", overlays: [])
+        let room4 = MemoryPalaceRoomIcon(graphName: palaceName, label: 3, filename: "A.jpg", overlays: [])
         
+        //Tests initial state
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
         XCTAssertFalse(manager.getPalaceOverview(palaceName) == nil)
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1])
         
-        //Adds room2 using new resource
-        let res = manager.addMemoryPalaceRoom(palaceName, roomImage: "linuxpenguin.jpg", image: image)
+        //Adds room2 using new resource as PNG
+        let res = manager.addMemoryPalaceRoom(palaceName, roomImage: "linuxpenguin", image: image, imageType: Constants.ImageType.PNG)
         XCTAssertFalse(res == nil)
         XCTAssertEqual(res!.0, 1)
-        XCTAssertEqual(res!.1, "linuxpenguin.jpg")
+        XCTAssertEqual(res!.1, "linuxpenguin.png")
         XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2])
-        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.png"))
         
         //Adds room3 using existing resource
         if let res2 = manager.addMemoryPalaceRoom(palaceName, roomImage: "linuxpenguin.jpg") {
@@ -95,25 +98,41 @@ class MementoManagerTests: XCTestCase {
             XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2, room3])
         }
         
-        //Tests adding room to non-existent memory palce.
+        //Tests adding room using new image as JPG
+        let res3 = manager.addMemoryPalaceRoom(palaceName, roomImage: "A", image: image, imageType: Constants.ImageType.JPG)
+        XCTAssertFalse(res3 == nil)
+        XCTAssertEqual(res3!.0, 3)
+        XCTAssertEqual(res3!.1, "A.jpg")
+        XCTAssertTrue(fileExists("sharedResource/A.jpg"))
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room2, room3, room4])
+        
+        //Tests adding room to non-existent memory palace
         XCTAssertTrue(manager.addMemoryPalaceRoom("somePalace", roomImage: "B.png") == nil)
+        XCTAssertTrue(manager.addMemoryPalaceRoom("somePalace", roomImage: "B", image: image, imageType: Constants.ImageType.JPG) == nil)
+        XCTAssertFalse(fileExists("sharedResource/B.jpg"))
         
         //Removes room2
         manager.removeMemoryPalaceRoom(palaceName, roomLabel: 1)
         XCTAssertTrue(manager.getMemoryPalaceRoom(palaceName, roomLabel: 1) == nil)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room3])
-        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room3, room4])
+        XCTAssertFalse(fileExists("sharedResource/linuxpenguin.png"))
         
         //Removes room3
         manager.removeMemoryPalaceRoom(palaceName, roomLabel: 2)
         XCTAssertTrue(manager.getMemoryPalaceRoom(palaceName, roomLabel: 2) == nil)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1])
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1, room4])
+        XCTAssertTrue(fileExists("sharedResource/linuxpenguin.jpg"))
+        
+        //Removes till 1 room remaining
+        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 0)
+        XCTAssertTrue(manager.getMemoryPalaceRoom(palaceName, roomLabel: 0) == nil)
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room4])
         XCTAssertFalse(fileExists("sharedResource/linuxpenguin.jpg"))
         
         //Attempts to remove last remaining room
-        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 0)
-        XCTAssertFalse(manager.getMemoryPalaceRoom(palaceName, roomLabel: 0) == nil)
-        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room1])
+        manager.removeMemoryPalaceRoom(palaceName, roomLabel: 3)
+        XCTAssertFalse(manager.getMemoryPalaceRoom(palaceName, roomLabel: 3) == nil)
+        XCTAssertEqual(manager.getPalaceOverview(palaceName)!, [room4])
         
         //Clean up directory
         manager.removeMemoryPalace(palaceName)
@@ -121,6 +140,7 @@ class MementoManagerTests: XCTestCase {
         dispatch_sync(model.saveQueue, {() -> Void in
             //Do nothing. Wait for deletion to complete.
         })
+        XCTAssertFalse(fileExists("sharedResource/A.jpg"))
     }
     
     func testSetBackgroundImage() {

@@ -92,9 +92,10 @@ class MementoManager {
         return newGraph.name
     }
     
+    //Deprecated
     //Adds memory palace with given name using the image provided as the 1st room's background image.
     //It is recommended to use this method if the image does not exist in the resources folder yet.
-    //Returns a tuple (graph name, image name) representing names assigned to the grah and the given image.
+    //Returns a tuple (graph name, image name) representing names assigned to the graph and the given image.
     func addMemoryPalace(named name: String, imageFile: String, image: UIImage) -> (String, String) {
         let imgFile = resourceManager.retainResource(imageFile, image: image)
         let newGraph = graphFactory.makeGraph(named: name, imageFile: imgFile)
@@ -104,13 +105,13 @@ class MementoManager {
     
     /* Adds memory palace using new image resource as background for 1st room.
      * @param named Teh memory palace name.
-     * @param imageFile The base name of the image file to be saved as.
+     * @param imageFile The base name of the image file to be saved as, without fie extension.
      * @param image The image resource to be saved.
      * @param imageType The type of image to be saved as.
      * @return A tuple (finalised palace name, finalised resource name)
      */
     func addMemoryPalace(named name: String, imageFile: String, image: UIImage, imageType: Constants.ImageType) -> (String, String) {
-        let imgFile = resourceManager.retainResource(imageFile, image: image, imageType: imageType == Constants.ImageType.JPG ? ResourceManager.ImageType.JPG: ResourceManager.ImageType.PNG)
+        let imgFile = resourceManager.retainResource(imageFile, image: image, imageType: imageType)
         let newGraph = graphFactory.makeGraph(named: name, imageFile: imgFile)
         model.addPalace(newGraph)
         return (newGraph.name, imgFile)
@@ -160,6 +161,7 @@ class MementoManager {
         return nil
     }
     
+    //Deprecated
     //Adds a new memory palace room with the given image.
     //Recommended to use this for images that does not currently exist in shared resources folder.
     //Returns the room label and the file name assigned to the image upon success.
@@ -168,6 +170,22 @@ class MementoManager {
         if model.containsPalace(palaceName) {
             //Add the image resource and get assigned file name
             let imgFile = resourceManager.retainResource(roomImage, image: image)
+            let newRoom = nodeFactory.makeNode(imgFile)
+            model.addPalaceRoom(palaceName, room: newRoom)
+            return (newRoom.label, imgFile)
+        }
+        return nil
+    }
+    
+    /* Adds room to memory palace with new resource as background.
+     * @param palaceName The name of the memory palace to add room to.
+     * @param roomImage The base name for the image resource to be saved as
+     * @return
+     */
+    func addMemoryPalaceRoom(palaceName: String, roomImage: String, image: UIImage, imageType: Constants.ImageType) -> (Int, String)? {
+        if model.containsPalace(palaceName) {
+            //Add the image resource and get assigned file name
+            let imgFile = resourceManager.retainResource(roomImage, image: image, imageType: imageType)
             let newRoom = nodeFactory.makeNode(imgFile)
             model.addPalaceRoom(palaceName, room: newRoom)
             return (newRoom.label, imgFile)
