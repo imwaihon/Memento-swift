@@ -138,7 +138,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
                     }
                 } else {
                     self.parentVC?.imageView.image = image
-                    mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: nextRoomLabel, newImage: Utilities.convertToScreenSize(image))
+                    mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: nextRoomLabel, newImage: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.PNG)
                 }
                 self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -153,7 +153,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
             }
         } else {
             self.parentVC?.imageView.image = image
-            mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: nextRoomLabel, newImage: Utilities.convertToScreenSize(image))
+            mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: nextRoomLabel, newImage: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.PNG)
         }
 
 
