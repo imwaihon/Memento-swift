@@ -45,6 +45,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var previouslySelectedLabel :String = "_"
     private var previouslySelectedIndex : Int?
     
+    private var darkViewLayer = UIView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +103,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             allAnnotatableViews.append(newAnnotatableView)
             imageView.addSubview(newAnnotatableView)
         }
+        
+        // Pre-load dark layer
+        darkViewLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height - 68.0)
+        darkViewLayer.backgroundColor = UIColor.blackColor()
+        darkViewLayer.alpha = 0.3
         
     }
     
@@ -260,7 +267,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             annotateWordToggler = false
             annotateWordButton.setImage(UIImage(named: "annotationModeImage.png"), forState: UIControlState.Normal)
             self.view.removeGestureRecognizer(panRec)
-            self.imageView.alpha = 1.0
+            darkViewLayer.removeFromSuperview()
+            
         } else {
             if(deleteToggler == true){
                 self.deleteButtonPressed(deleteModeButton)
@@ -273,7 +281,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             annotateWordButton.setImage(UIImage(named: "annotationModeActiveImage.png"), forState: UIControlState.Normal)
             self.view.removeGestureRecognizer(panRec)
             self.view.addGestureRecognizer(panRec)
-            self.imageView.alpha = 0.75
+            self.imageView.addSubview(darkViewLayer)
+            self.imageView.sendSubviewToBack(darkViewLayer)
         }
     }
     
