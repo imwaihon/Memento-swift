@@ -12,11 +12,7 @@ import Foundation
 import UIKit
 
 struct Constants {
-    //Defines the types of images used in this app
-    enum ImageType {
-        case JPG
-        case PNG
-    }
+    typealias ImageType = ResourceManager.ImageType
     
     //UIImage-related constants
     static let fullScreenImageFrame = CGRectMake(0, 0, 1024, 768)
