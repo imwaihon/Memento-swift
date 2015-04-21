@@ -94,18 +94,7 @@ class MementoManager {
         model.addPalace(newGraph)
         return newGraph.name
     }
-    
-    //Deprecated
-    //Adds memory palace with given name using the image provided as the 1st room's background image.
-    //It is recommended to use this method if the image does not exist in the resources folder yet.
-    //Returns a tuple (graph name, image name) representing names assigned to the graph and the given image.
-    func addMemoryPalace(named name: String, imageFile: String, image: UIImage) -> (String, String) {
-        let imgFile = resourceManager.retainResource(imageFile, image: image)
-        let newGraph = graphFactory.makeGraph(named: name, imageFile: imgFile)
-        model.addPalace(newGraph)
-        return (newGraph.name, imgFile)
-    }
-    
+        
     /* Adds memory palace using new image resource as background for 1st room.
      * @param named Teh memory palace name.
      * @param imageFile The base name of the image file to be saved as, without fie extension.
