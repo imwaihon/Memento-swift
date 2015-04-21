@@ -297,14 +297,15 @@ class MementoManagerTests: XCTestCase {
         XCTAssertFalse(room == nil)
         XCTAssertEqual(room!.numOverlays, 0)
         
-        //Add overlay with new image resource
-        let overlay1 = manager.addOverlay(palaceName, roomLabel: 0, frame: frame1, image: image)
+        //Add overlay with new image resource as JPG
+        let overlay1 = manager.addOverlay(palaceName, roomLabel: 0, frame: frame1, image: image, imageType: Constants.ImageType.JPG)
         if overlay1 != nil {
+            XCTAssertEqual(overlay1!.imageFile.pathExtension, "jpg")
             XCTAssertEqual(room!.numOverlays, 1)
             XCTAssertEqual(room!.getOverlay(0)!, overlay1!)
             XCTAssertEqual(overlay1!.label, 0)
             XCTAssertEqual(overlay1!.frame, frame1)
-            XCTAssertTrue(fileExists("sharedResource/\(overlay1!.imageFile)"))
+            XCTAssertTrue(fileExists("sharedResource".stringByAppendingPathComponent(overlay1!.imageFile)))
         } else {
             XCTFail("Overlay 1 not added")
         }
@@ -320,8 +321,18 @@ class MementoManagerTests: XCTestCase {
             XCTFail("Overlay 2 not added")
         }
         
+        //Add overlay using new image resource as PNG
+        var overlay3 = manager.addOverlay(palaceName, roomLabel: 0, frame: frame1, image: image, imageType: Constants.ImageType.PNG)
+        if overlay3 != nil {
+            XCTAssertEqual(overlay3!.imageFile.pathExtension, "png")
+            XCTAssertEqual(room!.numOverlays, 3)
+            XCTAssertEqual(overlay3!.label, 2)
+            XCTAssertEqual(overlay3!.frame, frame1)
+            XCTAssertTrue(fileExists("sharedResource".stringByAppendingPathComponent(overlay3!.imageFile)))
+        }
+        
         //Failed attempts to add overlay
-        XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, frame: frame1, image: image) == nil)
+        XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, frame: frame1, image: image, imageType: Constants.ImageType.JPG) == nil)
         XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, overlay: overlay2) == nil)
         
         //Change overlay frames
@@ -337,15 +348,20 @@ class MementoManagerTests: XCTestCase {
         
         //Remove overlays
         manager.removeOverlay(palaceName, roomLabel: 0, overlayLabel: 0)
-        XCTAssertEqual(room!.numOverlays, 1)
+        XCTAssertEqual(room!.numOverlays, 2)
         XCTAssertTrue(room!.getOverlay(0) == nil)
-        XCTAssertTrue(fileExists("sharedResource/\(overlay1!.imageFile)"))
+        XCTAssertTrue(fileExists("sharedResource".stringByAppendingPathComponent(overlay1!.imageFile)))
         
-        //Removing this overlays cause the image resource to be deleted
+        //Removing these overlays cause the image resources to be deleted
         manager.removeOverlay(palaceName, roomLabel: 0, overlayLabel: 1)
-        XCTAssertEqual(room!.numOverlays, 0)
+        XCTAssertEqual(room!.numOverlays, 1)
         XCTAssertTrue(room!.getOverlay(1) == nil)
-        XCTAssertFalse(fileExists("sharedResource/\(overlay1!.imageFile)"))
+        XCTAssertFalse(fileExists("sharedResource".stringByAppendingPathComponent(overlay1!.imageFile)))
+        
+        manager.removeOverlay(palaceName, roomLabel: 0, overlayLabel: 2)
+        XCTAssertEqual(room!.numOverlays, 0)
+        XCTAssertTrue(room!.getOverlay(2) == nil)
+        XCTAssertFalse(fileExists("sharedResource".stringByAppendingPathComponent(overlay3!.imageFile)))
         
         //Cleanup
         manager.removeMemoryPalace(palaceName)

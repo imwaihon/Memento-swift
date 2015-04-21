@@ -240,7 +240,7 @@ class MementoManager {
     /* Sets the background image for the target memory palace room.
      * @param palaceName The name of the memory palace the room is in.
      * @param roomLabel The label of the target room.
-     * @ param newImage The new image resource to use as background.
+     * @param newImage The new image resource to use as background.
      * @param imageType The type of image to save the resource as.
      * @return The file name used to save the new image resource or nil if the memory palace room is not found.
      */
@@ -289,6 +289,7 @@ class MementoManager {
         return nil
     }
     
+    //Deprecated
     //Adds a new overlay object using a new image resource to be save to sharedResource folder.
     //Returns the added overlay object on success and nil if the palace or room is not found.
     //This is the recommended method to use if the image does not currently exist in the shared resource folder.
@@ -299,6 +300,29 @@ class MementoManager {
             
             //Add the given image as a resource
             let imgName = resourceManager.retainResource(generateImageName(), image: image)
+            
+            //Make and add the overlay
+            var overlay = MutableOverlay(frame: frame, imageFile: imgName)
+            overlay.label = room.addOverlay(overlay)
+            model.savePalace(palaceName)
+            return overlay.makeImmuatble()
+        }
+        return nil
+    }
+    
+    /* Adds new overlay to the specified memory palace room.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the target room.
+     * @param frame The frame of the overlay.
+     * @param image The image resource to use for the overlay.
+     * @param imageType The type of image to save the image resource as.
+     * @return The added overlay object or nil if the memory palace room is not found.
+     */
+    func addOverlay(palaceName: String, roomLabel: Int, frame: CGRect, image: UIImage, imageType: Constants.ImageType) -> Overlay? {
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
+            
+            //Add the given image as a resource
+            let imgName = resourceManager.retainResource(generateImageName(), image: image, imageType: imageType)
             
             //Make and add the overlay
             var overlay = MutableOverlay(frame: frame, imageFile: imgName)
