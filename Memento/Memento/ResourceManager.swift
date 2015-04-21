@@ -33,6 +33,13 @@ class ResourceManager {
         case Image
         case All
     }
+    
+    //Defines the types of image supported by this class
+    enum ImageType {
+        case JPG
+        case PNG
+    }
+    
     //File extensions
     private let jpegExtension = "jpg"
     private let pngExtention = "png"
@@ -108,27 +115,20 @@ class ResourceManager {
     }
     
     //Saves the text resource to the specified file.
-    //Returns: The actual name of the text file being saved to.
-    //Requires: Resource name should have .txt extension.
+    //Returns: The actual name of the text file being saved to, with txt file extension added.
     func retainResource(resourceName: String, text: String) -> String {
         var filename = resourceName
         
-        //Fixes file extension
-        if filename.pathExtension != textExtension {
-            filename = filename.stringByDeletingPathExtension.stringByAppendingPathExtension(textExtension)!
-        }
-        
         //Construct new file name if file with same name exists.
-        if _referenceCountTable[resourceName] != nil {
-            filename = filename.stringByDeletingPathExtension
+        if _referenceCountTable[filename.stringByAppendingPathExtension(textExtension)!] != nil {
             for var i=1; ; i++ {
                 if _referenceCountTable[(filename+"(\(i))").stringByAppendingPathExtension(textExtension)!] == nil {
                     filename+="(\(i))"
                     break
                 }
             }
-            filename = filename.stringByAppendingPathExtension(textExtension)!
         }
+        filename = filename.stringByAppendingPathExtension(textExtension)!
         
         //Write to the file.
         _referenceCountTable[filename] = 1
