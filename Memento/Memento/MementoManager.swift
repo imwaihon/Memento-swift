@@ -179,7 +179,9 @@ class MementoManager {
     
     /* Adds room to memory palace with new resource as background.
      * @param palaceName The name of the memory palace to add room to.
-     * @param roomImage The base name for the image resource to be saved as
+     * @param roomImage The base name for the image resource to be saved as.
+     * @param image The image resoure to be saved.
+     * @param imageType The type ofimage to save as.
      * @return
      */
     func addMemoryPalaceRoom(palaceName: String, roomImage: String, image: UIImage, imageType: Constants.ImageType) -> (Int, String)? {
