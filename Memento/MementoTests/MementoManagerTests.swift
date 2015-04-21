@@ -152,16 +152,35 @@ class MementoManagerTests: XCTestCase {
         
         XCTAssertEqual(room!.backgroundImageFile, "A.png")
         
-        //Tests normal operation
-        let imageName = manager.setBackgroundImageForRoom(palaceName, roomLabel: 0, newImage: image)
+        //Tests normal operation using JPG resource
+        let imageName = manager.setBackgroundImageForRoom(palaceName, roomLabel: 0, newImage: image, imageType: Constants.ImageType.JPG)
         if imageName != nil {
+            XCTAssertEqual(imageName!.pathExtension, "jpg")
             XCTAssertEqual(room!.backgroundImageFile, imageName!)
+            XCTAssertTrue(fileExists("sharedResource".stringByAppendingPathComponent(imageName!)))
+            
+            //Attempts to change to same background image
+            //The image file should not be dropped.
+            manager.setBackgroundImageForRoom(palaceName, roomLabel: 0, newImageFile: imageName!)
             XCTAssertTrue(fileExists("sharedResource".stringByAppendingPathComponent(imageName!)))
             
             //Changes back the background image
             manager.setBackgroundImageForRoom(palaceName, roomLabel: 0, newImageFile: "A.png")
             XCTAssertEqual(room!.backgroundImageFile, "A.png")
             XCTAssertFalse(fileExists("sharedResource".stringByAppendingPathComponent(imageName!)))
+        }
+        
+        //Tests normal operation using PNG resource
+        let imageName2 = manager.setBackgroundImageForRoom(palaceName, roomLabel: 0, newImage: image, imageType: Constants.ImageType.PNG)
+        if imageName2 != nil {
+            XCTAssertEqual(imageName2!.pathExtension, "png")
+            XCTAssertEqual(room!.backgroundImageFile, imageName2!)
+            XCTAssertTrue(fileExists("sharedResource".stringByAppendingPathComponent(imageName2!)))
+            
+            //Change back the background image
+            manager.setBackgroundImageForRoom(palaceName, roomLabel: 0, newImageFile: "A.png")
+            XCTAssertEqual(room!.backgroundImageFile, "A.png")
+            XCTAssertFalse(fileExists("sharedResource".stringByAppendingPathComponent(imageName2!)))
         }
         
         //Attempts to set background image on non-existent room

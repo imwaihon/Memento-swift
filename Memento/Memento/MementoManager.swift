@@ -207,16 +207,21 @@ class MementoManager {
         return model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel)?.viewRepresentation
     }
     
-    //Sets the background image of the room to another existing image resource
+    /* Sets the background image of the room to another existing image resource
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the target room.
+     * @param newImageFile The name of the new image file to set as background.
+     */
     func setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImageFile: String) {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            resourceManager.releaseResource(room.backgroundImageFile)
             resourceManager.retainResource(newImageFile)
+            resourceManager.releaseResource(room.backgroundImageFile)
             room.backgroundImageFile = newImageFile
             model.savePalace(palaceName)
         }
     }
     
+    //Deprecated
     //Sets the background image of the specified memory palace room with the given image as a new resource.
     //Recommended to use this if the image does not yet exist in the shared resource folder.
     //Returns the name assigned to the given image on success.
@@ -224,6 +229,24 @@ class MementoManager {
     func setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImage: UIImage) -> String? {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             let imageName = resourceManager.retainResource(generateImageName(), image: newImage)
+            resourceManager.releaseResource(room.backgroundImageFile)
+            room.backgroundImageFile = imageName
+            model.savePalace(palaceName)
+            return imageName
+        }
+        return nil
+    }
+    
+    /* Sets the background image for the target memory palace room.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the target room.
+     * @ param newImage The new image resource to use as background.
+     * @param imageType The type of image to save the resource as.
+     * @return The file name used to save the new image resource or nil if the memory palace room is not found.
+     */
+    func setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImage: UIImage, imageType: Constants.ImageType) -> String? {
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
+            let imageName = resourceManager.retainResource(generateImageName(), image: newImage, imageType: imageType)
             resourceManager.releaseResource(room.backgroundImageFile)
             room.backgroundImageFile = imageName
             model.savePalace(palaceName)
@@ -385,6 +408,6 @@ class MementoManager {
     private func generateImageName() -> String {
         let flags: NSCalendarUnit = .YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit
         let components = NSCalendar.currentCalendar().components(flags, fromDate: NSDate())
-        return "\(components.year)\(components.month)\(components.day)\(components.hour)\(components.minute).jpg"
+        return "\(components.year)\(components.month)\(components.day)\(components.hour)\(components.minute)"
     }
 }
