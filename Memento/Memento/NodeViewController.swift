@@ -106,7 +106,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
         
         // Pre-load dark layer
-        darkViewLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height - 68.0)
+        darkViewLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
         darkViewLayer.backgroundColor = UIColor.blackColor()
         darkViewLayer.alpha = 0.3
         
@@ -164,7 +164,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         if self.editToggler == false {
             self.editToggler = true
-            self.imageView.userInteractionEnabled = true
+            //self.imageView.userInteractionEnabled = true
             // Enable editing -> Show menu bar
             UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
                 var moveFrameUp = CGRectMake(0, self.view.frame.height - self.menuBarView.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)
@@ -173,7 +173,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
         } else {
             self.editToggler = false
-            self.imageView.userInteractionEnabled = false
+            //self.imageView.userInteractionEnabled = false
             // Disable editing -> Hide menu bar
             UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
                 var moveFrameDown = CGRectMake(0, self.view.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)
@@ -247,15 +247,18 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Save imageView to camera roll
     @IBAction func captureView(sender: AnyObject) {
-        var alert = UIAlertController(title: "Screenshot taken", message: "Save to Camera Roll?", preferredStyle: UIAlertControllerStyle.Alert)
-        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+        var ssAlert = UIAlertController(title: "Screenshot taken", message: "Save to Camera Roll?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        ssAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
             UIImageWriteToSavedPhotosAlbum(self.getImageView(), nil, nil, nil)
-        })
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
-        }
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        self.presentViewController(alert, animated: true, completion: nil)
+        }))
+        
+        ssAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+            println("Handle Cancel Logic here")
+        }))
+        
+        presentViewController(ssAlert, animated: true, completion: nil)
+        self.viewDidLoad()
     }
     
     // Returns imageView's image + all annotations
