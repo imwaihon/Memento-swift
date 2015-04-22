@@ -247,8 +247,15 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Save imageView to camera roll
     @IBAction func captureView(sender: AnyObject) {
-        UIImageWriteToSavedPhotosAlbum(getImageView(), nil, nil, nil);
-        
+        var alert = UIAlertController(title: "Screenshot taken", message: "Save to Camera Roll?", preferredStyle: UIAlertControllerStyle.Alert)
+        let ok = UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            UIImageWriteToSavedPhotosAlbum(self.getImageView(), nil, nil, nil)
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (action) -> Void in
+        }
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // Returns imageView's image + all annotations
@@ -270,6 +277,20 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             self.view.removeGestureRecognizer(panRec)
             darkViewLayer.removeFromSuperview()
             
+            // Send all AnnotatableUIViews to the back
+            for eachView in allAnnotatableViews {
+                self.imageView.sendSubviewToBack(eachView)
+                eachView.userInteractionEnabled = false
+            }
+            
+            // Allow touch for draggable images
+            for eachView in self.imageView.subviews {
+                if eachView.isMemberOfClass(DraggableImageView) {
+                    (eachView as DraggableImageView).userInteractionEnabled = true
+                }
+            }
+            
+            
         } else {
             if(deleteToggler == true){
                 self.deleteButtonPressed(deleteModeButton)
@@ -284,6 +305,19 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             self.view.addGestureRecognizer(panRec)
             self.imageView.addSubview(darkViewLayer)
             self.imageView.sendSubviewToBack(darkViewLayer)
+            
+            // Send all AnnotatableUIViews to the front
+            for eachView in allAnnotatableViews {
+                self.imageView.bringSubviewToFront(eachView)
+                eachView.userInteractionEnabled = true
+            }
+            
+            // Disllow touch for draggable images
+            for eachView in self.imageView.subviews {
+                if eachView.isMemberOfClass(DraggableImageView) {
+                    (eachView as DraggableImageView).userInteractionEnabled = false
+                }
+            }
         }
     }
     
