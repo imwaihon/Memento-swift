@@ -128,8 +128,10 @@ class DraggableImageView : UIImageView
                 }
             } else {
                 // Scale down
-                self.transform = CGAffineTransformScale(self.transform, nizer.scale, nizer.scale)
-                nizer.scale = 1.0
+                if (isMinimumSize()) {
+                    self.transform = CGAffineTransformScale(self.transform, nizer.scale, nizer.scale)
+                    nizer.scale = 1.0
+                }
             }
             // Call method again to realign for corners
             self.isWithinBounds()
@@ -141,34 +143,6 @@ class DraggableImageView : UIImageView
             //self.superview?.bringSubviewToFront(self)
         }
     }
-    
-    /*
-    func handleRotate(nizer: UIRotationGestureRecognizer!) {
-        self.transform = CGAffineTransformRotate(nizer.view!.transform, nizer.rotation)
-        totalRotation = totalRotation + nizer.rotation
-        nizer.rotation = 0.0
-        mementoManager.setOverlayFrame(graphName, roomLabel: roomLabel, overlayLabel: self.labelIdentifier, newFrame: self.frame)
-        //println(totalRotation)
-        
-        println(self.frame)
-        isWithinBounds()
-    }
-
-    */
-    /*
-    func rotatedView(sender:UIRotationGestureRecognizer){
-        var lastRotation = CGFloat()
-        if(sender.state == UIGestureRecognizerState.Ended){
-            lastRotation = 0.0;
-        }
-        var rotation = 0.0 - (lastRotation - sender.rotation)
-        var point = rotateRec.locationInView(self)
-        var currentTrans = sender.view!.transform
-        var newTrans = CGAffineTransformRotate(currentTrans, rotation)
-        sender.view!.transform = newTrans
-        lastRotation = sender.rotation
-    }
-    */
     
     // Helper function to check if this view is still within the 1024*768 boundary
     // Aids in slight offsetting back to within bounds
@@ -194,6 +168,13 @@ class DraggableImageView : UIImageView
             return true
         }
     }
-
+    
+    private func isMinimumSize() -> Bool {
+        if (self.frame.width < 125.0 || self.frame.height < 125.0) {
+            return false
+        } else {
+            return true
+        }
+    }
     
 }
