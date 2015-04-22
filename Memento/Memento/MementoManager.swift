@@ -88,7 +88,6 @@ class MementoManager {
      * @return The assigned name of the added memory palace.
      */
     func addMemoryPalace(named name: String, imageFile: String) -> String {
-        //assert(resourceManager.referenceCountForResource(imageFile) > 0)
         resourceManager.retainResource(imageFile)
         let newGraph = graphFactory.makeGraph(named: name, imageFile: imageFile)
         model.addPalace(newGraph)
@@ -102,8 +101,8 @@ class MementoManager {
      * @param imageType The type of image to be saved as.
      * @return A tuple (finalised palace name, finalised resource name)
      */
-    func addMemoryPalace(named name: String, imageFile: String, image: UIImage, imageType: Constants.ImageType) -> (String, String) {
-        let imgFile = resourceManager.retainResource(imageFile, image: image, imageType: imageType)
+    func addMemoryPalace(named name: String, image: UIImage, imageType: Constants.ImageType) -> (String, String) {
+        let imgFile = resourceManager.retainResource(generateImageName(), image: image, imageType: imageType)
         let newGraph = graphFactory.makeGraph(named: name, imageFile: imgFile)
         model.addPalace(newGraph)
         return (newGraph.name, imgFile)
@@ -166,10 +165,10 @@ class MementoManager {
      * @param imageType The type ofimage to save as.
      * @return
      */
-    func addMemoryPalaceRoom(palaceName: String, roomImage: String, image: UIImage, imageType: Constants.ImageType) -> (Int, String)? {
+    func addMemoryPalaceRoom(palaceName: String, image: UIImage, imageType: Constants.ImageType) -> (Int, String)? {
         if model.containsPalace(palaceName) {
             //Add the image resource and get assigned file name
-            let imgFile = resourceManager.retainResource(roomImage, image: image, imageType: imageType)
+            let imgFile = resourceManager.retainResource(generateImageName(), image: image, imageType: imageType)
             let newRoom = nodeFactory.makeNode(imgFile)
             model.addPalaceRoom(palaceName, room: newRoom)
             return (newRoom.label, imgFile)
