@@ -43,6 +43,8 @@
 		4F0824EC1ADFC6C500B091DA /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88D1AD2B2AD00436083 /* GameEngine.swift */; };
 		4F0824ED1ADFC6C800B091DA /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */; };
 		4F0824EE1ADFC6CC00B091DA /* GameAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */; };
+		4F2FC2AE1AE759B6007A82F6 /* SharedResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2FC2AD1AE759B6007A82F6 /* SharedResourceViewController.swift */; };
+		4F2FC2AF1AE759B6007A82F6 /* SharedResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2FC2AD1AE759B6007A82F6 /* SharedResourceViewController.swift */; };
 		4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */; };
 		4F83A6B81AE504340025BC25 /* EndGameChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9D15161ACADBCD00BEE609 /* EndGameChallengeViewController.swift */; };
 		4F90A5081AD6A76E00027201 /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */; };
@@ -229,6 +231,7 @@
 		4F06E88F1AD2B3EA00436083 /* GameAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAnnotationView.swift; sourceTree = "<group>"; };
 		4F0824E21ADFAC5A00B091DA /* GameBeforeStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBeforeStartViewController.swift; sourceTree = "<group>"; };
 		4F0824E41ADFBA8E00B091DA /* GamePauseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePauseDelegate.swift; sourceTree = "<group>"; };
+		4F2FC2AD1AE759B6007A82F6 /* SharedResourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedResourceViewController.swift; sourceTree = "<group>"; };
 		4F90A5071AD6A76E00027201 /* GameEngineDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineDelegate.swift; sourceTree = "<group>"; };
 		4F9D150E1ACADB6000BEE609 /* SelectChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectChallengeViewController.swift; sourceTree = "<group>"; };
 		4F9D15101ACADB7D00BEE609 /* LoadCustomChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCustomChallengeViewController.swift; sourceTree = "<group>"; };
@@ -429,6 +432,7 @@
 				41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */,
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
 				4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */,
+				4F2FC2AD1AE759B6007A82F6 /* SharedResourceViewController.swift */,
 				41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */,
 				4F9D15181ACAEF6A00BEE609 /* SaveLoadManager.swift */,
 				5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */,
@@ -937,6 +941,7 @@
 				5A01A3451ACE438900351423 /* FenwickTree.swift in Sources */,
 				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,
 				4127D7A11AD30103007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */,
+				4F2FC2AE1AE759B6007A82F6 /* SharedResourceViewController.swift in Sources */,
 				5A98038A1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */,
 				5AB3F7FE1ADC070F00906B76 /* CLRotateTool.m in Sources */,
 				5AB3F8001ADC070F00906B76 /* CLToneCurveTool.m in Sources */,
@@ -1000,6 +1005,7 @@
 				5AEF2A5E1AC4FD1300B2B6FB /* MemoryPalaceIcon.swift in Sources */,
 				4F0824EE1ADFC6CC00B091DA /* GameAnnotationView.swift in Sources */,
 				4F0824E71ADFC6AA00B091DA /* GameBeforeStartViewController.swift in Sources */,
+				4F2FC2AF1AE759B6007A82F6 /* SharedResourceViewController.swift in Sources */,
 				5A497A301AC7ED0C00D6C9C5 /* SelectPalaceCollectionViewCell.swift in Sources */,
 				5A01A3481ACE4CEE00351423 /* FenwickTreeTests.swift in Sources */,
 				4F0824EB1ADFC6BA00B091DA /* LoadCustomChallengeViewController.swift in Sources */,

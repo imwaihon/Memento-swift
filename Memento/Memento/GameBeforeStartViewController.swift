@@ -16,6 +16,7 @@ class GameBeforeStartViewController: UIViewController, UIGestureRecognizerDelega
     var palaceName = String()
     var gameMode = String()
     var guideSwitch = true
+    var showLayerSwitch = true
 
     @IBOutlet weak var guideAnnotationSwitch: UISwitch!
     
@@ -52,6 +53,14 @@ class GameBeforeStartViewController: UIViewController, UIGestureRecognizerDelega
             guideSwitch = false
         }
     }
+    
+    @IBAction func showLayerSwitchChanged(sender: UISwitch) {
+        if sender.on {
+            showLayerSwitch = true
+        } else {
+            showLayerSwitch = false
+        }
+    }
 
     @IBAction func startGame(sender: AnyObject) {
         self.performSegueWithIdentifier("StartGameSegue", sender: self)
@@ -67,6 +76,7 @@ class GameBeforeStartViewController: UIViewController, UIGestureRecognizerDelega
             dvc.palaceName = self.palaceName
             dvc.gameMode = self.gameMode
             dvc.showAnnotation = self.guideSwitch
+            dvc.showLayer = self.showLayerSwitch
         }
     }
 }
