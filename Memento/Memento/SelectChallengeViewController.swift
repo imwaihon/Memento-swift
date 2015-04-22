@@ -16,6 +16,8 @@ class SelectChallengeViewController: UIViewController {
         case findMode = "Find"
     }
     
+    @IBOutlet weak var modeDescriptionLabel: UILabel!
+    @IBOutlet weak var modeImage: UIImageView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var modeTitleLabel: UILabel!
     @IBOutlet weak var leftButton: UIButton!
@@ -29,6 +31,7 @@ class SelectChallengeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         modeTitleLabel.text = gameModes.orderMode.rawValue
+        modeImage.image = UIImage(named:"orderModeIcon")
         playButton.layer.borderColor = UIColor.darkGrayColor().CGColor
         playButton.layer.borderWidth = 1.5
         playButton.layer.cornerRadius = 5
@@ -41,11 +44,14 @@ class SelectChallengeViewController: UIViewController {
         leftButton.hidden = true
         rightButton.hidden = false
         modeTitleLabel.text = gameModes.orderMode.rawValue
+        modeImage.image = UIImage(named:"orderModeIcon")
+        
     }
     @IBAction func rightButtonClicked(sender: AnyObject) {
         leftButton.hidden = false
         rightButton.hidden = true
         modeTitleLabel.text = gameModes.findMode.rawValue
+        modeImage.image = UIImage(named:"findModeIcon")
     }
     @IBAction func playButtonPressed(sender: AnyObject) {
         self.performSegueWithIdentifier("LoadCustomChallengeSegue", sender: self)

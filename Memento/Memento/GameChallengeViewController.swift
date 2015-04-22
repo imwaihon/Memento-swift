@@ -19,7 +19,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
     var gameEngine: GameEngine
     var gameAnnotationViews: [GameAnnotationView]
     var gameLayerViews: [DraggableImageView]
-    var gameTickViews: [UIImageView]
+    var gameAnimationViews: [UIImageView]
     var roomLabel: Int
     var palaceName: String
     var gameMode: String
@@ -31,7 +31,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         self.gameEngine = GameEngine()
         self.gameAnnotationViews = [GameAnnotationView]()
         self.gameLayerViews = [DraggableImageView]()
-        self.gameTickViews = [UIImageView]()
+        self.gameAnimationViews = [UIImageView]()
         self.roomLabel = Int()
         self.palaceName = String()
         self.gameMode = String()
@@ -50,6 +50,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         
     }
     
+    // If first time loading, start the game
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(false)
         if firstLoad {
@@ -58,6 +59,133 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         }
     }
     
+    // A particular annotation is selected
+    // Queries game engine to check whether this is a valid move
+    func selectAnnotation(associationLabel: Int, annotation: GameAnnotationView) -> Bool {
+        var valid = gameEngine.checkValidMove(associationLabel)
+        
+        if valid {
+            // Annotation view now disabled
+            annotation.disableView()
+            
+            // If game mode is order, set current annotation text
+            if gameMode == "Order" {
+                annotationText.text = annotation.annotation
+            }
+            
+            // Displays green tick animation
+            let tickImageView = UIImageView(image: UIImage(named: "greenTick"))
+            tickImageView.frame =  CGRect(origin: CGPoint(x: annotation.center.x, y: annotation.center.y), size: CGSize(width: 1, height: 1))
+            imageView.addSubview(tickImageView)
+            gameAnimationViews.append(tickImageView)
+            
+            UIView.animateWithDuration(0.3,
+                delay: 0.0,
+                options: UIViewAnimationOptions.CurveEaseInOut ,
+                animations: {
+                    tickImageView.transform = CGAffineTransformMakeScale(50, 50)
+                    
+                },
+                completion: { finished in
+                    self.gameEngine.checkIfNext()
+            })
+            
+            return true
+        } else {
+            // Displays red cross animation
+            let crossImageView = UIImageView(image: UIImage(named: "redCross"))
+            crossImageView.frame =  CGRect(origin: CGPoint(x: annotation.center.x, y: annotation.center.y), size: CGSize(width: 1, height: 1))
+            imageView.addSubview(crossImageView)
+            
+            UIView.animateWithDuration(0.3,
+                delay: 0.0,
+                options: UIViewAnimationOptions.CurveEaseInOut ,
+                animations: {
+                    crossImageView.transform = CGAffineTransformMakeScale(50, 50)
+                    
+                },
+                completion: { finished in
+                    UIView.animateWithDuration(0.1,
+                        delay: 1.0,
+                        options: UIViewAnimationOptions.CurveEaseInOut ,
+                        animations: {
+                            crossImageView.alpha = 0.0
+                        },
+                        completion: { finished in
+                            crossImageView.removeFromSuperview()
+                    })
+            })
+            
+            return false
+        }
+    }
+
+    // Game Starts
+    // Starts the timer and game engine
+    func startGame() {
+        gameEngine.setUpGame(palaceName, mode: gameMode)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
+        loadGameRoomLayout()
+    }
+    
+    // Game Ends - Display End Screen
+    // Invalidates timer, go to end screen
+    // GameEngineDelegate
+    func displayEndGame() {
+        timer.invalidate()
+        self.performSegueWithIdentifier("EndGameSegue", sender: self)
+    }
+    
+    // Game Pauses
+    func pauseGame() {
+        timer.invalidate()
+    }
+    
+    // Game Resumes
+    func resumeGame() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
+    }
+    
+    // Reload the view
+    // GameEngineDelegate
+    func reloadView() {
+        loadGameRoomLayout()
+    }
+    
+    // Updates time by 1 every second on both view and engine
+    // Called every 1 second by a NSTimer timer
+    func updateTimer() {
+        gameEngine.timeElapsed += 1
+        timerLabel.text = String(gameEngine.timeElapsed)
+    }
+    
+    // Check if game is in finsihed state
+    func checkFinished() {
+        gameEngine.checkIfFinished()
+    }
+    
+    // Update the next question annotation if it is in order mode
+    // GameEngineDelegate
+    func updateNextFindQuestion(updateText: String) {
+        annotationText.text = updateText
+    }
+    
+    @IBAction func menuView(sender: UIButton) {
+        pauseGame()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "PauseMenuSegue") {
+            let pauseMenuViewController = segue.destinationViewController as GameModePauseMenuViewController
+            pauseMenuViewController.delegate = self
+        } else if (segue.identifier == "EndGameSegue") {
+            let endViewController = segue.destinationViewController as EndGameChallengeViewController
+            endViewController.timeValue = gameEngine.timeElapsed
+            endViewController.mistakeValue = gameEngine.mistakeCount
+        }
+    }
+    
+    // Cleans up all views that are no longer needed
     private func clearAllViews() {
         for view in gameAnnotationViews {
             view.removeFromSuperview()
@@ -67,13 +195,13 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
             view.removeFromSuperview()
         }
         
-        for view in gameTickViews {
+        for view in gameAnimationViews {
             view.removeFromSuperview()
         }
         
         gameAnnotationViews.removeAll()
         gameLayerViews.removeAll()
-        gameTickViews.removeAll()
+        gameAnimationViews.removeAll()
     }
     
     // Function to load current room layout
@@ -131,99 +259,6 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         // Check if there are any associations in this room
         gameEngine.checkIfNext()
         
-    }
-    
-    // A particular annotation is selected
-    // Asks game engine to check whether this is a valid move
-    func selectAnnotation(associationLabel: Int, annotation: GameAnnotationView) -> Bool {
-        var valid = gameEngine.checkValidMove(associationLabel)
-        
-        if valid {
-            annotation.disableView()
-            let tickImageView = UIImageView(image: UIImage(named: "greenTick"))
-            tickImageView.frame =  CGRect(origin: CGPoint(x: annotation.center.x, y: annotation.center.y), size: CGSize(width: 1, height: 1))
-            imageView.addSubview(tickImageView)
-            gameTickViews.append(tickImageView)
-            
-            if gameMode == "Order" {
-                annotationText.text = annotation.annotation
-            }
-            
-            UIView.animateWithDuration(0.3,
-                delay: 0.0,
-                options: UIViewAnimationOptions.CurveEaseInOut ,
-                animations: {
-                    tickImageView.transform = CGAffineTransformMakeScale(50, 50)
-                    
-                },
-                completion: { finished in
-                    self.gameEngine.checkIfNext()
-            })
-            
-            
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    // Game Starts
-    // Starts the timer and game engine
-    func startGame() {
-        gameEngine.setUpGame(palaceName, mode: gameMode)
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
-        loadGameRoomLayout()
-    }
-    
-    // Game Ends
-    func displayEndGame() {
-        timer.invalidate()
-        self.performSegueWithIdentifier("EndGameSegue", sender: self)
-    }
-    
-    // Game Pauses
-    func pauseGame() {
-        timer.invalidate()
-    }
-    
-    // Game Resumes
-    func resumeGame() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateTimer"), userInfo: nil, repeats: true)
-    }
-    
-    // Reload the view
-    func reloadView() {
-        loadGameRoomLayout()
-    }
-    
-    // Updates time by 1 every second on both view and engine
-    func updateTimer() {
-        gameEngine.timeElapsed += 1
-        timerLabel.text = String(gameEngine.timeElapsed)
-    }
-    
-    func checkFinished() {
-        gameEngine.checkIfFinished()
-    }
-    
-    // Update the next question annotation if it is in order mode
-    func updateNextFindQuestion(updateText: String) {
-        annotationText.text = updateText
-    }
-    
-    @IBAction func menuView(sender: UIButton) {
-        pauseGame()
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "PauseMenuSegue") {
-            let pauseMenuViewController = segue.destinationViewController as GameModePauseMenuViewController
-            pauseMenuViewController.delegate = self
-        } else if (segue.identifier == "EndGameSegue") {
-            let endViewController = segue.destinationViewController as EndGameChallengeViewController
-            endViewController.timeValue = gameEngine.timeElapsed
-            endViewController.mistakeValue = gameEngine.mistakeCount
-        }
     }
     
 }
