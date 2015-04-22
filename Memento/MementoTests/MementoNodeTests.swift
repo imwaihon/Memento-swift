@@ -21,7 +21,7 @@ class MementoNodeTests: XCTestCase {
     
     func testAddPlaceHolder() {
         let node = MementoNode(imageFile: "A.png")
-        let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20))
+        let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20), color: "225378")
         let placeHolder2 = RectanglePlaceHolder(highlightArea: CGRectMake(40, 50, 30, 20))
         let placeHolder3 = RectanglePlaceHolder(highlightArea: CGRectMake(69, 69, 20, 20))
         let assoc1 = Association(placeHolder: placeHolder1, value: "")
@@ -42,6 +42,34 @@ class MementoNodeTests: XCTestCase {
         XCTAssertEqual(node.numPlaceHolders, 2)
         XCTAssertEqual(placeHolder3.label, 0)
         XCTAssertEqual(node.associations, [assoc1, assoc2])
+    }
+    
+    func testSetPlaceHolderColor() {
+        let node = MementoNode(imageFile: "A.png")
+        let placeHolder = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20), color: "225378")
+        
+        node.addPlaceHolder(placeHolder)
+        
+        //Test initial color
+        XCTAssertEqual(node.getPlaceHolder(0)!.color, "225378")
+        
+        //Test color change
+        node.setPlaceHolderColor(0, color: "FFFFFF")
+        XCTAssertEqual(node.getPlaceHolder(0)!.color, "FFFFFF")
+    }
+    
+    func testSetPlaceHolderFrame() {
+        let node = MementoNode(imageFile: "A.png")
+        let placeHolder = RectanglePlaceHolder(highlightArea: CGRectMake(0, 0, 30, 20), color: "225378")
+        
+        node.addPlaceHolder(placeHolder)
+        
+        //Tests initial state
+        XCTAssertEqual(node.getPlaceHolder(0)!.view.frame, CGRectMake(0, 0, 30, 20))
+        
+        //Tests changing frame
+        node.setPlaceHolderFrame(0, newFrame: CGRectMake(100, 100, 100, 100))
+        XCTAssertEqual(node.getPlaceHolder(0)!.view.frame, CGRectMake(100, 100, 100, 100))
     }
     
     func testRemovePlaceHolder() {
