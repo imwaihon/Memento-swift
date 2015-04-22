@@ -132,7 +132,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
                 picker.pushViewController(editor, animated: true)
             } else {
                 if (isNextNode == true){
-                    var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0", image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
+                    var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, /*roomImage: "\(nameTextField.text)0",*/image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
                     if resourceRep != nil {
                         nextRoomLabel = resourceRep!.0
                     }
@@ -147,7 +147,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     
     func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
         if (isNextNode == true){
-            var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, roomImage: "\(nameTextField.text)0", image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
+            var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, /*roomImage: "\(nameTextField.text)0",*/image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
             if resourceRep != nil {
                 nextRoomLabel = resourceRep!.0
             }
