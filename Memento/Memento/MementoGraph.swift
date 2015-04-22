@@ -88,7 +88,10 @@ class MementoGraph {
     //Gets the view representation of the room that comes after the specified room.
     //Returns nil if no such room is found.
     func getNextRoomViewForRoom(roomNumber: Int) -> MemoryPalaceRoomView? {
-        return _nodes.successorValueForCurrentKey(roomNumber)?.viewRepresentation
+        if let nextKey = _nodes.upperBoundOfKey(roomNumber) {
+            return _nodes[nextKey]?.viewRepresentation
+        }
+        return nil
     }
     
     //Checks that representation invariant is not violated

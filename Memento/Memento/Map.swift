@@ -370,18 +370,6 @@ class Map<K: Comparable, V> {
         }
     }
     
-    //Gets the value for the successor key of the given key.
-    //Returns nil if no such successor is found.
-    func successorValueForCurrentKey(curKey: K) -> V? {
-        if isEmpty {
-            return nil
-        }
-        if let lowerBoundNode = lowerBoundNodeForKey(curKey, curNode: _root!) {
-            return lowerBoundNode.key == curKey ? successor(lowerBoundNode)?.value: lowerBoundNode.value
-        }
-        return nil
-    }
-    
     //Gets the smallest key in this map that is not less than the given key.
     //Returns nil if no such key is found in this map.
     func lowerBoundOfKey(key: K) -> K? {
