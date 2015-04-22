@@ -13,7 +13,7 @@ import UIKit
 import MobileCoreServices
 import QuartzCore
 
-class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate {
+class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate, UIActionSheetDelegate {
     
     @IBOutlet weak var swapButton: UIButton!
     @IBOutlet weak var annotateWordButton: UIButton!
@@ -22,6 +22,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var editModeButton: UIButton!
     @IBOutlet weak var deleteModeButton: UIButton!
+    @IBOutlet weak var changeImageButton: UIButton!
     private var newMedia: Bool?
     
     var mementoManager = MementoManager.sharedInstance
@@ -44,6 +45,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private var swappingToggler: Bool = false
     private var previouslySelectedLabel :String = "_"
     private var previouslySelectedIndex : Int?
+    
+    private var darkViewLayer = UIView()
     
     
     override func viewDidLoad() {
@@ -101,6 +104,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             allAnnotatableViews.append(newAnnotatableView)
             imageView.addSubview(newAnnotatableView)
         }
+        
+        // Pre-load dark layer
+        darkViewLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height - 68.0)
+        darkViewLayer.backgroundColor = UIColor.blackColor()
+        darkViewLayer.alpha = 0.3
         
     }
     
@@ -232,9 +240,9 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Edit imageview with CLImageEditor
     @IBAction func editImageView(sender: AnyObject) {
-        var editor = CLImageEditor(image: self.imageView.image)
-        editor.delegate = self
-        self.presentViewController(editor, animated: true, completion: nil)
+        let actionSheet = UIActionSheet(title: "Background Image", delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "Edit ", "Replace")
+        actionSheet.showFromRect(CGRectMake(changeImageButton.frame.origin.x, 703.0, 50, 50), inView: self.view, animated: true)
+        
     }
     
     // Save imageView to camera roll
@@ -260,7 +268,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             annotateWordToggler = false
             annotateWordButton.setImage(UIImage(named: "annotationModeImage.png"), forState: UIControlState.Normal)
             self.view.removeGestureRecognizer(panRec)
-            self.imageView.alpha = 1.0
+            darkViewLayer.removeFromSuperview()
+            
         } else {
             if(deleteToggler == true){
                 self.deleteButtonPressed(deleteModeButton)
@@ -273,7 +282,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             annotateWordButton.setImage(UIImage(named: "annotationModeActiveImage.png"), forState: UIControlState.Normal)
             self.view.removeGestureRecognizer(panRec)
             self.view.addGestureRecognizer(panRec)
-            self.imageView.alpha = 0.75
+            self.imageView.addSubview(darkViewLayer)
+            self.imageView.sendSubviewToBack(darkViewLayer)
         }
     }
     
@@ -524,6 +534,25 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             self.imageView.image = image
             mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: self.roomLabel, newImage: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.PNG)
             self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //Action Sheet Functions
+   func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
+        if(buttonIndex == 0){
+            self.editImage()
+        } else if(buttonIndex == 1){
+            self.replaceImage()
+        }
+    }
+    
+    func editImage() {
+        var editor = CLImageEditor(image: self.imageView.image)
+        editor.delegate = self
+        self.presentViewController(editor, animated: true, completion: nil)
+    }
+    
+    func replaceImage() {
+        performSegueWithIdentifier("ReplaceNodeSegue", sender: self)
     }
 
 }
