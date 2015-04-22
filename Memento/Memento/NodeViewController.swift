@@ -103,6 +103,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             newAnnotatableView.annotation = eachAssociation.value
             allAnnotatableViews.append(newAnnotatableView)
             imageView.addSubview(newAnnotatableView)
+            imageView.sendSubviewToBack(newAnnotatableView)
         }
         
         // Pre-load dark layer
