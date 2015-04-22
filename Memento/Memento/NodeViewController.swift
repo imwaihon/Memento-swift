@@ -101,10 +101,12 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             newAnnotatableView.backgroundColor = .whiteColor()
             newAnnotatableView.alpha = 0.25
             newAnnotatableView.annotation = eachAssociation.value
+            newAnnotatableView.userInteractionEnabled = false
             allAnnotatableViews.append(newAnnotatableView)
             imageView.addSubview(newAnnotatableView)
             imageView.sendSubviewToBack(newAnnotatableView)
         }
+        
         
         // Pre-load dark layer
         darkViewLayer.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
@@ -197,6 +199,10 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
             if(swappingToggler == true){
                 self.swapAnnotationLabels(swapButton)
+            }
+            // Interaction for all AnnotatableUIViews to be enabled
+            for eachView in allAnnotatableViews {
+                eachView.userInteractionEnabled = true
             }
             deleteToggler = true
             deleteModeButton.setImage(UIImage(named: "eraserSelected.png"), forState: UIControlState.Normal)
