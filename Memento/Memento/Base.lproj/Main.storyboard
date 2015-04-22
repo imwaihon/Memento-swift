@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Uld-zZ-JSg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -808,7 +808,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZR-72-3Wn">
-                                <rect key="frame" x="401" y="404" width="90" height="90"/>
+                                <rect key="frame" x="396" y="339" width="90" height="90"/>
                                 <state key="normal" backgroundImage="photosIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -817,7 +817,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9f4-Vi-YeI">
-                                <rect key="frame" x="532" y="404" width="90" height="90"/>
+                                <rect key="frame" x="526" y="339" width="90" height="90"/>
                                 <state key="normal" backgroundImage="cameraIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -825,24 +825,11 @@
                                     <action selector="useCamera:" destination="f5g-fC-prm" eventType="touchUpInside" id="XzO-FQ-fdg"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter the name of your new image ." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LuN-kV-9d7">
-                                <rect key="frame" x="270" y="273" width="483" height="50"/>
-                                <color key="tintColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <action selector="startedEnteringName:" destination="f5g-fC-prm" eventType="editingDidBegin" id="vcw-pq-jeY"/>
-                                </connections>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
-                    <connections>
-                        <outlet property="nameTextField" destination="LuN-kV-9d7" id="1j4-19-Lme"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeZ-gc-HsU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1008,7 +995,6 @@
                                 <rect key="frame" x="622" y="288" width="51" height="31"/>
                                 <color key="onTintColor" red="0.96719144570000004" green="0.96719144570000004" blue="0.96719144570000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <action selector="guideSwitchChanged:" destination="u2p-iv-RhB" eventType="valueChanged" id="CsJ-tW-wUn"/>
                                     <action selector="showLayerSwitchChanged:" destination="u2p-iv-RhB" eventType="valueChanged" id="qTc-7b-piP"/>
                                 </connections>
                             </switch>

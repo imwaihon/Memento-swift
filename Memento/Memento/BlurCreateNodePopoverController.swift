@@ -21,8 +21,6 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     var isNextNode: Bool = true
     var parentVC: NodeViewController?
     
-    @IBOutlet weak var nameTextField: UITextField!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clearColor()
@@ -39,12 +37,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         self.view.addSubview(visualEffectView)
         self.view.sendSubviewToBack(visualEffectView)
         self.setNeedsStatusBarAppearanceUpdate()
-        self.nameTextField.backgroundColor = UIColor.clearColor()
-        self.nameTextField.textColor = UIColor.whiteColor()
-        self.nameTextField.layer.borderColor = UIColor.whiteColor().CGColor
-        self.nameTextField.layer.borderWidth = 1.5
-        self.nameTextField.layer.cornerRadius = 5
-        self.nameTextField.delegate = self
+
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool{
@@ -65,10 +58,6 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
-    @IBAction func startedEnteringName(sender: AnyObject) {
-        nameTextField.layer.borderColor = UIColor.whiteColor().CGColor
-    }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.BlackOpaque
     }
@@ -76,46 +65,37 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     // Camera button
     @IBAction func useCamera(sender: AnyObject) {
         
-        if(!nameTextField.text.isEmpty){
-            if UIImagePickerController.isSourceTypeAvailable(
-                UIImagePickerControllerSourceType.Camera) {
-                    
-                    let imagePicker = UIImagePickerController()
-                    
-                    imagePicker.delegate = self
-                    imagePicker.sourceType =
-                        UIImagePickerControllerSourceType.Camera
-                    imagePicker.mediaTypes = [kUTTypeImage as NSString]
-                    self.presentViewController(imagePicker, animated: true,
-                        completion: nil)
-                    newMedia = true
-            }
-        } else{
-            nameTextField.layer.borderColor = UIColor.redColor().CGColor
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                
+                imagePicker.delegate = self
+                imagePicker.sourceType =
+                    UIImagePickerControllerSourceType.Camera
+                imagePicker.mediaTypes = [kUTTypeImage as NSString]
+                self.presentViewController(imagePicker, animated: true,
+                    completion: nil)
+                newMedia = true
         }
     }
-    
+        
     // Camera roll button
     @IBAction func useCameraRoll(sender: AnyObject) {
-        if(!nameTextField.text.isEmpty){
-            if UIImagePickerController.isSourceTypeAvailable(
-                UIImagePickerControllerSourceType.SavedPhotosAlbum) {
-                    var imagePicker = UIImagePickerController()
-                    imagePicker.delegate = self
-                    imagePicker.sourceType =
-                        UIImagePickerControllerSourceType.SavedPhotosAlbum
-                    imagePicker.mediaTypes = [kUTTypeImage as NSString]
-                    imagePicker.allowsEditing = false
-                    
-                    var popover = UIPopoverController(contentViewController: imagePicker) as UIPopoverController
-                    var frame = CGRectMake(315, 260, 386, 386);
-                    
-                    popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
-                    
-                    newMedia = false
-            }
-        } else{
-            nameTextField.layer.borderColor = UIColor.redColor().CGColor
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+                var imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType =
+                    UIImagePickerControllerSourceType.SavedPhotosAlbum
+                imagePicker.mediaTypes = [kUTTypeImage as NSString]
+                imagePicker.allowsEditing = false
+                
+                var popover = UIPopoverController(contentViewController: imagePicker) as UIPopoverController
+                var frame = CGRectMake(315, 260, 386, 386);
+                
+                popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+                
+                newMedia = false
         }
         
     }
@@ -132,7 +112,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
                 picker.pushViewController(editor, animated: true)
             } else {
                 if (isNextNode == true){
-                    var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, /*roomImage: "\(nameTextField.text)0",*/image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
+                    var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
                     if resourceRep != nil {
                         nextRoomLabel = resourceRep!.0
                     }
@@ -147,7 +127,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     
     func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
         if (isNextNode == true){
-            var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, /*roomImage: "\(nameTextField.text)0",*/image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
+            var resourceRep = mementoManager.addMemoryPalaceRoom(self.graphName, image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
             if resourceRep != nil {
                 nextRoomLabel = resourceRep!.0
             }
