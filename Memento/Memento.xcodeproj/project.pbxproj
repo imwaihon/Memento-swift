@@ -387,6 +387,7 @@
 				4F000D751AC1188F00720E7E /* NodeViewController.swift */,
 				4127D7A01AD30103007D6EE5 /* BlurCreateNodePopoverController.swift */,
 				41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */,
+				5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */,
 			);
 			name = VisitNodeMode;
 			sourceTree = "<group>";
@@ -450,7 +451,6 @@
 				4FCE35E81ABA8CEF00417763 /* Supporting Files */,
 				5A7E7CFB1ADA358200BD3310 /* Utilities.swift */,
 				5AB3F8261ADC081100906B76 /* Memento-Bridging-Header.h */,
-				5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */,
 			);
 			path = Memento;
 			sourceTree = "<group>";
@@ -808,7 +808,6 @@
 					};
 					4FCE35FC1ABA8CF000417763 = {
 						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 4FCE35E41ABA8CEF00417763;
 					};
 				};
 			};
@@ -1196,7 +1195,6 @@
 		4FCE360B1ABA8CF000417763 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1209,14 +1207,12 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Memento/Memento-Bridging-Header.h";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Memento.app/Memento";
 			};
 			name = Debug;
 		};
 		4FCE360C1ABA8CF000417763 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1225,7 +1221,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Memento/Memento-Bridging-Header.h";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Memento.app/Memento";
 			};
 			name = Release;
 		};

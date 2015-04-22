@@ -472,17 +472,67 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Enter annotation text here..." translatesAutoresizingMaskIntoConstraints="NO" id="637-RB-6lQ">
-                                <rect key="frame" x="16" y="20" width="368" height="167"/>
+                                <rect key="frame" x="16" y="72" width="368" height="115"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nus-D1-qyw" userLabel="Button-1">
+                                <rect key="frame" x="27" y="16" width="33" height="33"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="button1Pressed:" destination="nSk-r9-VSz" eventType="touchUpInside" id="vwL-on-FZd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qik-UA-rkj" userLabel="Button-2">
+                                <rect key="frame" x="106" y="16" width="33" height="33"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="button2Pressed:" destination="nSk-r9-VSz" eventType="touchUpInside" id="sNN-Lc-fPv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vzy-MH-KhW" userLabel="Button-3">
+                                <rect key="frame" x="185" y="16" width="33" height="33"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="button3Pressed:" destination="nSk-r9-VSz" eventType="touchUpInside" id="B2N-dt-REM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eA6-xk-XBx" userLabel="Button-4">
+                                <rect key="frame" x="264" y="16" width="33" height="33"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="button4Pressed:" destination="nSk-r9-VSz" eventType="touchUpInside" id="65k-zV-vAD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJ5-3h-dJq" userLabel="Button-5">
+                                <rect key="frame" x="343" y="16" width="33" height="33"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="button5Pressed:" destination="nSk-r9-VSz" eventType="touchUpInside" id="Bi1-Tp-4tB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="200"/>
                     <connections>
+                        <outlet property="button1" destination="nus-D1-qyw" id="ZeW-PR-Icq"/>
+                        <outlet property="button2" destination="Qik-UA-rkj" id="Vdo-qD-h4c"/>
+                        <outlet property="button3" destination="Vzy-MH-KhW" id="a7X-yo-9TR"/>
+                        <outlet property="button4" destination="eA6-xk-XBx" id="udi-7h-Ec4"/>
+                        <outlet property="button5" destination="CJ5-3h-dJq" id="UsW-KE-nwY"/>
                         <outlet property="textView" destination="637-RB-6lQ" id="Eui-6J-mo0"/>
                     </connections>
                 </viewController>
