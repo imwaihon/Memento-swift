@@ -399,6 +399,30 @@ class Map<K: Comparable, V> {
         return curNode.hasRightChild ? lowerBoundNodeForKey(key, curNode: curNode.rightChild!): successor(curNode)
     }
     
+    /* Gets the smallest key that compares greater than the specified key.
+     * @param key The key to be compared with.
+     * @return The smallest key that is greater than the given key or nil if no such key is found.
+     */
+    func upperBoundOfKey(key: K) -> K? {
+        return isEmpty ? nil: upperBoundNodeForKey(key, curNode: _root!)?.key
+    }
+    
+    //Gets the node with the smallest key such that the key is greater than the specified key.
+    private func upperBoundNodeForKey(key: K, curNode: MapNode<K, V>) -> MapNode<K, V>? {
+        if key == curNode.key {
+            return curNode.hasRightChild ? minElement(curNode.rightChild!): nil
+        }
+        if key < curNode.key {
+            if curNode.hasLeftChild {
+                if let res = upperBoundNodeForKey(key, curNode: curNode.leftChild!) {
+                    return res
+                }
+            }
+            return curNode
+        }
+        return curNode.hasRightChild ? upperBoundNodeForKey(key, curNode: curNode.rightChild!): nil
+    }
+    
     //Returns the node with the next smallest value or nil if no such node exists
     private func successor(node: MapNode<K, V>) -> MapNode<K, V>? {
         if node.hasRightChild {

@@ -337,6 +337,19 @@ class MementoManager {
         return false
     }
     
+    /* Sets the color of the association placeholder.
+     * @param palaceName The name of the memory palace the room is in.
+     * @param roomLabel The label of the room the association is in.
+     * @param placeHolderLabel The label of the target placeholder.
+     * @param color The new color of the placeholder.
+     */
+    func setPlaceHolderColor(palaceName: String, roomLabel: Int, placeHolderLabel: Int, color: String) {
+        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
+            room.setPlaceHolderColor(placeHolderLabel, color: color)
+            model.savePalace(palaceName)
+        }
+    }
+    
     /* Sets the association's frame. Does nothing if the association is not found.
      * @param palaceName The name of the memory palace the room is in.
      * @param roomLabel The label of the room the association is in.
