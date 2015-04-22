@@ -388,12 +388,19 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
-    // Show/Hide all labels on annotations
+    // Show/Hide all labels on annotations to swap
     @IBAction func swapAnnotationLabels(sender: AnyObject) {
         if swappingToggler {
             removeAllLabels()
             swappingToggler = false
             swapButton.setImage(UIImage(named: "orderingModeImage.png"), forState: UIControlState.Normal)
+            
+            // Send all AnnotatableUIViews to the back
+            for eachView in allAnnotatableViews {
+                self.imageView.sendSubviewToBack(eachView)
+                eachView.userInteractionEnabled = false
+            }
+            
         } else {
             if(deleteToggler==true){
                 self.deleteButtonPressed(deleteModeButton)
@@ -404,6 +411,12 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             showAllLabels()
             swappingToggler = true
             swapButton.setImage(UIImage(named: "orderingModeActiveImage.png"), forState: UIControlState.Normal)
+            
+            // Send all AnnotatableUIViews to the front
+            for eachView in allAnnotatableViews {
+                self.imageView.bringSubviewToFront(eachView)
+                eachView.userInteractionEnabled = true
+            }
         }
     }
     
