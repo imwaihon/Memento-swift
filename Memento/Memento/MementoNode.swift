@@ -153,6 +153,10 @@ class MementoNode {
         }
     }
     
+    func setPlaceHolderColor(placeHolderLabel: Int, color: String) {
+        _placeHolders[placeHolderLabel]?.color = color
+    }
+    
     //Swaps the 2 placeholders.
     //Returns false if no swapping takes place due to absence of 1 of the specified placeholders.
     func swapPlaceHolders(pHolder1Label: Int, pHolder2Label: Int) -> Bool {

@@ -19,6 +19,9 @@ struct Constants {
 
     //Overlay encoding
     static let overlayValueSeparator = ";"
+    
+    //Placeholder encoding
+    static let placeholderValueSeparator = ";"
 
     //Graph plist representation keys
     static let nameKey = "name"
