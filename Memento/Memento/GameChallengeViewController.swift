@@ -24,6 +24,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
     var palaceName: String
     var gameMode: String
     var showAnnotation: Bool
+    var showLayer: Bool
     var timer: NSTimer
     var firstLoad: Bool
     
@@ -37,6 +38,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         self.gameMode = String()
         self.timer = NSTimer()
         self.showAnnotation = true
+        self.showLayer = true
         self.firstLoad = true
         super.init(coder: aDecoder)
     }
@@ -217,22 +219,24 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
             animations: { self.imageView.image = toImage },
             completion: nil)
         
-        // Load image layers
-        var layerList = gameEngine.getCurrRoom().overlays
-        for eachOverlay in layerList {
-            var newFrame = eachOverlay.frame
-            var newImageFile = eachOverlay.imageFile
-            var newImage = Utilities.getImageNamed(newImageFile)
-            
-            var newDraggableImageView = DraggableImageView(image: newImage!)
-            newDraggableImageView.userInteractionEnabled = false
-            newDraggableImageView.graphName = self.palaceName
-            newDraggableImageView.roomLabel = self.roomLabel
-            newDraggableImageView.labelIdentifier = eachOverlay.label
-            newDraggableImageView.frame = newFrame
-            
-            gameLayerViews.append(newDraggableImageView)
-            imageView.addSubview(newDraggableImageView)
+        // Load image layers if show layer is true
+        if showLayer {
+            var layerList = gameEngine.getCurrRoom().overlays
+            for eachOverlay in layerList {
+                var newFrame = eachOverlay.frame
+                var newImageFile = eachOverlay.imageFile
+                var newImage = Utilities.getImageNamed(newImageFile)
+                
+                var newDraggableImageView = DraggableImageView(image: newImage!)
+                newDraggableImageView.userInteractionEnabled = false
+                newDraggableImageView.graphName = self.palaceName
+                newDraggableImageView.roomLabel = self.roomLabel
+                newDraggableImageView.labelIdentifier = eachOverlay.label
+                newDraggableImageView.frame = newFrame
+                
+                gameLayerViews.append(newDraggableImageView)
+                imageView.addSubview(newDraggableImageView)
+            }
         }
         
         // Load association list
@@ -243,6 +247,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
             
             var newAnnotatableView = GameAnnotationView(frame: newFrame, gameViewController: self, tagNumber: newLabel, graphName: palaceName, roomLabel:roomLabel)
             
+            // If show annotation is true, create visible annotation
             if showAnnotation {
                 newAnnotatableView.backgroundColor = .whiteColor()
             } else {
@@ -256,7 +261,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
             imageView.addSubview(newAnnotatableView)
         }
         
-        // Check if there are any associations in this room
+        // Check if there are any associations in this room, if not just go to next
         gameEngine.checkIfNext()
         
     }
