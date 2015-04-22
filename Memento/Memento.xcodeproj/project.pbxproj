@@ -93,7 +93,7 @@
 		5A5735191ACFC24E00A18107 /* AnnotatableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41941ABD1ACFA71000035302 /* AnnotatableUIView.swift */; };
 		5A57351A1ACFC25000A18107 /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41359EBC1AC84F3C00CBCC82 /* DraggableImageView.swift */; };
 		5A574BCE1AD76082007571C9 /* linuxpenguin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A574BCD1AD76082007571C9 /* linuxpenguin.jpg */; };
-		5A574BCF1AD76573007571C9 /* linuxpenguin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A574BCD1AD76082007571C9 /* linuxpenguin.jpg */; };
+		5A5AD5751AE7833B005217D8 /* linuxpenguin.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5A574BCD1AD76082007571C9 /* linuxpenguin.jpg */; };
 		5A5FB0A21AC63D6E00EA0EE7 /* MementoModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FB0A11AC63D6E00EA0EE7 /* MementoModelTests.swift */; };
 		5A5FB0A41AC6601100EA0EE7 /* MementoNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FB0A31AC6601100EA0EE7 /* MementoNodeTests.swift */; };
 		5A5FB0A61AC6628E00EA0EE7 /* Association.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5FB0A51AC6628E00EA0EE7 /* Association.swift */; };
@@ -808,6 +808,7 @@
 					};
 					4FCE35FC1ABA8CF000417763 = {
 						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 4FCE35E41ABA8CEF00417763;
 					};
 				};
 			};
@@ -839,8 +840,8 @@
 				4FCE35F31ABA8CF000417763 /* Main.storyboard in Resources */,
 				414272CE1ADFF0CC00809570 /* Paint Palette-100.png in Resources */,
 				41F4E4BE1AE588D4001CE1ED /* AnnotateWords.png in Resources */,
-				5A574BCF1AD76573007571C9 /* linuxpenguin.jpg in Resources */,
 				4116CAF71ADBB93D00D54AE2 /* rightArrow.png in Resources */,
+				5A5AD5751AE7833B005217D8 /* linuxpenguin.jpg in Resources */,
 				4FCE35F81ABA8CF000417763 /* LaunchScreen.xib in Resources */,
 				4116CAF51ADBB93D00D54AE2 /* insertImageAnnotationButton.png in Resources */,
 				4116CAF31ADBB93D00D54AE2 /* editModeButton.png in Resources */,
@@ -1207,6 +1208,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Memento/Memento-Bridging-Header.h";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Memento.app/Memento";
 			};
 			name = Debug;
 		};
@@ -1221,6 +1223,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Memento/Memento-Bridging-Header.h";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Memento.app/Memento";
 			};
 			name = Release;
 		};
