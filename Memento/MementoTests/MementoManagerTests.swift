@@ -220,6 +220,11 @@ class MementoManagerTests: XCTestCase {
         manager.setPlaceHolderFrame(palaceName, roomLabel: 0, placeHolderLabel: 0, newFrame: frame2)
         XCTAssertEqual((room!.getPlaceHolder(0) as RectanglePlaceHolder).highlightArea, frame2)
         
+        //Change the color of placeholder
+        XCTAssertEqual(room!.getPlaceHolder(0)!.color, "FFFFFF")
+        manager.setPlaceHolderColor(palaceName, roomLabel: 0, placeHolderLabel: 0, color: "AAAAAA")
+        XCTAssertEqual(room!.getPlaceHolder(0)!.color, "AAAAAA")
+        
         //Sets association value
         XCTAssertEqual(room!.getAssociation(0)!.value, "")
         manager.setAssociationValue(palaceName, roomLabel: 0, placeHolderLabel: 0, value: "Hello")
