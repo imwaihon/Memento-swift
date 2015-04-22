@@ -27,7 +27,6 @@ class AnnotatableUIView: UIView, UIPopoverPresentationControllerDelegate {
         self.backgroundImage = background
         self.graphName = graphName
         self.roomLabel = roomLabel
-        self.backgroundColor = hexStringToUIColor(backgroundColorHexCode)
         
         self.userInteractionEnabled = true
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
@@ -75,6 +74,10 @@ class AnnotatableUIView: UIView, UIPopoverPresentationControllerDelegate {
     
     func persistAnnotation(){
         self.mementoManager.setAssociationValue(self.graphName, roomLabel: self.roomLabel, placeHolderLabel: self.viewTag, value: self.annotation)
+    }
+    
+    func updateBackgroundColor() {
+        self.backgroundColor = hexStringToUIColor(backgroundColorHexCode)
     }
     
     // Helper function to convert hexstring color to UIColor

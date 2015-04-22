@@ -15,6 +15,7 @@ class AnnotationCardViewController : UIViewController{
     var previousText = ""
     var parent : AnnotatableUIView!
     var edittingEnabled: Bool!
+    var mementoManager = MementoManager.sharedInstance
     
     // Color Buttons
     @IBOutlet weak var button1: UIButton!
@@ -52,36 +53,42 @@ class AnnotationCardViewController : UIViewController{
     }
     
     @IBAction func button1Pressed(sender: AnyObject) {
-        parent.backgroundColor = button1.backgroundColor!
         parent.backgroundColorHexCode = Constants.color1
+        parent.updateBackgroundColor()
+        mementoManager.setPlaceHolderColor(parent.graphName, roomLabel: parent.roomLabel, placeHolderLabel: parent.viewTag, color: parent.backgroundColorHexCode)
         setAllButtonsToFade()
         button1.alpha = 1.0
     }
     
     @IBAction func button2Pressed(sender: AnyObject) {
-        parent.backgroundColor = button2.backgroundColor!
+        //parent.backgroundColor = button2.backgroundColor!
         parent.backgroundColorHexCode = Constants.color2
+        parent.updateBackgroundColor()
+        mementoManager.setPlaceHolderColor(parent.graphName, roomLabel: parent.roomLabel, placeHolderLabel: parent.viewTag, color: parent.backgroundColorHexCode)
         setAllButtonsToFade()
         button2.alpha = 1.0
     }
     
     @IBAction func button3Pressed(sender: AnyObject) {
-        parent.backgroundColor = button3.backgroundColor!
         parent.backgroundColorHexCode = Constants.color3
+        parent.updateBackgroundColor()
+        mementoManager.setPlaceHolderColor(parent.graphName, roomLabel: parent.roomLabel, placeHolderLabel: parent.viewTag, color: parent.backgroundColorHexCode)
         setAllButtonsToFade()
         button3.alpha = 1.0
     }
     
     @IBAction func button4Pressed(sender: AnyObject) {
-        parent.backgroundColor = button4.backgroundColor!
         parent.backgroundColorHexCode = Constants.color4
+        parent.updateBackgroundColor()
+        mementoManager.setPlaceHolderColor(parent.graphName, roomLabel: parent.roomLabel, placeHolderLabel: parent.viewTag, color: parent.backgroundColorHexCode)
         setAllButtonsToFade()
         button4.alpha = 1.0
     }
     
     @IBAction func button5Pressed(sender: AnyObject) {
-        parent.backgroundColor = button5.backgroundColor!
         parent.backgroundColorHexCode = Constants.color5
+        parent.updateBackgroundColor()        
+        mementoManager.setPlaceHolderColor(parent.graphName, roomLabel: parent.roomLabel, placeHolderLabel: parent.viewTag, color: parent.backgroundColorHexCode)
         setAllButtonsToFade()
         button5.alpha = 1.0
     }
