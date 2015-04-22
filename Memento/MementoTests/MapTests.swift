@@ -280,4 +280,34 @@ class MapTests: XCTestCase {
         XCTAssertEqual(arr[0].0, 3)
         XCTAssertEqual(arr[0].1, Character("z"))
     }
+    
+    func testLowerBoundOfKey() {
+        let map = Map<Int, Character>()
+        let keys = [2, 1, 4, 7, 5, 18]
+        let values = Array<Character>("badger")
+
+        for i in 0..<keys.count {
+            map[keys[i]] = values[i]
+        }
+        
+        XCTAssertEqual(map.lowerBoundOfKey(7)!, 7)
+        XCTAssertEqual(map.lowerBoundOfKey(11)!, 18)
+        XCTAssertTrue(map.lowerBoundOfKey(19) == nil)
+        XCTAssertEqual(map.lowerBoundOfKey(-1)!, 1)
+    }
+    
+    func testUpperBoundOfKey() {
+        let map = Map<Int, Character>()
+        let keys = [2, 1, 4, 7, 5, 18]
+        let values = Array<Character>("badger")
+
+        for i in 0..<keys.count {
+            map[keys[i]] = values[i]
+        }
+
+        XCTAssertEqual(map.upperBoundOfKey(5)!, 7)
+        XCTAssertEqual(map.upperBoundOfKey(-1)!, 1)
+        XCTAssertEqual(map.upperBoundOfKey(11)!, 18)
+        XCTAssertTrue(map.upperBoundOfKey(18) == nil)
+    }
 }
