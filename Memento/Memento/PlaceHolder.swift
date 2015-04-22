@@ -14,21 +14,30 @@ import UIKit
 
 class PlaceHolder: Equatable {
     let view: UIView
+    let defaultColor = "FFFFFF"
     var label: Int = 0
+    var color: String
     
     //Properties
     var stringEncoding: String {
-        return NSStringFromCGRect(view.frame)
+        return NSStringFromCGRect(view.frame).stringByAppendingString(Constants.placeholderValueSeparator).stringByAppendingString(color)
     }
     
     init(frame: CGRect){
         view = UIView(frame: frame)
+        color = defaultColor
+    }
+    
+    init(frame: CGRect, color: String) {
+        view = UIView(frame: frame)
+        self.color = color
     }
     
     //Decodes the string representation into a PlaceHodler object.
     //rep should be the type of string returned by stringEncoding property.
     class func decodeFromString(rep: String) -> PlaceHolder {
-        return PlaceHolder(frame: CGRectFromString(rep))
+        let arr = rep.componentsSeparatedByString(Constants.placeholderValueSeparator)
+        return arr.count > 1 ? PlaceHolder(frame: CGRectFromString(arr[0]), color: arr[1]): PlaceHolder(frame: CGRectFromString(arr[0]))
     }
     
     class func hasOverlap(placeHolder1: PlaceHolder, placeHolder2: PlaceHolder) -> Bool {

@@ -15,7 +15,7 @@ class RectanglePlaceHolder: PlaceHolder {
     let highlightArea: CGRect
     
     override var stringEncoding: String{
-        return NSStringFromCGRect(highlightArea)
+        return NSStringFromCGRect(highlightArea).stringByAppendingString(Constants.placeholderValueSeparator).stringByAppendingString(color)
     }
     
     init(highlightArea: CGRect){
@@ -25,9 +25,15 @@ class RectanglePlaceHolder: PlaceHolder {
         //Do something to the view to make it visible on screen
     }
     
+    init(highlightArea: CGRect, color: String) {
+        self.highlightArea = highlightArea
+        super.init(frame: highlightArea, color: color)
+    }
+    
     //Decodes the plist representation into a RectanglePlaceHolder.
     //rep should be the type of string that is returned by stringEncoding property.
     override class func decodeFromString(rep: String) -> PlaceHolder {
-        return RectanglePlaceHolder(highlightArea: CGRectFromString(rep))
+        let arr = rep.componentsSeparatedByString(Constants.placeholderValueSeparator)
+        return arr.count > 1 ? RectanglePlaceHolder(highlightArea: CGRectFromString(arr[0]), color: arr[1]): RectanglePlaceHolder(highlightArea: CGRectFromString(arr[0]))
     }
 }

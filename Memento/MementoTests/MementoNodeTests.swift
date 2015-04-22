@@ -124,7 +124,7 @@ class MementoNodeTests: XCTestCase {
         let node = MementoNode(imageFile: "A.png")
         let overlay1 = MutableOverlay(frame: CGRectMake(30, 30, 30, 30), imageFile: "B.png")
         let overlay2 = MutableOverlay(frame: CGRectMake(45, 0, 100, 77), imageFile: "C.png")
-        let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(30, 30, 30, 30))
+        let placeHolder1 = RectanglePlaceHolder(highlightArea: CGRectMake(30, 30, 30, 30), color: "225378")
         let placeHolder2 = RectanglePlaceHolder(highlightArea: CGRectMake(100, 200, 300, 400))
         
         //Tests initial state representation
