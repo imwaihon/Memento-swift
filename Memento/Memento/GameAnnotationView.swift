@@ -36,7 +36,6 @@ class GameAnnotationView: UIView {
     }
     
     func handleTap(nizer: UITapGestureRecognizer!) {
-        
         var valid = self.gameViewController.selectAnnotation(self.viewTag, annotation: self)
         
     }

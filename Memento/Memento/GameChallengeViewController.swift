@@ -249,7 +249,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
             
             // If show annotation is true, create visible annotation
             if showAnnotation {
-                newAnnotatableView.backgroundColor = .whiteColor()
+                newAnnotatableView.backgroundColor = Utilities.hexStringToUIColor(eachAssociation.placeHolder.color)
             } else {
                 newAnnotatableView.backgroundColor = .clearColor()
             }
