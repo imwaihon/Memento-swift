@@ -48,7 +48,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     private var darkViewLayer = UIView()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageView.userInteractionEnabled = true
@@ -446,7 +445,10 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             if (previouslySelectedLabel == "_") {
                 previouslySelectedLabel = String(labelSelected)
                 previouslySelectedIndex = (sender?.titleLabel?.text?.toInt())! - 1
-                sender.backgroundColor = UIColor.grayColor()
+                
+                // Draw border
+                sender.layer.borderWidth = 2.0
+                sender.layer.borderColor = UIColor.yellowColor().CGColor
             } else {
                 // Swap the labels
                 mementoManager.swapPlaceHolders(self.graphName, roomLabel: self.roomLabel, pHolder1Label: previouslySelectedLabel.toInt()!, pHolder2Label: labelSelected)
