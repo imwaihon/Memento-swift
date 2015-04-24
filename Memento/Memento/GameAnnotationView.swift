@@ -12,7 +12,7 @@ import UIKit
 class GameAnnotationView: UIView {
     
     var mementoManager = MementoManager.sharedInstance
-    var gameViewController: GameChallengeViewController
+    weak var gameViewController: GameChallengeViewController?
     var viewTag: Int
     var roomLabel: Int
     var graphName: String
@@ -36,7 +36,7 @@ class GameAnnotationView: UIView {
     }
     
     func handleTap(nizer: UITapGestureRecognizer!) {
-        var valid = self.gameViewController.selectAnnotation(self.viewTag, annotation: self)
+        var valid = self.gameViewController?.selectAnnotation(self.viewTag, annotation: self)
         
     }
     

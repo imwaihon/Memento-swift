@@ -11,20 +11,18 @@ import UIKit
 
 class AnnotatableUIView: UIView, UIPopoverPresentationControllerDelegate {
     
-    weak var parentViewController = UIViewController()
+    weak var parentViewController: NodeViewController?
     var viewTag = Int()
-    var backgroundImage = UIImageView()
     var roomLabel = Int()
     var graphName = String()
     var annotation = String()
     var mementoManager = MementoManager.sharedInstance
     var backgroundColorHexCode: String = "FFFFFF"
     
-    init(frame: CGRect, parentController: UIViewController, tagNumber: Int, background: UIImageView, graphName: String, roomLabel: Int) {
+    init(frame: CGRect, parentController: NodeViewController, tagNumber: Int, graphName: String, roomLabel: Int) {
         super.init(frame: frame)
-        self.parentViewController = parentController
+        parentViewController = parentController
         self.viewTag = tagNumber
-        self.backgroundImage = background
         self.graphName = graphName
         self.roomLabel = roomLabel
         
@@ -39,7 +37,7 @@ class AnnotatableUIView: UIView, UIPopoverPresentationControllerDelegate {
     
     // Add a simple annotation or delete, depending on NodeViewController parent
     func handleTap(nizer: UITapGestureRecognizer!) {
-        weak var nodeViewController = parentViewController as? NodeViewController
+        weak var nodeViewController = parentViewController
         if nodeViewController != nil {
             if nodeViewController!.deleteToggler {
                 // Delete mode active
