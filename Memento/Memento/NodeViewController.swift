@@ -13,7 +13,7 @@ import UIKit
 import MobileCoreServices
 import QuartzCore
 
-class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate, UIActionSheetDelegate {
+class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate, UIActionSheetDelegate, AddLayerDelegate {
     
     @IBOutlet weak var swapButton: UIButton!
     @IBOutlet weak var annotateWordButton: UIButton!
@@ -80,6 +80,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             var newFrame = eachOverlay.frame
             var newImageFile = eachOverlay.imageFile
             var newImage = Utilities.getImageNamed(newImageFile)
+            // TODO: remove NSlog
             NSLog(newImageFile)
             var newDraggableImageView = DraggableImageView(image: newImage!)
             newDraggableImageView.graphName = self.graphName
@@ -384,7 +385,9 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if (editToggler == false) {
             return
         }
-        getImageFromPhotoLibrary(sender)
+        
+        let actionSheet = UIActionSheet(title: "Image Layer", delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "Photos", "Camera", "Existing")
+        actionSheet.showFromRect(CGRectMake(changeImageButton.frame.origin.x, 703.0, 50, 50), inView: self.view, animated: true)
         
     }
     
@@ -492,7 +495,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     
     // Helper functions for main photo pickers
-    private func getImageFromPhotoLibrary(sender: AnyObject) {
+    private func getImageFromPhotoLibrary() {
         if UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.SavedPhotosAlbum) {
                 var imagePicker = UIImagePickerController()
@@ -528,20 +531,22 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 image = UIImage(CGImage: image.CGImage, scale:1, orientation: UIImageOrientation.Up)!
             }
             
-            // Adding draggable images
-            // Scaling factor for inserted images is default at height 150
-            var scalingFactor = image.size.height/150.0
-            var newWidth = image.size.width / scalingFactor
-            newImage = DraggableImageView(image: image)
-            newImage.graphName = self.graphName
-            newImage.roomLabel = self.roomLabel
-            newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
-            newImage.parentViewController = self
-            imageView.addSubview(newImage)
+//            // Adding draggable images
+//            // Scaling factor for inserted images is default at height 150
+//            var scalingFactor = image.size.height/150.0
+//            var newWidth = image.size.width / scalingFactor
+//            newImage = DraggableImageView(image: image)
+//            newImage.graphName = self.graphName
+//            newImage.roomLabel = self.roomLabel
+//            newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
+//            newImage.parentViewController = self
+//            imageView.addSubview(newImage)
+//            
+//            // Get paths for saving
+//            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: (newImage.image!), imageType: Constants.ImageType.PNG)!
+//            newImage.labelIdentifier = newOverlay.label
             
-            // Get paths for saving
-            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: (newImage.image!), imageType: Constants.ImageType.PNG)!
-            newImage.labelIdentifier = newOverlay.label
+            addLayer(image, imageName: nil)
             
             if (newMedia == true) {
                 // Option to save to camera roll/ Photo album
@@ -573,6 +578,29 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
+    // Adding draggable images
+    // Scaling factor for inserted images is default at height 150
+    func addLayer(image: UIImage, imageName: String?) {
+        var scalingFactor = image.size.height/150.0
+        var newWidth = image.size.width / scalingFactor
+        newImage = DraggableImageView(image: image)
+        newImage.graphName = self.graphName
+        newImage.roomLabel = self.roomLabel
+        newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
+        newImage.parentViewController = self
+        
+        if imageName != nil {
+            newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: MutableOverlay(frame: newImage.frame, imageFile: imageName!))!
+            
+        } else {
+            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: (newImage.image!), imageType: Constants.ImageType.PNG)!
+            newImage.labelIdentifier = newOverlay.label
+        }
+        
+        imageView.addSubview(newImage)
+    }
+    
     /******************************************************************************************/
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -593,26 +621,48 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
             self.imageView.image = image
             mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: self.roomLabel, newImage: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.PNG)
+        // TODO: JPG?
             self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //Action Sheet Functions
    func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
-        if(buttonIndex == 0){
-            self.editImage()
-        } else if(buttonIndex == 1){
-            self.replaceImage()
+        if actionSheet.title == "Background Image" {
+            if (buttonIndex == 0) {
+                editBackgroundImage()
+            } else if (buttonIndex == 1) {
+                replaceBackgroundImage()
+            }
+        } else if actionSheet.title == "Image Layer" {
+            if (buttonIndex == 0) {
+                getImageFromPhotoLibrary()
+            } else if (buttonIndex == 1) {
+                // Camera
+                
+            } else if (buttonIndex == 2) {
+                self.presentSharedResourcePopover()
+            }
         }
     }
     
-    func editImage() {
+    func editBackgroundImage() {
         var editor = CLImageEditor(image: self.imageView.image)
         editor.delegate = self
         self.presentViewController(editor, animated: true, completion: nil)
     }
     
-    func replaceImage() {
+    func replaceBackgroundImage() {
         performSegueWithIdentifier("ReplaceNodeSegue", sender: self)
+    }
+    
+    func presentSharedResourcePopover() {
+        var sharedResourceController = self.storyboard?.instantiateViewControllerWithIdentifier("SharedResourceViewController") as SharedResourceViewController
+        sharedResourceController.delegate = self
+        var popover = UIPopoverController(contentViewController: sharedResourceController) as UIPopoverController
+        var frame = CGRectMake(315, 260, 386, 386);
+
+        popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+        
     }
 
 }

@@ -10,50 +10,42 @@ import Foundation
 import UIKit
 
 
-// Stashed
+class SharedResourceViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    var mementoManager = MementoManager.sharedInstance
+    var resourceList = [String]()
+    weak var delegate: AddLayerDelegate?
+    
+    @IBOutlet weak var resourceView: UICollectionView!
 
-//class SharedResourceViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-//    
-//    var mementoManager = MementoManager.sharedInstance
-//    
-//    required init(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        
-//    }
-//
-//    
-////    // COLLECTION VIEW
-////    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-////        return palaces.count
-////    }
-////    
-////    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-////        var cell = palaceTiles.dequeueReusableCellWithReuseIdentifier("SelectPalaceCollectionViewCell", forIndexPath: indexPath) as SelectPalaceCollectionViewCell
-////        cell.parent = self
-////        
-////        let currentIcon : MemoryPalaceIcon = palaces[indexPath.item]
-////        if(imagesCache[currentIcon.imageFile] == nil || imagesCache[currentIcon.imageFile] == UIImage()) {
-////            imagesCache[currentIcon.imageFile] = Utilities.getImageNamed(currentIcon.imageFile)
-////        }
-////        cell.imageView.image = imagesCache[currentIcon.imageFile]
-////        cell.nameLabel.text = currentIcon.graphName
-////        cell.nameLabel.hidden = false
-////        cell.opacityBackground.hidden = false
-////        
-////        return cell
-////    }
-////    
-////    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-////        let cellClicked = collectionView.cellForItemAtIndexPath(indexPath) as SelectPalaceCollectionViewCell
-////        self.nextPalace = cellClicked.nameLabel.text!
-////        self.performSegueWithIdentifier("ShowBeforeStartSegue", sender: self)
-////    }
-////    
-//    
-//}
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        resourceList = mementoManager.getImageResource()
+        
+    }
+
+    
+    // COLLECTION VIEW
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return resourceList.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var cell = resourceView.dequeueReusableCellWithReuseIdentifier("SharedResourceCollectionViewCell", forIndexPath: indexPath) as SharedResourceCollectionViewCell
+        cell.imageView.image = Utilities.convertToThumbnail(Utilities.getImageNamed(resourceList[indexPath.item]))
+        
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cellClicked = collectionView.cellForItemAtIndexPath(indexPath) as SharedResourceCollectionViewCell
+        delegate?.addLayer(Utilities.getImageNamed(resourceList[indexPath.item]), imageName: resourceList[indexPath.item])
+    }
+    
+    
+}
