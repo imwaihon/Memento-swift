@@ -67,6 +67,7 @@ class MementoManager {
     }
     
     init(){
+        println("Initializing MementoManager")
         selectedPalace = nil
         selectedRoom = nil
         model = MementoModel.sharedInstance

@@ -54,6 +54,8 @@ class ResourceManager {
     //Creates the directory if it does not already exists.
     init(directory: String) {
         
+        println("Initializing resource manager")
+        
         //Computing the path to save the resource tracking file
         let docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
         _dirPath = docDir.stringByAppendingPathComponent(directory)
@@ -67,7 +69,14 @@ class ResourceManager {
         let trackingFileExists = NSFileManager.defaultManager().fileExistsAtPath(_resourceListPath)
         let directoryExists = NSFileManager.defaultManager().fileExistsAtPath(_dirPath, isDirectory: &isDir) && isDir
         if trackingFileExists && directoryExists {
-            _referenceCountTable = NSDictionary(contentsOfFile: _resourceListPath) as [String: UInt]
+            if let table = NSDictionary(contentsOfFile: _resourceListPath) as? [String: UInt] {
+                _referenceCountTable = table
+                println("Ok")
+            } else {
+                _referenceCountTable = [String: UInt]()
+                println("Not ok")
+            }
+            //_referenceCountTable = NSDictionary(contentsOfFile: _resourceListPath) as [String: UInt]
         } else {
             _referenceCountTable = [String: UInt]()
             NSFileManager.defaultManager().createDirectoryAtPath(_dirPath, withIntermediateDirectories: true, attributes: nil, error: nil)

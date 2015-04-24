@@ -15,7 +15,7 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
     
     
     var newMedia: Bool?
-    var model = MementoManager()
+    var model = MementoManager.sharedInstance
     var parent: ModelChangeUpdateDelegate!
     
     @IBOutlet weak var nameTextField: UITextField!
