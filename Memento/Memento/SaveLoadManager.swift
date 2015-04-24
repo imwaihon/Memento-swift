@@ -56,7 +56,7 @@ class SaveLoadManager {
         var isDirectory: ObjCBool = false
         let directoryExists = fileManager.fileExistsAtPath(dirPath, isDirectory: &isDirectory)
         if !directoryExists || !isDirectory {
-            assert(fileManager.createDirectoryAtPath(dirPath, withIntermediateDirectories: true, attributes: nil, error: nil))
+            fileManager.createDirectoryAtPath(dirPath, withIntermediateDirectories: true, attributes: nil, error: nil)
         }
     }
     
