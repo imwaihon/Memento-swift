@@ -13,7 +13,7 @@ import UIKit
 import MobileCoreServices
 import QuartzCore
 
-class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate, UIActionSheetDelegate, AddLayerDelegate {
+class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate, UIPopoverPresentationControllerDelegate, AddLayerDelegate {
     
     @IBOutlet weak var swapButton: UIButton!
     @IBOutlet weak var annotateWordButton: UIButton!
@@ -27,7 +27,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     var mementoManager = MementoManager.sharedInstance
     
-    private var newImage: DraggableImageView!
     private let panRec = UIPanGestureRecognizer()
     private var startPoint = CGPoint()
     private var allCGRects = [CGRect]()
@@ -162,13 +161,29 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         // Empty array of views to prevent retain cycle
         allAnnotatableViews.removeAll()
         allCGRects.removeAll()
+        allButtons.removeAll()
+
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Edit imageview with CLImageEditor
     @IBAction func editImageView(sender: AnyObject) {
-        let actionSheet = UIActionSheet(title: "Background Image", delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "Edit ", "Replace")
-        actionSheet.showFromRect(CGRectMake(changeImageButton.frame.origin.x, 703.0, 50, 50), inView: self.view, animated: true)
+        var imageSheet = UIAlertController(title: "Background Image", message: nil, preferredStyle: .ActionSheet)
+        
+        imageSheet.addAction(UIAlertAction(title: "Edit", style: .Default, handler: { (action: UIAlertAction!) in
+            self.editBackgroundImage()
+        }))
+        
+        imageSheet.addAction(UIAlertAction(title: "Replace", style: .Default, handler: { (action: UIAlertAction!) in
+            self.replaceBackgroundImage()
+        }))
+        
+        imageSheet.modalPresentationStyle = .Popover
+        
+        imageSheet.popoverPresentationController?.sourceView = self.view
+        imageSheet.popoverPresentationController?.sourceRect = CGRectMake(changeImageButton.frame.origin.x, 703.0, 50, 50)
+        
+        presentViewController(imageSheet, animated: true, completion: nil)
         
     }
     
@@ -185,7 +200,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }))
         
         presentViewController(ssAlert, animated: true, completion: nil)
-        self.viewDidLoad() //TODO: Why call this again? memory
+        self.viewDidLoad()
     }
     
     // Returns imageView's image + all annotations
@@ -257,8 +272,22 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             return
         }
         
-        let actionSheet = UIActionSheet(title: "Image Layer", delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "Photos", "Camera", "Existing")
-        actionSheet.showFromRect(CGRectMake(changeImageButton.frame.origin.x, 703.0, 50, 50), inView: self.view, animated: true)
+        var imageSheet = UIAlertController(title: "Image Layer Options", message: nil, preferredStyle: .ActionSheet)
+        
+        imageSheet.addAction(UIAlertAction(title: "Photo Library", style: .Default, handler: { (action: UIAlertAction!) in
+            self.getImageFromPhotoLibrary()
+        }))
+        
+        imageSheet.addAction(UIAlertAction(title: "Existing Layers", style: .Default, handler: { (action: UIAlertAction!) in
+            self.presentSharedResourcePopover()
+        }))
+        
+        imageSheet.modalPresentationStyle = .Popover
+        
+        imageSheet.popoverPresentationController?.sourceView = self.view
+        imageSheet.popoverPresentationController?.sourceRect = CGRectMake(changeImageButton.frame.origin.x, 703.0, 50, 50)
+        
+        presentViewController(imageSheet, animated: true, completion: nil)
         
     }
     
@@ -354,19 +383,24 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func addLayer(image: UIImage, imageName: String?) {
         var scalingFactor = image.size.height/150.0
         var newWidth = image.size.width / scalingFactor
-        newImage = DraggableImageView(image: image)
-        newImage.graphName = self.graphName
-        newImage.roomLabel = self.roomLabel
-        newImage.frame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
-        newImage.parentViewController = self
+        var newFrame = CGRect(x: imageView.center.x, y: imageView.center.y, width: newWidth, height: 150.0)
+
+        var newImage: DraggableImageView
         
         if imageName != nil {
-            newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: MutableOverlay(frame: newImage.frame, imageFile: imageName!))!
+            newImage = DraggableImageView(image: Utilities.getImageNamed(imageName!))
+            newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: MutableOverlay(frame: newFrame, imageFile: imageName!))!
             
         } else {
-            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newImage.frame, image: (newImage.image!), imageType: Constants.ImageType.PNG)!
+            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newFrame, image: Utilities.convertToThumbnail(image), imageType: Constants.ImageType.PNG)!
+            newImage = DraggableImageView(image: Utilities.getImageNamed(newOverlay.imageFile))
             newImage.labelIdentifier = newOverlay.label
         }
+        
+        newImage.frame = newFrame
+        newImage.graphName = self.graphName
+        newImage.roomLabel = self.roomLabel
+        newImage.parentViewController = self
         
         imageView.addSubview(newImage)
     }
@@ -380,19 +414,22 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     private func getImageFromPhotoLibrary() {
         if UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.SavedPhotosAlbum) {
-                var imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType =
+                var imagePicker: UIImagePickerController? = UIImagePickerController()
+                imagePicker?.delegate = self
+                imagePicker?.sourceType =
                     UIImagePickerControllerSourceType.PhotoLibrary
-                imagePicker.mediaTypes = [kUTTypeImage as NSString]
-                imagePicker.allowsEditing = false
+                imagePicker?.mediaTypes = [kUTTypeImage as NSString]
+                imagePicker?.allowsEditing = false
                 
-                var popover = UIPopoverController(contentViewController: imagePicker) as UIPopoverController
+                var popover = UIPopoverController(contentViewController: imagePicker!) as UIPopoverController?
                 var frame = CGRectMake(315, 260, 386, 386);
                 
-                popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+                popover?.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
                 
                 newMedia = false
+                
+                imagePicker = nil
+                popover = nil
         }
     }
     
@@ -414,7 +451,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
             
             // Call addLayer function
-            addLayer(image, imageName: nil)
+            addLayer(Utilities.convertToScreenSize(image), imageName: nil)
             
             if (newMedia == true) {
                 // Option to save to camera roll/ Photo album
@@ -456,26 +493,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     
-    /* Action Sheets and helper functions */
-    
-   func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
-        if actionSheet.title == "Background Image" {
-            if (buttonIndex == 0) {
-                editBackgroundImage()
-            } else if (buttonIndex == 1) {
-                replaceBackgroundImage()
-            }
-        } else if actionSheet.title == "Image Layer" {
-            if (buttonIndex == 0) {
-                getImageFromPhotoLibrary()
-            } else if (buttonIndex == 1) {
-                // Camera
-                
-            } else if (buttonIndex == 2) {
-                self.presentSharedResourcePopover()
-            }
-        }
-    }
+    /* Action Sheets helper functions */
     
     func editBackgroundImage() {
         var editor = CLImageEditor(image: self.imageView.image)
@@ -488,12 +506,15 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func presentSharedResourcePopover() {
-        var sharedResourceController = self.storyboard?.instantiateViewControllerWithIdentifier("SharedResourceViewController") as SharedResourceViewController
-        sharedResourceController.delegate = self
-        var popover = UIPopoverController(contentViewController: sharedResourceController) as UIPopoverController
+        var sharedResourceController = self.storyboard?.instantiateViewControllerWithIdentifier("SharedResourceViewController") as SharedResourceViewController?
+        sharedResourceController?.delegate = self
+        var popover = UIPopoverController(contentViewController: sharedResourceController!) as UIPopoverController?
         var frame = CGRectMake(315, 260, 386, 386);
 
-        popover.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+        popover?.presentPopoverFromRect(frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+        
+        sharedResourceController = nil
+        popover = nil
         
     }
     

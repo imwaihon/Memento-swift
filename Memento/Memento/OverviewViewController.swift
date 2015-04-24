@@ -119,6 +119,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     @IBAction func backButtonPress(sender: AnyObject) {
         parentVC.dataModelHasBeenChanged()
         model.savePalace(palaceName)
+        parentVC = nil
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

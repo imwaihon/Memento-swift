@@ -15,7 +15,7 @@ class DraggableImageView : UIImageView
 {
     var dragStartPositionRelativeToCenter : CGPoint?
     
-    weak var parentViewController = UIViewController()
+    weak var parentViewController: UIViewController?
     var lastRotation = CGFloat()
     var labelIdentifier = Int()
     var roomLabel = Int()
