@@ -54,8 +54,6 @@ class MementoManager {
         return Static.instance!
     }
     
-    private var selectedPalace: MementoGraph?
-    private var selectedRoom: MementoNode?
     private let model: MementoModel
     private let resourceManager: ResourceManager
     private let graphFactory: MementoGraphFactory
@@ -67,9 +65,6 @@ class MementoManager {
     }
     
     init(){
-        println("Initializing MementoManager")
-        selectedPalace = nil
-        selectedRoom = nil
         model = MementoModel.sharedInstance
         resourceManager = ResourceManager(directory: Constants.imgResourceDir)
         graphFactory = MementoGraphFactory()
