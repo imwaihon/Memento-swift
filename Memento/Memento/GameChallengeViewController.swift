@@ -131,10 +131,13 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
     }
     
     // Game Ends - Display End Screen
-    // Invalidates timer, go to end screen
+    // Invalidates timer, go to end screen, clear all views
     // GameEngineDelegate
     func displayEndGame() {
         timer.invalidate()
+        
+        // Clear all views to avoid leak
+        clearAllViews()
         self.performSegueWithIdentifier("EndGameSegue", sender: self)
     }
     

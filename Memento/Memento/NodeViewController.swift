@@ -159,6 +159,9 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     // Back button pressed
     @IBAction func backButtonPressed(sender: AnyObject) {
+        // Empty array of views to prevent retain cycle
+        allAnnotatableViews.removeAll()
+        allCGRects.removeAll()
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -539,7 +542,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             var newLabel = eachAssociation.placeHolder.label
             allCGRects.append(newFrame)
             
-            var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, background: imageView, graphName: graphName, roomLabel:roomLabel)
+            var newAnnotatableView = AnnotatableUIView(frame: newFrame, parentController: self, tagNumber: newLabel, graphName: graphName, roomLabel:roomLabel)
             newAnnotatableView.backgroundColorHexCode = eachAssociation.placeHolder.color
             newAnnotatableView.alpha = 0.25
             newAnnotatableView.annotation = eachAssociation.value
@@ -576,7 +579,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             allCGRects.append(newRect)
             var newRectPlaceHolder = RectanglePlaceHolder(highlightArea: newRect)
             mementoManager.addPlaceHolder(graphName, roomLabel: roomLabel, placeHolder: newRectPlaceHolder)
-            var newView = AnnotatableUIView(frame: newRect, parentController: self, tagNumber: newRectPlaceHolder.label, background: imageView, graphName: graphName, roomLabel:roomLabel)
+            var newView = AnnotatableUIView(frame: newRect, parentController: self, tagNumber: newRectPlaceHolder.label, graphName: graphName, roomLabel:roomLabel)
             newView.backgroundColor = .whiteColor()
             newView.alpha = 0.25
             allAnnotatableViews.append(newView)
