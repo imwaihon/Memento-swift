@@ -250,6 +250,8 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         allAnnotatableViews.removeAll()
         allCGRects.removeAll()
         allButtons.removeAll()
+        overlayList.removeAll()
+        associationList.removeAll()
 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
