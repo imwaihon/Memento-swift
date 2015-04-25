@@ -21,7 +21,6 @@
 //  Shift/Resize overlay:                               setOverlayFrame(palaceName: String, roomLabel: Int, overlayLabel: Int, newFrame: CGRect)
 //  Remove overlay:                                     removeOverlay(palaceName: String, roomLabel: Int, overlayLabel: Int)
 //  Add placeholder:                                    addPlaceHolder(palaceName: String, roomLabel: Int, placeHolder: PlaceHolder) -> Bool
-//  Shift/Resize placeholder:                           setPlaceHolderFrame(palaceName: String, roomLabel: Int, placeHolderLabel: Int, newFrame: CGRect)
 //  Set association value:                              setAssociationValue(palaceName: String, roomLabel: Int, placeHolderLabel: Int, value: String)
 //  Swap placeholder order:                             swapPlaceHolders(palaceName: String, roomLabel: Int, pHolder1Label: Int, pHolder2Label: Int) -> Bool
 //  Remove placeholder:                                 removePlaceHolder(palaceName: String, roomLabel: Int, placeHolderLabel: Int)
@@ -337,18 +336,6 @@ class MementoManager {
     func setPlaceHolderColor(palaceName: String, roomLabel: Int, placeHolderLabel: Int, color: String) {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
             room.setPlaceHolderColor(placeHolderLabel, color: color)
-            model.savePalace(palaceName)
-        }
-    }
-    
-    /// Sets the association's frame. Does nothing if the association is not found.
-    ///
-    /// :param: palaceName The name of the memory palace the room is in.
-    /// :param: roomLabel The label of the room the association is in.
-    /// :param: placeHolderLabel The label of the target association.
-    func setPlaceHolderFrame(palaceName: String, roomLabel: Int, placeHolderLabel: Int, newFrame: CGRect) {
-        if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            room.setPlaceHolderFrame(placeHolderLabel, newFrame: newFrame)
             model.savePalace(palaceName)
         }
     }

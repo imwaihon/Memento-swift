@@ -216,10 +216,6 @@ class MementoManagerTests: XCTestCase {
         //Adds placeholder to non-existent room
         XCTAssertFalse(manager.addPlaceHolder(palaceName, roomLabel: 1, placeHolder: placeHolder1))
         
-        //Change frame of current placeholder
-        manager.setPlaceHolderFrame(palaceName, roomLabel: 0, placeHolderLabel: 0, newFrame: frame2)
-        XCTAssertEqual((room!.getPlaceHolder(0) as RectanglePlaceHolder).highlightArea, frame2)
-        
         //Change the color of placeholder
         XCTAssertEqual(room!.getPlaceHolder(0)!.color, "FFFFFF")
         manager.setPlaceHolderColor(palaceName, roomLabel: 0, placeHolderLabel: 0, color: "AAAAAA")

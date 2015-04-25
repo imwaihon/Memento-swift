@@ -14,7 +14,6 @@
 //  Abstraction Functions and Specifications:
 //  Add association placeholder:                            addPlaceHolder(placeHolder: PlaceHolder) -> Bool
 //  Get association:                                        getAssociation(placeHolderLabel: Int) -> Association?
-//  Shift/Resize association placeholder:                   setPlaceHolderFrame(label: Int, newFrame: CGRect)
 //  Set association value:                                  setAssociationValue(placeHolderLabel: Int, value: String)
 //  Swap association ordering:                              swapPlaceHolders(pHolder1Label: Int, pHolder2Label: Int) -> Bool
 //  Remove association:                                     removePlaceHolder(placeHolderLabel: Int)
@@ -156,18 +155,6 @@ class MementoNode {
     /// :returns: The association object wth the given label. Returns nil if no such association is found.
     func getAssociation(placeHolderLabel: Int) -> Association? {
         return _placeHolders[placeHolderLabel] != nil && _values[placeHolderLabel] != nil ? Association(placeHolder: _placeHolders[placeHolderLabel]!, value: _values[placeHolderLabel]!): nil
-    }
-    
-    /// Sets the new frame for the placeholder identified by the given label.
-    ///
-    /// :param: placeHolderLabel The label of the placeholder.
-    /// :param: newFrame The new frame for the placeholder.
-    func setPlaceHolderFrame(placeHolderLabel: Int, newFrame: CGRect) {
-        if let pHolder = _placeHolders[label] {
-            let newPlaceholder = RectanglePlaceHolder(highlightArea: newFrame)
-            newPlaceholder.label = pHolder.label
-            _placeHolders[label] = newPlaceholder
-        }
     }
     
     /// Sets the new color for the placeholder. Does nothing if the placeholder is not found.

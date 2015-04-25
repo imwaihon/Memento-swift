@@ -66,10 +66,6 @@ class MementoNodeTests: XCTestCase {
         
         //Tests initial state
         XCTAssertEqual(node.getPlaceHolder(0)!.view.frame, CGRectMake(0, 0, 30, 20))
-        
-        //Tests changing frame
-        node.setPlaceHolderFrame(0, newFrame: CGRectMake(100, 100, 100, 100))
-        XCTAssertEqual(node.getPlaceHolder(0)!.view.frame, CGRectMake(100, 100, 100, 100))
     }
     
     func testRemovePlaceHolder() {
