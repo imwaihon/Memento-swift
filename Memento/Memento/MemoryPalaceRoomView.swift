@@ -2,8 +2,15 @@
 //  MemoryPalaceRoomView.swift
 //  Memento
 //
-//  Defines the object representation of the memory palace room with required
+//  Defines the immutable representation of the memory palace room with required
 //  data to render the room in view/edit mode.
+//
+//  Fields:
+//  graphName: String               The name of the memory palace this room is in
+//  label: Int                      The label assigned to this room
+//  backgroundImage: String         The name of the background image file for this room
+//  overlays: [Overlay]             The list of overlay objects in this room
+//  associations: [Association]     The list of associations in this room
 //
 //  Created by Qua Zi Xian on 1/4/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.

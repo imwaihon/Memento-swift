@@ -2,7 +2,11 @@
 //  MementoGraphIcon.swift
 //  Memento
 //
-//  The icon representation of the graph in graph selection scene.
+//  The immutable icon representation of the memory palace in palace selection scene.
+//
+//  Fields:
+//  graphName: String   The name of the memory palace
+//  imageFile: String   The image file name of the 1st room's background image
 //
 //  Specifications
 //  The view controller should be able to specify/identify the target memory
