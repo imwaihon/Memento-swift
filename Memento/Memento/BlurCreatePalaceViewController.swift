@@ -137,7 +137,7 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
                 editor.delegate = self
                 picker.pushViewController(editor, animated: true)
             } else{
-                model.addMemoryPalace(named: nameTextField.text, /*imageFile: "\(nameTextField.text)0",*/image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
+                model.addMemoryPalace(named: nameTextField.text, image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
                 parent.dataModelHasBeenChanged()
                 self.dismissViewControllerAnimated(true, completion: {finished in
                 self.dismissViewControllerAnimated(true, completion: nil)

@@ -124,6 +124,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     // NAVIGATION FUNCTIONS
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "goToNode"){
+            cellToDelete = nil
             let dvc = segue.destinationViewController as NodeViewController
             //dvc.roomLabel = selectedCellLabel
             dvc.roomLabel = selectedCellLabel
