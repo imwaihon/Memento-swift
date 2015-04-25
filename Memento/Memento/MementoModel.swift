@@ -5,8 +5,9 @@
 //  The app model that stores teh runtime representations of the graphs and nodes.
 //
 //  Specifications:
-//  Add graphs
-//  Remove graphs
+//  Add memory palace
+//  Get memory palace
+//  Remove memort palace
 //
 //  Non-Functional Specifications:
 //  Able to save the graphs
@@ -59,25 +60,17 @@ class MementoModel {
         loadGraphs()
     }
     
-    //Gets the palace name that will be used for the new memory palace with the given base name.
-    func generatePalaceName(baseName: String) -> String {
-        var name = baseName
-        if graphMap[name] != nil {
-            for var i = 1; ; i++ {
-                if graphMap[name+"(\(i))"] == nil {
-                    return name+"(\(i))"
-                }
-            }
-        }
-        return name
-    }
-    
-    //Checks if the memory palace with the given name exists.
+    /// Checks if the memory palace with the given name exists.
+    ///
+    /// :param: palaceName The name of the memory palace to query.
+    /// :returns: true if the memory palace exists and false otherwise.
     func containsPalace(palaceName: String) -> Bool {
         return graphMap[palaceName] != nil
     }
     
-    //Adds the new graph to the collection.
+    /// Adds the new graph to the collection.
+    ///
+    /// :param: palace The memory palace to add.
     func addPalace(palace: MementoGraph){
         
         var name = palace.name
@@ -98,8 +91,10 @@ class MementoModel {
         })
     }
     
-    //Gets the specified memory palace.
-    //Returns nil if palaceNumber<0 or palaceNumber>=numPalaces.
+    /// Gets the specified memory palace.
+    ///
+    /// :param: palaceName The name of the memory palace to retrieve.
+    /// :returns: The memory palace with the given name. Returns nil if no such palace is found.
     func getPalace(palaceName: String) -> MementoGraph? {
         if let index = graphMap[palaceName] {
             return graphs[index]
@@ -107,8 +102,9 @@ class MementoModel {
         return nil
     }
     
-    //Removes the specified memory palace.
-    //Does nothing if palaceNumber<0 or palaceNumber>=numPalaces.
+    /// Removes the specified memory palace. Does nothing if no such palace is found.
+    ///
+    /// :param: palaceName The name of the memory palace to remove.
     func removePalace(palaceName: String){
         if let index = graphMap[palaceName] {
             for i in (index+1)..<graphs.count {
@@ -127,8 +123,11 @@ class MementoModel {
         })
     }
     
-    //Adds the given room to the specified memory palace.
-    //Returns false if the memory palace does not exist.
+    /// Adds the given room to the specified memory palace.
+    ///
+    /// :param: palaceName The name of the memory palace to add the new room to.
+    /// :param: room The memory palace room to add.
+    /// :returns: true if the memory palace room is added. Returns false if the memory palace does not exist.
     func addPalaceRoom(palaceName: String, room: MementoNode) -> Bool {
         if let palace = getPalace(palaceName) {
             palace.addRoom(room)
@@ -142,8 +141,11 @@ class MementoModel {
         return false
     }
     
-    //Gets the memory palace room with the given room number from the specified memory palace.
-    //Returns nil if either the memory palace or the room is missing.
+    /// Gets the memory palace room with the given room number from the specified memory palace.
+    ///
+    /// :param: palaceName The name of the memory palace to get the room from.
+    /// :param: roomLabel The label of the memory palace room to retrieve.
+    /// :returns: The memory palace room with the given label from the given memory palace. Returns nil if either the memory palace or the room is missing.
     func getMemoryPalaceRoom(palaceName: String, roomLabel: Int) -> MementoNode? {
         if let palace = getPalace(palaceName) {
             return palace.getRoom(roomLabel)
@@ -151,8 +153,10 @@ class MementoModel {
         return nil
     }
     
-    //Removes the room from the specified memory palace.
-    //Does nothing if the memory palace does not exist.
+    /// Removes the room from the specified memory palace. Does nothing if the memory palace does not exist.
+    ///
+    /// :param: palaceName The name of the memry palace to remove the room from.
+    /// :param: roomLabel The label of the memory palace room to remove.
     func removeMemoryPalaceRoom(palaceName: String, roomLabel: Int) {
         if let palace = getPalace(palaceName) {
             palace.removeRoom(roomLabel)
@@ -168,8 +172,9 @@ class MementoModel {
         saveLoadManager.savePalaceToFile(palace)
     }
     
-    //Saves the memory palace with the given name.
-    //Does nothing if the memory palace cannot be found.
+    /// Saves the memory palace with the given name. Does nothing if the memory palace cannot be found.
+    ///
+    /// :param: palaceName The name of the memory palace to save.
     func savePalace(palaceName: String) {
         //To be implmented once the SaveLoadManager is working.
         if let palace = getPalace(palaceName) {
