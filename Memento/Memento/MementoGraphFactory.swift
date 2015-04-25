@@ -22,22 +22,30 @@ class MementoGraphFactory {
         nodeFactory = MementoNodeFactory()
     }
     
+    /// Creates a new memory palace with the given name and background image for the 1st room.
+    ///
+    /// :param: named The name of the memory palace.
+    /// :param: imageFile The filename of 1st room's background image.
+    /// :returns: A MementoGraph instance with the given name and 1st room with the given background image.
     func makeGraph(named name: String, imageFile: String) -> MementoGraph {
         let rootNode = nodeFactory.makeNode(imageFile)
         return MementoGraph(name: name, rootNode: rootNode)
     }
     
+    /// Creates a memory palace from the given plist representation.
+    ///
+    /// :param: data The plist representation of the memory palace to make.
+    /// :returns: A MementoGraph instance represented by the given plist representation.
     func decodeAndMakeGraph(data: NSDictionary) -> MementoGraph {
-        var name = data[Constants.nameKey] as String
-        var nodes = data[Constants.nodesKey] as NSArray
+        let name = data[Constants.nameKey] as String
+        let nodes = data[Constants.nodesKey] as NSArray
         var createdNodes = [MementoNode]()
         
         for node in nodes {
             createdNodes.append(nodeFactory.makeNode(node as NSDictionary))
         }
         
-        var createdGraph = MementoGraph(name: name, rootNode: createdNodes[0])
-    
+        let createdGraph = MementoGraph(name: name, rootNode: createdNodes[0])
         for index in 1..<createdNodes.count {
             createdGraph.addRoom(createdNodes[index])
         }
