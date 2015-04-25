@@ -66,8 +66,11 @@ class Map<K: Comparable, V> {
         _size = 0
     }
     
-    //Inserts a new element into the set.
-    //Does nothing if element already exists.
+    /// Inserts a new element into the set.
+    /// Does nothing if element already exists.
+    ///
+    /// :param: key The key to map value to.
+    /// :param: value The value to be mapped to the key.
     func insertValueForKey(key: K, value: V) {
         if isEmpty {
             _root = MapNode<K, V>(key: key, value: value, parent: nil)
@@ -203,7 +206,10 @@ class Map<K: Comparable, V> {
         assert(abs(l.balanceFactor) < 2)
     }
     
-    //Checks if the set contains the specified element
+    /// Checks if the set contains the specified element.
+    ///
+    /// :param: key The key to be queried.
+    /// :returns: true if there is a mapping for this key, false otherwise.
     func containsKey(key: K) -> Bool {
         return isEmpty ? false: containsKey(key, curNode: _root!)
     }
@@ -221,8 +227,10 @@ class Map<K: Comparable, V> {
         }
     }
     
-    //Gets the value mapped to the given key.
-    //Returns nil if the key is not found.
+    /// Gets the value mapped to the given key.
+    ///
+    /// :param: key The key to obtain the mapped value for.
+    /// :returns: The value mapped to the given key. Returns nil if the key is not found.
     func valueForKey(key: K) -> V? {
         return isEmpty ? nil: valueForKey(key, curNode: _root!)
     }
@@ -237,15 +245,16 @@ class Map<K: Comparable, V> {
         return curNode.hasRightChild ? valueForKey(key, curNode: curNode.rightChild!): nil
     }
     
-    //Removes all elements from this set.
+    /// Removes all elements from this set.
     func clear() {
         removeSubtreeOf(_root)
         _root = nil
         _size = 0
     }
     
-    //Removes the specified element from the set.
-    //Does nothing if the element cannot be found.
+    /// Removes the specified element from the set. Does nothing if the element cannot be found.
+    ///
+    /// :param: key The key of the mapping to be removed.
     func eraseValueForKey(key: K) {
         if isEmpty {
             return
@@ -349,7 +358,9 @@ class Map<K: Comparable, V> {
         }
     }
     
-    //Gets the array of elements stored in this set.
+    /// Gets the array of elements stored in this set.
+    ///
+    /// :returns: A list of tuples representing the mappings in this instance.
     func inOrderTraversal() -> [(K, V)] {
         if isEmpty {
             return [(K, V)]()
@@ -370,8 +381,10 @@ class Map<K: Comparable, V> {
         }
     }
     
-    //Gets the smallest key in this map that is not less than the given key.
-    //Returns nil if no such key is found in this map.
+    /// Gets the smallest key in this map that is not less than the given key.
+    ///
+    /// :param: key The key to be compared against.
+    /// :returns: The smallest key k in this instance such that key<=k. Returns nil if no such key is found.
     func lowerBoundOfKey(key: K) -> K? {
         return isEmpty ? nil: lowerBoundNodeForKey(key, curNode: _root!)?.key
     }
@@ -387,10 +400,10 @@ class Map<K: Comparable, V> {
         return curNode.hasRightChild ? lowerBoundNodeForKey(key, curNode: curNode.rightChild!): successor(curNode)
     }
     
-    /* Gets the smallest key that compares greater than the specified key.
-     * @param key The key to be compared with.
-     * @return The smallest key that is greater than the given key or nil if no such key is found.
-     */
+    /// Gets the smallest key that compares greater than the specified key.
+    ///
+    /// :param: key The key to be compared with.
+    /// :returns: The smallest key k in this instance such that key<k. Returns nil if no such key is found.
     func upperBoundOfKey(key: K) -> K? {
         return isEmpty ? nil: upperBoundNodeForKey(key, curNode: _root!)?.key
     }
@@ -517,6 +530,7 @@ class MapNode<K: Comparable, V> {
         _rightHeight = -1
     }
     
+    /// Updates the height of this node.
     func updateHeight() {
         _leftHeight = hasLeftChild ? _leftChild!.height: -1
         _rightHeight = hasRightChild ? _rightChild!.height: -1
