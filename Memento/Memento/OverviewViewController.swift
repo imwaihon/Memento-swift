@@ -9,17 +9,23 @@
 import Foundation
 import UIKit
 
+/// This view is an infinite horizontal scroll representation of the rooms contained within a memory palace.
 class OverviewViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
+    // Storyboard connected variables
     @IBOutlet weak var scrollableOverviewCollectionView: UICollectionView!
+    // Instance variables
     var palaceName: String!
     var model = MementoManager.sharedInstance
     var rooms: [MemoryPalaceRoomIcon]!
     var parentVC: SelectPalaceViewController!
-    
     var selectedCellLabel: Int!
+    var cellToDelete: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Sets up the collection view that will contain the room representations.
         scrollableOverviewCollectionView.delegate = self
         scrollableOverviewCollectionView.dataSource = self
         scrollableOverviewCollectionView.backgroundColor = UIColor.clearColor()
@@ -40,37 +46,40 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         super.viewDidDisappear(animated)
     }
     
+    /// Sets up the gesture recognisers for the delete function.
     func setUpGestures(){
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: "longPressHandler:")
         longPressGesture.minimumPressDuration = 1.0
         self.view.addGestureRecognizer(longPressGesture)
     }
     
+    /// The function called when a long press is detected. Long press triggers the delete palace functionality
     func longPressHandler(gesture: UIGestureRecognizer){
         var pointOfTheTouch = gesture.locationInView(self.scrollableOverviewCollectionView)
         var indexPath = scrollableOverviewCollectionView.indexPathForItemAtPoint(pointOfTheTouch)
         
         if(indexPath != nil && indexPath!.item != 0){
-            let selectedCell = scrollableOverviewCollectionView.cellForItemAtIndexPath(indexPath!) as OverviewImageCollectionViewCell?
-            if(selectedCell != nil){
-                selectedCell?.graphName = self.palaceName
-                selectedCell?.roomLabel = rooms[indexPath!.item - 1].label
-                selectedCell?.deleteButtonView.alpha = 1.0
-                selectedCell?.parent = self
-            }
+            cellToDelete = indexPath?.item
+            scrollableOverviewCollectionView.reloadData()
         }
     }
     
-    func deleteRoom(graphName: String, roomLabel: Int) {
-        model.removeMemoryPalaceRoom(graphName, roomLabel: roomLabel)
-        self.dataModelHasBeenChanged()
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.BlackOpaque
     }
     
-    func dataModelHasBeenChanged() {
+    /// Calls the data model to remove a particular room from the memory palace and updates the current view to reflect the changes
+    ///
+    /// :param: graphName The name of the memory palace that contains the room to be deleted
+    /// :param: roomLabel The room to be deleted in a specific memory palace
+    func deleteRoom(graphName: String, roomLabel: Int) {
+        model.removeMemoryPalaceRoom(graphName, roomLabel: roomLabel)
         self.rooms = model.getPalaceOverview(palaceName)
         self.scrollableOverviewCollectionView.reloadData()
     }
     
+    
+    // COLLECTION VIEW FUNCTIONS
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return rooms.count + 1;
     }
@@ -82,6 +91,11 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
             return cell
         } else{
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier("OverviewImageCell", forIndexPath: indexPath) as OverviewImageCollectionViewCell
+            if(cellToDelete == indexPath.item){
+                cell.showDeleteButton()
+            } else{
+                cell.hideDeleteButton()
+            }
             let currentIcon = rooms[indexPath.row - 1]
             cell.roomLabel = currentIcon.label
             cell.image.image = Utilities.getImageNamed(currentIcon.filename)
@@ -98,15 +112,6 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
 
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "goToNode"){
-            let dvc = segue.destinationViewController as NodeViewController
-            //dvc.roomLabel = selectedCellLabel
-            dvc.roomLabel = selectedCellLabel
-            dvc.graphName = palaceName
-        }
-    }
-    
     func collectionView(collectionView : UICollectionView,layout collectionViewLayout:UICollectionViewLayout,sizeForItemAtIndexPath indexPath:NSIndexPath) -> CGSize
     {
         if(indexPath.row == 0){
@@ -116,16 +121,20 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         }
     }
     
+    // NAVIGATION FUNCTIONS
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "goToNode"){
+            let dvc = segue.destinationViewController as NodeViewController
+            //dvc.roomLabel = selectedCellLabel
+            dvc.roomLabel = selectedCellLabel
+            dvc.graphName = palaceName
+        }
+    }
+    
     @IBAction func backButtonPress(sender: AnyObject) {
         parentVC.dataModelHasBeenChanged()
         model.savePalace(palaceName)
         parentVC = nil
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.BlackOpaque
-    }
-    
-    
 }

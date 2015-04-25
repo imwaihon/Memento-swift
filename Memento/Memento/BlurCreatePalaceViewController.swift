@@ -69,7 +69,10 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         nameTextField.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
-    /// Navigates to the camera to allow the user to click a photo
+    
+    // NAVIGATION FUNCTIONS
+    
+    /// Navigates to the camera to allow the user to click a photo for the new memory palace.
     @IBAction func useCamera(sender: AnyObject) {
         
         if(!nameTextField.text.isEmpty){
@@ -91,7 +94,7 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         }
     }
     
-    // Camera roll button
+    /// Navigates to the camera roll to allow the user to choose a photo for the new memory palace.
     @IBAction func useCameraRoll(sender: AnyObject) {
         if(!nameTextField.text.isEmpty){
             if UIImagePickerController.isSourceTypeAvailable(
@@ -119,6 +122,11 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         
     }
     
+    func handleTap(sender: UITapGestureRecognizer){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // UIIMAGEPICKERCONTROLLERDELEGATE FUNCTIONS
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as NSString
         if mediaType.isEqualToString(kUTTypeImage as NSString) {
@@ -138,6 +146,7 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         }
     }
     
+    // CLIMAGEEDITORDELEGATE FUNCTIONS
     func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!) {
         model.addMemoryPalace(named: nameTextField.text, /*imageFile: "\(nameTextField.text)0",*/image: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
         parent.dataModelHasBeenChanged()
@@ -151,11 +160,6 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         self.dismissViewControllerAnimated(true, completion: {finished in
             self.dismissViewControllerAnimated(true, completion: nil)
         })
-    }
-    
-    
-    func handleTap(sender: UITapGestureRecognizer){
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
