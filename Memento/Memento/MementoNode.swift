@@ -2,8 +2,14 @@
 //  MementoNode.swift
 //  Memento
 //
-//  Defines the model of a memory palace room.
-//  Each room contains background image, list of overlay images and associations.
+//  Defines the model of a memory palace room(mutable).
+//
+//  Fields:
+//  label: Int                      The label assigned to thsi room
+//  backgroundImageFile: String     The name of this room's background image file
+//  graphName: String               The name of the memory palace this room is in
+//  overlays: [Overlay]             The list of overlays in this room
+//  associations: [Association]     The list of associations in this room
 //
 //  Abstraction Functions and Specifications:
 //  Add association placeholder:                            addPlaceHolder(placeHolder: PlaceHolder) -> Bool
