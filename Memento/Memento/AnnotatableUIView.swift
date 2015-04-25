@@ -62,7 +62,7 @@ class AnnotatableUIView: UIView, UIPopoverPresentationControllerDelegate {
                     height: 0)
                 popoverContent.previousText = self.annotation
                 popoverContent.parent = self
-                popoverContent.edittingEnabled = true
+                popoverContent.editingEnabled = true
                 self.parentViewController?.presentViewController(
                     popoverContent,
                     animated: true,
