@@ -2,7 +2,13 @@
 //  MementoNodeIcon.swift
 //  Memento
 //
-//  The icon representation of a node on the graph.
+//  The immutable icon representation of a room in the memory palace.
+//
+//  Fields:
+//  graphName: String       The name of the memory palace this room is in
+//  label: Int              The label assigned to this room
+//  filename: String        The name of the background image file for this room
+//  overlays: [Overlay]     The list of overlay objects in this room
 //
 //  Created by Qua Zi Xian on 23/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.

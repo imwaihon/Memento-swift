@@ -2,8 +2,12 @@
 //  PlaceHolder.swift
 //  Memento
 //
-//  Defines the superclass for association placeholder.
+//  Defines the superclass for mutable association placeholder.
 //  This is used in framework object interactions and is to be subclassed by the user of the framework.
+//
+//  Fields:
+//  label: Int      The assigned label for this placeholder
+//  color: String   The color of the placeholder
 //
 //  Created by Qua Zi Xian on 27/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.

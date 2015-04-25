@@ -2,7 +2,12 @@
 //  MutableOverlay.swift
 //  Memento
 //
-//  Defines the overlay object managed by the MementoNode.
+//  Defines the mutable overlay object managed by the MementoNode.
+//
+//  Fields:
+//  label: Int          The label assigned to this overlay
+//  frame: CGRect       This overlay's image frame
+//  imageFile: String   The name of the overlay image file
 //
 //  Created by Qua Zi Xian on 31/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.

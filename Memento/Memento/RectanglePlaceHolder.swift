@@ -2,7 +2,10 @@
 //  RectanglePlaceHoler.swift
 //  Memento
 //
-//  Defines the rectangular placeholder.
+//  Defines the mutable rectangular placeholder.
+//
+//  Fields:
+//  highlightArea: CGRect   The highlighted region representing the associated area
 //
 //  Created by Qua Zi Xian on 27/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.

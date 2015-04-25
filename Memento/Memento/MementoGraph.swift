@@ -2,7 +2,11 @@
 //  MementoGraph.swift
 //  Memento
 //
-//  Represents a linear graph of rooms.
+//  Defines the model of the memory palace(mutable).
+//
+//  Fields:
+//  name: String                                The name of this memory palace
+//  private _nodes: Map<Int, MementoNode>       The collection of memory palace rooms in balanced Binary Search Tree
 //
 //  Abstraction functions:
 //  Add room:       addRoom(room: MementoNode)

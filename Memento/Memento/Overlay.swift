@@ -2,7 +2,12 @@
 //  Overlay.swift
 //  Memento
 //
-//  Defines the overlay object for display purpose.
+//  Defines the immutable overlay object for display purpose.
+//
+//  Fields:
+//  label: Int          The label assigned to this overlay object
+//  frame: CGRect       This overlay object's image frame
+//  imageFile: String   The name of this overlay's image file
 //
 //  Created by Qua Zi Xian on 31/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
