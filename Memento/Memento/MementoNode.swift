@@ -37,7 +37,7 @@ class MementoNode {
     
     var backgroundImageFile: String
     var label: Int = 0      //The node's identification label in the graph
-    var graphName: String = "sampleGraph"
+    var graphName: String!
     
     //Properties
     var icon: MemoryPalaceRoomIcon {
@@ -72,7 +72,7 @@ class MementoNode {
         return MemoryPalaceRoomView(graphName: graphName, label: label, backgroundImage: backgroundImageFile, overlays: overlays, associations: associations)
     }
     
-    var plistRepresentation: NSDictionary { //Currently assumes no deletion of overlays, placeholders and values
+    var plistRepresentation: NSDictionary {
         var rep = NSMutableDictionary()
         rep[Constants.bgImageKey] = NSString(string: backgroundImageFile)
         
@@ -104,14 +104,18 @@ class MementoNode {
     }
 
     init(imageFile: String){
+        graphName = Constants.defaultPalaceName
         backgroundImageFile = imageFile
         _overlays = Map<Int, MutableOverlay>()
         _placeHolders = Map<Int, PlaceHolder>()
         _values = Map<Int, String>()
     }
     
-    //Adds the given placeholder to this memory palace room.
-    //Returns false if the placeholder cannot be added because it overlaps with an existing placeholder.
+    /// Adds the given placeholder to this memory palace room.
+    /// This operation fails if the given placeholder overlaps with any existing placeholders.
+    ///
+    /// :param: placeHolder The placeholder object to be added.
+    /// :returns: true if the placeholder is successfully added. Returns false otherwise..
     func addPlaceHolder(placeHolder: PlaceHolder) -> Bool {
         
         //Checks for overlap
@@ -132,20 +136,27 @@ class MementoNode {
         return true
     }
     
-    //Gets the placeholder identified by the given label.
-    //Returns nil if no such placeholder is found.
+    /// Gets the placeholder identified by the given label.
+    ///
+    /// :param: placeHolderLabel The label of the placeholder to retrieve.
+    /// :returns: The placeholder object with the given label. Returns nil if no such placeholder is found.
     func getPlaceHolder(placeHolderLabel: Int) -> PlaceHolder? {
         return _placeHolders[placeHolderLabel]
     }
     
-    //Gets the association identified by the placeholder's label.
-    //Returns nil if no such association is found.
+    /// Gets the association identified by the placeholder's label.
+    ///
+    /// :param: placeHolderLabel The label of the placeholder in the association.
+    /// :returns: The association object wth the given label. Returns nil if no such association is found.
     func getAssociation(placeHolderLabel: Int) -> Association? {
         return _placeHolders[placeHolderLabel] != nil && _values[placeHolderLabel] != nil ? Association(placeHolder: _placeHolders[placeHolderLabel]!, value: _values[placeHolderLabel]!): nil
     }
     
-    //Sets the new frame for the placeholder identified by the given label.
-    func setPlaceHolderFrame(label: Int, newFrame: CGRect) {
+    /// Sets the new frame for the placeholder identified by the given label.
+    ///
+    /// :param: placeHolderLabel The label of the placeholder.
+    /// :param: newFrame The new frame for the placeholder.
+    func setPlaceHolderFrame(placeHolderLabel: Int, newFrame: CGRect) {
         if let pHolder = _placeHolders[label] {
             let newPlaceholder = RectanglePlaceHolder(highlightArea: newFrame)
             newPlaceholder.label = pHolder.label
@@ -153,12 +164,19 @@ class MementoNode {
         }
     }
     
+    /// Sets the new color for the placeholder. Does nothing if the placeholder is not found.
+    ///
+    /// :param: placeHolderLabel The label of the placeholder to edit.
+    /// :param: color The new color of the placeholder.
     func setPlaceHolderColor(placeHolderLabel: Int, color: String) {
         _placeHolders[placeHolderLabel]?.color = color
     }
     
-    //Swaps the 2 placeholders.
-    //Returns false if no swapping takes place due to absence of 1 of the specified placeholders.
+    /// Swaps the 2 placeholders. Swapping occurs if both placeholders are found.
+    ///
+    /// :param: pHolder1Label The label of the 1st placeholder to swap.
+    /// :param: pHolder2Label The label of the 2nd placeholder to swap.
+    /// :returns: true if swapping takes place. Returns false otherwise.
     func swapPlaceHolders(pHolder1Label: Int, pHolder2Label: Int) -> Bool {
         if let pHolder1 = _placeHolders[pHolder1Label] {
             if let pHolder2 = _placeHolders[pHolder2Label] {
@@ -176,23 +194,29 @@ class MementoNode {
         return false
     }
 
-    //Removes the placeholder identified by the label, and its corresponding associated value.
-    //Does nothing if the placeholder cannot be found.
+    /// Removes the placeholder identified by the label, and its corresponding associated value.
+    /// Does nothing if the placeholder cannot be found.
+    ///
+    /// :param: placeHolderLabel The label of the placeholder to be removed.
     func removePlaceHolder(placeHolderLabel: Int) {
         _placeHolders.eraseValueForKey(placeHolderLabel)
         _values.eraseValueForKey(placeHolderLabel)
     }
     
-    //Associates the specified placeholder with the given value.
-    //Does nothing ifno such placeholder exists.
+    /// Associates the specified placeholder with the given value. Does nothing if no such placeholder exists.
+    ///
+    /// :param: placeHolderLabel The label of the placeholder associated with the association.
+    /// :param: value The value to be set to the association.
     func setAssociationValue(placeHolderLabel: Int, value: String) {
         if _placeHolders[placeHolderLabel] != nil {
             _values[placeHolderLabel] = value
         }
     }
     
-    //Adds the given overlay object
-    //Returns the identifier assigned to the added overlay
+    /// Adds the given overlay object.
+    ///
+    /// :param: overlay The overlay object to be added.
+    /// :returns: The identifier assigned to the added overlay.
     func addOverlay(overlay: MutableOverlay) -> Int {
         let label = _overlays.isEmpty ? 0: _overlays.largestKey! + 1
         _overlays[label] = overlay
@@ -200,22 +224,27 @@ class MementoNode {
         return label
     }
     
-    //Gets the overlay object with the given label.
-    //Returns nil if no such overlay object can be found.
+    /// Gets the overlay object with the given label.
+    ///
+    /// :param: overlayLabel The label of the overlay object to retrieve.
+    /// :returns: The overlay object with the given label, Returns nil if no such overlay object can be found.
     func getOverlay(overlayLabel: Int) -> Overlay? {
         return _overlays[overlayLabel]?.makeImmuatble()
     }
 
-    //Changes the frame of the overlay object.
-    //Does nothing if the overlay object cannot be found.
+    /// Changes the frame of the overlay object. Does nothing if the overlay object cannot be found.
+    ///
+    /// :param: overlayLabel The label of the overlay object to edit.
+    /// :param: newFrame The new frame for the overlay object.
     func setOverlayFrame(overlayLabel: Int, newFrame: CGRect) {
         if _overlays[overlayLabel] != nil {
             _overlays[overlayLabel]?.frame = newFrame
         }
     }
     
-    //Removes the overlay identified by the given label.
-    //Does nothing if no such overlay is found.
+    /// Removes the overlay identified by the given label. Does nothing if no such overlay is found.
+    ///
+    /// :param: overlayLabel The label of the overlay object to remove.
     func removeOverlay(overlayLabel: Int) {
         _overlays.eraseValueForKey(overlayLabel)
     }

@@ -22,6 +22,9 @@ struct Constants {
     
     //Placeholder encoding
     static let placeholderValueSeparator = ";"
+    
+    //Node constants
+    static let defaultPalaceName = "sampleGraph"
 
     //Graph plist representation keys
     static let nameKey = "name"
@@ -33,10 +36,9 @@ struct Constants {
     static let placeHolderKey = "placeHolders"
     static let valueKey = "values"
     
-    //App document directory path
+    //Directory constants
     static let docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
-
-    //Resources-related constants
+    static let dataDir = "data"
     static let imgResourceDir = "sharedResource"
     
     // Color constants

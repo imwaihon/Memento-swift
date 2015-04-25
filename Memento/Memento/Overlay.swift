@@ -4,9 +4,6 @@
 //
 //  Defines the overlay object for display purpose.
 //
-//  IMPORTANT!
-//  To load the image file, use the exact path = imgResourceDir.stringByAppendingPathComponent(imageFile)
-//
 //  Created by Qua Zi Xian on 31/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
@@ -36,7 +33,9 @@ struct Overlay: Equatable {
         self.imageFile = imageFile
     }
     
-    //Creates a mutable version of this overlay object.
+    /// Creates a mutable version of this overlay object.
+    ///
+    /// :returns The immutable representation of this overlay object.
     func makeMutable() -> MutableOverlay {
         return MutableOverlay(frame: frame, imageFile: imageFile)
     }

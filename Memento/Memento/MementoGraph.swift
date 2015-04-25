@@ -64,20 +64,26 @@ class MementoGraph {
         assert(checkRep())
     }
     
-    //Adds a room to the memory palace.
+    /// Adds a room to the memory palace.
+    ///
+    /// :params: room The memory palace room to add.
     func addRoom(room: MementoNode) {
         room.label = _nodes.isEmpty ? 0: _nodes.largestKey! + 1
         room.graphName = name
         _nodes[room.label] = (room as MementoNode)
     }
     
-    //Gets the room identified by the given number.
+    /// Gets the room identified by the given number.
+    ///
+    /// :param: roomNumber The label of the room to retrieve.
+    /// :returns: The memory palace room with the given label. Returns nil if no such room is found.
     func getRoom(roomNumber: Int) -> MementoNode? {
         return _nodes[roomNumber]
     }
     
-    //Removes the room identified by the specified number.
-    //Does nothing if room identified by the given number does not exist.
+    /// Removes the room identified by the specified number. Does nothing if room identified by the given number does not exist.
+    ///
+    /// :param: roomNumber The label of the memory palace room to remove.
     func removeRoom(roomNumber: Int) {
         if _nodes.size > 1 {
             _nodes.eraseValueForKey(roomNumber)
@@ -85,8 +91,10 @@ class MementoGraph {
         assert(checkRep())
     }
     
-    //Gets the view representation of the room that comes after the specified room.
-    //Returns nil if no such room is found.
+    /// Gets the view representation of the room that comes after the specified room.
+    ///
+    /// :param: roomNumber The label of the memory palace room whose successor is to be retrieved.
+    /// :returns: The memory palace room that immediately follows the room with the given label. Returns nil if no such room is found.
     func getNextRoomViewForRoom(roomNumber: Int) -> MemoryPalaceRoomView? {
         if let nextKey = _nodes.upperBoundOfKey(roomNumber) {
             return _nodes[nextKey]?.viewRepresentation
