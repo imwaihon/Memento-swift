@@ -16,7 +16,7 @@
 //  Set background image for room:                      setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImageFile: String)
 //  Set background image for room with new resource:    setBackgroundImageForRoom(palaceName: String, roomLabel: Int, newImage: UIImage) -> String?
 //  Remove memory palace room:                          removeMemoryPalaceRoom(palaceName: String, roomLabel: Int)
-//  Add overlay:                                        addOverlay(palaceName: String, roomLabel: Int, overlay: MutableOverlay) -> Int?
+//  Add overlay:                                        addOverlay(palaceName: String, roomLabel: Int, frame: CGRect, imageFile: String) -> Int?
 //  Add overlay with new resource:                      addOverlay(palaceName: String, roomLabel: Int, frame: CGRect, image: UIImage) -> Overlay?
 //  Shift/Resize overlay:                               setOverlayFrame(palaceName: String, roomLabel: Int, overlayLabel: Int, newFrame: CGRect)
 //  Remove overlay:                                     removeOverlay(palaceName: String, roomLabel: Int, overlayLabel: Int)
@@ -251,13 +251,14 @@ class MementoManager {
      * Does nothing if the memory palace room is not found.
      * @param palaceName The name of the memory palace the room is in.
      * @param roomLabel The label of the room to add the overlay to.
-     * @param overlay The overlay to add.
+     * @param frame The frame of the overlay.
+     * @param imageFile The filename of the voerlay image.
      * @return The label assigned to the new overlay.
      */
-    func addOverlay(palaceName: String, roomLabel: Int, overlay: MutableOverlay) -> Int? {
+    func addOverlay(palaceName: String, roomLabel: Int, frame: CGRect, imageFile: String) -> Int? {
         if let room = model.getMemoryPalaceRoom(palaceName, roomLabel: roomLabel) {
-            resourceManager.retainResource(overlay.imageFile)
-            let overlayLabel = room.addOverlay(overlay)
+            resourceManager.retainResource(imageFile)
+            let overlayLabel = room.addOverlay(MutableOverlay(frame: frame, imageFile: imageFile))
             model.savePalace(palaceName)
             return overlayLabel
         }

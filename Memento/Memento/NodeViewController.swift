@@ -389,7 +389,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
         if imageName != nil {
             newImage = DraggableImageView(image: Utilities.getImageNamed(imageName!))
-            newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, overlay: MutableOverlay(frame: newFrame, imageFile: imageName!))!
+            newImage.labelIdentifier = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newFrame, imageFile: imageName!)!
             
         } else {
             var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newFrame, image: Utilities.convertToThumbnail(image), imageType: Constants.ImageType.PNG)!
