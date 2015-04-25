@@ -9,8 +9,10 @@
 import Foundation
 
 protocol ModelChangeUpdateDelegate : class{
-    /** This function can be used to indicate that the data model has been changed.
-        the implementation of this function should include code that responds appropriately 
-        to the changes in the model.*/
+    /** 
+        This function can be used to indicate that the data model has been changed.
+        The implementation of this function should include code that responds appropriately 
+        to the changes in the model.
+    */
     func dataModelHasBeenChanged()
 }

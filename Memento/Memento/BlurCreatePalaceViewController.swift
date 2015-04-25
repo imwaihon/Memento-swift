@@ -6,24 +6,27 @@
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
+
 import Foundation
 import UIKit
 import MobileCoreServices
 import QuartzCore
 
+/// This view brings up a full screen modal view with a blur effect on it. The view is used to create a new memory palace by taking an image and a palace name as user inputs
 class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CLImageEditorDelegate {
     
-    
+    // Instance Variables
     var newMedia: Bool?
     var model = MementoManager.sharedInstance
     var parent: ModelChangeUpdateDelegate!
-    
+    // Storyboard connected variables
     @IBOutlet weak var nameTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clearColor()
         
+        // Set up blur effect for the view
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
         visualEffectView.frame = self.view.bounds
         visualEffectView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
@@ -43,11 +46,6 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         nameTextField.delegate = self
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool{
-        textField.resignFirstResponder()
-        return true
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -56,19 +54,22 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         super.viewDidDisappear(animated)
     }
     
-    func handleTap(sender: UITapGestureRecognizer){
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    
-    @IBAction func startedEnteringName(sender: AnyObject) {
-        nameTextField.layer.borderColor = UIColor.whiteColor().CGColor
-    }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.BlackOpaque
     }
     
-    // Camera button
+    // UITEXTFIELDDELEGATEPROTOCOL FUNCTIONS
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    /// This function triggers whenever the user starts entering anything into the text field. It provides functionality towards blocking a user from selecting an image before entering a name for the new palace.
+    @IBAction func startedEnteringName(sender: AnyObject) {
+        nameTextField.layer.borderColor = UIColor.whiteColor().CGColor
+    }
+    
+    /// Navigates to the camera to allow the user to click a photo
     @IBAction func useCamera(sender: AnyObject) {
         
         if(!nameTextField.text.isEmpty){
@@ -150,6 +151,11 @@ class BlurCreatePalaceViewController: UIViewController, UIGestureRecognizerDeleg
         self.dismissViewControllerAnimated(true, completion: {finished in
             self.dismissViewControllerAnimated(true, completion: nil)
         })
+    }
+    
+    
+    func handleTap(sender: UITapGestureRecognizer){
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

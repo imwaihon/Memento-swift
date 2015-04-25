@@ -83,10 +83,12 @@ class ResourceManager {
         }
     }
     
-    /* Gets the list of resources of the given type in the directory managed by this resource manager.
-     * @param type The type of resource to be listed.
-     * @returns An array of file names of resources of the specified type.
-     */
+    
+    /// Gets the list of resources of the given type in the directory managed by this resource manager.
+    /// 
+    /// :param: type The type of resource to be listed.
+    /// :returns: An array of file names of resources of the specified type.
+
     func resourceOfType(type: ResourceType) -> [String] {
         let files = _referenceCountTable.keys.array
         
@@ -112,10 +114,10 @@ class ResourceManager {
         return arr
     }
     
-    /* Gets the reference count for the given resource.
-     * @params resourceName The name of the resource to be queried.
-     * @returns The reference count for the specified resource.
-     */
+    /// Gets the reference count for the given resource.
+    ///
+    /// :param: resourceName The name of the resource to be queried.
+    /// :returns: The reference count for the specified resource.
     func referenceCountForResource(resourceName: String) -> Int {
         return _referenceCountTable[resourceName] == nil ? 0: Int(_referenceCountTable[resourceName]!)
     }
@@ -131,11 +133,11 @@ class ResourceManager {
         }
     }
     
-    /* Saves the text resource to the specified file.
-     * @param resourceName The base name of the text file to save to.
-     * @param text The text resource to be saved.
-     * @returns: The actual name of the text file being saved to, with txt file extension added.
-     */
+    /// Saves the text resource to the specified file.
+    ///
+    /// :param: resourceName The base name of the text file to save to.
+    /// :param: text The text resource to be saved.
+    /// :returns: The actual name of the text file being saved to, with txt file extension added.
     func retainResource(resourceName: String, text: String) -> String {
         var filename = resourceName
         
@@ -159,12 +161,12 @@ class ResourceManager {
         return filename
     }
     
-    /* Adds the given image resource as the given image type
-     * @param resourceName The base name of the file to save as, without the file extension.
-     * @param image The image to be saved.
-     * @param imageType The type of image to be saved as.
-     * @return The actual name of the image file used, with the file extension appended.
-     */
+    /// Adds the given image resource as the given image type
+    ///
+    /// :param: resourceName The base name of the file to save as, without the file extension.
+    /// :param: image The image to be saved.
+    /// :param: imageType The type of image to be saved as.
+    /// :returns: The actual name of the image file used, with the file extension appended.
     func retainResource(resourceName: String, image: UIImage, imageType: ImageType) -> String {
         var filename = resourceName
         let ext = imageType == ImageType.JPG ? jpegExtension: imageType == ImageType.PNG ? pngExtention: String()
@@ -196,11 +198,9 @@ class ResourceManager {
         return filename
     }
     
-    /* Reduces the reference count for the resource object identified by the given name.
-     * The resource object will be removed if there is no more reference to the resource after this operation.
-     * Does nothing if the resource with the given name is not found.
-     * @param resourceName The name of the resource to be released.
-     */
+    /// Reduces the reference count for the resource object identified by the given name. The resource object will be removed if there is no more reference to the resource after this operation. Does nothing if the resource with the given name is not found.
+    ///
+    /// :param: resourceName The name of the resource to be released.
     func releaseResource(resourceName: String) {
         if _referenceCountTable[resourceName] != nil {
             if _referenceCountTable[resourceName] == 1 {    //Removing last reference to resource.

@@ -10,13 +10,15 @@ import UIKit
 
 class SelectPalaceCollectionViewCell: UICollectionViewCell {
     
-    
+    // Storyboard connected variables
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var opacityBackground: UIView!
     @IBOutlet weak var deleteButton: UIButton!
+    // Instance variables
     weak var parent : ModelChangeUpdateDelegate!
     
+    /// Adds shadows to the image and the text to give a depth of field effect
     func addShadows(){
         imageView.layer.shadowColor = UIColor.blackColor().CGColor
         imageView.layer.shadowOffset = CGSizeMake(2, 2);
@@ -35,6 +37,7 @@ class SelectPalaceCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
     
+    /// Deletes the memory palace by calling the model, when the delete button is pressed.
     @IBAction func deleteButtonPressed(sender: AnyObject) {
         var palaceName = nameLabel.text!
         MementoManager.sharedInstance.removeMemoryPalace(palaceName)
