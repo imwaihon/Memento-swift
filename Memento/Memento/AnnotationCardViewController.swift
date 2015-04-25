@@ -15,7 +15,7 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
     @IBOutlet weak var textViewAnno: UITextView!
     var previousText = ""
     weak var parent : AnnotatableUIView!
-    var edittingEnabled: Bool!
+    var editingEnabled: Bool!
     var mementoManager = MementoManager.sharedInstance
     
     // Color Buttons
@@ -32,7 +32,7 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
         textViewAnno.layer.borderWidth = 1.5
         textViewAnno.layer.cornerRadius = 5
         textViewAnno.delegate = self
-        if edittingEnabled == true {
+        if editingEnabled == true {
             textViewAnno.userInteractionEnabled = true
         } else {
             textViewAnno.userInteractionEnabled = false
@@ -47,7 +47,7 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
         super.viewDidAppear(animated)
     }
     override func viewDidDisappear(animated: Bool) {
-        if edittingEnabled == true{
+        if editingEnabled == true{
             parent.annotation = textViewAnno.text
             parent.persistAnnotation()
         }
@@ -96,7 +96,6 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
         setAllButtonsToFade()
         button1.alpha = 1.0
     }
-    
     @IBAction func button2Pressed(sender: AnyObject) {
         //parent.backgroundColor = button2.backgroundColor!
         parent.backgroundColorHexCode = Constants.color2
@@ -105,7 +104,6 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
         setAllButtonsToFade()
         button2.alpha = 1.0
     }
-    
     @IBAction func button3Pressed(sender: AnyObject) {
         parent.backgroundColorHexCode = Constants.color3
         parent.updateBackgroundColor()
@@ -113,7 +111,6 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
         setAllButtonsToFade()
         button3.alpha = 1.0
     }
-    
     @IBAction func button4Pressed(sender: AnyObject) {
         parent.backgroundColorHexCode = Constants.color4
         parent.updateBackgroundColor()
@@ -121,7 +118,6 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
         setAllButtonsToFade()
         button4.alpha = 1.0
     }
-    
     @IBAction func button5Pressed(sender: AnyObject) {
         parent.backgroundColorHexCode = Constants.color5
         parent.updateBackgroundColor()        
@@ -130,19 +126,23 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
         button5.alpha = 1.0
     }
     
+    /* Helper functions */
+    
+    // Helper function to load all buttons based on hexa-coded colors in Constants file.
     private func loadButtons() {
         for eachButton in self.view.subviews {
             if eachButton.isMemberOfClass(UIButton) {
+                // Buttons to be circular with a black border
                 (eachButton as UIButton).layer.cornerRadius = (eachButton as UIButton).bounds.size.width/2
                 (eachButton as UIButton).layer.borderWidth = 2.0
                 (eachButton as UIButton).layer.borderColor = UIColor.blackColor().CGColor
             }
         }
-        button1.backgroundColor = hexStringToUIColor(Constants.color1)
-        button2.backgroundColor = hexStringToUIColor(Constants.color2)
-        button3.backgroundColor = hexStringToUIColor(Constants.color3)
-        button4.backgroundColor = hexStringToUIColor(Constants.color4)
-        button5.backgroundColor = hexStringToUIColor(Constants.color5)
+        button1.backgroundColor = Utilities.hexStringToUIColor(Constants.color1)
+        button2.backgroundColor = Utilities.hexStringToUIColor(Constants.color2)
+        button3.backgroundColor = Utilities.hexStringToUIColor(Constants.color3)
+        button4.backgroundColor = Utilities.hexStringToUIColor(Constants.color4)
+        button5.backgroundColor = Utilities.hexStringToUIColor(Constants.color5)
         setAllButtonsToFade()
     }
     
@@ -154,25 +154,7 @@ class AnnotationCardViewController : UIViewController, UITextViewDelegate {
             }
         }
     }
-    
-    // Helper function to convert hexstring color to UIColor
-    private func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
-        
-        if (cString.hasPrefix("#")) {
-            cString = cString.substringFromIndex(advance(cString.startIndex, 1))
-        }
-        
-        var rgbValue:UInt32 = 0
-        NSScanner(string: cString).scanHexInt(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
+
     
     
 }
