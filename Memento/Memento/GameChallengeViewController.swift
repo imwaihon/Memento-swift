@@ -185,6 +185,13 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
     @IBAction func menuView(sender: UIButton) {
         pauseGame()
     }
+    @IBAction func helpBar(sender: UIButton) {
+        if annotationText.hidden {
+            annotationText.hidden = false
+        } else {
+            annotationText.hidden = true
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "PauseMenuSegue") {

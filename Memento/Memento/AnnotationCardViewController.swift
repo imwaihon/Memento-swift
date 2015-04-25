@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 import QuartzCore
 
-class AnnotationCardViewController : UIViewController{
-    @IBOutlet weak var textView: UITextView!
+class AnnotationCardViewController : UIViewController, UITextViewDelegate {
+
+    @IBOutlet weak var textViewAnno: UITextView!
     var previousText = ""
-    var parent : AnnotatableUIView!
+    weak var parent : AnnotatableUIView!
     var edittingEnabled: Bool!
     var mementoManager = MementoManager.sharedInstance
     
@@ -26,14 +27,15 @@ class AnnotationCardViewController : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.text = previousText
-        textView.layer.borderColor = UIColor.lightGrayColor().CGColor
-        textView.layer.borderWidth = 1.5
-        textView.layer.cornerRadius = 5
-        if edittingEnabled == true{
-            textView.userInteractionEnabled = true
-        } else{
-            textView.userInteractionEnabled = false
+        textViewAnno.text = previousText
+        textViewAnno.layer.borderColor = UIColor.lightGrayColor().CGColor
+        textViewAnno.layer.borderWidth = 1.5
+        textViewAnno.layer.cornerRadius = 5
+        textViewAnno.delegate = self
+        if edittingEnabled == true {
+            textViewAnno.userInteractionEnabled = true
+        } else {
+            textViewAnno.userInteractionEnabled = false
         }
         
         loadButtons()
@@ -46,11 +48,46 @@ class AnnotationCardViewController : UIViewController{
     }
     override func viewDidDisappear(animated: Bool) {
         if edittingEnabled == true{
-            parent.annotation = textView.text
+            parent.annotation = textViewAnno.text
             parent.persistAnnotation()
         }
         super.viewDidDisappear(animated)
     }
+    
+    /* UITextField Delegate */
+
+    // Prevents going over textfield size
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        // Combine the new text with the old
+        let combinedText = (textView.text as NSString).stringByReplacingCharactersInRange(range, withString: text)
+        
+        // Create attributed version of the text
+        let attributedText = NSMutableAttributedString(string: combinedText)
+        attributedText.addAttribute(NSFontAttributeName, value: textView.font, range: NSMakeRange(0, attributedText.length))
+        
+        // Get the padding of the text container
+        let padding = textView.textContainer.lineFragmentPadding
+        
+        // Create a bounding rect size by subtracting the padding
+        // from both sides and allowing for unlimited length
+        let boundingSize = CGSizeMake(textView.frame.size.width - padding * 2, CGFloat.max)
+        
+        // Get the bounding rect of the attributed text in the
+        // given frame
+        let boundingRect = attributedText.boundingRectWithSize(boundingSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
+        
+        // Compare the boundingRect plus the top and bottom padding
+        // to the text view height; if the new bounding height would be
+        // less than or equal to the text view height, append the text
+        if (boundingRect.size.height + padding * 2 <= textView.frame.size.height){
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    /* Color Buttons */
     
     @IBAction func button1Pressed(sender: AnyObject) {
         parent.backgroundColorHexCode = Constants.color1
