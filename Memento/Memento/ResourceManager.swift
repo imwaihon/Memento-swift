@@ -10,7 +10,7 @@
 //  Abstraction functions:
 //  Indicate use of resource:           retainResource(resourceName: String)
 //  Add text resource:                  retainResource(resourceName: String, text: String) -> String
-//  Add image resource:                 retainResource(resourceName: String, image: UIImage) -> String
+//  Add image resource:                 retainResource(resourceName: String, image: UIImage, imageType: ImageType) -> String
 //  Indicate release of resource:       releaseResource(resourceName: String)
 //  Get reference count for resource:   referenceCountForResource(resourceName: String) -> Int
 //  Get list of resource:               resourceOfType(type: ResourceType) -> [String]
@@ -50,8 +50,14 @@ class ResourceManager {
     private let _resourceListPath: String   //The full path of the resource tracking file.
     private var _referenceCountTable: [String: UInt]    //The reference counting table
     
-    //Directory is the name of the directory inside the app's Document directory.
-    //Creates the directory if it does not already exists.
+    /* Creates a new resource manager instance that tracks usage of files in the specified directory.
+     * Creates the directory if it does not already exist.
+     * Creates the tracking file if it does not already exist.
+     * If directory exists but not the tracking file, a new tracking file is created and the directory is treated as
+     * an empty directory.
+     * @param directory The path of the directory, relative to the app's Document directory
+     *                  whose contents are to be tracked.
+     */
     init(directory: String) {
         
         //Computing the path to save the resource tracking file
@@ -64,6 +70,7 @@ class ResourceManager {
         let trackingFileExists = NSFileManager.defaultManager().fileExistsAtPath(_resourceListPath)
         let directoryExists = NSFileManager.defaultManager().fileExistsAtPath(_dirPath, isDirectory: &isDir) && isDir
         if trackingFileExists && directoryExists {
+            //In case an error occurs when reading from file
             if let table = NSDictionary(contentsOfFile: _resourceListPath) as? [String: UInt] {
                 _referenceCountTable = table
             } else {
@@ -76,8 +83,10 @@ class ResourceManager {
         }
     }
     
-    //Gets the list of resources of the given type in th edirectory managed by this resource manager.
-    //Returns: An array of file names of resources of the specified type.
+    /* Gets the list of resources of the given type in the directory managed by this resource manager.
+     * @param type The type of resource to be listed.
+     * @returns An array of file names of resources of the specified type.
+     */
     func resourceOfType(type: ResourceType) -> [String] {
         let files = _referenceCountTable.keys.array
         
@@ -103,14 +112,18 @@ class ResourceManager {
         return arr
     }
     
-    //Gets the reference count for the given resource.
-    //Returns: The reference count for the specified resource.
+    /* Gets the reference count for the given resource.
+     * @params resourceName The name of the resource to be queried.
+     * @returns The reference count for the specified resource.
+     */
     func referenceCountForResource(resourceName: String) -> Int {
         return _referenceCountTable[resourceName] == nil ? 0: Int(_referenceCountTable[resourceName]!)
     }
     
-    //Increases reference count for the resource object identified by the given name.
-    //Does nothing if the resource with the given name is not found.
+    /* Increases reference count for the resource object identified by the given name.
+     * Does nothing if the resource with the given name is not found.
+     * @param resourceName The name of the resource to be used.
+     */
     func retainResource(resourceName: String) {
         if _referenceCountTable[resourceName] != nil {
             _referenceCountTable[resourceName]!++
@@ -118,8 +131,11 @@ class ResourceManager {
         }
     }
     
-    //Saves the text resource to the specified file.
-    //Returns: The actual name of the text file being saved to, with txt file extension added.
+    /* Saves the text resource to the specified file.
+     * @param resourceName The base name of the text file to save to.
+     * @param text The text resource to be saved.
+     * @returns: The actual name of the text file being saved to, with txt file extension added.
+     */
     func retainResource(resourceName: String, text: String) -> String {
         var filename = resourceName
         
@@ -180,12 +196,14 @@ class ResourceManager {
         return filename
     }
     
-    //Reduces the reference count for the resource object identified by the given name.
-    //The resource object will be removed if there is no more reference to the resource after this operation.
-    //Does nothing if the resource with the given name is not found.
+    /* Reduces the reference count for the resource object identified by the given name.
+     * The resource object will be removed if there is no more reference to the resource after this operation.
+     * Does nothing if the resource with the given name is not found.
+     * @param resourceName The name of the resource to be released.
+     */
     func releaseResource(resourceName: String) {
         if _referenceCountTable[resourceName] != nil {
-            if _referenceCountTable[resourceName] == 1 {
+            if _referenceCountTable[resourceName] == 1 {    //Removing last reference to resource.
                 _referenceCountTable[resourceName] = nil
                 NSFileManager.defaultManager().removeItemAtPath(_dirPath.stringByAppendingPathComponent(resourceName), error: nil)
             } else {
