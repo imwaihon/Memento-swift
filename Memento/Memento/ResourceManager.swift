@@ -50,14 +50,12 @@ class ResourceManager {
     private let _resourceListPath: String   //The full path of the resource tracking file.
     private var _referenceCountTable: [String: UInt]    //The reference counting table
     
-    /* Creates a new resource manager instance that tracks usage of files in the specified directory.
-     * Creates the directory if it does not already exist.
-     * Creates the tracking file if it does not already exist.
-     * If directory exists but not the tracking file, a new tracking file is created and the directory is treated as
-     * an empty directory.
-     * @param directory The path of the directory, relative to the app's Document directory
-     *                  whose contents are to be tracked.
-     */
+    /// Creates a new resource manager instance that tracks usage of files in the specified directory.
+    /// Creates the directory if it does not already exist.
+    /// Creates the tracking file if it does not already exist.
+    /// If directory exists but not the tracking file, a new tracking file is created and the directory is treated as an empty directory.
+    ///
+    /// :param: directory The path of the directory, relative to the app's Document directory whose contents are to be tracked.
     init(directory: String) {
         
         //Computing the path to save the resource tracking file
@@ -122,10 +120,10 @@ class ResourceManager {
         return _referenceCountTable[resourceName] == nil ? 0: Int(_referenceCountTable[resourceName]!)
     }
     
-    /* Increases reference count for the resource object identified by the given name.
-     * Does nothing if the resource with the given name is not found.
-     * @param resourceName The name of the resource to be used.
-     */
+    /// Increases reference count for the resource object identified by the given name.
+    /// Does nothing if the resource with the given name is not found.
+    ///
+    /// :param: resourceName The name of the resource to be used.
     func retainResource(resourceName: String) {
         if _referenceCountTable[resourceName] != nil {
             _referenceCountTable[resourceName]!++
