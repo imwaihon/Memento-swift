@@ -312,7 +312,7 @@ class MementoManagerTests: XCTestCase {
         
         //Add overlay using existing image resource
         var overlay2 = MutableOverlay(frame: frame2, imageFile: overlay1!.imageFile)
-        if let label = manager.addOverlay(palaceName, roomLabel: 0, overlay: overlay2) {
+        if let label = manager.addOverlay(palaceName, roomLabel: 0, frame: frame2, imageFile: overlay1!.imageFile) {
             overlay2.label = label
             XCTAssertEqual(room!.numOverlays, 2)
             XCTAssertEqual(label, 1)
@@ -333,7 +333,7 @@ class MementoManagerTests: XCTestCase {
         
         //Failed attempts to add overlay
         XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, frame: frame1, image: image, imageType: Constants.ImageType.JPG) == nil)
-        XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, overlay: overlay2) == nil)
+        XCTAssertTrue(manager.addOverlay(palaceName, roomLabel: 1, frame: frame2, imageFile: overlay1!.imageFile) == nil)
         
         //Change overlay frames
         let newFrame1 = CGRectMake(30, 40, 50, 60)
