@@ -32,14 +32,19 @@ struct MutableOverlay: Equatable {
         self.imageFile = imageFile
     }
     
-    //Decode the given string representation into a MutableOverlay object.
-    //rep must be a string returned by stringEncoding property of a MutableOverlay instance.
+    /// Decode the given string representation into a MutableOverlay object.
+    /// rep must be a string returned by stringEncoding property of a MutableOverlay instance.
+    ///
+    /// :param: rep The string encoding of the overlay object to be decoded.
+    /// :returns: The overlay objext represented by the given string encoding.
     static func decodeFromString(rep: String) -> MutableOverlay {
         let strArray = rep.componentsSeparatedByString(Constants.overlayValueSeparator)
         return MutableOverlay(frame: CGRectFromString(strArray[0]), imageFile: strArray[1])
     }
     
-    //Returns the immutable representation of this object.
+    /// Creates an immutable representation of this object.
+    ///
+    /// :returns: The immutable representation of this object.
     func makeImmuatble() -> Overlay {
         return Overlay(label: label, frame: frame, imageFile: imageFile)
     }
