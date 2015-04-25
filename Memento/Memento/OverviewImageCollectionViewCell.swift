@@ -9,19 +9,29 @@
 import Foundation
 import UIKit
 
+/// Collection view cell that represents a room in a particular memory palace.
 class OverviewImageCollectionViewCell : UICollectionViewCell {
     
+    // Storyboard connected variables
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var deleteButtonView: UIButton!
+    
+    // Instance variables
     var mementoManager = MementoManager.sharedInstance
     var graphName: String!
     var roomLabel: Int!
     var parent: OverviewViewController!
     
-    @IBOutlet weak var deleteButtonView: UIButton!
-    
     @IBAction func deleteButtonPressed(sender: AnyObject) {
-        deleteButtonView.alpha = 0.0
+        self.hideDeleteButton()
         parent.deleteRoom(graphName, roomLabel: roomLabel)
+    }
+    
+    func showDeleteButton(){
+        deleteButtonView.alpha = 1.0
+    }
+    func hideDeleteButton(){
+        deleteButtonView.alpha = 0.0
     }
 
     
