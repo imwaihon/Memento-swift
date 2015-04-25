@@ -51,8 +51,6 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: "longPressHandler:")
         longPressGesture.minimumPressDuration = 1.0
         self.view.addGestureRecognizer(longPressGesture)
-        let tapGesture = UITapGestureRecognizer(target: self, action: "tapHandler:")
-        self.view.addGestureRecognizer(tapGesture)
     }
     
     /// The function called when a long press is detected. Long press triggers the delete palace functionality
@@ -62,16 +60,6 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         
         if(indexPath != nil && indexPath!.item != 0){
             cellToDelete = indexPath?.item
-            scrollableOverviewCollectionView.reloadData()
-        }
-    }
-    
-    /// The delete button is dismissed when the user taps outside the collection view
-    func tapHandler(gesture : UIGestureRecognizer){
-        var pointOfTheTouch = gesture.locationInView(self.scrollableOverviewCollectionView)
-        var indexPath = scrollableOverviewCollectionView.indexPathForItemAtPoint(pointOfTheTouch)
-        if(indexPath == nil){
-            cellToDelete = nil
             scrollableOverviewCollectionView.reloadData()
         }
     }
