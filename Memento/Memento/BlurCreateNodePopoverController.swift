@@ -19,7 +19,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     var graphName: String = ""
     var nextRoomLabel = Int()
     var isNextNode: Bool = true
-    var parentVC: NodeViewController?
+    weak var parentVC: NodeViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +120,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
                     self.parentVC?.imageView.image = image
                     mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: nextRoomLabel, newImage: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
                 }
+                self.parentVC?.loadNextNode()
                 self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
@@ -136,7 +137,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
             mementoManager.setBackgroundImageForRoom(self.graphName, roomLabel: nextRoomLabel, newImage: Utilities.convertToScreenSize(image), imageType: Constants.ImageType.JPG)
         }
 
-
+        self.parentVC?.loadNextNode()
         self.dismissViewControllerAnimated(true, completion: {finished in
             self.dismissViewControllerAnimated(true, completion: nil)
         })

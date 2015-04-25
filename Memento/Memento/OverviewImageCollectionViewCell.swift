@@ -20,11 +20,11 @@ class OverviewImageCollectionViewCell : UICollectionViewCell {
     var mementoManager = MementoManager.sharedInstance
     var graphName: String!
     var roomLabel: Int!
-    var parent: OverviewViewController!
+    weak var parent: OverviewViewController?
     
     @IBAction func deleteButtonPressed(sender: AnyObject) {
         self.hideDeleteButton()
-        parent.deleteRoom(graphName, roomLabel: roomLabel)
+        parent?.deleteRoom(graphName, roomLabel: roomLabel)
     }
     
     func showDeleteButton(){
