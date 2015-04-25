@@ -26,9 +26,9 @@ class DraggableImageView : UIImageView
     var totalRotation: CGFloat = 0.0
     
     // Screen size
-    //let screenSize: CGRect = UIScreen.mainScreen().bounds
-    let screenWidth: CGFloat = 1024.0
-    let screenHeight: CGFloat = 768.0
+    let screenWidth: CGFloat = UIScreen.mainScreen().bounds.width
+    let screenHeight: CGFloat = UIScreen.mainScreen().bounds.height
+
     
     override init(image: UIImage) {
         super.init(image: image)
@@ -144,7 +144,7 @@ class DraggableImageView : UIImageView
         }
     }
     
-    // Helper function to check if this view is still within the 1024*768 boundary
+    // Helper function to check if this view is still within the screen boundary
     // Aids in slight offsetting back to within bounds
     private func isWithinBounds() -> Bool {
         let minX = CGRectGetMinX(self.frame)
