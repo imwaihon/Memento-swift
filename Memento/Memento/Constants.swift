@@ -22,6 +22,9 @@ struct Constants {
     
     //Placeholder encoding
     static let placeholderValueSeparator = ";"
+    
+    //Node constants
+    static let defaultPalaceName = "sampleGraph"
 
     //Graph plist representation keys
     static let nameKey = "name"
