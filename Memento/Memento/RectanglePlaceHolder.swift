@@ -14,6 +14,8 @@ import UIKit
 class RectanglePlaceHolder: PlaceHolder {
     let highlightArea: CGRect
     
+    // Property
+    // Encoding scheme is <CGRect string>:<color>
     override var stringEncoding: String{
         return NSStringFromCGRect(highlightArea).stringByAppendingString(Constants.placeholderValueSeparator).stringByAppendingString(color)
     }
@@ -21,8 +23,6 @@ class RectanglePlaceHolder: PlaceHolder {
     init(highlightArea: CGRect){
         self.highlightArea = highlightArea
         super.init(frame: highlightArea)
-        
-        //Do something to the view to make it visible on screen
     }
     
     init(highlightArea: CGRect, color: String) {

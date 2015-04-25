@@ -19,6 +19,7 @@ class PlaceHolder: Equatable {
     var color: String
     
     //Properties
+    // Encoding scheme is <CGRect string>:<color>
     var stringEncoding: String {
         return NSStringFromCGRect(view.frame).stringByAppendingString(Constants.placeholderValueSeparator).stringByAppendingString(color)
     }
