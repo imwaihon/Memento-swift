@@ -59,7 +59,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
         var indexPath = scrollableOverviewCollectionView.indexPathForItemAtPoint(pointOfTheTouch)
         
         if(indexPath != nil && indexPath!.item != 0){
-            cellToDelete = indexPath?.item
+            cellToDelete = indexPath!.item
             scrollableOverviewCollectionView.reloadData()
         }
     }
@@ -75,6 +75,7 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
     func deleteRoom(graphName: String, roomLabel: Int) {
         model.removeMemoryPalaceRoom(graphName, roomLabel: roomLabel)
         self.rooms = model.getPalaceOverview(palaceName)
+        cellToDelete = nil
         self.scrollableOverviewCollectionView.reloadData()
     }
     
@@ -99,6 +100,8 @@ class OverviewViewController : UIViewController, UICollectionViewDelegate, UICol
             let currentIcon = rooms[indexPath.row - 1]
             cell.roomLabel = currentIcon.label
             cell.image.image = Utilities.getImageNamed(currentIcon.filename)
+            cell.parent = self
+            cell.graphName = self.palaceName
             //cell.image.image = UIImage(named: "landscape\(indexPath.row)")
             return cell
         }
