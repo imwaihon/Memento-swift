@@ -64,9 +64,7 @@
 		4FCE35F51ABA8CF000417763 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCE35F41ABA8CF000417763 /* Images.xcassets */; };
 		4FCE35F81ABA8CF000417763 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FCE35F61ABA8CF000417763 /* LaunchScreen.xib */; };
 		4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE36031ABA8CF000417763 /* MementoTests.swift */; };
-		5A01A3481ACE4CEE00351423 /* FenwickTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01A3471ACE4CEE00351423 /* FenwickTreeTests.swift */; };
 		5A12D6701AE3C30400BF1523 /* SaveLoadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A12D66F1AE3C30400BF1523 /* SaveLoadManagerTests.swift */; };
-		5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */; };
 		5A278FF41AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
 		5A278FF51AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */; };
 		5A278FF71AC03DF300B7AE67 /* MementoGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */; };
@@ -250,9 +248,7 @@
 		4FCE35FD1ABA8CF000417763 /* MementoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MementoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCE36021ABA8CF000417763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FCE36031ABA8CF000417763 /* MementoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementoTests.swift; sourceTree = "<group>"; };
-		5A01A3471ACE4CEE00351423 /* FenwickTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FenwickTreeTests.swift; sourceTree = "<group>"; };
 		5A12D66F1AE3C30400BF1523 /* SaveLoadManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveLoadManagerTests.swift; sourceTree = "<group>"; };
-		5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		5A278FF31AC0334A00B7AE67 /* MemoryPalaceRoomIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryPalaceRoomIcon.swift; sourceTree = "<group>"; };
 		5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoGraphTests.swift; sourceTree = "<group>"; };
 		5A28A8B91AD0436F00518AB1 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
@@ -476,9 +472,7 @@
 				5A5FB0A81AC67FB400EA0EE7 /* MementoManagerTests.swift */,
 				5A278FF61AC03DF300B7AE67 /* MementoGraphTests.swift */,
 				5A5FB0A31AC6601100EA0EE7 /* MementoNodeTests.swift */,
-				5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */,
 				4FCE36031ABA8CF000417763 /* MementoTests.swift */,
-				5A01A3471ACE4CEE00351423 /* FenwickTreeTests.swift */,
 				4FCE36011ABA8CF000417763 /* Supporting Files */,
 			);
 			path = MementoTests;
@@ -977,7 +971,6 @@
 				5A28A8BB1AD0436F00518AB1 /* Map.swift in Sources */,
 				4F0824ED1ADFC6C800B091DA /* GameEngineDelegate.swift in Sources */,
 				5AB3F7DF1ADC070F00906B76 /* CLAdjustmentTool.m in Sources */,
-				5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */,
 				5A7E7CFD1ADA35E300BD3310 /* Utilities.swift in Sources */,
 				4F0824E61ADFC6A300B091DA /* GamePauseDelegate.swift in Sources */,
 				5AB3F8091ADC070F00906B76 /* CLImageToolInfo+Private.m in Sources */,
@@ -1003,7 +996,6 @@
 				4F0824E71ADFC6AA00B091DA /* GameBeforeStartViewController.swift in Sources */,
 				4F2FC2AF1AE759B6007A82F6 /* SharedResourceViewController.swift in Sources */,
 				5A497A301AC7ED0C00D6C9C5 /* SelectPalaceCollectionViewCell.swift in Sources */,
-				5A01A3481ACE4CEE00351423 /* FenwickTreeTests.swift in Sources */,
 				4F0824EB1ADFC6BA00B091DA /* LoadCustomChallengeViewController.swift in Sources */,
 				5A4E78A01AC2A2F700013728 /* MementoModel.swift in Sources */,
 				5AB3F7DD1ADC070F00906B76 /* CLImageToolInfo.m in Sources */,
