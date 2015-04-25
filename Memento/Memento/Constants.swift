@@ -36,10 +36,9 @@ struct Constants {
     static let placeHolderKey = "placeHolders"
     static let valueKey = "values"
     
-    //App document directory path
+    //Directory constants
     static let docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
-
-    //Resources-related constants
+    static let dataDir = "data"
     static let imgResourceDir = "sharedResource"
     
     // Color constants
