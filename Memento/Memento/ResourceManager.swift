@@ -59,9 +59,6 @@ class ResourceManager {
         _dirPath = docDir.stringByAppendingPathComponent(directory)
         _resourceListPath = _dirPath.stringByAppendingPathExtension(plistExtension)!
         
-        //println(_dirPath)
-        //println(_resourceListPath)
-        
         //Loads the reference counting table and creates directory if needed.
         var isDir: ObjCBool = false
         let trackingFileExists = NSFileManager.defaultManager().fileExistsAtPath(_resourceListPath)
