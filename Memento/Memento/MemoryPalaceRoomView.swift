@@ -5,9 +5,6 @@
 //  Defines the object representation of the memory palace room with required
 //  data to render the room in view/edit mode.
 //
-//  IMPORTANT!
-//  To load the image file, use the exact path = imgResourceDir.stringByAppendingPathComponent(backgroundImage)
-//
 //  Created by Qua Zi Xian on 1/4/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //

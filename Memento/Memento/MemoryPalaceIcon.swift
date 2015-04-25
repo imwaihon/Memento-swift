@@ -8,9 +8,6 @@
 //  The view controller should be able to specify/identify the target memory
 //  palace when calling app manager methods.
 //
-//  IMPORTANT!
-//  To load the image file, use the exact path = imgResourceDir.stringByAppendingPathComponent(imageFile)
-//
 //  Created by Qua Zi Xian on 27/3/15.
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
