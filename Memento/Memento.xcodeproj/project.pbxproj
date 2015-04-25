@@ -64,8 +64,6 @@
 		4FCE35F51ABA8CF000417763 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCE35F41ABA8CF000417763 /* Images.xcassets */; };
 		4FCE35F81ABA8CF000417763 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FCE35F61ABA8CF000417763 /* LaunchScreen.xib */; };
 		4FCE36041ABA8CF000417763 /* MementoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCE36031ABA8CF000417763 /* MementoTests.swift */; };
-		5A01A3451ACE438900351423 /* FenwickTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01A3441ACE438900351423 /* FenwickTree.swift */; };
-		5A01A3461ACE438900351423 /* FenwickTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01A3441ACE438900351423 /* FenwickTree.swift */; };
 		5A01A3481ACE4CEE00351423 /* FenwickTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A01A3471ACE4CEE00351423 /* FenwickTreeTests.swift */; };
 		5A12D6701AE3C30400BF1523 /* SaveLoadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A12D66F1AE3C30400BF1523 /* SaveLoadManagerTests.swift */; };
 		5A1F0E0B1ABC20CE00601ABC /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */; };
@@ -111,8 +109,6 @@
 		5A7E7CFD1ADA35E300BD3310 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E7CFB1ADA358200BD3310 /* Utilities.swift */; };
 		5A82F8F31AC44D7100D89166 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82F8F21AC44D7100D89166 /* OverviewViewController.swift */; };
 		5A82F8F51AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82F8F41AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift */; };
-		5A837B921ABBE86E00E52F80 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A837B911ABBE86E00E52F80 /* Set.swift */; };
-		5A837B931ABBE86E00E52F80 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A837B911ABBE86E00E52F80 /* Set.swift */; };
 		5A8FA76F1ADF9AB0001EB76D /* AnnotationCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */; };
 		5A8FA7701ADFA1D2001EB76D /* AnnotationCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */; };
 		5A98038A1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */; };
@@ -254,7 +250,6 @@
 		4FCE35FD1ABA8CF000417763 /* MementoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MementoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCE36021ABA8CF000417763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FCE36031ABA8CF000417763 /* MementoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MementoTests.swift; sourceTree = "<group>"; };
-		5A01A3441ACE438900351423 /* FenwickTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FenwickTree.swift; path = ../FenwickTree.swift; sourceTree = "<group>"; };
 		5A01A3471ACE4CEE00351423 /* FenwickTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FenwickTreeTests.swift; sourceTree = "<group>"; };
 		5A12D66F1AE3C30400BF1523 /* SaveLoadManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveLoadManagerTests.swift; sourceTree = "<group>"; };
 		5A1F0E0A1ABC20CE00601ABC /* SetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
@@ -279,7 +274,6 @@
 		5A7E7CFB1ADA358200BD3310 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		5A82F8F21AC44D7100D89166 /* OverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		5A82F8F41AC44DDF00D89166 /* OverviewImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		5A837B911ABBE86E00E52F80 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		5A8FA76E1ADF9AB0001EB76D /* AnnotationCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationCardViewController.swift; sourceTree = "<group>"; };
 		5A9803891AC92BC100F30463 /* ModelChangeUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelChangeUpdateDelegate.swift; sourceTree = "<group>"; };
 		5AA1B0691AC1528B00AC3C65 /* MementoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MementoManager.swift; sourceTree = "<group>"; };
@@ -502,8 +496,6 @@
 		5A01A3431ACE433800351423 /* Data Structures and Algorithms */ = {
 			isa = PBXGroup;
 			children = (
-				5A01A3441ACE438900351423 /* FenwickTree.swift */,
-				5A837B911ABBE86E00E52F80 /* Set.swift */,
 				5A28A8B91AD0436F00518AB1 /* Map.swift */,
 			);
 			name = "Data Structures and Algorithms";
@@ -931,7 +923,6 @@
 				5AB3F7DA1ADC070F00906B76 /* CLImageEditorTheme.m in Sources */,
 				4F9D15171ACADBCD00BEE609 /* EndGameChallengeViewController.swift in Sources */,
 				4F90A5081AD6A76E00027201 /* GameEngineDelegate.swift in Sources */,
-				5A837B921ABBE86E00E52F80 /* Set.swift in Sources */,
 				5AB3F8141ADC070F00906B76 /* UIImage+Utility.m in Sources */,
 				4F1A543B1AEA20B700E5F6BA /* AddLayerDelegate.swift in Sources */,
 				5A4E789F1AC2A2F700013728 /* MementoModel.swift in Sources */,
@@ -943,7 +934,6 @@
 				5AEF2A631AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				41359EBD1AC84F3C00CBCC82 /* DraggableImageView.swift in Sources */,
 				5A2988EF1AD3BC7E005B999E /* ResourceManager.swift in Sources */,
-				5A01A3451ACE438900351423 /* FenwickTree.swift in Sources */,
 				4FCE35EB1ABA8CEF00417763 /* AppDelegate.swift in Sources */,
 				4127D7A11AD30103007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */,
 				4F2FC2AE1AE759B6007A82F6 /* SharedResourceViewController.swift in Sources */,
@@ -983,7 +973,6 @@
 				5AB3F7E51ADC070F00906B76 /* CLDrawTool.m in Sources */,
 				5AEF2A641AC513CA00B2B6FB /* RectanglePlaceHolder.swift in Sources */,
 				5A4E78A31AC2A42900013728 /* MementoGraphFactory.swift in Sources */,
-				5A837B931ABBE86E00E52F80 /* Set.swift in Sources */,
 				4F5A96E71ACFA5ED003E8667 /* SaveLoadManager.swift in Sources */,
 				5A28A8BB1AD0436F00518AB1 /* Map.swift in Sources */,
 				4F0824ED1ADFC6C800B091DA /* GameEngineDelegate.swift in Sources */,
@@ -1034,7 +1023,6 @@
 				5A12D6701AE3C30400BF1523 /* SaveLoadManagerTests.swift in Sources */,
 				5AB3F7D91ADC070F00906B76 /* CLImageEditor.m in Sources */,
 				4F83A6B81AE504340025BC25 /* EndGameChallengeViewController.swift in Sources */,
-				5A01A3461ACE438900351423 /* FenwickTree.swift in Sources */,
 				4127D7A21AD30112007D6EE5 /* BlurCreateNodePopoverController.swift in Sources */,
 				5A98038B1AC92BC100F30463 /* ModelChangeUpdateDelegate.swift in Sources */,
 				5AB3F80F1ADC070F00906B76 /* CLClassList.m in Sources */,
