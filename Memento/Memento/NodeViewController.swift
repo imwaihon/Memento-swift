@@ -72,7 +72,6 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         
     }
     
-    
     /* Gestures Selector */
     
     // Method to draw rectangles for annotation

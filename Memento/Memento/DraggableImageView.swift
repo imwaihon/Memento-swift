@@ -13,22 +13,17 @@ import UIKit
 
 class DraggableImageView : UIImageView
 {
-    var dragStartPositionRelativeToCenter : CGPoint?
-    
     weak var parentViewController: UIViewController?
-    var lastRotation = CGFloat()
     var labelIdentifier = Int()
     var roomLabel = Int()
     var graphName = String()
     var mementoManager = MementoManager.sharedInstance
     
-    // Need to store total rotation for saving
-    var totalRotation: CGFloat = 0.0
+    var dragStartPositionRelativeToCenter : CGPoint?
     
     // Screen size
     let screenWidth: CGFloat = UIScreen.mainScreen().bounds.width
     let screenHeight: CGFloat = UIScreen.mainScreen().bounds.height
-
     
     override init(image: UIImage) {
         super.init(image: image)
@@ -52,12 +47,10 @@ class DraggableImageView : UIImageView
         fatalError("init(coder:) has not been implemented")
     }
     
-    // Allow simultaneous
-    func gestureRecognizer(UIGestureRecognizer,
-        shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
-            return true
-    }
+    /* Gesture Recognizers */
     
+    // Function to handle pan gestures
+    // Pan gestures would shift the DraggableImageView according to location of touch
     func handlePan(nizer: UIPanGestureRecognizer!) {
         if nizer.state == UIGestureRecognizerState.Began {
             let locationInView = nizer.locationInView(superview)
@@ -104,9 +97,10 @@ class DraggableImageView : UIImageView
         }
     }
     
+    // Function to handle single tap gestures
+    // Will delete this DraggableImageView if deleteToggler is set to true in NodeViewController
     func handleTap(nizer: UITapGestureRecognizer!) {
         nizer.numberOfTapsRequired = 1
-        
         weak var nodeViewController = parentViewController as? NodeViewController
         if nodeViewController != nil {
             if nodeViewController!.deleteToggler {
@@ -118,6 +112,9 @@ class DraggableImageView : UIImageView
         }
     }
     
+    // Function to handle pinch gesture
+    // Will resize the DraggableImageView based on user's input gesture
+    // Has a minimum and maximum size
     func handlePinch(nizer: UIPinchGestureRecognizer!) {
         if (nizer.state == UIGestureRecognizerState.Began || nizer.state == UIGestureRecognizerState.Changed) {
             // Scale up
@@ -133,19 +130,19 @@ class DraggableImageView : UIImageView
                     nizer.scale = 1.0
                 }
             }
-            // Call method again to realign for corners
+            // Call method again to realign corners
             self.isWithinBounds()
         }
         
         if nizer.state == UIGestureRecognizerState.Ended {
             mementoManager.setOverlayFrame(graphName, roomLabel: roomLabel, overlayLabel: self.labelIdentifier, newFrame: self.frame)
-            // Place it on top of other subviews
-            //self.superview?.bringSubviewToFront(self)
         }
     }
     
+    /* Helper functions */
+    
     // Helper function to check if this view is still within the screen boundary
-    // Aids in slight offsetting back to within bounds
+    // Aids in offsetting back to within bounds
     private func isWithinBounds() -> Bool {
         let minX = CGRectGetMinX(self.frame)
         let maxX = CGRectGetMaxX(self.frame)
@@ -169,6 +166,7 @@ class DraggableImageView : UIImageView
         }
     }
     
+    // Helper boolean function to determine if the DraggableImageView is of at least 125 * 125
     private func isMinimumSize() -> Bool {
         if (self.frame.width < 125.0 || self.frame.height < 125.0) {
             return false

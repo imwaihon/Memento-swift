@@ -30,12 +30,14 @@ class AnnotatableUIView: UIView, UIPopoverPresentationControllerDelegate {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTap:"))
     }
 
-    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // Add a simple annotation or delete, depending on NodeViewController parent
+    /* Gestures */
+    
+    // Function to handle single tap
+    // Add a simple annotation text or delete this view, depending on NodeViewController parent state
     func handleTap(nizer: UITapGestureRecognizer!) {
         weak var nodeViewController = parentViewController
         if nodeViewController != nil {
@@ -74,6 +76,7 @@ class AnnotatableUIView: UIView, UIPopoverPresentationControllerDelegate {
         self.mementoManager.setAssociationValue(self.graphName, roomLabel: self.roomLabel, placeHolderLabel: self.viewTag, value: self.annotation)
     }
     
+    // Function to change the color of the AnnotatableUIView
     func updateBackgroundColor() {
         self.backgroundColor = Utilities.hexStringToUIColor(backgroundColorHexCode)
     }

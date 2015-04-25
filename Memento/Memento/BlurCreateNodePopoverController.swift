@@ -21,6 +21,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
     var isNextNode: Bool = true
     weak var parentVC: NodeViewController?
     
+    /* Override methods */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clearColor()
@@ -40,11 +41,6 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
 
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool{
-        textField.resignFirstResponder()
-        return true
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -53,16 +49,29 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         super.viewDidDisappear(animated)
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.BlackOpaque
+    }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    /* Gesture Recognizer */
+    
+    // Function to handle tap
+    // Dismisses this blurpopover when tapped on spots excluding buttons and textbox
     func handleTap(sender: UITapGestureRecognizer){
         let previousViewController = self.presentingViewController as NodeViewController
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.BlackOpaque
-    }
+    /* Camera Methods */
     
-    // Camera button
+    // Camera Button pressed
+    // Load up camera and select image from camera input
     @IBAction func useCamera(sender: AnyObject) {
         
         if UIImagePickerController.isSourceTypeAvailable(
@@ -79,7 +88,8 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         }
     }
         
-    // Camera roll button
+    // Camera roll button pressed
+    // Load up Photo Library as popover to allow for users to select images from their camera roll
     @IBAction func useCameraRoll(sender: AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.SavedPhotosAlbum) {
@@ -100,6 +110,7 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         
     }
     
+    /* Image Picker / CLImageEditor methods */
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let mediaType = info[UIImagePickerControllerMediaType] as NSString
         if mediaType.isEqualToString(kUTTypeImage as NSString) {
