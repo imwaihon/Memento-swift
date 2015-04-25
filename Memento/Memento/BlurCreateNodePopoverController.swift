@@ -148,14 +148,4 @@ class BlurCreateNodePopoverController: UIViewController, UIGestureRecognizerDele
         })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "GoToNextNodeSegue"){
-            println("Going to node")
-            // Go to previously created next node
-            let nextNodeViewController = segue.destinationViewController as NodeViewController
-            nextNodeViewController.graphName = self.graphName
-            nextNodeViewController.roomLabel = nextRoomLabel
-        }
-    }
-    
 }
