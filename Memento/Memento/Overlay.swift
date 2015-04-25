@@ -33,7 +33,9 @@ struct Overlay: Equatable {
         self.imageFile = imageFile
     }
     
-    //Creates a mutable version of this overlay object.
+    /// Creates a mutable version of this overlay object.
+    ///
+    /// :returns The immutable representation of this overlay object.
     func makeMutable() -> MutableOverlay {
         return MutableOverlay(frame: frame, imageFile: imageFile)
     }
