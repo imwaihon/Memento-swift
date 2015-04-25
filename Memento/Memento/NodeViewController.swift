@@ -96,14 +96,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     /* Menu Buttons */
     
-    /* Buttons for toggling */
-    
     // Toggles on/off edit mode
+    // Enalbes/Disables user to edit the image
     @IBAction func toggleEditMode(sender: AnyObject) {
-        
         if self.editToggler == false {
             self.editToggler = true
-            //self.imageView.userInteractionEnabled = true
             // Enable editing -> Show menu bar
             UIView.animateWithDuration(NSTimeInterval(0.3), animations: {
                 var moveFrameUp = CGRectMake(0, self.view.frame.height - self.menuBarView.frame.height, self.menuBarView.frame.width, self.menuBarView.frame.height)
@@ -470,14 +467,11 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.view.addSubview(oldImage)
 
         // Animation
-        if (withAnimation) {
-            println("animated")
-            UIView.animateWithDuration(NSTimeInterval(1.0), animations: {
-                oldImage.frame.origin = CGPoint(x: -1024.0, y: 0)
-                }, completion: { finished in
-                    oldImage.removeFromSuperview()
-            })
-        }
+        UIView.animateWithDuration(NSTimeInterval(1.0), animations: {
+            oldImage.frame.origin = CGPoint(x: -1024.0, y: 0)
+            }, completion: { finished in
+                oldImage.removeFromSuperview()
+        })
 
         
     }
