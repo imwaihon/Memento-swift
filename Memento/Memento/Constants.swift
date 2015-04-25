@@ -45,4 +45,7 @@ struct Constants {
     static let color3 = "FFFFFF"
     static let color4 = "A7C520"
     static let color5 = "2980B9"
+    
+    static let orderModeId = "Order"
+    static let findModeId = "Find"
 }

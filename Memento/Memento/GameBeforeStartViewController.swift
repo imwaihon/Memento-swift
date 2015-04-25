@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
+// View before the game starts, with game options and confirmation for the user to start the game
+
 import Foundation
 import UIKit
 import MobileCoreServices
@@ -40,7 +42,6 @@ class GameBeforeStartViewController: UIViewController, UIGestureRecognizerDelega
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
     }
-    
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.BlackOpaque

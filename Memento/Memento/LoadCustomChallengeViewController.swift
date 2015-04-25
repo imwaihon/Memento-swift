@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
+// Collectionview to load a custom challenge
+
 import Foundation
 import UIKit
 
@@ -34,14 +36,14 @@ class LoadCustomChallengeViewController: UIViewController, UICollectionViewDeleg
         
     }
     
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         palaceTiles.reloadData()
     }
     
     
-    // COLLECTION VIEW
+    /* Collection View */
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return palaces.count
     }

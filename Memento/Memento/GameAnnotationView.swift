@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
+// View that handles the annotations for the game mode
+// If selected, notifies GameViewController
+
 import Foundation
 import UIKit
 

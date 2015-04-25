@@ -6,6 +6,12 @@
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
+// Main view controller for the game challenge
+// Sets up GameEngine which preloads the required information to generate the views
+// Reloads the view with the next set of views to be inserted when transitioning to the next room
+// Displays animation when selecting annotation
+// Show views when game ends or pause game
+
 import Foundation
 import UIKit
 
@@ -71,7 +77,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
             annotation.disableView()
             
             // If game mode is order, set current annotation text
-            if gameMode == "Order" {
+            if gameMode == Constants.orderModeId {
                 annotationText.text = annotation.annotation
             }
             
@@ -93,6 +99,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
             })
             
             return true
+            
         } else {
             // Displays red cross animation
             let crossImageView = UIImageView(image: UIImage(named: "redCross"))
@@ -209,7 +216,7 @@ class GameChallengeViewController: UIViewController, GameEngineDelegate, GamePau
         gameAnimationViews.removeAll()
     }
     
-    // Function to load current room layout
+    // Private function to load current room layout
     private func loadGameRoomLayout() {
         // Clear the current view
         clearAllViews()

@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
+// Delegate for game engine to notify GameViewController
+
 import Foundation
 
 protocol GameEngineDelegate: class {

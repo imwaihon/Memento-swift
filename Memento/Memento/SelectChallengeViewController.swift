@@ -6,15 +6,18 @@
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
+// View screen that shows the challenge modes for the users to select
+
 import Foundation
 import UIKit
 
 class SelectChallengeViewController: UIViewController {
+
+    // Game Modes
+    let orderMode = Constants.orderModeId
+    let findMode = Constants.findModeId
     
-    enum gameModes : String {
-        case orderMode = "Order"
-        case findMode = "Find"
-    }
+    var currentMode = Constants.orderModeId
     
     @IBOutlet weak var modeDescriptionLabel: UILabel!
     @IBOutlet weak var modeImage: UIImageView!
@@ -30,7 +33,7 @@ class SelectChallengeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        modeTitleLabel.text = gameModes.orderMode.rawValue
+        modeTitleLabel.text = Constants.orderModeId
         modeImage.image = UIImage(named:"orderModeIcon")
         playButton.layer.borderColor = UIColor.darkGrayColor().CGColor
         playButton.layer.borderWidth = 1.5
@@ -43,14 +46,16 @@ class SelectChallengeViewController: UIViewController {
     @IBAction func leftButtonClicked(sender: AnyObject) {
         leftButton.hidden = true
         rightButton.hidden = false
-        modeTitleLabel.text = gameModes.orderMode.rawValue
+        modeTitleLabel.text = Constants.orderModeId
+        currentMode = Constants.orderModeId
         modeImage.image = UIImage(named:"orderModeIcon")
         
     }
     @IBAction func rightButtonClicked(sender: AnyObject) {
         leftButton.hidden = false
         rightButton.hidden = true
-        modeTitleLabel.text = gameModes.findMode.rawValue
+        modeTitleLabel.text = Constants.findModeId
+        currentMode = Constants.findModeId
         modeImage.image = UIImage(named:"findModeIcon")
     }
     @IBAction func playButtonPressed(sender: AnyObject) {
@@ -60,7 +65,7 @@ class SelectChallengeViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "LoadCustomChallengeSegue") {
             let dvc = segue.destinationViewController as LoadCustomChallengeViewController
-            dvc.gameMode = self.modeTitleLabel.text!
+            dvc.gameMode = self.currentMode
             
         }
     }

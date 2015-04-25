@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 NUS CS3217. All rights reserved.
 //
 
-import Foundation
+// Preloads the views that the current game requires and feeds the GameChallengeViewController as needed
 
+import Foundation
 
 class GameEngine {
     var mementoManager = MementoManager.sharedInstance
@@ -34,6 +35,7 @@ class GameEngine {
     }
     
     // Set up the initial game
+    // Takes in the placeName and mode string to load the correct game and palace
     func setUpGame(palaceName: String, mode: String) {
         self.startedGame = true
         
@@ -46,16 +48,17 @@ class GameEngine {
             palaceRooms.append(mementoManager.getMemoryPalaceRoomView(activePalaceName, roomLabel: room.label)!)
         }
         
-        if mode == "Order" {
+        // Different modes
+        if mode == Constants.orderModeId {
             currRoomAssociations.extend(palaceRooms.first!.associations)
-        } else if mode == "Find" {
+        } else if mode == Constants.findModeId {
             currRoomAssociations.extend(Utilities.shuffleArray(palaceRooms.first!.associations))
             ifFindModeDoNext()
         }
 
     }
     
-    // Set up the next room
+    // Set up the next room if it exists, else finish the game
     func setUpNext() {
         currRoomIndex += 1
         
@@ -75,10 +78,13 @@ class GameEngine {
         return palaceRooms[currRoomIndex]
     }
     
-    // Check whether this move is valid
+    
+    /* Check Functions */
+    
+    // Check whether this move is valid, takes in the current association label that is tapped
     func checkValidMove(associationLabel: Int) -> Bool {
         // Order Mode
-        if mode == "Order" {
+        if mode == Constants.orderModeId {
             var validAssociationLabel = currRoomAssociations.first?.placeHolder.label
             
             if validAssociationLabel == associationLabel {
@@ -90,7 +96,7 @@ class GameEngine {
             }
         
         // Find Mode
-        } else if mode == "Find" {
+        } else if mode == Constants.findModeId {
             var validAssociationValue = currRoomAssociations.first?.value
             
             for i in 0..<currRoomAssociations.count {
@@ -128,7 +134,7 @@ class GameEngine {
     }
     
     private func ifFindModeDoNext() {
-        if mode == "Find" {
+        if mode == Constants.findModeId {
             var validAssociationValue = currRoomAssociations.first?.value
             if validAssociationValue != nil {
                 delegate?.updateNextFindQuestion(validAssociationValue!)
