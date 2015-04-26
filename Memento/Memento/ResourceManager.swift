@@ -42,7 +42,7 @@ class ResourceManager {
     
     //File extensions
     private let jpegExtension = "jpg"
-    private let pngExtention = "png"
+    private let pngExtension = "png"
     private let textExtension = "txt"
     private let plistExtension = "plist"
     
@@ -97,7 +97,7 @@ class ResourceManager {
         //Sets the desired file extensions.
         let ext = NSMutableSet()
         if type == ResourceType.Image {
-            ext.addObjectsFromArray([jpegExtension, pngExtention])
+            ext.addObjectsFromArray([jpegExtension, pngExtension])
         } else {
             ext.addObject(textExtension)
         }
@@ -167,7 +167,7 @@ class ResourceManager {
     /// :returns: The actual name of the image file used, with the file extension appended.
     func retainResource(resourceName: String, image: UIImage, imageType: ImageType) -> String {
         var filename = resourceName
-        let ext = imageType == ImageType.JPG ? jpegExtension: imageType == ImageType.PNG ? pngExtention: String()
+        let ext = imageType == ImageType.JPG ? jpegExtension: imageType == ImageType.PNG ? pngExtension: String()
         
         //Construct new file name if file with same name exists.
         if _referenceCountTable[filename.stringByAppendingPathExtension(ext)!] != nil {
