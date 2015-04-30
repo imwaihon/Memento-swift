@@ -578,7 +578,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             }
             
             // Call addLayer function
-            addLayer(Utilities.convertToScreenSize(image), imageName: nil)
+            addLayer(Utilities.convertToThumbnail(image), imageName: nil)
         }
     }
     
