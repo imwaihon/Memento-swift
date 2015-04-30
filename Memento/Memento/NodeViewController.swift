@@ -361,7 +361,7 @@ class NodeViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
         } else {
             // Existing image
-            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newFrame, image: Utilities.convertToThumbnail(image), imageType: Constants.ImageType.PNG)!
+            var newOverlay = mementoManager.addOverlay(graphName, roomLabel: roomLabel, frame: newFrame, image: image, imageType: Constants.ImageType.PNG)!
             newImage = DraggableImageView(image: Utilities.getImageNamed(newOverlay.imageFile))
             newImage.labelIdentifier = newOverlay.label
         }
